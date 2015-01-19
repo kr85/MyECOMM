@@ -1,4 +1,8 @@
 <?php
+
+    $objCatalogue = new Catalogue();
+    $categories = $objCatalogue->getCategories();
+
     $objBusiness = new Business();
     $business = $objBusiness->getBusiness();
 ?>
@@ -24,7 +28,19 @@
             <div id="left">
                 <h2>Categories</h2>
                 <ul id="navigation">
-                    <li><a href="#">link</a></li>
+                    <?php
+                        if (!empty($categories))
+                        {
+                            foreach ($categories as $category)
+                            {
+                                echo "<li><a href=\"/?page=catalogue&amp;category=".$category['id']."\"";
+                                echo Helper::getActive(['category' => $category['id']]);
+                                echo ">";
+                                echo Helper::encodeHTML($category['name']);
+                                echo "</a></li>";
+                            }
+                        }
+                    ?>
                 </ul>
             </div>
             <div id="right">

@@ -6,6 +6,34 @@
 class Helper
 {
     /**
+     * Get active page
+     *
+     * @param null $page
+     * @return null|string
+     */
+    public static function getActive($page = null)
+    {
+        if (!empty($page))
+        {
+            if (is_array($page))
+            {
+                $error = [];
+                foreach ($page as $key => $value)
+                {
+                    if (Url::getParam($key) != $value)
+                    {
+                        array_push($error, $key);
+                    }
+                }
+
+                return empty($error) ? " class=\"act\"" : null;
+            }
+        }
+
+        return $page == Url::currentPage() ? " class=\"act\"" : null;
+    }
+
+    /**
      * Encode HTML.
      *
      * @param $string
