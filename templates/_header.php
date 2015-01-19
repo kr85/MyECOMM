@@ -1,3 +1,8 @@
+<?php
+    $objBusiness = new Business();
+    $business = $objBusiness->getBusiness();
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -11,7 +16,7 @@
     <body>
     <div id="header">
         <div id="header_in">
-            <h5><a href="/">Business name</a></h5>
+            <h5><a href="/"><?php echo $business['name']; ?></a></h5>
         </div>
     </div>
     <div id="outer">
