@@ -9,15 +9,13 @@ class Database
     private $username = "root";
     private $password = "";
     private $database = "ecommerce";
-
     private $connDb = false;
+
     public $lastQuery = null;
     public $affectedRows = 0;
-
     public $insertKeys = [];
     public $insertValues = [];
     public $updateSets = [];
-
     public $id;
 
     /**

@@ -5,9 +5,9 @@
  */
 class Url
 {
-    public static $_page = "page";
-    public static $_folder = PAGES_DIR;
-    public static $_params = [];
+    public static $page = "page";
+    public static $folder = PAGES_DIR;
+    public static $params = [];
 
     /**
      * Get parameters
@@ -28,7 +28,7 @@ class Url
      */
     public static function currentPage()
     {
-        return isset($_GET[self::$_page]) ? $_GET[self::$_page] : 'index';
+        return isset($_GET[self::$page]) ? $_GET[self::$page] : 'index';
     }
 
     /**
@@ -38,8 +38,8 @@ class Url
      */
     public static function getPage()
     {
-        $page = self::$_folder.DS.self::currentPage().".php";
-        $error = self::$_folder.DS."error.php";
+        $page = self::$folder.DS.self::currentPage().".php";
+        $error = self::$folder.DS."error.php";
         return is_file($page) ? $page : $error;
     }
 
@@ -54,7 +54,7 @@ class Url
             {
                 if (!empty($value))
                 {
-                    self::$_params[$key] = $value;
+                    self::$params[$key] = $value;
                 }
             }
         }
