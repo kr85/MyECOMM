@@ -65,4 +65,44 @@ class Helper
 			break;
 		}
 	}
+
+    /**
+     * Get the size of a image
+     *
+     * @param $image
+     * @param $case
+     * @return mixed
+     */
+    public static function getImageSize($image, $case)
+    {
+        if (is_file($image))
+        {
+            // 0 => width, 1 => height, 2 => type, 3 => attributes
+            $size = getimagesize($image);
+            return $size[$case];
+        }
+    }
+
+    /**
+     * Shorten the description of a product
+     *
+     * @param $string
+     * @param int $length
+     * @return string
+     */
+    public static function shortenString($string, $length = 150)
+    {
+        if (strlen($string) > $length)
+        {
+            $string = trim(substr($string, 0, $length));
+            $string = substr($string, 0, strrpos($string, " "));
+            $string .= "&hellip;";
+        }
+        else
+        {
+            $string .= "&hellip";
+        }
+
+        return $string;
+    }
 }
