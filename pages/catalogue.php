@@ -33,8 +33,8 @@
                 <div class="catalogue_wrapper_left">
                     <?php
                         $image = !empty($row['image']) ?
-                        $objCatalogue->_path.$row['image'] :
-                        $objCatalogue->_path.'unavailable.png';
+                        $objCatalogue->path.$row['image'] :
+                        $objCatalogue->path.'unavailable.png';
 
                         $width = Helper::getImageSize($image, 0);
                         $width = $width > 120 ? 120 : $width;
@@ -53,7 +53,7 @@
                             <?php echo Helper::encodeHTML($row['name'], 1); ?>
                         </a>
                     </h4>
-                    <h4>Price: <?php echo Catalogue::$_currency;
+                    <h4>Price: <?php echo Catalogue::$currency;
                         echo number_format($row['price'], 2); ?>
                     </h4>
                     <p>

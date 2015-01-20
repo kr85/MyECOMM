@@ -5,7 +5,7 @@
  */
 class Business extends Application
 {
-    private $_table = 'business';
+    private $table = 'business';
 
     /**
      * Get all business information
@@ -14,7 +14,7 @@ class Business extends Application
      */
     public function getBusiness()
     {
-        $sql = "SELECT * FROM `{$this->_table}` WHERE `id` = 1";
+        $sql = "SELECT * FROM `{$this->table}` WHERE `id` = 1";
 
         return $this->db->fetchOne($sql);
     }

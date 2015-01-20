@@ -5,10 +5,10 @@
  */
 class Catalogue extends Application
 {
-    private $_table_categories = 'categories';
-    private $_table_products = 'products';
-    public $_path = 'media/catalogue/';
-    public static $_currency = '&dollar;';
+    private $tableCategories = 'categories';
+    private $tableProducts = 'products';
+    public $path = 'media/catalogue/';
+    public static $currency = '&dollar;';
 
 
     /**
@@ -18,7 +18,7 @@ class Catalogue extends Application
      */
     public function getCategories()
     {
-        $sql = "SELECT * FROM `{$this->_table_categories}` ORDER BY `name` ASC";
+        $sql = "SELECT * FROM `{$this->tableCategories}` ORDER BY `name` ASC";
 
         return $this->db->fetchAll($sql);
     }
@@ -31,7 +31,7 @@ class Catalogue extends Application
      */
     public function getCategory($id)
     {
-        $sql = "SELECT * FROM `{$this->_table_categories}`
+        $sql = "SELECT * FROM `{$this->tableCategories}`
                   WHERE `id` = '".$this->db->escape($id)."'";
 
         return $this->db->fetchOne($sql);
@@ -45,7 +45,7 @@ class Catalogue extends Application
      */
     public function getProducts($category)
     {
-        $sql = "SELECT * FROM `{$this->_table_products}`
+        $sql = "SELECT * FROM `{$this->tableProducts}`
                   WHERE `category` ='".$this->db->escape($category['id'])."'
                   ORDER BY `date` DESC";
 

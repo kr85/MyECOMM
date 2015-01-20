@@ -5,20 +5,20 @@
  */
 class Database
 {
-    private $_hostname = "localhost";
-    private $_username = "root";
-    private $_password = "";
-    private $_database = "ecommerce";
+    private $hostname = "localhost";
+    private $username = "root";
+    private $password = "";
+    private $database = "ecommerce";
 
-    private $_conndb = false;
-    public $_last_query = null;
-    public $_affected_rows = 0;
+    private $connDb = false;
+    public $lastQuery = null;
+    public $affectedRows = 0;
 
-    public $_insert_keys = [];
-    public $_insert_values = [];
-    public $_update_sets = [];
+    public $insertKeys = [];
+    public $insertValues = [];
+    public $updateSets = [];
 
-    public $_id;
+    public $id;
 
     /**
      * Constructor
@@ -33,30 +33,30 @@ class Database
      */
     private function connect()
     {
-        $this->_conndb = mysql_connect(
-            $this->_hostname,
-            $this->_username,
-            $this->_password
+        $this->connDb = mysql_connect(
+            $this->hostname,
+            $this->username,
+            $this->password
         );
 
-        if (!$this->_conndb)
+        if (!$this->connDb)
         {
             die("Database connection failed: <br />" . mysql_error());
         }
         else
         {
-            $_select = mysql_select_db(
-                $this->_database,
-                $this->_conndb
+            $select = mysql_select_db(
+                $this->database,
+                $this->connDb
             );
 
-            if (!$_select)
+            if (!$select)
             {
                 die("Database selection failed: <br />" . mysql_error());
             }
         }
 
-        mysql_set_charset("utf8", $this->_conndb);
+        mysql_set_charset("utf8", $this->connDb);
     }
 
     /**
@@ -64,7 +64,7 @@ class Database
      */
     public function close()
     {
-        if (!mysql_close($this->_conndb))
+        if (!mysql_close($this->connDb))
         {
             die("Closing connection failed.");
         }
@@ -106,8 +106,8 @@ class Database
      */
     public function query($sql)
     {
-        $this->_last_query = $sql;
-        $result = mysql_query($sql, $this->_conndb);
+        $this->lastQuery = $sql;
+        $result = mysql_query($sql, $this->connDb);
         $this->displayQuery($result);
         return $result;
     }
@@ -122,12 +122,12 @@ class Database
         if (!$result)
         {
             $output = "Database query failed: " . mysql_error();
-            $output .= "Last SQL query was: " . $this->_last_query;
+            $output .= "Last SQL query was: " . $this->lastQuery;
             die($output);
         }
         else
         {
-            $this->_affected_rows = mysql_affected_rows($this->_conndb);
+            $this->affectedRows = mysql_affected_rows($this->connDb);
         }
     }
 
@@ -169,6 +169,6 @@ class Database
      */
     public function lastId()
     {
-        return mysql_insert_id($this->_conndb);
+        return mysql_insert_id($this->connDb);
     }
 }
