@@ -59,4 +59,36 @@ class Url
             }
         }
     }
+
+    /**
+     * Get current url
+     *
+     * @param null $remove
+     * @return string
+     */
+    public static function getCurrentUrl($remove = null)
+    {
+        self::getAll();
+        $out = [];
+
+        if (!empty($remove))
+        {
+            $remove = !is_array($remove) ? [$remove] : $remove;
+
+            foreach (self::$params as $key => $value)
+            {
+                if (in_array($key, $remove))
+                {
+                    unset(self::$params[$key]);
+                }
+            }
+        }
+
+        foreach (self::$params as $key => $value)
+        {
+            $out[] = $key."=".$value;
+        }
+
+        return "/?".implode("&", $out);
+    }
 }

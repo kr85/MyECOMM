@@ -7,6 +7,7 @@
     }
     else
     {
+        // Instantiate catalogue class
         $objCatalogue = new Catalogue();
         $cat = $objCatalogue->getCategory($category);
 
@@ -17,6 +18,10 @@
         else
         {
             $rows = $objCatalogue->getProducts($cat);
+
+            // Instantiate paging class
+            $objPaging = new Paging($rows, 5);
+            $rows = $objPaging->getRecords();
 
             require_once("_header.php");
 ?>
@@ -69,6 +74,9 @@
             </div>
 <?php
         }
+
+        // Display pagination links
+        echo $objPaging->getPaging();
     }
     else
     {

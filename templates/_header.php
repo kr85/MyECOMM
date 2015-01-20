@@ -1,8 +1,9 @@
 <?php
-
+    // Instantiate catalogue class
     $objCatalogue = new Catalogue();
     $categories = $objCatalogue->getCategories();
 
+    // Instantiate business class
     $objBusiness = new Business();
     $business = $objBusiness->getBusiness();
 ?>
