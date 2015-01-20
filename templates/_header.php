@@ -1,7 +1,7 @@
 <?php
-    // Instantiate catalogue class
-    $objCatalogue = new Catalogue();
-    $categories = $objCatalogue->getCategories();
+    // Instantiate catalog class
+    $objCatalog = new Catalog();
+    $categories = $objCatalog->getCategories();
 
     // Instantiate business class
     $objBusiness = new Business();
@@ -27,23 +27,23 @@
         <div id="outer">
             <div id="wrapper">
                 <div id="left">
+                    <?php require_once('basket_left.php'); ?>
+                    <?php if (!empty($categories)) { ?>
                     <h2>Categories</h2>
                     <ul id="navigation">
                         <?php
-                            if (!empty($categories))
+                            foreach ($categories as $category)
                             {
-                                foreach ($categories as $category)
-                                {
-                                    echo "<li>";
-                                    echo "<a href=\"/?page=catalogue&amp;category=".$category['id']."\"";
-                                    echo Helper::getActive(['category' => $category['id']]);
-                                    echo ">";
-                                    echo Helper::encodeHTML($category['name']);
-                                    echo "</a>";
-                                    echo "</li>";
-                                }
+                                echo "<li>";
+                                echo "<a href=\"/?page=catalog&amp;category=".$category['id']."\"";
+                                echo Helper::getActive(['category' => $category['id']]);
+                                echo ">";
+                                echo Helper::encodeHTML($category['name']);
+                                echo "</a>";
+                                echo "</li>";
                             }
                         ?>
                     </ul>
+            <?php } ?>
                 </div>
                 <div id="right">

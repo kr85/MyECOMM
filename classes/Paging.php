@@ -77,6 +77,11 @@ class Paging
         return $out;
     }
 
+    /**
+     * Get pagination links
+     *
+     * @return string
+     */
     private function getLinks()
     {
         if ($this->numberOfPages > 1)
@@ -138,6 +143,11 @@ class Paging
         }
     }
 
+    /**
+     * Get pagination
+     *
+     * @return string
+     */
     public function getPaging()
     {
         $links = $this->getLinks();

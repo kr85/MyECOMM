@@ -41,9 +41,9 @@ defined("TEMPLATES_DIR")
 defined("EMAILS_PATH")
     || define("EMAILS_PATH", ROOT_PATH.DS."emails");
 
-// Catalogue images path
-defined("CATALOGUE_PATH")
-    || define("CATALOGUE_PATH", ROOT_PATH.DS."media".DS."catalogue");
+// Catalog images path
+defined("CATALOG_PATH")
+    || define("CATALOG_PATH", ROOT_PATH.DS."media".DS."catalog");
 
 // Add all directories to the include path
 set_include_path(implode(PATH_SEPARATOR, [

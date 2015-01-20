@@ -7,9 +7,9 @@
     }
     else
     {
-        // Instantiate catalogue class
-        $objCatalogue = new Catalogue();
-        $cat = $objCatalogue->getCategory($category);
+        // Instantiate catalog class
+        $objCatalog = new Catalog();
+        $cat = $objCatalog->getCategory($category);
 
         if (empty($cat))
         {
@@ -17,16 +17,16 @@
         }
         else
         {
-            $rows = $objCatalogue->getProducts($cat);
+            $rows = $objCatalog->getProducts($cat);
 
             // Instantiate paging class
-            $objPaging = new Paging($rows, 5);
+            $objPaging = new Paging($rows, 3);
             $rows = $objPaging->getRecords();
 
             require_once("_header.php");
 ?>
 
-    <h1>Catalogue :: <?php echo $cat['name']; ?></h1>
+            <h1 xmlns="http://www.w3.org/1999/html">Catalog :: <?php echo $cat['name']; ?></h1>
 
 <?php
     if (!empty($rows))
@@ -34,31 +34,31 @@
         foreach ($rows as $row)
         {
 ?>
-            <div class="catalogue_wrapper">
-                <div class="catalogue_wrapper_left">
+            <div class="catalog_wrapper">
+                <div class="catalog_wrapper_left">
                     <?php
                         $image = !empty($row['image']) ?
-                        $objCatalogue->path.$row['image'] :
-                        $objCatalogue->path.'unavailable.png';
+                        $objCatalog->path.$row['image'] :
+                        $objCatalog->path.'unavailable.png';
 
                         $width = Helper::getImageSize($image, 0);
                         $width = $width > 120 ? 120 : $width;
                     ?>
-                    <a href="/?page=catalogue-item&amp;category=<?php
+                    <a href="/?page=catalog-item&amp;category=<?php
                         echo $category['id']; ?>&amp;id=<?php echo $row['id']; ?>">
                         <img src="<?php echo $image; ?>"
                              alt="<?php echo Helper::encodeHTML($row['name'], 1); ?>"
                              width="<?php echo $width; ?>" />
                     </a>
                 </div>
-                <div class="catalogue_wrapper_right">
+                <div class="catalog_wrapper_right">
                     <h4>
-                        <a href="/?page=catalogue-item&amp;category=<?php
+                        <a href="/?page=catalog-item&amp;category=<?php
                             echo $category['id']; ?>&amp;id=<?php echo $row['id']; ?>">
                             <?php echo Helper::encodeHTML($row['name'], 1); ?>
                         </a>
                     </h4>
-                    <h4>Price: <?php echo Catalogue::$currency;
+                    <h4>Price: <?php echo Catalog::$currency;
                         echo number_format($row['price'], 2); ?>
                     </h4>
                     <p>

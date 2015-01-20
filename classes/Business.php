@@ -19,5 +19,14 @@ class Business extends Application
         return $this->db->fetchOne($sql);
     }
 
-
+    /**
+     * Get tax rate
+     *
+     * @return mixed
+     */
+    public function getTaxRate()
+    {
+        $business = $this->getBusiness();
+        return $business['vat_rate'];
+    }
 }

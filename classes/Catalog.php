@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Class Catalogue
+ * Class Catalog
  */
-class Catalogue extends Application
+class Catalog extends Application
 {
     private $tableCategories = 'categories';
     private $tableProducts = 'products';
-    public $path = 'media/catalogue/';
+    public $path = 'media/catalog/';
     public static $currency = '&dollar;';
 
 
@@ -50,5 +50,19 @@ class Catalogue extends Application
                   ORDER BY `date` DESC";
 
         return $this->db->fetchAll($sql);
+    }
+
+    /**
+     * Get a product by id
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getProduct($id)
+    {
+        $sql = "SELECT * FROM `{$this->tableProducts}`
+                  WHERE `id` ='".$this->db->escape($id)."'";
+
+        return $this->db->fetchOne($sql);
     }
 }

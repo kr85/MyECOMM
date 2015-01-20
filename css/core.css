@@ -26,9 +26,9 @@ h4,h4 a{font-size:14px}
 .br_td{border-top:dashed 1px #aaa}
 #basket_left dt{clear:left;width:40%}
 #basket_left dd{text-align:right;width:30%}
-.catalogue_wrapper{width:100%;border-bottom:dashed 1px #aaa;margin-bottom:14px}
-.catalogue_wrapper_left{width:150px}
-.catalogue_wrapper_right{width:470px}
+.catalog_wrapper{width:100%;border-bottom:dashed 1px #aaa;margin-bottom:14px}
+.catalog_wrapper_left{width:150px}
+.catalog_wrapper_right{width:470px}
 .add_to_basket{cursor:pointer;text-decoration:underline;color:#295c88}
 .red,.warn{color:#900}
 .warn{display:block}
@@ -60,7 +60,7 @@ th,td{text-align:left;vertical-align:top}
 .inactive{color:#aaa}
 .mr_r4{margin-right:4px}
 a:hover,#footer_in a,.add_to_basket:hover{text-decoration:none}
-#header,#outer,#left,#right,#footer,.cl,.dev,#basket_left,#basket_left dd,#basket_left dt,.catalogue_wrapper,.catalogue_wrapper_left,.catalogue_wrapper_right,.lft,.rgt,.fl_l{float:left}
+#header,#outer,#left,#right,#footer,.cl,.dev,#basket_left,#basket_left dd,#basket_left dt,.catalog_wrapper,.catalog_wrapper_left,.catalog_wrapper_right,.lft,.rgt,.fl_l{float:left}
 #navigation li a,#basket_left dt,#basket_left dd{padding:1px 0}
-.catalogue_wrapper img,.tbl_repeat,.tbl_insert{margin-bottom:14px}
+.catalog_wrapper img,.tbl_repeat,.tbl_insert{margin-bottom:14px}
 .tbl_insert td,.fld,.fld_price,.sel,.tar,.tar_fixed{padding:3px}
