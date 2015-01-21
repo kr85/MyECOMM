@@ -6,7 +6,6 @@ $(document).ready(function() {
             url: '/modules/basket_small_refresh.php',
             dataType: 'json',
             success: function(data) {
-                console.log(data);
                 $.each(data, function(k, v) {
                     $("#basket_left ." + k + " span").text(v);
                 });
@@ -29,8 +28,6 @@ $(document).ready(function() {
                 dataType: 'json',
                 data: ({ id: item[0], job: item[1] }),
                 success: function(data) {
-                    console.log(item[1]);
-                    console.log(data.job);
                     var newId = item[0] + '_' + data.job;
                     if (data.job != item[1]) {
                         if (data.job == 0) {

@@ -9,15 +9,15 @@
     {
         // Instantiate catalog class
         $objCatalog = new Catalog();
-        $cat = $objCatalog->getCategory($category);
+        $category = $objCatalog->getCategory($category);
 
-        if (empty($cat))
+        if (empty($category))
         {
             require_once("error.php");
         }
         else
         {
-            $rows = $objCatalog->getProducts($cat);
+            $rows = $objCatalog->getProducts($category);
 
             // Instantiate paging class
             $objPaging = new Paging($rows, 3);
@@ -26,7 +26,7 @@
             require_once("_header.php");
 ?>
 
-            <h1 xmlns="http://www.w3.org/1999/html">Catalog :: <?php echo $cat['name']; ?></h1>
+            <h1 xmlns="http://www.w3.org/1999/html">Catalog :: <?php echo $category['name']; ?></h1>
 
 <?php
     if (!empty($rows))

@@ -32,13 +32,13 @@
                     <h2>Categories</h2>
                     <ul id="navigation">
                         <?php
-                            foreach ($categories as $category)
+                            foreach ($categories as $c)
                             {
                                 echo "<li>";
-                                echo "<a href=\"/?page=catalog&amp;category=".$category['id']."\"";
-                                echo Helper::getActive(['category' => $category['id']]);
+                                echo "<a href=\"/?page=catalog&amp;category=".$c['id']."\"";
+                                echo Helper::getActive(['category' => $c['id']]);
                                 echo ">";
-                                echo Helper::encodeHTML($category['name']);
+                                echo Helper::encodeHTML($c['name']);
                                 echo "</a>";
                                 echo "</li>";
                             }
