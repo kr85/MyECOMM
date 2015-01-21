@@ -119,4 +119,39 @@ class Basket
 
         return $out;
     }
+
+    /**
+     * Calculate the total of an item by price and quantity
+     *
+     * @param null $price
+     * @param null $quantity
+     * @return float
+     */
+    public function itemTotal($price = null, $quantity = null)
+    {
+        if (!empty($price) && !empty($quantity))
+        {
+            return round(($price * $quantity), 2);
+        }
+    }
+
+    /**
+     * Get the remove item button for the basket
+     *
+     * @param null $id
+     * @return string
+     */
+    public static function removeButton($id = null)
+    {
+        if (!empty($id))
+        {
+            if (isset($_SESSION['basket'][$id]))
+            {
+                $out = "<a href=\"\" class=\"remove_basket red";
+                $out .= "\" rel=\"{$id}\">Remove</a>";
+
+                return $out;
+            }
+        }
+    }
 }

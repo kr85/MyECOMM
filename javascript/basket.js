@@ -1,5 +1,46 @@
 $(document).ready(function() {
 
+    initializeBinds();
+
+    function initializeBinds() {
+        if ($('.update_basket').length > 0) {
+            $('.update_basket').bind('click', updateBasket);
+        }
+
+        if ($('.remove_basket').length > 0) {
+            $('.remove_basket').bind('click', removeFromBasket);
+        }
+
+        if ($('.fld_qty').length > 0) {
+            $('.fld_qty').bind('keypress', function(e) {
+                var code = e.keyCode ? e.keyCode : e.which;
+                if (code == 13) {
+                    updateBasket();
+                }
+            });
+        }
+    }
+
+    function removeFromBasket(event) {
+        event.preventDefault();
+
+        var item = $(this).attr('rel');
+
+        $.ajax({
+            type: 'POST',
+            url: '/modules/basket_remove.php',
+            dataType: 'html',
+            data: ({ id: item }),
+            success: function() {
+                refreshMainBasket();
+                refreshSmallBasket();
+            },
+            error: function() {
+                alert("An error has occurred.")
+            }
+        });
+    }
+
     function refreshSmallBasket() {
 
         $.ajax({
@@ -11,13 +52,30 @@ $(document).ready(function() {
                 });
             },
             error: function(data) {
-                alert("Error occurred!")
+                alert("An error has occurred.")
+            }
+        });
+    }
+
+    function refreshMainBasket() {
+
+        $.ajax({
+            url: '/modules/basket_view.php',
+            dataType: 'html',
+            success: function(data) {
+                $('#main_basket').html(data);
+                initializeBinds();
+            },
+            error: function(data) {
+                alert("An error has occurred.");
             }
         });
     }
 
     if ($(".add_to_basket").length > 0) {
-        $(".add_to_basket").click(function() {
+        $(".add_to_basket").click(function(event) {
+            event.preventDefault();
+
             var trigger = $(this);
             var param = trigger.attr("rel");
             var item = param.split("_");
@@ -43,10 +101,32 @@ $(document).ready(function() {
                     }
                 },
                 error: function(data) {
-                    alert("An error has occurred!");
+                    alert("An error has occurred.");
                 }
             });
             return false;
         });
     }
+
+    function updateBasket() {
+
+        $('#frm_basket :input').each(function() {
+            var sid = $(this).attr('id').split('-');
+            var value = $(this).val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/modules/basket_quantity.php',
+                data: ({ id: sid[1], quantity: value }),
+                success: function() {
+                    refreshSmallBasket();
+                    refreshMainBasket();
+                },
+                error: function() {
+                    alert('An error has occurred.')
+                }
+            });
+        });
+    }
+
 });
