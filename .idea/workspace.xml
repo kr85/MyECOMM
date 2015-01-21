@@ -35,16 +35,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="catalog-item.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="catalog-item.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/catalog-item.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8654504" vertical-offset="345" max-vertical-offset="1357">
+            <state vertical-scroll-proportion="-23.71875" vertical-offset="345" max-vertical-offset="1357">
               <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
               <folding>
                 <marker date="1421801580612" expanded="true" signature="695:1613" placeholder="..." />
                 <marker date="1421801580612" expanded="true" signature="739:1613" placeholder="..." />
                 <marker date="1421801580612" expanded="true" signature="887:1453" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="readme.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/readme.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="909">
+              <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -103,6 +113,7 @@
         <option value="$PROJECT_DIR$/templates/_header.php" />
         <option value="$PROJECT_DIR$/pages/catalog.php" />
         <option value="$PROJECT_DIR$/pages/catalog-item.php" />
+        <option value="$PROJECT_DIR$/readme.md" />
       </list>
     </option>
   </component>
@@ -666,13 +677,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/catalog-item.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8654504" vertical-offset="345" max-vertical-offset="1357">
+        <state vertical-scroll-proportion="-23.71875" vertical-offset="345" max-vertical-offset="1357">
           <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
           <folding>
             <marker date="1421801580612" expanded="true" signature="695:1613" placeholder="..." />
             <marker date="1421801580612" expanded="true" signature="739:1613" placeholder="..." />
             <marker date="1421801580612" expanded="true" signature="887:1453" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="909">
+          <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
