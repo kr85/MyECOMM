@@ -95,7 +95,7 @@ CREATE TABLE `clients` (
   `address_2` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
-  `post_code` varchar(10) NOT NULL,
+  `zip_code` varchar(10) NOT NULL,
   `country` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,

@@ -42,10 +42,10 @@
             </td>
         </tr>
         <tr>
-            <th><label for="county">City: *</label></th>
+            <th><label for="state">State: *</label></th>
             <td>
-                <input type="text" name="town"
-                       id="town" class="fld" value="" />
+                <input type="text" name="state"
+                       id="state" class="fld" value="" />
             </td>
         </tr>
     </table>
