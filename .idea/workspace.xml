@@ -25,11 +25,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="basket.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="basket.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javascript/basket.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0880088" vertical-offset="0" max-vertical-offset="3151">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3151">
               <caret line="43" column="32" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="checkout.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/checkout.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="448" max-vertical-offset="1357">
+              <caret line="40" column="31" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ecommerce.sql" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/database/ecommerce.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6539352" vertical-offset="10774" max-vertical-offset="11638">
+              <caret line="493" column="35" selection-start-line="493" selection-start-column="35" selection-end-line="493" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -128,6 +148,8 @@
         <option value="$PROJECT_DIR$/modules/basket_view.php" />
         <option value="$PROJECT_DIR$/modules/basket_remove.php" />
         <option value="$PROJECT_DIR$/javascript/basket.js" />
+        <option value="$PROJECT_DIR$/pages/checkout.php" />
+        <option value="$PROJECT_DIR$/database/ecommerce.sql" />
       </list>
     </option>
   </component>
@@ -482,14 +504,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/ecommerce.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35643566" vertical-offset="1263" max-vertical-offset="11431">
-          <caret line="69" column="17" selection-start-line="69" selection-start-column="14" selection-end-line="69" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/classes/Core.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40484047" vertical-offset="0" max-vertical-offset="909">
@@ -739,8 +753,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/javascript/basket.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0880088" vertical-offset="0" max-vertical-offset="3151">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3151">
           <caret line="43" column="32" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/checkout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="448" max-vertical-offset="1357">
+          <caret line="40" column="31" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/ecommerce.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6539352" vertical-offset="10774" max-vertical-offset="11638">
+          <caret line="493" column="35" selection-start-line="493" selection-start-column="35" selection-end-line="493" selection-end-column="35" />
           <folding />
         </state>
       </provider>
