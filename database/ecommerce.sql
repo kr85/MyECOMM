@@ -491,6 +491,11 @@ ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Dumping data for table `business`
+--
+INSERT  INTO `business` VALUES (1, 'MyECOMM', '123 Way Street, San Jose, CA 95192, USA', '408-505-0000', ' support@myecomm.com', 'www.MyECOMM.com', 10.00);
+
+--
 -- Dumping data for table `products`
 --
 INSERT INTO `products` VALUES (1, 'Beginning PHP and MySQL', 'Beginning PHP and MySQL: From Novice to Professional, Fourth Edition is a major update of W. Jason Gilmore''s authoritative book on PHP and MySQL. The fourth edition includes complete coverage of PHP 5.3 features, including namespacing, an update of AMP stack installation and configuration, updates to Zend Framework, coverage of MySQL Workbench, and much more.', '25.99', NOW(), 2, 'beginning-php.jpg');

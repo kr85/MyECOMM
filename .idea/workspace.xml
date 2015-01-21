@@ -48,8 +48,8 @@
       <file leaf-file-name="ecommerce.sql" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/database/ecommerce.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6539352" vertical-offset="10774" max-vertical-offset="11638">
-              <caret line="493" column="35" selection-start-line="493" selection-start-column="35" selection-end-line="493" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.33449075" vertical-offset="10774" max-vertical-offset="11776">
+              <caret line="481" column="2" selection-start-line="481" selection-start-column="2" selection-end-line="481" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -769,8 +769,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/database/ecommerce.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6539352" vertical-offset="10774" max-vertical-offset="11638">
-          <caret line="493" column="35" selection-start-line="493" selection-start-column="35" selection-end-line="493" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.33449075" vertical-offset="10774" max-vertical-offset="11776">
+          <caret line="481" column="2" selection-start-line="481" selection-start-column="2" selection-end-line="481" selection-end-column="2" />
           <folding />
         </state>
       </provider>
