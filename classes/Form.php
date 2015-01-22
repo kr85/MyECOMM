@@ -5,6 +5,12 @@
  */
 class Form
 {
+    /**
+     * Check if a field is posted
+     *
+     * @param null $field
+     * @return bool
+     */
     public function isPost($field = null)
     {
         if (!empty($field))
@@ -27,6 +33,12 @@ class Form
         }
     }
 
+    /**
+     * Get post with field if available
+     *
+     * @param null $field
+     * @return null|string
+     */
     public function getPost($field = null)
     {
         if (!empty($field))
@@ -35,6 +47,14 @@ class Form
         }
     }
 
+    /**
+     * Keep select input after refresh
+     *
+     * @param $field
+     * @param $value
+     * @param null $default
+     * @return null|string
+     */
     public function stickySelect($field, $value, $default = null)
     {
         if ($this->isPost($field) && $this->getPost($field) == $value)
@@ -49,6 +69,13 @@ class Form
         }
     }
 
+    /**
+     * Keep text input after refresh
+     *
+     * @param $field
+     * @param null $value
+     * @return null|string
+     */
     public function stickyText($field, $value = null)
     {
         if ($this->isPost($field))
@@ -94,5 +121,36 @@ class Form
             $out .= "</select>";
             return $out;
         }
+    }
+
+    /**
+     * Get posted fields
+     *
+     * @param null $expected
+     * @return array
+     */
+    public function getPostArray($expected = null)
+    {
+        $out = [];
+
+        if ($this->isPost())
+        {
+            foreach($_POST as $key => $value)
+            {
+                if (!empty($expected))
+                {
+                    if (in_array($key, $expected))
+                    {
+                        $out[$key] = strip_tags($value);
+                    }
+                }
+                else
+                {
+                    $out[$key] = strip_tags($value);
+                }
+            }
+        }
+
+        return $out;
     }
 }

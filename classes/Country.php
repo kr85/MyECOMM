@@ -1,7 +1,15 @@
 <?php
 
+/**
+ * Class Country
+ */
 class Country extends Application
 {
+    /**
+     * Get all countries
+     *
+     * @return array
+     */
     public function getCountries()
     {
         $sql = "SELECT * FROM `countries`
