@@ -5,6 +5,7 @@
  */
 class Application
 {
+    // Database object
     public $db;
 
     /**

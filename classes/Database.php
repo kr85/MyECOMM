@@ -5,12 +5,14 @@
  */
 class Database
 {
+    // Database connection credentials
     private $hostname = "localhost";
     private $username = "root";
     private $password = "";
     private $database = "ecommerce";
     private $connDb = false;
 
+    // Database helper fields
     public $lastQuery = null;
     public $affectedRows = 0;
     public $insertKeys = [];

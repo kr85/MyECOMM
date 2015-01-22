@@ -5,12 +5,25 @@
  */
 class Basket
 {
+    // Catalog instance
     public $instanceCatalog;
+
+    // Empty basket variable
     public $emptyBasket;
+
+    // Tax rate variable
     public $taxRate;
+
+    // Number of items variable
     public $numberOfItems;
+
+    // Sub-total amount variable
     public $subTotal;
+
+    // Tax variable
     public $tax;
+
+    // Total amount variable
     public $total;
 
     /**

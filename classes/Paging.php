@@ -5,13 +5,28 @@
  */
 class Paging
 {
+    // The actual records
     private $records;
+
+    // The maximum number of records per page
     private $maxPerPage;
+
+    // The number of pages
     private $numberOfPages;
+
+    // The number of records
     private $numberOfRecords;
+
+    // The current page
     private $current;
+
+    // The pagination offset
     private $offset = 0;
+
+    // The key in the url
     private static $key = 'pg';
+
+    // The url
     public $url;
 
     /**

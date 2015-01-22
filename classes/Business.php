@@ -5,6 +5,7 @@
  */
 class Business extends Application
 {
+    // The name of the database table
     private $table = 'business';
 
     /**

@@ -5,9 +5,16 @@
  */
 class Catalog extends Application
 {
+    // The name of the categories table
     private $tableCategories = 'categories';
+
+    // The name of the products table
     private $tableProducts = 'products';
+
+    // The path to the catalog images
     public $path = 'media/catalog/';
+
+    // Country's official currency
     public static $currency = '&dollar;';
 
 

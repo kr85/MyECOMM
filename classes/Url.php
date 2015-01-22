@@ -5,8 +5,13 @@
  */
 class Url
 {
+    // The pages url key
     public static $page = "page";
+
+    // Path to the pages folder
     public static $folder = PAGES_DIR;
+
+    // List of parameters
     public static $params = [];
 
     /**
