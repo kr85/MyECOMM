@@ -96,4 +96,16 @@ class Url
 
         return "/?".implode("&", $out);
     }
+
+    /**
+     * Get the referrer url
+     *
+     * @return null|string
+     */
+    public static function getReferrerUrl()
+    {
+        $page = self::getParam(Login::$referrer);
+
+        return !empty($page) ? "/?page={$page}" : null;
+    }
 }

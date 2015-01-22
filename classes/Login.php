@@ -31,6 +31,9 @@ class Login
         }
     }
 
+    /**
+     * Restrict access only after login
+     */
     public static function restrictFront()
     {
         if (!self::isLogged(self::$loginFront))
@@ -43,6 +46,12 @@ class Login
         }
     }
 
+    /**
+     * Check if user is logged in
+     *
+     * @param null $case
+     * @return bool
+     */
     public static function isLogged($case = null)
     {
         if (!empty($case))
@@ -57,5 +66,21 @@ class Login
         }
 
         return false;
+    }
+
+    /**
+     * Login default page
+     *
+     * @param $id
+     * @param null $url
+     */
+    public static function loginFront($id, $url = null)
+    {
+        $url = !empty($url) ? $url : self::$dashboardFront;
+
+        $_SESSION[self::$loginFront] = $id;
+        $_SESSION[self::$validLogin] = 1;
+
+        Helper::redirect($url);
     }
 }

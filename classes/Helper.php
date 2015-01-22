@@ -106,6 +106,11 @@ class Helper
         return $string;
     }
 
+    /**
+     * Redirect to url
+     *
+     * @param null $url
+     */
     public static function redirect($url = null)
     {
         if (!empty($url))

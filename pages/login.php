@@ -1,6 +1,29 @@
 <?php
 
+// Check if user is logged in
+if (Login::isLogged(Login::$loginFront))
+{
+    Helper::redirect(Login::$dashboardFront);
+}
+
 $objForm = new Form();
+$objValidation = new Validation($objForm);
+$objUser = new User();
+
+if ($objForm->isPost('login_email'))
+{
+    if ($objUser->isUser(
+        $objForm->getPost('login_email'),
+        $objForm->getPost('login_password')
+    ))
+    {
+        Login::loginFront($objUser->id, Url::getReferrerUrl());
+    }
+    else
+    {
+        $objValidation->addToErrors('login');
+    }
+}
 
 require_once('_header.php');
 
@@ -15,6 +38,7 @@ require_once('_header.php');
                 <label for="login_email">Email:</label>
             </th>
             <td>
+                <?php echo $objValidation->validate('login'); ?>
                 <input type="text" name="login_email"
                        id="login_email" class="fld" value=""/>
             </td>

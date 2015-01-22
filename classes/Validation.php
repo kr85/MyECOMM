@@ -21,7 +21,8 @@ class Validation
         'state'      => 'Please provide the name of your state',
         'zip_code'   => 'Please provide your ZIP code',
         'country'    => 'Please provide your country',
-        'email'      => 'Please provide your valid email address'
+        'email'      => 'Please provide your valid email address',
+        'login'      => 'User and/or password are incorrect'
     ];
 
     // List of expected fields
