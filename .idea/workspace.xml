@@ -24,7 +24,18 @@
     <favorites_list name="ecommerce" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="checkout.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/checkout.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.43014303" vertical-offset="0" max-vertical-offset="3266">
+              <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -57,9 +68,7 @@
         <option value="$PROJECT_DIR$/modules/basket_remove.php" />
         <option value="$PROJECT_DIR$/javascript/basket.js" />
         <option value="$PROJECT_DIR$/database/ecommerce.sql" />
-        <option value="$PROJECT_DIR$/pages/checkout.php" />
         <option value="$PROJECT_DIR$/classes/Form.php" />
-        <option value="$PROJECT_DIR$/classes/Validation.php" />
         <option value="$PROJECT_DIR$/classes/Application.php" />
         <option value="$PROJECT_DIR$/classes/Basket.php" />
         <option value="$PROJECT_DIR$/classes/Business.php" />
@@ -68,6 +77,9 @@
         <option value="$PROJECT_DIR$/classes/Database.php" />
         <option value="$PROJECT_DIR$/classes/Paging.php" />
         <option value="$PROJECT_DIR$/classes/Url.php" />
+        <option value="$PROJECT_DIR$/classes/Login.php" />
+        <option value="$PROJECT_DIR$/pages/checkout.php" />
+        <option value="$PROJECT_DIR$/classes/Validation.php" />
       </list>
     </option>
   </component>
@@ -478,22 +490,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/basket.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04295302" vertical-offset="175" max-vertical-offset="920">
-          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/basket_left.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0067114" vertical-offset="842" max-vertical-offset="1587">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/basket_small_refresh.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3542354" vertical-offset="0" max-vertical-offset="909">
@@ -571,33 +567,6 @@
         <state vertical-scroll-proportion="0.22772278" vertical-offset="0" max-vertical-offset="909">
           <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/checkout.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.3025303" vertical-offset="0" max-vertical-offset="2323">
-          <caret line="91" column="13" selection-start-line="91" selection-start-column="13" selection-end-line="91" selection-end-column="13" />
-          <folding>
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1421881241324" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -730,10 +699,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modules/basket_left.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10121012" vertical-offset="0" max-vertical-offset="1587">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/basket.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21562156" vertical-offset="11" max-vertical-offset="920">
+          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/Login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20242023" vertical-offset="0" max-vertical-offset="909">
+          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/classes/Validation.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.579758" vertical-offset="0" max-vertical-offset="5152">
-          <caret line="181" column="40" selection-start-line="181" selection-start-column="40" selection-end-line="181" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.45544556" vertical-offset="0" max-vertical-offset="5175">
+          <caret line="18" column="71" selection-start-line="18" selection-start-column="71" selection-end-line="18" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/checkout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43014303" vertical-offset="0" max-vertical-offset="3266">
+          <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
           <folding />
         </state>
       </provider>

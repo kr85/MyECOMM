@@ -16,6 +16,7 @@ class Validation
         'first_name' => 'Please provide your first name',
         'last_name'  => 'Please provide your last name',
         'address_1'  => 'Please provide the first line of your address',
+        'address_2'  => 'Please provide the second line of your address',
         'city'       => 'Please provide the name of your city',
         'state'      => 'Please provide the name of your state',
         'zip_code'   => 'Please provide your ZIP code',
@@ -46,7 +47,7 @@ class Validation
      *
      * @param Form $objForm
      */
-    public function __construct(Form $objForm)
+    public function __construct($objForm)
     {
         $this->objForm = $objForm;
     }
