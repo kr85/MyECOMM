@@ -22,7 +22,10 @@ class Validation
         'zip_code'   => 'Please provide your ZIP code',
         'country'    => 'Please provide your country',
         'email'      => 'Please provide your valid email address',
-        'login'      => 'User and/or password are incorrect'
+        'login'      => 'User and/or password are incorrect',
+        'password'   => 'Please choose your password',
+        'confirm_password' => 'Please confirm your password',
+        'password_mismatch' => 'Passwords do not match'
     ];
 
     // List of expected fields

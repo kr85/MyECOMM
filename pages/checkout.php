@@ -6,6 +6,7 @@ Login::restrictFront();
 $objForm = new Form();
 $objValidation = new Validation($objForm);
 
+// Checkout form
 if ($objForm->isPost('first_name'))
 {
     $objValidation->expected = [
