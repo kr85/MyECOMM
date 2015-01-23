@@ -171,4 +171,48 @@ class Database
     {
         return mysql_insert_id($this->connDb);
     }
+
+    /**
+     * Prepare parameters for insert query
+     *
+     * @param null $parameters
+     */
+    public function prepareInsert($parameters = null)
+    {
+        if (!empty($parameters))
+        {
+            foreach($parameters as $key => $value)
+            {
+                $this->insertKeys[] = $key;
+                $this->insertValues[] = $this->escape($value);
+            }
+        }
+    }
+
+    /**
+     * Insert SQL function
+     *
+     * @param null $table
+     * @return bool
+     */
+    public function insert($table = null)
+    {
+        if (!empty($this) && !empty($this->insertKeys)
+            && !empty($this->insertValues))
+        {
+            $sql = "INSERT INTO `{$table}` (`";
+            $sql .= implode("`, `", $this->insertKeys);
+            $sql .= "`) VALUES ('";
+            $sql .= implode("', '", $this->insertValues);
+            $sql .= "')";
+
+            if ($this->query($sql))
+            {
+                $this->id = $this->lastId();
+                return true;
+            }
+
+            return false;
+        }
+    }
 }

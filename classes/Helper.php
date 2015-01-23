@@ -119,4 +119,48 @@ class Helper
             exit;
         }
     }
+
+    /**
+     * Set date helper function
+     *
+     * @param null $case
+     * @param null $date
+     * @return bool|string
+     */
+    public static function setDate($case = null, $date = null)
+    {
+        $date = empty($date) ? time() : strtotime($date);
+
+        switch($case)
+        {
+            case 1:
+                // 23/01/2015
+                return date('d/m/Y', $date);
+                break;
+            case 2:
+                // Monday, 1st January 2015, 10:25:57
+                return date('l, jS F Y, H:i:s', $date);
+                break;
+            case 3:
+                // 2015-01-23-10-25-57
+                return date('Y-m-d-H-i-s', $date);
+                break;
+            default:
+                // 2015-01-23 10:25:57
+                return date('Y-m-d H:i:s', $date);
+        }
+    }
+
+    /**
+     * Add errors to log file
+     *
+     * @param $errors
+     */
+    public static function addToErrorsLog($errors)
+    {
+        $file = LOGS_DIR.DS.'errors.txt';
+        $errors = $errors.PHP_EOL;
+
+        file_put_contents($file, date('Y-m-d H:i:s - ') . $errors, FILE_APPEND);
+    }
 }

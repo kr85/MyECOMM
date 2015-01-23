@@ -13,19 +13,20 @@ class Validation
 
     // List of validation error messages
     public $message = [
-        'first_name' => 'Please provide your first name',
-        'last_name'  => 'Please provide your last name',
-        'address_1'  => 'Please provide the first line of your address',
-        'address_2'  => 'Please provide the second line of your address',
-        'city'       => 'Please provide the name of your city',
-        'state'      => 'Please provide the name of your state',
-        'zip_code'   => 'Please provide your ZIP code',
-        'country'    => 'Please provide your country',
-        'email'      => 'Please provide your valid email address',
-        'login'      => 'User and/or password are incorrect',
-        'password'   => 'Please choose your password',
-        'confirm_password' => 'Please confirm your password',
-        'password_mismatch' => 'Passwords do not match'
+        'first_name'        => 'Please provide your first name.',
+        'last_name'         => 'Please provide your last name.',
+        'address_1'         => 'Please provide the first line of your address.',
+        'address_2'         => 'Please provide the second line of your address.',
+        'city'              => 'Please provide the name of your city.',
+        'state'             => 'Please provide the name of your state.',
+        'zip_code'          => 'Please provide your ZIP code.',
+        'country'           => 'Please provide your country.',
+        'email'             => 'Please provide your valid email address.',
+        'email_duplicate'   => 'This email address already exists.',
+        'login'             => 'Email address and/or password are incorrect.',
+        'password'          => 'Please choose your password.',
+        'confirm_password'  => 'Please confirm your password.',
+        'password_mismatch' => 'Passwords do not match.'
     ];
 
     // List of expected fields

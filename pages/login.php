@@ -29,6 +29,7 @@ if ($objForm->isPost('login_email'))
 // Sign Up form
 if ($objForm->isPost('first_name'))
 {
+    // Expected fields
     $objValidation->expected = [
         'first_name',
         'last_name',
@@ -43,6 +44,7 @@ if ($objForm->isPost('first_name'))
         'confirm_password'
     ];
 
+    // Required fields
     $objValidation->required = [
         'first_name',
         'last_name',
@@ -56,18 +58,22 @@ if ($objForm->isPost('first_name'))
         'confirm_password'
     ];
 
+    // Special validation field
     $objValidation->special = [
         'email' => 'email'
     ];
 
+    // Fields that should not be processed after validation
     $objValidation->postRemove = [
         'confirm_password'
     ];
 
+    // Format (hash) password after post
     $objValidation->postFormat = [
         'password' => 'password'
     ];
 
+    // Check if passwords match
     $password_1 = $objForm->getPost('password');
     $password_2 = $objForm->getPost('confirm_password');
 
@@ -76,9 +82,34 @@ if ($objForm->isPost('first_name'))
         $objValidation->addToErrors('password_mismatch');
     }
 
+    // Check if email already exist
+    $email = $objForm->getPost('email');
+    $user = $objUser->getByEmail($email);
+
+    if (!empty($user))
+    {
+        $objValidation->addToErrors('email_duplicate');
+    }
+
+    // Check if validation is valid
     if ($objValidation->isValid())
     {
+        // Add hash for activation account
+        $objValidation->post['hash'] = mt_rand().date('YmdHis').mt_rand();
 
+        // Add registration date
+        $objValidation->post['date'] = Helper::setDate();
+
+        if ($objUser->addUser(
+            $objValidation->post,
+            $objForm->getPost('password')))
+        {
+            Helper::redirect('/?page=registered');
+        }
+        else
+        {
+            Helper::redirect('/?page=registered-failed');
+        }
     }
 }
 
@@ -89,15 +120,16 @@ require_once('_header.php');
 <h1>Log In</h1>
 
 <form action="" method="POST">
-    <table cellpadding="0", cellspacing="0" border="0" class="tbl_insert">
+    <table cellpadding="0" cellspacing="0" border="0" class="tbl_insert">
         <tr>
             <th>
-                <label for="login_email">Email:</label>
+                <label for="login_email">Email address:</label>
             </th>
             <td>
                 <?php echo $objValidation->validate('login'); ?>
                 <input type="text" name="login_email"
-                       id="login_email" class="fld" value=""/>
+                       id="login_email" class="fld"
+                       value="<?php echo $objForm->stickyText('login_email'); ?>"/>
             </td>
         </tr>
         <tr>
@@ -121,7 +153,7 @@ require_once('_header.php');
 </form>
 
 <div class="dev br_td">&#160;</div>
-<h3>Not registered yet?</h3>
+<h1>Not registered yet?</h1>
 
 <form action="" method="POST">
     <table cellpadding="0" cellspacing="0" border="0" class="tbl_insert">
@@ -132,7 +164,8 @@ require_once('_header.php');
             <td>
                 <?php echo $objValidation->validate('first_name'); ?>
                 <input type="text" name="first_name"
-                       id="first_name" class="fld" value=""/>
+                       id="first_name" class="fld"
+                       value="<?php echo $objForm->stickyText('first_name'); ?>"/>
             </td>
         </tr>
         <tr>
@@ -142,7 +175,8 @@ require_once('_header.php');
             <td>
                 <?php echo $objValidation->validate('last_name'); ?>
                 <input type="text" name="last_name"
-                       id="last_name" class="fld" value=""/>
+                       id="last_name" class="fld"
+                       value="<?php echo $objForm->stickyText('last_name'); ?>"/>
             </td>
         </tr>
         <tr>
@@ -152,7 +186,8 @@ require_once('_header.php');
             <td>
                 <?php echo $objValidation->validate('address_1'); ?>
                 <input type="text" name="address_1"
-                       id="address_1" class="fld" value=""/>
+                       id="address_1" class="fld"
+                       value="<?php echo $objForm->stickyText('address_1'); ?>"/>
             </td>
         </tr>
         <tr>
@@ -162,7 +197,8 @@ require_once('_header.php');
             <td>
                 <?php echo $objValidation->validate('address_2'); ?>
                 <input type="text" name="address_2"
-                       id="address_2" class="fld" value=""/>
+                       id="address_2" class="fld"
+                       value="<?php echo $objForm->stickyText('address_2'); ?>"/>
             </td>
         </tr>
         <tr>
@@ -172,7 +208,8 @@ require_once('_header.php');
             <td>
                 <?php echo $objValidation->validate('city'); ?>
                 <input type="text" name="city"
-                       id="city" class="fld" value=""/>
+                       id="city" class="fld"
+                       value="<?php echo $objForm->stickyText('city'); ?>"/>
             </td>
         </tr>
         <tr>
@@ -182,7 +219,8 @@ require_once('_header.php');
             <td>
                 <?php echo $objValidation->validate('state'); ?>
                 <input type="text" name="state"
-                       id="state" class="fld" value=""/>
+                       id="state" class="fld"
+                       value="<?php echo $objForm->stickyText('state'); ?>"/>
             </td>
         </tr>
         <tr>
@@ -192,7 +230,8 @@ require_once('_header.php');
             <td>
                 <?php echo $objValidation->validate('zip_code'); ?>
                 <input type="text" name="zip_code"
-                       id="zip_code" class="fld" value=""/>
+                       id="zip_code" class="fld"
+                       value="<?php echo $objForm->stickyText('zip_code'); ?>"/>
             </td>
         </tr>
         <tr>
@@ -210,8 +249,10 @@ require_once('_header.php');
             </th>
             <td>
                 <?php echo $objValidation->validate('email'); ?>
+                <?php echo $objValidation->validate('email_duplicate'); ?>
                 <input type="text" name="email"
-                       id="email" class="fld" value=""/>
+                       id="email" class="fld"
+                       value="<?php echo $objForm->stickyText('email'); ?>"/>
             </td>
         </tr>
         <tr>

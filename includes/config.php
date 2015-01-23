@@ -45,6 +45,10 @@ defined("EMAILS_PATH")
 defined("CATALOG_PATH")
     || define("CATALOG_PATH", ROOT_PATH.DS."media".DS."catalog");
 
+// Logs folder
+defined("LOGS_DIR")
+    || define("LOGS_DIR", "logs");
+
 // Add all directories to the include path
 set_include_path(implode(PATH_SEPARATOR, [
     realpath(ROOT_PATH.DS.CLASSES_DIR),
@@ -52,5 +56,6 @@ set_include_path(implode(PATH_SEPARATOR, [
     realpath(ROOT_PATH.DS.MODULES_DIR),
     realpath(ROOT_PATH.DS.INCLUDES_DIR),
     realpath(ROOT_PATH.DS.TEMPLATES_DIR),
+    realpath(ROOT_PATH.DS.LOGS_DIR),
     get_include_path()
 ]));

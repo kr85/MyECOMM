@@ -1,2 +1,4 @@
 .idea
 .idea/*.xml
+logs
+logs/errors.txt
