@@ -126,4 +126,42 @@ class User extends Application
             return $this->db->fetchOne($sql);
         }
     }
+
+    /**
+     * Get user by id
+     *
+     * @param null $id
+     * @return mixed
+     */
+    public function getUser($id = null)
+    {
+        if (!empty($id))
+        {
+            $sql = "SELECT * FROM `{$this->table}`
+                      WHERE `id` = '".$this->db->escape($id)."'";
+
+            return $this->db->fetchOne($sql);
+        }
+    }
+
+    /**
+     * Update user
+     *
+     * @param null $parameters
+     * @param null $id
+     * @return bool
+     */
+    public function updateUser($parameters = null, $id = null)
+    {
+        if (!empty($parameters) && !empty($id))
+        {
+            $this->db->prepareUpdate($parameters);
+            if ($this->db->update($this->table, $id))
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
 }

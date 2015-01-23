@@ -190,7 +190,7 @@ class Database
     }
 
     /**
-     * Insert SQL function
+     * Insert SQL query
      *
      * @param null $table
      * @return bool
@@ -213,6 +213,41 @@ class Database
             }
 
             return false;
+        }
+    }
+
+    /**
+     * Prepare parameters for update query
+     *
+     * @param null $parameters
+     */
+    public function prepareUpdate($parameters = null)
+    {
+        if (!empty($parameters))
+        {
+            foreach ($parameters as $key => $value)
+            {
+                $this->updateSets[] = "`{$key}` = '".$this->escape($value)."'";
+            }
+        }
+    }
+
+    /**
+     * Update SQL query
+     *
+     * @param null $table
+     * @param null $id
+     * @return resource
+     */
+    public function update($table = null, $id = null)
+    {
+        if (!empty($table) && !empty($id) && !empty($this->updateSets))
+        {
+            $sql = "UPDATE `{$table}` SET ";
+            $sql .= implode(", ", $this->updateSets);
+            $sql .= " WHERE `id` = '".$this->escape($id)."'";
+
+            return $this->query($sql);
         }
     }
 }
