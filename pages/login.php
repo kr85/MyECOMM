@@ -137,7 +137,7 @@ require_once('_header.php');
                 <label for="login_password">Password:</label>
             </th>
             <td>
-                <input type="text" name="login_password"
+                <input type="password" name="login_password"
                        id="login_password" class="fld" value=""/>
             </td>
         </tr>
