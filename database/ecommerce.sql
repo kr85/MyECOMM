@@ -52,7 +52,7 @@ CREATE TABLE `business` (
   `telephone` varchar(100) NOT NULL,
   `email` varchar(200) NOT NULL,
   `website` varchar(200) NOT NULL,
-  `vat_rate` decimal(5,2) NOT NULL,
+  `tax_rate` decimal(5,2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -381,8 +381,8 @@ INSERT INTO `countries` VALUES(243, 'Zimbabwe', 'ZW');
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `client` int(11) NOT NULL,
-  `vat_rate` decimal(5,2) NOT NULL,
-  `vat` decimal(8,2) NOT NULL,
+  `tax_rate` decimal(5,2) NOT NULL,
+  `tax` decimal(8,2) NOT NULL,
   `subtotal` decimal(8,2) NOT NULL,
   `total` decimal(8,2) NOT NULL,
   `date` datetime NOT NULL,
