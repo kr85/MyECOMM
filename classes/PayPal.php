@@ -359,7 +359,7 @@ class PayPal
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST           => true,
             CURLOPT_POSTFIELDS     => $response,
-            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_0,
+            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
             CURLOPT_FORBID_REUSE   => true,
             CURLOPT_FORBID_REUSE   => true,
             CURLOPT_CONNECTTIMEOUT => 30,
@@ -369,8 +369,9 @@ class PayPal
             CURLOPT_VERBOSE        => 1,
             CURLINFO_HEADER_OUT    => true,
             CURLOPT_HTTPHEADER     => [
-                "Content-Type: application/x-www-form-urlencoded",
-                "Content-Length: " , strlen($response)
+                'Content-Type: application/x-www-form-urlencoded',
+                'Content-Length: ' . strlen($response),
+                'Connection: close'
             ]
         ]);
 
