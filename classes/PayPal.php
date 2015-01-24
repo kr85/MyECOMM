@@ -347,7 +347,7 @@ class PayPal
 
         $response = $this->getReturnParameters();
 
-        Helper::addToErrorsLog(null, $response);
+        Helper::addToErrorsLog('Response', $response);
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $this->url);
@@ -364,11 +364,11 @@ class PayPal
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($curl, CURLOPT_TIMEOUT, 30);
 
-        Helper::addToErrorsLog(null, $curl);
+        Helper::addToErrorsLog('Curl', $curl);
 
         $this->ipnResult = curl_exec($curl);
 
-        Helper::addToErrorsLog(null, $this->ipnResult);
+        Helper::addToErrorsLog('IPN_result', $this->ipnResult);
 
         if (empty($this->ipnResult))
         {
@@ -404,7 +404,6 @@ class PayPal
         }
 
         Helper::addToErrorsLog('Get_return_param_success', null);
-        Helper::addToErrorsLog(null, $out);
         return implode("&", $out);
     }
 }

@@ -179,5 +179,16 @@ class Helper
 
             fclose($file);
         }
+
+        if (!empty($name) && !empty($errors))
+        {
+            $fileName = date('Y-m-d_H:i:s_') . $name . '.log';
+            $filePath = LOGS_DIR.DS.$fileName;
+
+            $file = fopen($filePath, 'w') or die('Unable to open the file.');
+            fwrite($file, $errors);
+
+            fclose($file);
+        }
     }
 }
