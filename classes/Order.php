@@ -171,17 +171,17 @@ class Order extends Application
      */
     public function approve($data = null, $result = null)
     {
-        Helper::addToErrorsLog('In_approve', null);
+        //Helper::addToErrorsLog('In_approve', null);
 
         if (!empty($data) && !empty($result))
         {
-            Helper::addToErrorsLog('data_result_not_null', null);
+            //Helper::addToErrorsLog('data_result_not_null', null);
 
             if (array_key_exists('txn_id', $data) &&
                 array_key_exists('payment_status', $data) &&
                 array_key_exists('custom', $data))
             {
-                Helper::addToErrorsLog('txn_id|payment_status|custom_exist', null);
+                //Helper::addToErrorsLog('txn_id|payment_status|custom_exist', null);
 
                 $active = $data['payment_status'] == 'Completed' ? 1 : 0;
 
@@ -197,14 +197,14 @@ class Order extends Application
                 $errors = [];
 
                 $sql = "UPDATE `{$this->tableOrders}`
-                     SET `pp_status` = '".$this->db->escape($active)."', 
+                     SET `pp_status` = '".$this->db->escape($active)."',
                      `txn_id` = '".$this->db->escape($data['txn_id'])."',
                      `payment_status` = '".$this->db->escape($data['payment_status'])."',
                      `ipn` = '".$this->db->escape($out)."',
                      `response` = '".$this->db->escape($result)."'
                      WHERE `id` = '".$this->db->escape($data['custom'])."'";
 
-                Helper::addToErrorsLog('SQL_approve', $sql);
+                //Helper::addToErrorsLog('SQL_approve', $sql);
 
                 if(!$this->db->query($sql))
                 {
@@ -212,15 +212,15 @@ class Order extends Application
                     $errors[] = $sql;
                 }
 
-                Helper::addToErrorsLog('After_approve_query', null);
+                //Helper::addToErrorsLog('After_approve_query', null);
                 return empty($errors) ? true : false;
             }
 
-            Helper::addToErrorsLog('txn_id_payment_status_or_custom_do_not_exist', null);
+            //Helper::addToErrorsLog('txn_id_payment_status_or_custom_do_not_exist', null);
             return false;
         }
 
-        Helper::addToErrorsLog('Data_and_result_for_approve_are_empty', null);
+        //Helper::addToErrorsLog('Data_and_result_for_approve_are_empty', null);
         return false;
     }
 }

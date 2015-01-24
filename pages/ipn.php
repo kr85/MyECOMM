@@ -4,7 +4,7 @@
 $objPayPal = new PayPal();
 $succeed = $objPayPal->ipn();
 
-if (!$succeed)
+/*if (!$succeed)
 {
     Helper::addToErrorsLog('IPN_did_not_succeed', null);
     //Helper::redirect('/?page=error');
@@ -12,4 +12,4 @@ if (!$succeed)
 else
 {
     Helper::addToErrorsLog('IPN_succeed', null);
-}
+}*/
