@@ -22,6 +22,35 @@
         <div id="header">
             <div id="header_in">
                 <h5><a href="/"><?php echo $business['name']; ?></a></h5>
+                <?php
+                    if (Login::isLogged(Login::$loginFront))
+                    {
+                ?>
+                    <div id="logged_as">
+                        Logged in as:
+                        <strong>
+                            <?php
+                                echo Login::getFullNameFront(
+                                    Session::getSession(Login::$loginFront)
+                                );
+                            ?>
+                        </strong> |
+                        <a href="/?page=orders">My orders</a> |
+                        <a href="/?page=logout">Log Out</a>
+                    </div>
+                <?php
+                    }
+                    else
+                    {
+                ?>
+                    <div id="logged_as">
+                        <a href="/?page=login">
+                            Log In
+                        </a>
+                    </div>;
+                <?php
+                    }
+                ?>
             </div>
         </div>
         <div id="outer">
