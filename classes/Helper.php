@@ -154,18 +154,30 @@ class Helper
     /**
      * Add errors to log file
      *
-     * @param $errors
+     * @param null $name
+     * @param null $errors
      */
-    public static function addToErrorsLog($errors)
+    public static function addToErrorsLog($name = null, $errors = null)
     {
-        //$fileName = date('Y-m-d_H:i:s') . '.log';
-        //$filePath = LOGS_DIR.DS.$fileName;
+        if (!empty($name) && empty($errors))
+        {
+            $filePath = LOGS_DIR.DS.$errors;
 
-        $filePath = LOGS_DIR.DS.$errors;
+            $file = fopen($filePath, 'w') or die('Unable to open the file.');
+            fwrite($file, $errors);
 
-        $file = fopen($filePath, 'w') or die('Unable to open the file.');
-        fwrite($file, $errors);
+            fclose($file);
+        }
 
-        fclose($file);
+        if (empty($name) && !empty($errors))
+        {
+            $fileName = date('Y-m-d_H:i:s') . '.log';
+            $filePath = LOGS_DIR.DS.$fileName;
+
+            $file = fopen($filePath, 'w') or die('Unable to open the file.');
+            fwrite($file, $errors);
+
+            fclose($file);
+        }
     }
 }

@@ -20,8 +20,6 @@ if (!empty($session))
     {
         $out[$key] = $objCatalog->getProduct($key);
     }
-
-    Helper::addToErrorsLog('Summary page');
 }
 
 require_once('_header.php');
