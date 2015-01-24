@@ -27,7 +27,7 @@ class PayPal
     private $fields = [];
 
     // PayPal id
-    private $business = 'seller-myecomm@gmail.com';
+    private $business = null;
 
     // Page style
     private $pageStyle = null;
@@ -66,6 +66,8 @@ class PayPal
      */
     public function __construct($cmd = '_cart')
     {
+        $this->business = ProjectVariable::$PAYPAL_BUSINESS_ID;
+
         $this->url = $this->environment == 'sandbox' ?
             $this->urlSandbox :
             $this->urlProduction;

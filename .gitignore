@@ -4,3 +4,4 @@ logs
 logs/errors.txt
 .env.php
 .env.*.php
+/classes/ProjectVariable.php

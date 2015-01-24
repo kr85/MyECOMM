@@ -25,10 +25,12 @@ class Email
         $this->objMailer->Host = "smtp.gmail.com";
         $this->objMailer->Port = 587;
         $this->objMailer->SMTPSecure = "tls";
-        $this->objMailer->Username = "example@gmail.com";
-        $this->objMailer->Password = "secret";
-        $this->objMailer->SetFrom("example@gmail.com", "Kosta Rashev");
-        $this->objMailer->AddReplyTo("example@gmail.com", "Kosta Rashev");
+        $this->objMailer->Username = ProjectVariable::$MAILER_USERNAME;
+        $this->objMailer->Password = ProjectVariable::$MAILER_PASSWORD;
+        $this->objMailer->SetFrom(ProjectVariable::$MAILER_USERNAME,
+            ProjectVariable::$MAILER_NAME);
+        $this->objMailer->AddReplyTo(ProjectVariable::$MAILER_USERNAME,
+            ProjectVariable::$MAILER_NAME);
     }
 
     /**

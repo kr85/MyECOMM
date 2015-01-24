@@ -10,7 +10,7 @@ class Database
     private $username;
     private $password;
     private $database;
-    private $connDb = false;
+    private $connDb;
 
     // Database helper fields
     public $lastQuery = null;
@@ -25,10 +25,12 @@ class Database
      */
     public function __construct()
     {
-        $this->hostname = getenv('DB_HOSTNAME');
-        $this->username = getenv('DB_USERNAME');
-        $this->password = getenv('DB_PASSWORD');
-        $this->database = getenv('DB_NAME');
+        $this->hostname = ProjectVariable::$DB_HOSTNAME;
+        $this->username = ProjectVariable::$DB_USERNAME;
+        $this->password = ProjectVariable::$DB_PASSWORD;
+        $this->database = ProjectVariable::$DB_NAME;
+
+        $this->connDb = false;
 
         $this->connect();
     }
