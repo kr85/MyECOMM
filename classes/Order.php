@@ -171,12 +171,18 @@ class Order extends Application
      */
     public function approve($data = null, $result = null)
     {
+        Helper::addToErrorsLog('In_approve', null);
+
         if (!empty($data) && !empty($result))
         {
+            Helper::addToErrorsLog('data_result_not_null', null);
+
             if (array_key_exists('txn_id', $data) &&
                 array_key_exists('payment_status', $data) &&
                 array_key_exists('custom', $data))
             {
+                Helper::addToErrorsLog('txn_id|payment_status|custom_exist', null);
+
                 $active = $data['payment_status'] == 'Completed' ? 1 : 0;
 
                 $out = [];
@@ -197,6 +203,8 @@ class Order extends Application
                      `ipn` = '".$this->db->escape($out)."'
                      `response` = '".$this->db->escape($result)."'
                      WHERE `id` = '".$this->db->escape($data['custom'])."'";
+
+                Helper::addToErrorsLog('SQL_approve', $sql);
 
                 if(!$this->db->query($sql))
                 {
