@@ -259,20 +259,20 @@ class PayPal
     {
         if ($this->validateIpn())
         {
-            Helper::addToErrorsLog('Validate_IPN_true');
+            Helper::addToErrorsLog('Validate_IPN_true', null);
 
             $this->sendCurl();
 
             if (strcmp($this->ipnResult, "VERIFIED") == 0)
             {
-                Helper::addToErrorsLog('IPN_result_verified');
+                Helper::addToErrorsLog('IPN_result_verified', null);
 
                 $objOrder = new Order();
 
                 // Update order status
                 if (!empty($this->ipnData))
                 {
-                    Helper::addToErrorsLog('IPN_data_not_empty');
+                    Helper::addToErrorsLog('IPN_data_not_empty', null);
 
                     $approved = $objOrder->approve(
                         $this->ipnData,
@@ -281,23 +281,23 @@ class PayPal
 
                     if (!$approved)
                     {
-                        Helper::addToErrorsLog('Order_is_not_approved');
+                        Helper::addToErrorsLog('Order_is_not_approved', null);
                         return false;
                     }
 
-                    Helper::addToErrorsLog('Order_approved');
+                    Helper::addToErrorsLog('Order_approved', null);
                     return true;
                 }
 
-                Helper::addToErrorsLog('IPN_data_is_empty');
+                Helper::addToErrorsLog('IPN_data_is_empty', null);
                 return false;
             }
 
-            Helper::addToErrorsLog('IPN_result_not_VERIFIED');
+            Helper::addToErrorsLog('IPN_result_not_VERIFIED', null);
             return false;
         }
 
-        Helper::addToErrorsLog('Validate_IPN_failed');
+        Helper::addToErrorsLog('Validate_IPN_failed', null);
         return false;
     }
 
@@ -313,7 +313,7 @@ class PayPal
         // Check if post has been received back from PayPal
         if (!preg_match('/paypal\.com$/', $hostname))
         {
-            Helper::addToErrorsLog('Post not received from PayPal');
+            Helper::addToErrorsLog('Post_not_received_from_PayPal', null);
             return false;
         }
 
@@ -330,11 +330,11 @@ class PayPal
             )
         )
         {
-            Helper::addToErrorsLog('In validateIpn receiver email different');
+            Helper::addToErrorsLog('In_validateIpn_receiver_email_different', null);
             return false;
         }
 
-        Helper::addToErrorsLog('IPN_validated');
+        Helper::addToErrorsLog('IPN_validated', null);
         return true;
     }
 
@@ -343,10 +343,10 @@ class PayPal
      */
     private function sendCurl()
     {
-        Helper::addToErrorsLog('In_send_curl');
+        Helper::addToErrorsLog('In_send_curl', null);
 
         $response = $this->getReturnParameters();
-        
+
         Helper::addToErrorsLog(null, $response);
 
         $curl = curl_init();
@@ -372,7 +372,7 @@ class PayPal
 
         if (empty($this->ipnResult))
         {
-            Helper::addToErrorsLog('IPN_result_after_curl_empty');
+            Helper::addToErrorsLog('IPN_result_after_curl_empty', null);
         }
 
         curl_close($curl);
@@ -400,10 +400,10 @@ class PayPal
         }
         else
         {
-            Helper::addToErrorsLog('IPN_data_empty_in_getParameters');
+            Helper::addToErrorsLog('IPN_data_empty_in_getParameters', null);
         }
 
-        Helper::addToErrorsLog('Get_return_param_success');
+        Helper::addToErrorsLog('Get_return_param_success', null);
         Helper::addToErrorsLog(null, $out);
         return implode("&", $out);
     }

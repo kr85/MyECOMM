@@ -161,10 +161,10 @@ class Helper
     {
         if (!empty($name) && empty($errors))
         {
-            $filePath = LOGS_DIR.DS.$errors;
+            $filePath = LOGS_DIR.DS.$name;
 
             $file = fopen($filePath, 'w') or die('Unable to open the file.');
-            fwrite($file, $errors);
+            fwrite($file, $name);
 
             fclose($file);
         }
