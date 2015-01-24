@@ -275,18 +275,22 @@ class PayPal
 
                     if (!$approved)
                     {
+                        Helper::addToErrorsLog('Order is not approved');
                         return false;
                     }
 
                     return true;
                 }
 
+                Helper::addToErrorsLog('IPN data is empty');
                 return false;
             }
 
+            Helper::addToErrorsLog('IPN result not VERIFIED');
             return false;
         }
 
+        Helper::addToErrorsLog('Validate IPN failed');
         return false;
     }
 
@@ -302,6 +306,7 @@ class PayPal
         // Check if post has been received back from PayPal
         if (!preg_match('/paypal\.com$/', $hostname))
         {
+            Helper::addToErrorsLog('Post not received from PayPal');
             return false;
         }
 
@@ -318,6 +323,7 @@ class PayPal
             )
         )
         {
+            Helper::addToErrorsLog('In validateIpn receiver email different');
             return false;
         }
 
@@ -347,6 +353,7 @@ class PayPal
         curl_setopt($curl, CURLOPT_TIMEOUT, 30);
 
         $this->ipnResult = curl_exec($curl);
+        Helper::addToErrorsLog('IPN Result \n\n' . $this->ipnResult);
         curl_close($curl);
     }
 
@@ -369,6 +376,10 @@ class PayPal
 
                 $out[] = "{$key}={$value}";
             }
+        }
+        else
+        {
+            Helper::addToErrorsLog('IPN data empty in getParameters');
         }
 
         return implode("&", $out);

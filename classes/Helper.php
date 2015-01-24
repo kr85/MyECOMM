@@ -158,9 +158,12 @@ class Helper
      */
     public static function addToErrorsLog($errors)
     {
-        $file = LOGS_DIR.DS.'errors.txt';
-        $errors = $errors.PHP_EOL;
+        $fileName = date('Y-m-d_H:i:s') . '.log';
+        $filePath = LOGS_DIR.DS.$fileName;
 
-        file_put_contents($file, date('Y-m-d H:i:s - ') . $errors, FILE_APPEND);
+        $file = fopen($filePath, 'w') or die('Unable to open the file.');
+        fwrite($file, $errors);
+
+        fclose($file);
     }
 }

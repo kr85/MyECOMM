@@ -200,15 +200,18 @@ class Order extends Application
 
                 if(!$this->db->query($sql))
                 {
+                    Helper::addToErrorsLog('Update approve query failed');
                     $errors[] = $sql;
                 }
 
                 return empty($errors) ? true : false;
             }
 
+            Helper::addToErrorsLog('txn_id, payment_status or custom do not exist');
             return false;
         }
 
+        Helper::addToErrorsLog('Data and result for approve are empty');
         return false;
     }
 }

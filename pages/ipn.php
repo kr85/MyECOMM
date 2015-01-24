@@ -6,5 +6,6 @@ $succeed = $objPayPal->ipn();
 
 if (!$succeed)
 {
+    Helper::addToErrorsLog('IPN did not succeed');
     Helper::redirect('/?page=error');
 }
