@@ -6,10 +6,10 @@
 class Database
 {
     // Database connection credentials
-    private $hostname = "localhost";
-    private $username = "root";
-    private $password = "";
-    private $database = "ecommerce";
+    private $hostname;
+    private $username;
+    private $password;
+    private $database;
     private $connDb = false;
 
     // Database helper fields
@@ -25,6 +25,11 @@ class Database
      */
     public function __construct()
     {
+        $this->hostname = getenv('DB_HOSTNAME');
+        $this->username = getenv('DB_USERNAME');
+        $this->password = getenv('DB_PASSWORD');
+        $this->database = getenv('DB_NAME');
+
         $this->connect();
     }
 
