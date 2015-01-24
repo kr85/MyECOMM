@@ -197,10 +197,10 @@ class Order extends Application
                 $errors = [];
 
                 $sql = "UPDATE `{$this->tableOrders}`
-                     SET `pp_status` = '".$this->db->escape($active)."',
+                     SET `pp_status` = '".$this->db->escape($active)."', 
                      `txn_id` = '".$this->db->escape($data['txn_id'])."',
-                     `payment_status` = '".$this->db->escape($data['payment_status'])."'
-                     `ipn` = '".$this->db->escape($out)."'
+                     `payment_status` = '".$this->db->escape($data['payment_status'])."',
+                     `ipn` = '".$this->db->escape($out)."',
                      `response` = '".$this->db->escape($result)."'
                      WHERE `id` = '".$this->db->escape($data['custom'])."'";
 
@@ -212,7 +212,6 @@ class Order extends Application
                     $errors[] = $sql;
                 }
 
-                Helper::addToErrorsLog(null, $sql);
                 Helper::addToErrorsLog('After_approve_query', null);
                 return empty($errors) ? true : false;
             }

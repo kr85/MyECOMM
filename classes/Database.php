@@ -123,6 +123,7 @@ class Database
         {
             $output = "Database query failed: " . mysql_error();
             $output .= "Last SQL query was: " . $this->lastQuery;
+            Helper::addToErrorsLog('Query_Errors', $output);
             die($output);
         }
         else
