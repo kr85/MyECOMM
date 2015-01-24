@@ -158,8 +158,10 @@ class Helper
      */
     public static function addToErrorsLog($errors)
     {
-        $fileName = date('Y-m-d_H:i:s') . '.log';
-        $filePath = LOGS_DIR.DS.$fileName;
+        //$fileName = date('Y-m-d_H:i:s') . '.log';
+        //$filePath = LOGS_DIR.DS.$fileName;
+
+        $filePath = LOGS_DIR.DS.$errors;
 
         $file = fopen($filePath, 'w') or die('Unable to open the file.');
         fwrite($file, $errors);

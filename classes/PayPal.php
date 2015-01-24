@@ -259,15 +259,21 @@ class PayPal
     {
         if ($this->validateIpn())
         {
+            Helper::addToErrorsLog('Validate_IPN_true');
+
             $this->sendCurl();
 
             if (strcmp($this->ipnResult, "VERIFIED") == 0)
             {
+                Helper::addToErrorsLog('IPN_result_verified');
+
                 $objOrder = new Order();
 
                 // Update order status
                 if (!empty($this->ipnData))
                 {
+                    Helper::addToErrorsLog('IPN_data_not_empty');
+
                     $approved = $objOrder->approve(
                         $this->ipnData,
                         $this->ipnResult
@@ -275,22 +281,23 @@ class PayPal
 
                     if (!$approved)
                     {
-                        Helper::addToErrorsLog('Order is not approved');
+                        Helper::addToErrorsLog('Order_is_not_approved');
                         return false;
                     }
 
+                    Helper::addToErrorsLog('Order_approved');
                     return true;
                 }
 
-                Helper::addToErrorsLog('IPN data is empty');
+                Helper::addToErrorsLog('IPN_data_is_empty');
                 return false;
             }
 
-            Helper::addToErrorsLog('IPN result not VERIFIED');
+            Helper::addToErrorsLog('IPN_result_not_VERIFIED');
             return false;
         }
 
-        Helper::addToErrorsLog('Validate IPN failed');
+        Helper::addToErrorsLog('Validate_IPN_failed');
         return false;
     }
 
@@ -327,6 +334,7 @@ class PayPal
             return false;
         }
 
+        Helper::addToErrorsLog('IPN_validated');
         return true;
     }
 
@@ -335,6 +343,8 @@ class PayPal
      */
     private function sendCurl()
     {
+        Helper::addToErrorsLog('In_send_curl');
+
         $response = $this->getReturnParameters();
 
         $curl = curl_init();
@@ -353,7 +363,13 @@ class PayPal
         curl_setopt($curl, CURLOPT_TIMEOUT, 30);
 
         $this->ipnResult = curl_exec($curl);
-        Helper::addToErrorsLog('IPN Result \n\n' . $this->ipnResult);
+
+        if (empty($this->ipnResult))
+        {
+            Helper::addToErrorsLog('IPN_result_after_curl_empty');
+        }
+
+        Helper::addToErrorsLog($this->ipnResult);
         curl_close($curl);
     }
 

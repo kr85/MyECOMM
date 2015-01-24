@@ -204,6 +204,7 @@ class Order extends Application
                     $errors[] = $sql;
                 }
 
+                Helper::addToErrorsLog('After_approve_query');
                 return empty($errors) ? true : false;
             }
 
