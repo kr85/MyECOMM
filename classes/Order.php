@@ -161,4 +161,42 @@ class Order extends Application
 
         return $this->db->fetchAll($sql);
     }
+
+    /**
+     * Approve the order and update its status
+     *
+     * @param null $data
+     * @param null $result
+     */
+    public function approve($data = null, $result = null)
+    {
+        if (!empty($data) && !empty($result))
+        {
+            if (array_key_exists('txn_id', $data) &&
+                array_key_exists('payment_status', $data) &&
+                array_key_exists('custom', $data))
+            {
+                $active = $data['payment_status'] == 'Completed' ? 1 : 0;
+
+                $out = [];
+
+                foreach ($data as $key => $value)
+                {
+                    $out[] = "{$key} : {$value}";
+                }
+
+                $out = implode("\n", $out);
+
+                $sql = "UPDATE `{$this->tableOrders}`
+                     SET `pp_status` = '".$this->db->escape($active)."',
+                     `txn_id` = '".$this->db->escape($data['txn_id'])."',
+                     `payment_status` = '".$this->db->escape($data['payment_status'])."'
+                     `ipn` = '".$this->db->escape($out)."'
+                     `response` = '".$this->db->escape($result)."'
+                     WHERE `id` = '".$this->db->escape($data['custom'])."'";
+
+                $this->db->query($sql);
+            }
+        }
+    }
 }

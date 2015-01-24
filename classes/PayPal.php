@@ -56,9 +56,6 @@ class PayPal
     // Data received from PayPal
     private $ipnData = [];
 
-    // Path to the log file for the ipn response
-    private $logFilePath = null;
-
     // Result of sending data back to PayPal after ipn
     private $ipnResult;
 
@@ -78,7 +75,6 @@ class PayPal
         $this->returnUrl = SITE_URL."/?page=return";
         $this->cancelPaymentUrl = SITE_URL."/?page=cancel";
         $this->notifyUrl = SITE_URL."/?page=ipn";
-        $this->logFilePath = ROOT_PATH.DS."log".DS."ipn.log";
     }
 
     /**
@@ -254,5 +250,114 @@ class PayPal
 
                 break;
         }
+    }
+
+    /**
+     * Instant Payment Notification
+     */
+    public function ipn()
+    {
+        if ($this->validateIpn())
+        {
+            $this->sendCurl();
+
+            if (strcmp($this->ipnResult, "VERIFIED") == 0)
+            {
+                $objOrder = new Order();
+
+                // Update order status
+                if (!empty($this->ipnData))
+                {
+                    $objOrder->approve(
+                        $this->ipnData,
+                        $this->ipnResult
+                    );
+                }
+            }
+        }
+    }
+
+    /**
+     * Validate the IPN
+     *
+     * @return bool
+     */
+    private function validateIpn()
+    {
+        $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+
+        // Check if post has been received back from PayPal
+        if (!preg_match('/paypal\.com$/', $hostname))
+        {
+            return false;
+        }
+
+        // Store all posted parameters
+        $objForm = new Form();
+        $this->ipnData = $objForm->getPostArray();
+
+        // Check if the email of the business and the received email
+        // from IPN are the same
+        if (!empty($this->ipnData) &&
+            array_key_exists('receiver_email', $this->ipnData) &&
+            strtolower($this->ipnData['receiver_email'] !=
+                strtolower($this->business)
+            )
+        )
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Send a curl request
+     */
+    private function sendCurl()
+    {
+        $response = $this->getReturnParameters();
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $this->url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $response);
+        curl_setopt($curl, CURLOPT_HEADER, 0);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            "Content-Type: application/x-www-form-urlencoded",
+            "Content-Length: " , strlen($response)
+        ]);
+        curl_setopt($curl, CURLOPT_VERBOSE, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+
+        $this->ipnResult = curl_exec($curl);
+        curl_close($curl);
+    }
+
+    /**
+     * Get all parameters from IPN post
+     *
+     * @return string
+     */
+    private function getReturnParameters()
+    {
+        $out = ['cmd=_notify-validate'];
+
+        if (!empty($this->ipnData))
+        {
+            foreach ($this->ipnData as $key => $value)
+            {
+                $value = function_exists('get_magic_quotes_gpc') ?
+                    urlencode(stripslashes($value)) :
+                    urlencode($value);
+
+                $out[] = "{$key}={$value}";
+            }
+        }
+
+        return implode("&", $out);
     }
 }
