@@ -2,4 +2,9 @@
 
 // Initialize PayPal object and call IPN
 $objPayPal = new PayPal();
-$objPayPal->ipn();
+$succeed = $objPayPal->ipn();
+
+if (!$succeed)
+{
+    Helper::redirect('/?page=error');
+}

@@ -167,6 +167,7 @@ class Order extends Application
      *
      * @param null $data
      * @param null $result
+     * @return bool
      */
     public function approve($data = null, $result = null)
     {
@@ -196,7 +197,13 @@ class Order extends Application
                      WHERE `id` = '".$this->db->escape($data['custom'])."'";
 
                 $this->db->query($sql);
+
+                return true;
             }
+
+            return false;
         }
+
+        return false;
     }
 }

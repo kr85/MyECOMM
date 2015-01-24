@@ -268,13 +268,26 @@ class PayPal
                 // Update order status
                 if (!empty($this->ipnData))
                 {
-                    $objOrder->approve(
+                    $approved = $objOrder->approve(
                         $this->ipnData,
                         $this->ipnResult
                     );
+
+                    if (!$approved)
+                    {
+                        return false;
+                    }
+
+                    return true;
                 }
+
+                return false;
             }
+
+            return false;
         }
+
+        return false;
     }
 
     /**
