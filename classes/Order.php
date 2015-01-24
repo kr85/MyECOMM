@@ -188,6 +188,8 @@ class Order extends Application
 
                 $out = implode("\n", $out);
 
+                $errors = [];
+
                 $sql = "UPDATE `{$this->tableOrders}`
                      SET `pp_status` = '".$this->db->escape($active)."',
                      `txn_id` = '".$this->db->escape($data['txn_id'])."',
@@ -196,9 +198,12 @@ class Order extends Application
                      `response` = '".$this->db->escape($result)."'
                      WHERE `id` = '".$this->db->escape($data['custom'])."'";
 
-                $this->db->query($sql);
+                if(!$this->db->query($sql))
+                {
+                    $errors[] = $sql;
+                }
 
-                return true;
+                return empty($errors) ? true : false;
             }
 
             return false;
