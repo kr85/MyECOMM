@@ -390,6 +390,7 @@ CREATE TABLE `orders` (
   `pp_status` tinyint(1) NOT NULL DEFAULT '0',
   `txn_id` varchar(100) DEFAULT NULL,
   `payment_status` varchar(100) DEFAULT NULL,
+  `ipn` text,
   `notes` text,
   PRIMARY KEY (`id`),
   KEY `client` (`client`),
