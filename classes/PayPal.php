@@ -350,19 +350,29 @@ class PayPal
         Helper::addToErrorsLog('Response', $response);
 
         $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $this->url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $response);
-        curl_setopt($curl, CURLOPT_HEADER, 0);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, [
-            "Content-Type: application/x-www-form-urlencoded",
-            "Content-Length: " , strlen($response)
+        curl_setopt_array($curl, [
+            CURLOPT_URL            => $this->url,
+            CURLOPT_SSL_VERIFYPEER => 1,
+            CURLOPT_SSL_VERIFYHOST => 2,
+            CURLOPT_ENCODING       => 'gzip',
+            CURLOPT_BINARYTRANSFER => true,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST           => true,
+            CURLOPT_POSTFIELDS     => $response,
+            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_0,
+            CURLOPT_FORBID_REUSE   => true,
+            CURLOPT_FORBID_REUSE   => true,
+            CURLOPT_CONNECTTIMEOUT => 30,
+            CURLOPT_TIMEOUT        => 60,
+            CURLOPT_HEADER         => false,
+            CURLOPT_FOLLOWLOCATION => 1,
+            CURLOPT_VERBOSE        => 1,
+            CURLINFO_HEADER_OUT    => true,
+            CURLOPT_HTTPHEADER     => [
+                "Content-Type: application/x-www-form-urlencoded",
+                "Content-Length: " , strlen($response)
+            ]
         ]);
-        curl_setopt($curl, CURLOPT_VERBOSE, 1);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
 
         Helper::addToErrorsLog('Curl', $curl);
 
