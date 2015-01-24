@@ -49,4 +49,35 @@ class Session
         }
     }
 
+    /**
+     * Set the session
+     *
+     * @param null $name
+     * @param null $value
+     */
+    public static function setSession($name = null, $value = null)
+    {
+        if (!empty($name) && !empty($value))
+        {
+            $_SESSION[$name] = $value;
+        }
+    }
+
+    /**
+     * Clear the session
+     *
+     * @param null $id
+     */
+    public static function clear($id = null)
+    {
+        if (!empty($id) && isset($_SESSION[$id]))
+        {
+            $_SESSION[$id] = null;
+            unset($_SESSION[$id]);
+        }
+        else
+        {
+            session_destroy();
+        }
+    }
 }

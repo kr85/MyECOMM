@@ -1,0 +1,164 @@
+<?php
+
+/**
+ * Class Order
+ */
+class Order extends Application
+{
+    // Database table names
+    private $tableOrders = 'orders';
+    private $tableOrdersItems = 'orders_items';
+    private $tableStatuses = 'statuses';
+
+    private $basket = [];
+    private $items = [];
+
+    private $fields = [];
+    private $values = [];
+
+    private $id = null;
+
+    /**
+     * Create a new order sql query
+     *
+     * @return bool
+     */
+    public function createOrder()
+    {
+        $this->getItems();
+
+        if (!empty($this->items))
+        {
+            $objUser = new User();
+            $user = $objUser->getUser(Session::getSession(Login::$loginFront));
+
+            if (!empty($user))
+            {
+                $objBasket = new Basket();
+
+                $this->fields[] = 'client';
+                $this->values[] = $this->db->escape($user['id']);
+
+                $this->fields[] = 'tax_rate';
+                $this->values[] = $this->db->escape($objBasket->taxRate);
+
+                $this->fields[] = 'tax';
+                $this->values[] = $this->db->escape($objBasket->tax);
+
+                $this->fields[] = 'subtotal';
+                $this->values[] = $this->db->escape($objBasket->subTotal);
+
+                $this->fields[] = 'total';
+                $this->values[] = $this->db->escape($objBasket->total);
+
+                $this->fields[] = 'date';
+                $this->values[] = Helper::setDate();
+
+                $sql = "INSERT INTO `{$this->tableOrders}` (`";
+                $sql .= implode("`, `", $this->fields);
+                $sql .= "`) VALUES ('";
+                $sql .= implode("', '", $this->values);
+                $sql .= "')";
+
+                $this->db->query($sql);
+                $this->id = $this->db->lastId();
+
+                if (!empty($this->id))
+                {
+                    $this->fields = [];
+                    $this->values = [];
+
+                    return $this->addItems($this->id);
+
+                }
+            }
+
+            return false;
+        }
+
+        return false;
+    }
+
+    /**
+     * Add items to the database sql query
+     *
+     * @param null $orderId
+     * @return bool
+     */
+    public function addItems($orderId = null)
+    {
+        if (!empty($orderId))
+        {
+            $errors = [];
+
+            foreach ($this->items as $item)
+            {
+                $sql = "INSERT INTO `{$this->tableOrdersItems}`
+                          (`order`, `product`, `price`, `qty`)
+                          VALUES ('{$orderId}',
+                                  '".$item['id']."',
+                                  '".$item['price']."',
+                                  '".$this->basket[$item['id']]['quantity']."')";
+
+                if (!$this->db->query($sql))
+                {
+                    $errors[] = $sql;
+                }
+            }
+
+            return empty($errors) ? true : false;
+        }
+
+        return false;
+    }
+
+    /**
+     * Get all items from the session
+     */
+    public function getItems()
+    {
+        $this->basket = Session::getSession('basket');
+
+        if (!empty($this->basket))
+        {
+            $objCatalog = new Catalog();
+
+            foreach ($this->basket as $key => $value)
+            {
+                $this->items[$key] = $objCatalog->getProduct($key);
+            }
+        }
+    }
+
+    /**
+     * Get a specific order
+     *
+     * @param null $id
+     * @return mixed
+     */
+    public function getOrder($id = null)
+    {
+        $id = !empty($id) ? $id : $this->id;
+
+        $sql = "SELECT * FROM `{$this->tableOrders}`
+                  WHERE `id` = '".$this->db->escape($id)."'";
+
+        return $this->db->fetchOne($sql);
+    }
+
+    /**
+     * Get all items of a specific order
+     *
+     * @param null $id
+     * @return array
+     */
+    public function getOrderItems($id = null)
+    {
+        $id = !empty($id) ? $id : $this->id;
+
+        $sql = "SELECT * FROM `{$this->tableOrdersItems}`
+                  WHERE `order` = '".$this->db->escape($id)."'";
+
+        return $this->db->fetchAll($sql);
+    }
+}

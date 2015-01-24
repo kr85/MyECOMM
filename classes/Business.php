@@ -28,6 +28,6 @@ class Business extends Application
     public function getTaxRate()
     {
         $business = $this->getBusiness();
-        return $business['vat_rate'];
+        return $business['tax_rate'];
     }
 }

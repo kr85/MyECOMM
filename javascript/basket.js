@@ -36,7 +36,7 @@ $(document).ready(function() {
                 refreshSmallBasket();
             },
             error: function() {
-                alert("An error has occurred.")
+                alert("An error has occurred.");
             }
         });
     }
@@ -51,8 +51,8 @@ $(document).ready(function() {
                     $("#basket_left ." + k + " span").text(v);
                 });
             },
-            error: function(data) {
-                alert("An error has occurred.")
+            error: function() {
+                alert("An error has occurred.");
             }
         });
     }
@@ -66,7 +66,7 @@ $(document).ready(function() {
                 $('#main_basket').html(data);
                 initializeBinds();
             },
-            error: function(data) {
+            error: function() {
                 alert("An error has occurred.");
             }
         });
@@ -100,7 +100,7 @@ $(document).ready(function() {
                         refreshSmallBasket();
                     }
                 },
-                error: function(data) {
+                error: function() {
                     alert("An error has occurred.");
                 }
             });
@@ -123,9 +123,43 @@ $(document).ready(function() {
                     refreshMainBasket();
                 },
                 error: function() {
-                    alert('An error has occurred.')
+                    alert('An error has occurred.');
                 }
             });
+        });
+    }
+
+    if ($('.paypal').length > 0) {
+        $('.paypal').click(function() {
+            var token = $(this).attr('id');
+            var image = "<div style=\"text-align: center;\">";
+            image = image + "<img src=\"/images/loading.gif\"";
+            image = image + " alt=\"Proceeding to PayPal\" />";
+            image = image + "<br />Please wait while we are redirecting you to PayPal...";
+            image = image + "</div><div id=\"frm_pp\"></div>";
+
+            $('#main_basket').fadeOut(200, function() {
+                $(this).html(image).fadeIn(200, function() {
+                    sendToPayPal(token);
+                });
+            });
+        });
+    }
+
+    function sendToPayPal(token) {
+
+        $.ajax({
+            type: 'POST',
+            url: '/modules/paypal.php',
+            data: ({ token: token }),
+            dataType: 'html',
+            success: function(data) {
+                $('#frm_pp').html(data);
+                $('#frm_paypal').submit();
+            },
+            error: function() {
+                alert('An error has occurred.');
+            }
         });
     }
 
