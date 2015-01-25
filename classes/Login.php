@@ -84,6 +84,12 @@ class Login
         Helper::redirect($url);
     }
 
+    /**
+     * Get the full name of the logged in user
+     *
+     * @param null $id
+     * @return string
+     */
     public static function getFullNameFront($id = null)
     {
         if (!empty($id))
@@ -95,6 +101,24 @@ class Login
             {
                 return $user['first_name'].' '.$user['last_name'];
             }
+        }
+    }
+
+    /**
+     * Logout the user
+     *
+     * @param null $case
+     */
+    public static function logout($case = null)
+    {
+        if (!empty($case))
+        {
+            $_SESSION[$case] = null;
+            unset($_SESSION[$case]);
+        }
+        else
+        {
+            session_destroy();
         }
     }
 }
