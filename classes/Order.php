@@ -223,4 +223,27 @@ class Order extends Application
         //Helper::addToErrorsLog('Data_and_result_for_approve_are_empty', null);
         return false;
     }
+
+    public function getClientOrders($clientId = null)
+    {
+        if (!empty($clientId))
+        {
+            $sql = "SELECT * FROM `{$this->tableOrders}`
+                      WHERE `client` = '".$this->db->escape($clientId)."'
+                      ORDER BY `date` DESC";
+
+            return $this->db->fetchAll($sql);
+        }
+    }
+
+    public function getStatus($id = null)
+    {
+        if (!empty($id))
+        {
+            $sql = "SELECT * FROM `{$this->tableStatuses}`
+                      WHERE `id` = '".$this->db->escape($id)."'";
+
+            return $this->db->fetchOne($sql);
+        }
+    }
 }
