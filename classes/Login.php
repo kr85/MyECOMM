@@ -74,14 +74,30 @@ class Login
      * @param $id
      * @param null $url
      */
-    public static function loginFront($id, $url = null)
+    public static function loginFront($id = null, $url = null)
     {
-        $url = !empty($url) ? $url : self::$dashboardFront;
+        if (!empty($id))
+        {
+            $url = !empty($url) ? $url : self::$dashboardFront;
 
-        $_SESSION[self::$loginFront] = $id;
-        $_SESSION[self::$validLogin] = 1;
+            $_SESSION[self::$loginFront] = $id;
+            $_SESSION[self::$validLogin] = 1;
 
-        Helper::redirect($url);
+            Helper::redirect($url);
+        }
+    }
+
+    public static function loginAdmin($id = null, $url = null)
+    {
+        if (!empty($id))
+        {
+            $url = !empty($url) ? $url : self::$dashboardAdmin;
+
+            $_SESSION[self::$loginAdmin] = $id;
+            $_SESSION[self::$validLogin] = 1;
+
+            Helper::redirect($url);
+        }
     }
 
     /**
@@ -114,7 +130,9 @@ class Login
         if (!empty($case))
         {
             $_SESSION[$case] = null;
+            $_SESSION[self::$validLogin] = null;
             unset($_SESSION[$case]);
+            unset($_SESSION[self::$validLogin]);
         }
         else
         {
