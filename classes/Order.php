@@ -224,6 +224,12 @@ class Order extends Application
         return false;
     }
 
+    /**
+     * Get all orders of a client
+     *
+     * @param null $clientId
+     * @return array
+     */
     public function getClientOrders($clientId = null)
     {
         if (!empty($clientId))
@@ -236,6 +242,12 @@ class Order extends Application
         }
     }
 
+    /**
+     * Get the status by id
+     *
+     * @param null $id
+     * @return mixed
+     */
     public function getStatus($id = null)
     {
         if (!empty($id))

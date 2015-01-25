@@ -1,5 +1,6 @@
 <?php
 
+// Restrict access only for logged in users
 Login::restrictFront();
 
 $objOrder = new Order();
