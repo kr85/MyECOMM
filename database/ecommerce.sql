@@ -494,7 +494,7 @@ ALTER TABLE `products`
 --
 -- Dumping data for table `business`
 --
-INSERT  INTO `business` VALUES (1, 'MyECOMM', '123 Way Street, San Jose, CA 95192, USA', '408-505-0000', ' support@myecomm.com', 'www.MyECOMM.com', 10.00);
+INSERT  INTO `business` VALUES (1, 'MyECOMM', '123 Way Street\nSan Jose, CA 95192\nUSA', '408-505-0000', ' support@myecomm.com', 'www.MyECOMM.com', 10.00);
 
 --
 -- Dumping data for table `products`
