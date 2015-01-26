@@ -26,7 +26,11 @@
             'login'             => 'Email address and/or password are incorrect.',
             'password'          => 'Please choose your password.',
             'confirm_password'  => 'Please confirm your password.',
-            'password_mismatch' => 'Passwords do not match.'
+            'password_mismatch' => 'Passwords do not match.',
+            'category'          => 'Please select a category',
+            'name'              => 'Please provide a name',
+            'description'       => 'Please provide a description',
+            'price'             => 'Please provide a price'
         ];
 
         // List of expected fields

@@ -172,4 +172,17 @@
                 fclose($file);
             }
         }
+
+        /**
+         * Clean a string from unwanted characters
+         *
+         * @param null $name
+         * @return string
+         */
+        public static function cleanString($name = null) {
+
+            if (!empty($name)) {
+                return strtolower(preg_replace('/[^a-zA-Z0-9.]/', '-', $name));
+            }
+        }
     }

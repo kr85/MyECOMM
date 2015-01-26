@@ -17,6 +17,9 @@
         // Country's official currency
         public static $currency = '&dollar;';
 
+        // Record id
+        public $id;
+
 
         /**
          * Get all categories
@@ -82,6 +85,7 @@
         public function getAllProducts($search = null) {
 
             $sql = "SELECT * FROM `{$this->tableProducts}`";
+
             if (!empty($search)) {
                 $search = $this->db->escape($search);
                 $sql .= " WHERE `name` LIKE '%{$search}%' || `id` = '{$search}'";
@@ -89,5 +93,40 @@
             $sql .= " ORDER BY `date` DESC";
 
             return $this->db->fetchAll($sql);
+        }
+
+        /**
+         * Add a new product
+         *
+         * @param null $data
+         * @return bool
+         */
+        public function addProduct($data = null) {
+
+            if (!empty($data)) {
+                $data['date'] = Helper::setDate();
+                $this->db->prepareInsert($data);
+                $out = $this->db->insert($this->tableProducts);
+                $this->id = $this->db->id;
+
+                return $out;
+            }
+
+            return false;
+        }
+
+        /**
+         * Update an existing product
+         *
+         * @param null $data
+         * @param null $id
+         * @return resource
+         */
+        public function updateProduct($data = null, $id = null) {
+
+            if (!empty($data) && !empty($id)) {
+                $this->db->prepareUpdate($data);
+                return $this->db->update($this->tableProducts, $id);
+            }
         }
     }
