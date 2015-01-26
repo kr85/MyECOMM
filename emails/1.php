@@ -3,12 +3,12 @@
 </p>
 
 <p>
-    Thank you for registering at our website. <br />
+    Thank you for registering at our website. <br/>
     Your login details are as follow:
 </p>
 
 <p>
-    Login: <?php echo $email; ?><br />
+    Login: <?php echo $email; ?><br/>
     Password: <?php echo $password; ?>
 </p>
 

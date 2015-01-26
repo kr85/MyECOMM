@@ -18,7 +18,7 @@
         </span>
     </dd>
     <dt>
-        Sub-total:
+        Subtotal:
     </dt>
     <dd class="bl_st">
         <?php echo Catalog::$currency; ?>
@@ -29,7 +29,7 @@
         </span>
     </dd>
     <dt>
-        TAX (
+        Tax (
         <span>
             <?php
                 echo number_format($objBasket->taxRate, 2);

@@ -2,7 +2,6 @@
 
     // Clear the basket
     Session::clear('basket');
-
     require_once('_header.php');
 ?>
 

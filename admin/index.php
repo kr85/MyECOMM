@@ -1,6 +1,7 @@
 <?php
 
-require_once('../includes/autoload.php');
+    require_once('../includes/autoload.php');
 
-$core = new Core();
-$core->run();
+    // Instantiate the core class
+    $core = new Core();
+    $core->run();

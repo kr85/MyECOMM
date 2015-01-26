@@ -1,39 +1,36 @@
 <?php
 
-Login::restrictFront();
+    Login::restrictFront();
 
-$token1 = mt_rand();
-$token2 = Login::stringToHash($token1);
-Session::setSession('token2', $token2);
+    $token1 = mt_rand();
+    $token2 = Login::stringToHash($token1);
+    Session::setSession('token2', $token2);
 
-$objBasket = new Basket();
+    $objBasket = new Basket();
 
-$out = [];
+    $out = [];
 
-$session = Session::getSession('basket');
+    $session = Session::getSession('basket');
 
-if (!empty($session))
-{
-    $objCatalog = new Catalog();
-
-    foreach ($session as $key => $value)
-    {
-        $out[$key] = $objCatalog->getProduct($key);
+    if (!empty($session)) {
+        $objCatalog = new Catalog();
+        foreach ($session as $key => $value) {
+            $out[$key] = $objCatalog->getProduct($key);
+        }
     }
-}
 
-require_once('_header.php');
+    require_once('_header.php');
 ?>
 
-<h1>Order summary</h1>
+<h1>Order Summary</h1>
 
 <?php
-    if (!empty($out))
-    {
-?>
+    if (!empty($out)) {
+        ?>
         <div id="main_basket">
             <form action="" method="POST" id="frm_basket">
-                <table cellpadding="0" cellspacing="0" border="0" class="tbl_repeat">
+                <table cellpadding="0" cellspacing="0" border="0"
+                       class="tbl_repeat">
                     <tr>
                         <th>Item</th>
                         <th class="ta_r">Qty</th>
@@ -41,9 +38,8 @@ require_once('_header.php');
                     </tr>
 
                     <?php
-                        foreach ($out as $item)
-                        {
-                    ?>
+                        foreach ($out as $item) {
+                            ?>
                             <tr>
                                 <td>
                                     <?php
@@ -57,28 +53,27 @@ require_once('_header.php');
                                 </td>
                                 <td class="ta_r">
                                     <?php
-                                    echo Catalog::$currency;
-                                    echo number_format(
-                                        $objBasket->itemTotal(
-                                            $item['price'],
-                                            $session[$item['id']]['quantity']
-                                        ), 2);
+                                        echo Catalog::$currency;
+                                        echo number_format(
+                                            $objBasket->itemTotal(
+                                                $item['price'],
+                                                $session[$item['id']]['quantity']
+                                            ), 2);
                                     ?>
                                 </td>
                             </tr>
-                    <?php
+                        <?php
                         }
                     ?>
-                            <tr>
-                                <td class="dev">&#160;</td>
-                            </tr>
+                    <tr>
+                        <td class="dev">&#160;</td>
+                    </tr>
                     <?php
-                        if ($objBasket->taxRate > 0)
-                        {
-                    ?>
+                        if ($objBasket->taxRate > 0) {
+                            ?>
                             <tr>
                                 <td colspan="2" class="br_td">
-                                    Sub-total:
+                                    Subtotal:
                                 </td>
                                 <td class="ta_r br_td">
                                     <?php
@@ -89,7 +84,7 @@ require_once('_header.php');
                             </tr>
                             <tr>
                                 <td colspan="2" class="br_td">
-                                    TAX (<?php echo $objBasket->taxRate; ?>%)
+                                    Tax (<?php echo $objBasket->taxRate; ?>%)
                                 </td>
                                 <td class="ta_r br_td">
                                     <?php
@@ -98,7 +93,7 @@ require_once('_header.php');
                                     ?>
                                 </td>
                             </tr>
-                    <?php
+                        <?php
                         }
                     ?>
 
@@ -117,32 +112,28 @@ require_once('_header.php');
                     </tr>
                 </table>
                 <div class="dev br_td">&#160;</div>
-                <div class="sbm sbm_blue fl_r paypal" id="<?php echo $token1; ?>">
+                <div class="sbm sbm_blue fl_r paypal"
+                     id="<?php echo $token1; ?>">
                     <span class="btn">
                         Proceed to PayPal
                     </span>
                 </div>
                 <div class="sbm sbm_blue fl_l">
                     <a href="/?page=basket" class="btn">
-                        Back to basket
+                        Continue Shopping
                     </a>
                 </div>
             </form>
             <div class="dev">&#160;</div>
         </div>
 
-<?php
+    <?php
     }
-    else
-    {
-?>
+    else {
+        ?>
         <p>Your basket is currently empty.</p>
-<?php
+    <?php
     }
 ?>
 
-<?php
-
-require_once('_footer.php');
-
-?>
+<?php require_once('_footer.php'); ?>

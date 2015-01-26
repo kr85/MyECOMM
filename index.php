@@ -1,6 +1,5 @@
 <?php
 
-require_once('includes/autoload.php');
-
-$core = new Core();
-$core->run();
+    require_once('includes/autoload.php');
+    $core = new Core();
+    $core->run();

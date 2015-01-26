@@ -1,29 +1,41 @@
 <?php
 
-class Admin extends Application
-{
-    private $table = 'admins';
-    public $id;
+    /**
+     * Class Admin
+     */
+    class Admin extends Application {
 
-    public function isUser($email = null, $password = null)
-    {
-        if (!empty($email) && !empty($password))
-        {
-            $password = Login::stringToHash($password);
+        // The table name
+        private $table = 'admins';
 
-            $sql = "SELECT * FROM `{$this->table}`
-                      WHERE `email` = '".$this->db->escape($email)."'
-                      AND `password` = '".$this->db->escape($password)."'";
+        public $id;
 
-            $result = $this->db->fetchOne($sql);
+        /**
+         * Check if it a user by email/password
+         *
+         * @param null $email
+         * @param null $password
+         * @return bool
+         */
+        public function isUser($email = null, $password = null) {
 
-            if (!empty($result))
-            {
-                $this->id = $result['id'];
-                return true;
+            if (!empty($email) && !empty($password)) {
+
+                $password = Login::stringToHash($password);
+
+                $sql = "SELECT * FROM `{$this->table}`
+                      WHERE `email` = '" . $this->db->escape($email) . "'
+                      AND `password` = '" . $this->db->escape($password) . "'";
+
+                $result = $this->db->fetchOne($sql);
+
+                if (!empty($result)) {
+                    $this->id = $result['id'];
+
+                    return true;
+                }
+
+                return false;
             }
-
-            return false;
         }
     }
-}

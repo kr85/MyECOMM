@@ -1,18 +1,18 @@
 <?php
 
-/**
- * Class Application
- */
-class Application
-{
-    // Database object
-    public $db;
-
     /**
-     * Constructor
+     * Class Application
      */
-    public function __construct()
-    {
-        $this->db = new Database();
+    class Application {
+
+        // Database object
+        public $db;
+
+        /**
+         * Constructor
+         */
+        public function __construct() {
+
+            $this->db = new Database();
+        }
     }
-}

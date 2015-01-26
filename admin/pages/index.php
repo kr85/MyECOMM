@@ -1,33 +1,27 @@
 <?php
 
-if (Login::isLogged(Login::$loginAdmin))
-{
-    Helper::redirect(Login::$dashboardAdmin);
-}
-
-$objForm = new Form();
-$objValidation = new Validation($objForm);
-
-if ($objForm->isPost('login_email'))
-{
-    $objAdmin = new Admin();
-
-    if ($objAdmin->isUser(
-        $objForm->getPost('login_email'),
-        $objForm->getPost('login_password')
-    ))
-    {
-        Login::loginAdmin($objAdmin->id, Url::getReferrerUrl());
+    // Check if the user is logged in and redirect if true
+    if (Login::isLogged(Login::$loginAdmin)) {
+        Helper::redirect(Login::$dashboardAdmin);
     }
-    else
-    {
-        $objValidation->addToErrors('login');
+
+    $objForm = new Form();
+    $objValidation = new Validation($objForm);
+
+    if ($objForm->isPost('login_email')) {
+        $objAdmin = new Admin();
+        if ($objAdmin->isUser
+        ($objForm->getPost('login_email'),
+            $objForm->getPost('login_password'))
+        ) {
+            Login::loginAdmin($objAdmin->id, Url::getReferrerUrl());
+        } else {
+            $objValidation->addToErrors('login');
+        }
     }
-}
+    require_once('templates/_header.php'); ?>
 
-require_once('templates/_header.php'); ?>
-
-<h1>Log In</h1>
+    <h1>Log In</h1>
 
     <form action="" method="POST">
         <table cellpadding="0" cellspacing="0" border="0" class="tbl_insert">
@@ -42,7 +36,8 @@ require_once('templates/_header.php'); ?>
             <tr>
                 <th><label for="login_password">Password:</label></th>
                 <td>
-                    <input type="password" name="login_password" id="login_password"
+                    <input type="password" name="login_password"
+                           id="login_password"
                            class="fld" value=""/>
                 </td>
             </tr>

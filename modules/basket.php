@@ -1,35 +1,32 @@
 <?php
 
-require_once('../includes/autoload.php');
+    require_once('../includes/autoload.php');
 
-// Check if job and id are set
-if (isset($_POST['job']) && isset($_POST['id']))
-{
-    $out = [];
+    // Check if job and id are set
+    if (isset($_POST['job']) && isset($_POST['id'])) {
 
-    // Store job and id
-    $job = $_POST['job'];
-    $id = $_POST['id'];
+        $out = [];
 
-    // Instantiate catalog class
-    $objCatalog = new Catalog();
-    $product = $objCatalog->getProduct($id);
+        // Store job and id
+        $job = $_POST['job'];
+        $id = $_POST['id'];
 
-    if (!empty($product))
-    {
-        switch($job)
-        {
-            case 0:
-                Session::removeItem($id);
-                $out['job'] = 1;
-                break;
+        // Instantiate catalog class
+        $objCatalog = new Catalog();
+        $product = $objCatalog->getProduct($id);
 
-            case 1:
-                Session::setItem($id);
-                $out['job'] = 0;
-                break;
+        if (!empty($product)) {
+            switch ($job) {
+                case 0:
+                    Session::removeItem($id);
+                    $out['job'] = 1;
+                    break;
+                case 1:
+                    Session::setItem($id);
+                    $out['job'] = 0;
+                    break;
+            }
+
+            echo json_encode($out);
         }
-
-        echo json_encode($out);
     }
-}

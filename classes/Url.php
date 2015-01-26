@@ -1,111 +1,143 @@
 <?php
 
-/**
- * Class Url
- */
-class Url
-{
-    // The pages url key
-    public static $page = "page";
-
-    // Path to the pages folder
-    public static $folder = PAGES_DIR;
-
-    // List of parameters
-    public static $params = [];
-
     /**
-     * Get parameters
-     *
-     * @param $param
-     * @return null
+     * Class Url
      */
-    public static function getParam($param)
-    {
-        return isset($_GET[$param])
-            && $_GET[$param] != "" ? $_GET[$param] : null;
-    }
+    class Url {
 
-    /**
-     * Return current page
-     *
-     * @return string
-     */
-    public static function currentPage()
-    {
-        return isset($_GET[self::$page]) ? $_GET[self::$page] : 'index';
-    }
+        // The pages url key
+        public static $page = "page";
 
-    /**
-     * Gets a page or returns error if it does not exist
-     *
-     * @return string
-     */
-    public static function getPage()
-    {
-        $page = self::$folder.DS.self::currentPage().".php";
-        $error = self::$folder.DS."error.php";
-        return is_file($page) ? $page : $error;
-    }
+        // Path to the pages folder
+        public static $folder = PAGES_DIR;
 
-    /**
-     * Gets all parameters
-     */
-    public static function getAll()
-    {
-        if (!empty($_GET))
-        {
-            foreach ($_GET as $key => $value)
-            {
-                if (!empty($value))
-                {
-                    self::$params[$key] = $value;
-                }
-            }
+        // List of parameters
+        public static $params = [];
+
+        /**
+         * Get parameters
+         *
+         * @param $param
+         * @return null
+         */
+        public static function getParam($param) {
+
+            return isset($_GET[$param]) && $_GET[$param] != "" ?
+                $_GET[$param] :
+                null;
         }
-    }
 
-    /**
-     * Get current url
-     *
-     * @param null $remove
-     * @return string
-     */
-    public static function getCurrentUrl($remove = null)
-    {
-        self::getAll();
-        $out = [];
+        /**
+         * Return current page
+         *
+         * @return string
+         */
+        public static function currentPage() {
 
-        if (!empty($remove))
-        {
-            $remove = !is_array($remove) ? [$remove] : $remove;
+            return isset($_GET[self::$page]) ? $_GET[self::$page] : 'index';
+        }
 
-            foreach (self::$params as $key => $value)
-            {
-                if (in_array($key, $remove))
-                {
-                    unset(self::$params[$key]);
+        /**
+         * Gets a page or returns error if it does not exist
+         *
+         * @return string
+         */
+        public static function getPage() {
+
+            $page = self::$folder . DS . self::currentPage() . ".php";
+            $error = self::$folder . DS . "error.php";
+
+            return is_file($page) ? $page : $error;
+        }
+
+        /**
+         * Gets all parameters
+         */
+        public static function getAll() {
+
+            if (!empty($_GET)) {
+
+                foreach ($_GET as $key => $value) {
+
+                    if (!empty($value)) {
+                        self::$params[$key] = $value;
+                    }
                 }
             }
         }
 
-        foreach (self::$params as $key => $value)
-        {
-            $out[] = $key."=".$value;
+        /**
+         * Get current url
+         *
+         * @param null $remove
+         * @return string
+         */
+        public static function getCurrentUrl($remove = null) {
+
+            self::getAll();
+            $out = [];
+
+            if (!empty($remove)) {
+
+                $remove = !is_array($remove) ? [$remove] : $remove;
+
+                foreach (self::$params as $key => $value) {
+
+                    if (in_array($key, $remove)) {
+                        unset(self::$params[$key]);
+                    }
+                }
+            }
+
+            foreach (self::$params as $key => $value) {
+                $out[] = $key . "=" . $value;
+            }
+
+            return "/?" . implode("&", $out);
         }
 
-        return "/?".implode("&", $out);
-    }
+        /**
+         * Get the referrer url
+         *
+         * @return null|string
+         */
+        public static function getReferrerUrl() {
 
-    /**
-     * Get the referrer url
-     *
-     * @return null|string
-     */
-    public static function getReferrerUrl()
-    {
-        $page = self::getParam(Login::$referrer);
+            $page = self::getParam(Login::$referrer);
 
-        return !empty($page) ? "/?page={$page}" : null;
+            return !empty($page) ? "/?page={$page}" : null;
+        }
+
+        /**
+         * Get the search parameters
+         *
+         * @param null $remove
+         * @return string
+         */
+        public static function getParamsForSearch($remove = null) {
+
+            self::getAll();
+            $out = [];
+
+            if (!empty(self::$params)) {
+
+                foreach (self::$params as $key => $value) {
+
+                    if (!empty($remove)) {
+
+                        $remove = is_array($remove) ? $remove : [$remove];
+
+                        if (!in_array($key, $remove)) {
+                            $out[] = '<input type="hidden" name="' . $key . '"
+                                    value="' . $value . '" />';
+                        }
+                    } else {
+                        $out[] = '<input type="hidden" name="' . $key . '"
+                                    value="' . $value . '" />';
+                    }
+                }
+
+                return implode("", $out);
+            }
+        }
     }
-}

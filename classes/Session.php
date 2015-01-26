@@ -1,83 +1,81 @@
 <?php
 
-/**
- * Class Session
- */
-class Session
-{
     /**
-     * Set an item
-     *
-     * @param $id
-     * @param int $quantity
+     * Class Session
      */
-    public static function setItem($id, $quantity = 1)
-    {
-        $_SESSION['basket'][$id]['quantity'] = $quantity;
-    }
+    class Session {
 
-    /**
-     * Remove an item
-     *
-     * @param $id
-     * @param null $quantity
-     */
-    public static function removeItem($id, $quantity = null)
-    {
-        if ($quantity != null && $quantity < $_SESSION['basket'][$id]['quantity'])
-        {
-            $_SESSION['basket'][$id]['quantity'] = ($_SESSION['basket'][$id]['quantity'] - $quantity);
-        }
-        else
-        {
-            $_SESSION['basket'][$id] = null;
-            unset($_SESSION['basket'][$id]);
-        }
-    }
+        /**
+         * Set an item
+         *
+         * @param $id
+         * @param int $quantity
+         */
+        public static function setItem($id, $quantity = 1) {
 
-    /**
-     * Get session
-     *
-     * @param null $name
-     * @return null
-     */
-    public static function getSession($name = null)
-    {
-        if (!empty($name))
-        {
-            return isset($_SESSION[$name]) ? $_SESSION[$name] : null;
+            $_SESSION['basket'][$id]['quantity'] = $quantity;
         }
-    }
 
-    /**
-     * Set the session
-     *
-     * @param null $name
-     * @param null $value
-     */
-    public static function setSession($name = null, $value = null)
-    {
-        if (!empty($name) && !empty($value))
-        {
-            $_SESSION[$name] = $value;
-        }
-    }
+        /**
+         * Remove an item
+         *
+         * @param $id
+         * @param null $quantity
+         */
+        public static function removeItem($id, $quantity = null) {
 
-    /**
-     * Clear the session
-     *
-     * @param null $id
-     */
-    public static function clear($id = null)
-    {
-        if (!empty($id) && isset($_SESSION[$id]))
-        {
-            $_SESSION[$id] = null;
-            unset($_SESSION[$id]);
+            if ($quantity != null &&
+                $quantity < $_SESSION['basket'][$id]['quantity']) {
+
+                $_SESSION['basket'][$id]['quantity'] =
+                    ($_SESSION['basket'][$id]['quantity'] - $quantity);
+
+            } else {
+
+                $_SESSION['basket'][$id] = null;
+                unset($_SESSION['basket'][$id]);
+
+            }
         }
-        else
-        {
-            session_destroy();
+
+        /**
+         * Get session
+         *
+         * @param null $name
+         * @return null
+         */
+        public static function getSession($name = null) {
+
+            if (!empty($name)) {
+                return isset($_SESSION[$name]) ? $_SESSION[$name] : null;
+            }
+        }
+
+        /**
+         * Set the session
+         *
+         * @param null $name
+         * @param null $value
+         */
+        public static function setSession($name = null, $value = null) {
+
+            if (!empty($name) && !empty($value)) {
+                $_SESSION[$name] = $value;
+            }
+        }
+
+        /**
+         * Clear the session
+         *
+         * @param null $id
+         */
+        public static function clear($id = null) {
+
+            if (!empty($id) && isset($_SESSION[$id])) {
+                $_SESSION[$id] = null;
+                unset($_SESSION[$id]);
+            } else {
+                session_destroy();
+            }
         }
     }
-}
