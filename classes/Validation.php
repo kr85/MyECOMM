@@ -29,9 +29,13 @@
             'password_mismatch' => 'Passwords do not match.',
             'category'          => 'Please select a category',
             'name'              => 'Please provide a name',
+            'name_duplicate'    => 'This name already exist',
             'description'       => 'Please provide a description',
             'price'             => 'Please provide a price',
-            'name_duplicate'    => 'This name already exist'
+            'address'           => 'Please provide an address',
+            'telephone'         => 'Please provide a phone number',
+            'website'           => 'Please provide a website',
+            'tax_rate'          => 'Please provide a tax rate'
         ];
 
         // List of expected fields

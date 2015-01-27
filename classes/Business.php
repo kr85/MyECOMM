@@ -21,6 +21,22 @@
         }
 
         /**
+         * Update the business information
+         *
+         * @param null $data
+         * @return bool|resource
+         */
+        public function updateBusiness($data = null) {
+
+            if (!empty($data)) {
+                $this->db->prepareUpdate($data);
+                return $this->db->update($this->table, 1);
+            }
+
+            return false;
+        }
+
+        /**
          * Get tax rate
          *
          * @return mixed
