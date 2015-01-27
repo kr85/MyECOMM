@@ -128,5 +128,35 @@
                 $this->db->prepareUpdate($data);
                 return $this->db->update($this->tableProducts, $id);
             }
+
+            return false;
+        }
+
+        /**
+         * Delete an existing product by id
+         *
+         * @param null $id
+         * @return bool|resource
+         */
+        public function removeProduct($id = null) {
+
+            if (!empty($id)) {
+                $product = $this->getProduct($id);
+
+                if (!empty($product)) {
+                    if (is_file(CATALOG_PATH . DS . $product['image'])) {
+                        unlink(CATALOG_PATH . DS . $product['image']);
+                    }
+
+                    $sql = "DELETE FROM `{$this->tableProducts}`
+                          WHERE `id` = '" . $this->db->escape($id) . "'";
+
+                    return $this->db->query($sql);
+                }
+
+                return false;
+            }
+
+            return false;
         }
     }
