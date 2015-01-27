@@ -16,8 +16,8 @@
             echo "<h1>Catalog :: " . $category['name'] . "</h1>";
 
             $image = !empty($product['image']) ?
-                'media/catalog/' . $product['image'] :
-                null;
+                $objCatalog->path . $product['image'] :
+                $objCatalog->path . 'unavailable.png';
 
             if (!empty($image)) {
 

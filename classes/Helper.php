@@ -95,7 +95,7 @@
                 $string = substr($string, 0, strrpos($string, " "));
                 $string .= "&hellip;";
             } else {
-                $string .= "&hellip";
+                $string .= "&hellip;";
             }
 
             return $string;

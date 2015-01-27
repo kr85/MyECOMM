@@ -39,6 +39,8 @@
             if (!empty($field)) {
                 return $this->isPost($field) ? strip_tags($_POST[$field]) : null;
             }
+
+            return null;
         }
 
         /**
@@ -111,6 +113,8 @@
 
                 return $out;
             }
+
+            return null;
         }
 
         /**
