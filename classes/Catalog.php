@@ -28,7 +28,8 @@
          */
         public function getCategories() {
 
-            $sql = "SELECT * FROM `{$this->tableCategories}` ORDER BY `name` ASC";
+            $sql = "SELECT * FROM `{$this->tableCategories}`
+                    ORDER BY `name` ASC";
 
             return $this->db->fetchAll($sql);
         }
@@ -42,9 +43,49 @@
         public function getCategory($id) {
 
             $sql = "SELECT * FROM `{$this->tableCategories}`
-                  WHERE `id` = '" . $this->db->escape($id) . "'";
+                    WHERE `id` = '" . $this->db->escape($id) . "'";
 
             return $this->db->fetchOne($sql);
+        }
+
+        /**
+         * Add a new category
+         *
+         * @param null $name
+         * @return bool|resource
+         */
+        public function addCategory($name = null) {
+
+            if (!empty($name)) {
+                $sql = "INSERT INTO `$this->tableCategories`
+                        (`name`) VALUES ('" . $this->db->escape($name) . "')";
+
+                return $this->db->query($sql);
+            }
+
+            return false;
+        }
+
+        /**
+         * Check if a category already exist
+         *
+         * @param null $name
+         * @param null $id
+         * @return bool|mixed
+         */
+        public function duplicateCategory($name = null, $id = null) {
+
+            if (!empty($name)) {
+                $sql = "SELECT * FROM `{$this->tableCategories}`
+                        WHERE `name` = '" . $this->db->escape($name) . "'";
+                $sql .= !empty($id) ?
+                    " AND `id` = '" . $this->db->escape($id) . "'" :
+                    null;
+
+                return $this->db->fetchOne($sql);
+            }
+
+            return false;
         }
 
         /**
@@ -56,8 +97,8 @@
         public function getProducts($category) {
 
             $sql = "SELECT * FROM `{$this->tableProducts}`
-                  WHERE `category` ='" . $this->db->escape($category['id']) . "'
-                  ORDER BY `date` DESC";
+                    WHERE `category` ='" . $this->db->escape($category['id']) . "'
+                    ORDER BY `date` DESC";
 
             return $this->db->fetchAll($sql);
         }
@@ -71,7 +112,7 @@
         public function getProduct($id) {
 
             $sql = "SELECT * FROM `{$this->tableProducts}`
-                  WHERE `id` ='" . $this->db->escape($id) . "'";
+                    WHERE `id` ='" . $this->db->escape($id) . "'";
 
             return $this->db->fetchOne($sql);
         }
@@ -149,7 +190,7 @@
                     }
 
                     $sql = "DELETE FROM `{$this->tableProducts}`
-                          WHERE `id` = '" . $this->db->escape($id) . "'";
+                            WHERE `id` = '" . $this->db->escape($id) . "'";
 
                     return $this->db->query($sql);
                 }

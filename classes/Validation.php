@@ -30,7 +30,8 @@
             'category'          => 'Please select a category',
             'name'              => 'Please provide a name',
             'description'       => 'Please provide a description',
-            'price'             => 'Please provide a price'
+            'price'             => 'Please provide a price',
+            'name_duplicate'    => 'This name already exist'
         ];
 
         // List of expected fields
