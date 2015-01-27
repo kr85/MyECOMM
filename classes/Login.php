@@ -33,7 +33,7 @@
         }
 
         /**
-         * Restrict access only after login
+         * Restrict access only after login (clients)
          */
         public static function restrictFront() {
 
@@ -46,6 +46,9 @@
             }
         }
 
+        /**
+         * Restrict access only after login (admins)
+         */
         public static function restrictAdmin() {
 
             if (!self::isLogged(self::$loginAdmin)) {
@@ -89,6 +92,12 @@
             }
         }
 
+        /**
+         * Admin login page
+         *
+         * @param null $id
+         * @param null $url
+         */
         public static function loginAdmin($id = null, $url = null) {
 
             if (!empty($id)) {
@@ -112,6 +121,25 @@
                 $user = $objUser->getUser($id);
                 if (!empty($user)) {
                     return $user['first_name'] . ' ' . $user['last_name'];
+                }
+            }
+
+            return false;
+        }
+
+        /**
+         * Get the full name of the logged in admin
+         *
+         * @param null $id
+         * @return bool|string
+         */
+        public static function getFullNameAdmin($id = null) {
+
+            if (!empty($id)) {
+                $objAdmin = new Admin();
+                $admin = $objAdmin->getAdmin($id);
+                if (!empty($admin)) {
+                    return $admin['first_name'] . ' ' . $admin['last_name'];
                 }
             }
 

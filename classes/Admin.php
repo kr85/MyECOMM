@@ -24,8 +24,8 @@
                 $password = Login::stringToHash($password);
 
                 $sql = "SELECT * FROM `{$this->table}`
-                      WHERE `email` = '" . $this->db->escape($email) . "'
-                      AND `password` = '" . $this->db->escape($password) . "'";
+                        WHERE `email` = '" . $this->db->escape($email) . "'
+                        AND `password` = '" . $this->db->escape($password) . "'";
 
                 $result = $this->db->fetchOne($sql);
 
@@ -36,6 +36,24 @@
                 }
 
                 return false;
+            }
+
+            return false;
+        }
+
+        /**
+         * Get admin's information by id
+         *
+         * @param null $id
+         * @return bool|mixed
+         */
+        public function getAdmin($id = null) {
+
+            if (!empty($id)) {
+                $sql = "SELECT * FROM `{$this->table}`
+                        WHERE `id` = '" . $this->db->escape($id) . "'";
+
+                return $this->db->fetchOne($sql);
             }
 
             return false;

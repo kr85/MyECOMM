@@ -26,7 +26,7 @@
                         Logged in as:
                         <strong>
                             <?php
-                                echo Login::getFullNameFront(
+                                echo Login::getFullNameAdmin(
                                     Session::getSession(Login::$loginAdmin)
                                 );
                             ?>

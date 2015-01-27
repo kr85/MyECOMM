@@ -23,9 +23,9 @@
             $password = Login::stringToHash($password);
 
             $sql = "SELECT * FROM `{$this->table}`
-                  WHERE `email` = '" . $this->db->escape($email) . "'
-                  AND `password` = '" . $this->db->escape($password) . "'
-                  AND `active` = 1";
+                    WHERE `email` = '" . $this->db->escape($email) . "'
+                    AND `password` = '" . $this->db->escape($password) . "'
+                    AND `active` = 1";
 
             $result = $this->db->fetchOne($sql);
 
@@ -86,7 +86,7 @@
             if (!empty($hash)) {
 
                 $sql = "SELECT * FROM `{$this->table}`
-                      WHERE `hash` = '" . $this->db->escape($hash) . "'";
+                        WHERE `hash` = '" . $this->db->escape($hash) . "'";
 
                 return $this->db->fetchOne($sql);
             }
@@ -105,8 +105,8 @@
             if (!empty($id)) {
 
                 $sql = "UPDATE `{$this->table}`
-                      SET `active` = 1
-                      WHERE `id` = '" . $this->db->escape($id) . "'";
+                        SET `active` = 1
+                        WHERE `id` = '" . $this->db->escape($id) . "'";
 
                 return $this->db->query($sql);
             }
@@ -125,8 +125,8 @@
             if (!empty($email)) {
 
                 $sql = "SELECT * FROM `{$this->table}`
-                      WHERE `email` = '" . $this->db->escape($email) . "'
-                      AND `active` = 1";
+                        WHERE `email` = '" . $this->db->escape($email) . "'
+                        AND `active` = 1";
 
                 return $this->db->fetchOne($sql);
             }
@@ -145,7 +145,7 @@
             if (!empty($id)) {
 
                 $sql = "SELECT * FROM `{$this->table}`
-                      WHERE `id` = '" . $this->db->escape($id) . "'";
+                        WHERE `id` = '" . $this->db->escape($id) . "'";
 
                 return $this->db->fetchOne($sql);
             }
