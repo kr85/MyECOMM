@@ -1,5 +1,7 @@
 <?php
-
+    // Restrict access only for logged in users
+    Login::restrictFront();
+    
     $id = Url::getParam('id');
 
     if (!empty($id)) {
