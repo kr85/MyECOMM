@@ -1,7 +1,7 @@
 <?php
     // Restrict access only for logged in users
     Login::restrictFront();
-    
+
     $id = Url::getParam('id');
 
     if (!empty($id)) {
@@ -42,7 +42,7 @@
                         <?php echo $user['address_1']; ?><br/>
                         <?php echo !empty($user['address_2']) ? $user['address_2'] : null;
                         ?><br/>
-                        <?php echo $user['city']; ?>
+                        <?php echo $user['city']; ?>,
                         <?php echo $user['state']; ?>
                         <?php echo $user['zip_code']; ?><br/>
                         <?php
