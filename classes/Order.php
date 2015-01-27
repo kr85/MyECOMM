@@ -86,8 +86,8 @@
                 foreach ($this->items as $item) {
 
                     $sql = "INSERT INTO `{$this->tableOrdersItems}`
-                          (`order`, `product`, `price`, `qty`)
-                          VALUES ('{$orderId}',
+                            (`order`, `product`, `price`, `qty`)
+                            VALUES ('{$orderId}',
                                   '" . $item['id'] . "',
                                   '" . $item['price'] . "',
                                   '" . $this->basket[$item['id']]['quantity'] . "')";
@@ -131,7 +131,7 @@
             $id = !empty($id) ? $id : $this->id;
 
             $sql = "SELECT * FROM `{$this->tableOrders}`
-                  WHERE `id` = '" . $this->db->escape($id) . "'";
+                    WHERE `id` = '" . $this->db->escape($id) . "'";
 
             return $this->db->fetchOne($sql);
         }
@@ -147,7 +147,7 @@
             $id = !empty($id) ? $id : $this->id;
 
             $sql = "SELECT * FROM `{$this->tableOrdersItems}`
-                  WHERE `order` = '" . $this->db->escape($id) . "'";
+                    WHERE `order` = '" . $this->db->escape($id) . "'";
 
             return $this->db->fetchAll($sql);
         }
@@ -181,12 +181,12 @@
                     $errors = [];
 
                     $sql = "UPDATE `{$this->tableOrders}`
-                     SET `pp_status` = '" . $this->db->escape($active) . "',
-                     `txn_id` = '" . $this->db->escape($data['txn_id']) . "',
-                     `payment_status` = '" . $this->db->escape($data['payment_status']) . "',
-                     `ipn` = '" . $this->db->escape($out) . "',
-                     `response` = '" . $this->db->escape($result) . "'
-                     WHERE `id` = '" . $this->db->escape($data['custom']) . "'";
+                            SET `pp_status` = '" . $this->db->escape($active) . "',
+                            `txn_id` = '" . $this->db->escape($data['txn_id']) . "',
+                            `payment_status` = '" . $this->db->escape($data['payment_status']) . "',
+                            `ipn` = '" . $this->db->escape($out) . "',
+                            `response` = '" . $this->db->escape($result) . "'
+                            WHERE `id` = '" . $this->db->escape($data['custom']) . "'";
 
                     //Helper::addToErrorsLog('SQL_approve', $sql);
                     if (!$this->db->query($sql)) {
@@ -216,11 +216,13 @@
 
             if (!empty($clientId)) {
                 $sql = "SELECT * FROM `{$this->tableOrders}`
-                      WHERE `client` = '" . $this->db->escape($clientId) . "'
-                      ORDER BY `date` DESC";
+                        WHERE `client` = '" . $this->db->escape($clientId) . "'
+                        ORDER BY `date` DESC";
 
                 return $this->db->fetchAll($sql);
             }
+
+            return false;
         }
 
         /**
@@ -233,9 +235,59 @@
 
             if (!empty($id)) {
                 $sql = "SELECT * FROM `{$this->tableStatuses}`
-                      WHERE `id` = '" . $this->db->escape($id) . "'";
+                        WHERE `id` = '" . $this->db->escape($id) . "'";
 
                 return $this->db->fetchOne($sql);
             }
+
+            return false;
+        }
+
+        /**
+         * Get all orders by search criteria if available
+         *
+         * @param null $search
+         * @return array
+         */
+        public function getAllOrders($search = null) {
+
+            $sql = "SELECT * FROM `$this->tableOrders`";
+            $sql .= !empty($search) ?
+                    " WHERE `id` = '" . $this->db->escape($search) . "'" :
+                    null;
+            $sql .= " ORDER BY `date` DESC";
+
+            return $this->db->fetchAll($sql);
+        }
+
+        public function updateOrder($id = null, $data = null) {
+
+            if (!empty($id) && !empty($data)) {
+                if (is_array($data) &&
+                    array_key_exists('status', $data) &&
+                    array_key_exists('notes', $data)) {
+                    $sql = "UPDATE `{$this->tableOrders}`
+                            SET `status` = '" . $this->db->escape($data['status']) . "',
+                            `notes` = '" . $this->db->escape($data['notes']) . "'
+                            WHERE `id` = '" . $this->db->escape($id) . "'";
+
+                    return $this->db->query($sql);
+                }
+            }
+
+            return false;
+        }
+
+        /**
+         * Get all statuses
+         *
+         * @return array
+         */
+        public function getStatuses() {
+
+            $sql = "SELECT * FROM `$this->tableStatuses`
+                   ORDER BY `id` ASC";
+
+            return $this->db->fetchAll($sql);
         }
     }
