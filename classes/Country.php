@@ -15,7 +15,7 @@
         public function getCountries() {
 
             $sql = "SELECT * FROM `{$this->table}`
-                   ORDER BY `name` ASC";
+                    ORDER BY `name` ASC";
 
             return $this->db->fetchAll($sql);
         }
@@ -30,7 +30,7 @@
 
             if (!empty($id)) {
                 $sql = "SELECT * FROM `{$this->table}`
-                      WHERE `id` = '" . $this->db->escape($id) . "'";
+                        WHERE `id` = '" . $this->db->escape($id) . "'";
 
                 return $this->db->fetchOne($sql);
             }
