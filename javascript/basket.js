@@ -1,79 +1,6 @@
-$(document).ready(function() {
-
-    initializeBinds();
-
-    function initializeBinds() {
-        if ($('.update_basket').length > 0) {
-            $('.update_basket').bind('click', updateBasket);
-        }
-
-        if ($('.remove_basket').length > 0) {
-            $('.remove_basket').bind('click', removeFromBasket);
-        }
-
-        if ($('.fld_qty').length > 0) {
-            $('.fld_qty').bind('keypress', function(e) {
-                var code = e.keyCode ? e.keyCode : e.which;
-                if (code == 13) {
-                    updateBasket();
-                }
-            });
-        }
-    }
-
-    function removeFromBasket(event) {
-        event.preventDefault();
-
-        var item = $(this).attr('rel');
-
-        $.ajax({
-            type: 'POST',
-            url: '/modules/basket_remove.php',
-            dataType: 'html',
-            data: ({ id: item }),
-            success: function() {
-                refreshMainBasket();
-                refreshSmallBasket();
-            },
-            error: function() {
-                alert("An error has occurred.");
-            }
-        });
-    }
-
-    function refreshSmallBasket() {
-
-        $.ajax({
-            url: '/modules/basket_small_refresh.php',
-            dataType: 'json',
-            success: function(data) {
-                $.each(data, function(k, v) {
-                    $("#basket_left ." + k + " span").text(v);
-                });
-            },
-            error: function() {
-                alert("An error has occurred.");
-            }
-        });
-    }
-
-    function refreshMainBasket() {
-
-        $.ajax({
-            url: '/modules/basket_view.php',
-            dataType: 'html',
-            success: function(data) {
-                $('#main_basket').html(data);
-                initializeBinds();
-            },
-            error: function() {
-                alert("An error has occurred.");
-            }
-        });
-    }
-
-    if ($(".add_to_basket").length > 0) {
-        $(".add_to_basket").click(function(event) {
+var basketObject = {
+    addToBasket: function(o) {
+        o.live('click', function() {
             event.preventDefault();
 
             var trigger = $(this);
@@ -97,7 +24,7 @@ $(document).ready(function() {
                             trigger.text("Add to basket");
                             trigger.removeClass("red");
                         }
-                        refreshSmallBasket();
+                        basketObject.refreshSmallBasket();
                     }
                 },
                 error: function() {
@@ -106,11 +33,56 @@ $(document).ready(function() {
             });
             return false;
         });
-    }
+    },
+    refreshMainBasket: function() {
+        $.ajax({
+            url: '/modules/basket_view.php',
+            dataType: 'html',
+            success: function(data) {
+                $('#main_basket').html(data);
+            },
+            error: function() {
+                alert("An error has occurred.");
+            }
+        });
+    },
+    refreshSmallBasket: function() {
+        $.ajax({
+            url: '/modules/basket_small_refresh.php',
+            dataType: 'json',
+            success: function(data) {
+                $.each(data, function(k, v) {
+                    $("#basket_left ." + k + " span").text(v);
+                });
+            },
+            error: function() {
+                alert("An error has occurred.");
+            }
+        });
+    },
+    removeFromBasket: function(event) {
+        event.preventDefault();
 
-    function updateBasket() {
+        var item = $(this).attr('rel');
 
-        $('#frm_basket :input').each(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/modules/basket_remove.php',
+            dataType: 'html',
+            data: ({ id: item }),
+            success: function() {
+                basketObject.refreshSmallBasket();
+                basketObject.refreshMainBasket();
+            },
+            error: function() {
+                alert("An error has occurred.");
+            }
+        });
+
+        return false;
+    },
+    updateBasket: function() {
+        jQuery.each($('#frm_basket :input'), function() {
             var sid = $(this).attr('id').split('-');
             var value = $(this).val();
 
@@ -119,18 +91,31 @@ $(document).ready(function() {
                 url: '/modules/basket_quantity.php',
                 data: ({ id: sid[1], quantity: value }),
                 success: function() {
-                    refreshSmallBasket();
-                    refreshMainBasket();
+                    basketObject.refreshSmallBasket();
+                    basketObject.refreshMainBasket();
                 },
                 error: function() {
                     alert('An error has occurred.');
                 }
             });
         });
-    }
-
-    if ($('.paypal').length > 0) {
-        $('.paypal').click(function() {
+    },
+    updateBasketKeyPres: function(o) {
+        o.live('keypress', function(e) {
+            var code = e.keyCode ? e.keyCode : e.which;
+            if (code == 13) {
+                basketObject.updateBasket();
+            }
+        });
+    },
+    updateBasketButton: function(o) {
+        o.live('click', function(e) {
+            basketObject.updateBasket();
+            return false;
+        });
+    },
+    loadingPayPal: function(o) {
+        o.live('click', function() {
             var token = $(this).attr('id');
             var image = "<div style=\"text-align: center;\">";
             image = image + "<img src=\"/images/loading.gif\"";
@@ -140,14 +125,14 @@ $(document).ready(function() {
 
             $('#main_basket').fadeOut(200, function() {
                 $(this).html(image).fadeIn(200, function() {
-                    sendToPayPal(token);
+                    basketObject.sendToPayPal(token);
                 });
             });
+
+            return false;
         });
-    }
-
-    function sendToPayPal(token) {
-
+    },
+    sendToPayPal: function(token) {
         $.ajax({
             type: 'POST',
             url: '/modules/paypal.php',
@@ -162,5 +147,14 @@ $(document).ready(function() {
             }
         });
     }
+};
+
+$(document).ready(function() {
+
+    basketObject.addToBasket($('.add_to_basket'));
+    basketObject.updateBasketKeyPres($('.fld_qty'));
+    basketObject.updateBasketButton($('.update_basket'));
+    basketObject.removeFromBasket($('.remove_basket'));
+    basketObject.loadingPayPal($('.paypal'));
 
 });
