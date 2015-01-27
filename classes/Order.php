@@ -260,6 +260,13 @@
             return $this->db->fetchAll($sql);
         }
 
+        /**
+         * Update an existing order
+         *
+         * @param null $id
+         * @param null $data
+         * @return bool|resource
+         */
         public function updateOrder($id = null, $data = null) {
 
             if (!empty($id) && !empty($data)) {
@@ -279,6 +286,24 @@
         }
 
         /**
+         * Delete an existing order
+         *
+         * @param null $id
+         * @return bool|resource
+         */
+        public function removeOrder($id = null) {
+
+            if (!empty($id)) {
+                $sql = "DELETE FROM `{$this->tableOrders}`
+                        WHERE `id` = '" . $this->db->escape($id) . "'";
+
+                return $this->db->query($sql);
+            }
+
+            return false;
+        }
+
+        /**
          * Get all statuses
          *
          * @return array
@@ -286,7 +311,7 @@
         public function getStatuses() {
 
             $sql = "SELECT * FROM `$this->tableStatuses`
-                   ORDER BY `id` ASC";
+                    ORDER BY `id` ASC";
 
             return $this->db->fetchAll($sql);
         }
