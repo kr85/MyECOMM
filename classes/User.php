@@ -90,6 +90,8 @@
 
                 return $this->db->fetchOne($sql);
             }
+
+            return false;
         }
 
         /**
@@ -108,6 +110,8 @@
 
                 return $this->db->query($sql);
             }
+
+            return false;
         }
 
         /**
@@ -143,10 +147,12 @@
 
                 return $this->db->fetchOne($sql);
             }
+
+            return false;
         }
 
         /**
-         * Update user
+         * Update an existing user
          *
          * @param null $parameters
          * @param null $id
@@ -164,5 +170,29 @@
 
                 return false;
             }
+
+            return false;
+        }
+
+        /**
+         * Get all users
+         *
+         * @param null $search
+         * @return array
+         */
+        public function getUsers($search = null) {
+
+            $sql = "SELECT * FROM `{$this->table}`
+                    WHERE `active` = 1";
+
+            if (!empty($search)) {
+                $search = $this->db->escape($search);
+                $sql .= " AND (`first_name` LIKE '%{$search}%' ||
+                        `last_name` LIKE '%{$search}%')";
+            }
+
+            $sql .= " ORDER BY `last_name`, `first_name` ASC";
+
+            return $this->db->fetchAll($sql);
         }
     }
