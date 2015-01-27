@@ -130,6 +130,8 @@
 
                 return $this->db->fetchOne($sql);
             }
+
+            return false;
         }
 
         /**
@@ -194,5 +196,23 @@
             $sql .= " ORDER BY `last_name`, `first_name` ASC";
 
             return $this->db->fetchAll($sql);
+        }
+
+        /**
+         * Delete a user by id
+         *
+         * @param null $id
+         * @return bool|resource
+         */
+        public function removeUser($id = null) {
+
+            if (!empty($id)) {
+                $sql = "DELETE FROM `{$this->table}`
+                        WHERE `id` = '" . $this->db->escape($id) . "'";
+
+                return $this->db->query($sql);
+            }
+
+            return false;
         }
     }
