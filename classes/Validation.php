@@ -197,6 +197,8 @@
             if (!empty($this->errors) && in_array($key, $this->errors)) {
                 return $this->wrapWarning($this->message[$key]);
             }
+
+            return false;
         }
 
         /**
@@ -210,5 +212,7 @@
             if (!empty($message)) {
                 return "<span class=\"warn\">{$message}</span>";
             }
+
+            return false;
         }
     }

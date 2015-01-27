@@ -37,5 +37,7 @@
 
                 return false;
             }
+
+            return false;
         }
     }

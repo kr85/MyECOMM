@@ -62,6 +62,8 @@
                     return $string;
                     break;
             }
+
+            return false;
         }
 
         /**
@@ -79,6 +81,8 @@
 
                 return $size[$case];
             }
+
+            return false;
         }
 
         /**
@@ -184,5 +188,7 @@
             if (!empty($name)) {
                 return strtolower(preg_replace('/[^a-zA-Z0-9.]/', '-', $name));
             }
+
+            return false;
         }
     }

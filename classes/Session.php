@@ -49,6 +49,8 @@
             if (!empty($name)) {
                 return isset($_SESSION[$name]) ? $_SESSION[$name] : null;
             }
+
+            return false;
         }
 
         /**

@@ -74,6 +74,8 @@
 
                 return false;
             }
+
+            return false;
         }
 
         /**
@@ -97,6 +99,8 @@
 
                 return $this->wrapEmail($out);
             }
+
+            return false;
         }
 
         /**
@@ -118,5 +122,7 @@
 
                 return $emailWrapper;
             }
+
+            return false;
         }
     }

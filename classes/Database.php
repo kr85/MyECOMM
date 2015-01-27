@@ -201,6 +201,8 @@
 
                 return false;
             }
+
+            return false;
         }
 
         /**
@@ -233,5 +235,7 @@
 
                 return $this->query($sql);
             }
+
+            return false;
         }
     }

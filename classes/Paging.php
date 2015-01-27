@@ -135,6 +135,8 @@
 
                 return "<li>" . implode("</li><li>", $out) . "</li>";
             }
+
+            return false;
         }
 
         /**
@@ -152,5 +154,7 @@
 
                 return $out;
             }
+
+            return false;
         }
     }

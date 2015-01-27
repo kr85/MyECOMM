@@ -34,5 +34,7 @@
 
                 return $this->db->fetchOne($sql);
             }
+
+            return false;
         }
     }

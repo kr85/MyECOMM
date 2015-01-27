@@ -139,5 +139,7 @@
 
                 return implode("", $out);
             }
+
+            return false;
         }
     }

@@ -161,6 +161,8 @@
             if (!empty($this->fields)) {
                 return implode("", $this->fields);
             }
+
+            return false;
         }
 
         /**

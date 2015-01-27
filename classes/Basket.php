@@ -131,6 +131,8 @@
             if (!empty($price) && !empty($quantity)) {
                 return round(($price * $quantity), 2);
             }
+
+            return false;
         }
 
         /**
@@ -149,5 +151,7 @@
                     return $out;
                 }
             }
+
+            return false;
         }
     }
