@@ -4,11 +4,11 @@
     require_once('templates/_header.php');
 ?>
 
-    <h1>Products :: Edit</h1>
+    <h1>Categories :: Edit</h1>
     <p>
-        The product has been updated successfully.<br/>
+        The category has been updated successfully.<br/>
         <a href="<?php echo $url ?>">
-            Go back to the list of products.
+            Go back to the list of categories.
         </a>
     </p>
 

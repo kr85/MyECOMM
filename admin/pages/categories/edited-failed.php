@@ -4,12 +4,12 @@
     require_once('templates/_header.php');
 ?>
 
-    <h1>Products :: Edit</h1>
+    <h1>Categories :: Edit</h1>
     <p>
-        There was a problem updating this product.
+        There was a problem updating this category.
         Please contact the administrator.<br/>
         <a href="<?php echo $url ?>">
-            Go back to the list of products.
+            Go back to the list of categories.
         </a>
     </p>
 

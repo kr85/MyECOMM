@@ -67,6 +67,44 @@
         }
 
         /**
+         * Update an existing category
+         *
+         * @param null $name
+         * @param null $id
+         * @return bool|resource
+         */
+        public function updateCategory($name = null, $id = null) {
+
+            if (!empty($name) && !empty($id)) {
+                $sql = "UPDATE `{$this->tableCategories}`
+                        SET `name` = '" . $this->db->escape($name) . "'
+                        WHERE `id` = '" . $this->db->escape($id) ."'";
+
+                return $this->db->query($sql);
+            }
+
+            return false;
+        }
+
+        /**
+         * Delete a category by id
+         *
+         * @param null $id
+         * @return bool|resource
+         */
+        public function removeCategory($id = null) {
+
+            if (!empty($id)) {
+                $sql = "DELETE FROM `{$this->tableCategories}`
+                        WHERE `id` = '" . $this->db->escape($id) ."'";
+
+                return $this->db->query($sql);
+            }
+
+            return false;
+        }
+
+        /**
          * Check if a category already exist
          *
          * @param null $name

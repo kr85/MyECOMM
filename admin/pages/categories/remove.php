@@ -5,9 +5,9 @@
     if (!empty($id)) {
 
         $objCatalog = new Catalog();
-        $product = $objCatalog->getProduct($id);
+        $category = $objCatalog->getCategory($id);
 
-        if (!empty($product)) {
+        if (!empty($category)) {
 
             $yes = '/admin' . Url::getCurrentUrl() . '&amp;remove=1';
             $no = 'javascript:history.go(-1)';
@@ -15,13 +15,13 @@
             $remove = Url::getParam('remove');
 
             if (!empty($remove)) {
-                $objCatalog->removeProduct($id);
+                $objCatalog->removeCategory($id);
 
                 Helper::redirect('/admin' . Url::getCurrentUrl([
                         'action',
                         'id',
                         'remove',
-                        'search',
+                        'srch',
                         Paging::$key
                     ])
                 );
@@ -29,10 +29,10 @@
 
             require_once('templates/_header.php'); ?>
 
-        <h1>Products :: Remove</h1>
+        <h1>Categories :: Remove</h1>
 
         <p>
-            Are you sure you want to remove this product?<br/>
+            Are you sure you want to remove this category?<br/>
             <a href="<?php echo $yes; ?>">Yes</a> | <a href="<?php echo $no; ?>">No</a>
         </p>
 
