@@ -8,8 +8,7 @@
      * @param $className
      */
     function __autoload($className) {
-
         $class = explode("_", $className);
         $path = implode("/", $class) . ".php";
-        require_once($path);
+        @require_once(ROOT_PATH . DS . CLASSES_DIR . DS . $path);
     }

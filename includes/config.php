@@ -5,6 +5,10 @@
         session_start();
     }
 
+    // Page extension
+    defined("PAGE_EXTENSION")
+        || define("PAGE_EXTENSION", "");
+
     // Site domain name with HTTP
     defined("SITE_URL")
         || define("SITE_URL", "http://" . $_SERVER['SERVER_NAME']);
@@ -51,11 +55,7 @@
 
     // Add all directories to the include path
     set_include_path(implode(PATH_SEPARATOR, [
-        realpath(ROOT_PATH . DS . CLASSES_DIR),
-        realpath(ROOT_PATH . DS . PAGES_DIR),
         realpath(ROOT_PATH . DS . MODULES_DIR),
         realpath(ROOT_PATH . DS . INCLUDES_DIR),
-        realpath(ROOT_PATH . DS . TEMPLATES_DIR),
-        realpath(ROOT_PATH . DS . LOGS_DIR),
         get_include_path()
     ]));
