@@ -160,11 +160,50 @@
          * @return string
          */
         public static function cleanString($name = null) {
-
             if (!empty($name)) {
                 return strtolower(preg_replace('/[^a-zA-Z0-9.]/', '-', $name));
             }
 
             return false;
+        }
+
+        /**
+         * Clear a string
+         *
+         * @param null $string
+         * @param null $remove
+         * @return bool|mixed|null
+         */
+        public static function clearString($string = null, $remove = null) {
+            if (!empty($string) && !self::isEmpty($remove)) {
+                $remove = self::makeArray($remove);
+                foreach ($remove as $key => $value) {
+                    $string = str_replace($value, '', $string);
+                }
+
+                return $string;
+            }
+
+            return false;
+        }
+
+        /**
+         * Check is a value is empty
+         *
+         * @param null $value
+         * @return bool
+         */
+        public static function isEmpty($value = null) {
+            return empty($value) && !is_numeric($value) ? true : false;
+        }
+
+        /**
+         * Make an array
+         *
+         * @param null $array
+         * @return array
+         */
+        public static function makeArray($array = null) {
+            return is_array($array) ? $array : [$array];
         }
     }
