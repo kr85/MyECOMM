@@ -1,3 +1,3 @@
-## MyECOMM - A E-Commerce Website
+## MyeCOMM - A eCommerce Website
 
 More Info Coming Soon
