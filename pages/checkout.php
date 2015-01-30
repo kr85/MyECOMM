@@ -1,7 +1,7 @@
 <?php
 
     // Restrict access only for logged in users
-    Login::restrictFront();
+    Login::restrictFront($this->objUrl);
 
     $objUser = new User();
     $user = $objUser->getUser(Session::getSession(Login::$loginFront));
@@ -48,7 +48,7 @@
             if ($objValidation->isValid()) {
 
                 if ($objUser->updateUser($objValidation->post, $user['id'])) {
-                    Helper::redirect('/?page=summary');
+                    Helper::redirect($this->objUrl->href('summary'));
                 }
                 else {
                     $message = "<p class=\"red\">There are a problem updating ";
@@ -190,6 +190,6 @@
         require_once('_footer.php');
     }
     else {
-        Helper::redirect('/?page=error');
+        Helper::redirect($this->objUrl->href('error'));
     }
 ?>

@@ -116,7 +116,8 @@
                 <div class="dev br_td">&#160;</div>
 
                 <div class="sbm sbm_blue fl_r">
-                    <a href="/?page=checkout" class="btn">Checkout</a>
+                    <a href="<?php echo $this->objUrl->href('checkout'); ?>"
+                       class="btn">Checkout</a>
                 </div>
 
                 <div class="sbm sbm_blue fl_l update_basket">
