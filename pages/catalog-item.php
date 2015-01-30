@@ -1,14 +1,19 @@
 <?php
 
-    $id = Url::getParam('id');
+    $id = $this->objUrl->get('item');
 
+    // Check if id is empty
     if (!empty($id)) {
-
         $objCatalog = new Catalog();
-        $product = $objCatalog->getProduct($id);
+        $product = $objCatalog->getProductByIdentity($id);
 
+        // Check if product is empty
         if (!empty($product)) {
+            $this->metaTitle = $product['meta_title'];
+            $this->metaDescription = $product['meta_description'];
+            $this->metaKeywords = $product['meta_keywords'];
 
+            // Get product's category
             $category = $objCatalog->getCategory($product['category']);
 
             require_once('_header.php');
@@ -16,15 +21,17 @@
             echo "<h1>Catalog :: " . $category['name'] . "</h1>";
 
             $image = !empty($product['image']) ?
-                $objCatalog->path . $product['image'] :
-                $objCatalog->path . 'unavailable.png';
+                $product['image'] :
+                'unavailable.png';
 
+            // Check if image is empty
             if (!empty($image)) {
-
-                $width = Helper::getImageSize($image, 0);
+                $width = Helper::getImageSize(CATALOG_PATH . DS . $image, 0);
                 $width = $width > 120 ? 120 : $width;
                 echo "<div class=\"fl_l\">";
-                echo "<div class=\"lft\"><img src=\"{$image}\" alt=\"";
+                echo "<div class=\"lft\"><img src=\"";
+                echo $objCatalog->path . $image;
+                echo "\" alt=\"";
                 echo Helper::encodeHTML($product['name'], 1);
                 echo "\" width=\"{$width}\" /></div>";
             }
