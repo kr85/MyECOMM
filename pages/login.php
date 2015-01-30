@@ -7,7 +7,7 @@
 
     $objForm = new Form();
     $objValidation = new Validation($objForm);
-    $objUser = new User();
+    $objUser = new User($this->objUrl);
 
     // Log In form
     if ($objForm->isPost('login_email')) {
@@ -15,7 +15,10 @@
             $objForm->getPost('login_email'),
             $objForm->getPost('login_password'))
         ) {
-            Login::loginFront($objUser->id, Url::getReferrerUrl());
+            Login::loginFront(
+                $objUser->id,
+                $this->objUrl->href($this->objUrl->get(Login::$referrer))
+            );
         }
         else {
             $objValidation->addToErrors('login');
@@ -83,7 +86,17 @@
         $user = $objUser->getByEmail($email);
 
         if (!empty($user)) {
-            $objValidation->addToErrors('email_duplicate');
+            if ($user['active'] != 1) {
+                $emailInactive = '<a href="" id="emailInactive"';
+                $emailInactive .= ' data-id="';
+                $emailInactive .= $user['id'];
+                $emailInactive .= '">Email address is already taken.';
+                $emailInactive .= ' Resend activation email.</a>';
+                $objValidation->message['email_inactive'] = $emailInactive;
+                $objValidation->addToErrors('email_inactive');
+            } else {
+                $objValidation->addToErrors('email_duplicate');
+            }
         }
 
         // Check if validation is valid
@@ -99,10 +112,10 @@
                 $objValidation->post,
                 $objForm->getPost('password'))
             ) {
-                Helper::redirect('/?page=registered');
+                Helper::redirect($this->objUrl->href('registered'));
             }
             else {
-                Helper::redirect('/?page=registered-failed');
+                Helper::redirect($this->objUrl->href('registered-failed'));
             }
         }
     }
@@ -120,7 +133,7 @@
                 </th>
                 <td>
                     <?php echo $objValidation->validate('login'); ?>
-                    <input type="text" name="login_email"
+                    <input type="email" name="login_email"
                            id="login_email" class="fld"
                            value="<?php echo $objForm->stickyText('login_email'); ?>"/>
                 </td>
@@ -244,7 +257,8 @@
                 <td>
                     <?php echo $objValidation->validate('email'); ?>
                     <?php echo $objValidation->validate('email_duplicate'); ?>
-                    <input type="text" name="email"
+                    <?php echo $objValidation->validate('email_inactive'); ?>
+                    <input type="email" name="email"
                            id="email" class="fld"
                            value="<?php echo $objForm->stickyText('email'); ?>"/>
                 </td>
