@@ -11,9 +11,9 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8"/>
-    <title>E-Commerce Website Project</title>
-    <meta name="description" content="E-Commerce Website Project"/>
-    <meta name="keywords" content="E-Commerce Website Project"/>
+    <title><?php echo $this->metaTitle; ?>/title>
+    <meta name="description" content="<?php echo $this->metaDescription; ?>"/>
+    <meta name="keywords" content="<?php echo $this->metaKeywords; ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/css/core.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -33,15 +33,19 @@
                                 );
                             ?>
                         </strong> |
-                        <a href="/?page=orders">My Orders</a> |
-                        <a href="/?page=logout">Log Out</a>
+                        <a href="<?php echo $this->objUrl->href('orders'); ?>">
+                            My Orders
+                        </a> |
+                        <a href="<?php echo $this->objUrl->href('logout'); ?>">
+                            Log Out
+                        </a>
                     </div>
                 <?php
                 }
                 else {
                     ?>
                     <div id="logged_as">
-                        <a href="/?page=login">
+                        <a href="<?php echo $this->objUrl->href('login'); ?>">
                             Log In
                         </a>
                     </div>;
@@ -59,13 +63,19 @@
                     <ul id="navigation">
                         <?php
                             foreach ($categories as $c) {
-                                echo "<li>";
-                                echo "<a href=\"/?page=catalog&amp;category=" . $c['id'] . "\"";
-                                echo Helper::getActive(['category' => $c['id']]);
-                                echo ">";
+                                echo '<li><a href="';
+                                echo $this->objUrl->href('catalog', [
+                                    'category',
+                                    $c['identity']
+                                ]);
+                                echo '"';
+                                echo $this->objNavigation->active('catalog', [
+                                    'category',
+                                    $c['identity']
+                                ]);
+                                echo '>';
                                 echo Helper::encodeHTML($c['name']);
-                                echo "</a>";
-                                echo "</li>";
+                                echo '</a></li>';
                             }
                         ?>
                     </ul>
