@@ -146,6 +146,19 @@ var basketObject = {
                 alert('An error has occurred.');
             }
         });
+    },
+    emailInactive: function(o) {
+        o.live('click', function() {
+            var thisId = $(this).attr('data-id');
+            jQuery.getJSON('/modules/resend.php?id=' + thisId, function(data) {
+                if (!data.error) {
+                    location.href = '/resent'
+                } else {
+                    location.href = '/resent-failed';
+                }
+            });
+            return false;
+        });
     }
 };
 
@@ -156,5 +169,6 @@ $(document).ready(function() {
     basketObject.updateBasketButton($('.update_basket'));
     basketObject.removeFromBasket($('.remove_basket'));
     basketObject.loadingPayPal($('.paypal'));
+    basketObject.emailInactive($('#emailInactive'));
 
 });
