@@ -5,12 +5,12 @@
      */
     class Login {
 
-        public static $loginPageFront = "/?page=login";
-        public static $dashboardFront = "/?page=orders";
+        public static $loginPageFront = "/login";
+        public static $dashboardFront = "/orders";
         public static $loginFront = "cid";
 
-        public static $loginPageAdmin = "/admin";
-        public static $dashboardAdmin = "/admin/?page=products";
+        public static $loginPageAdmin = "/panel";
+        public static $dashboardAdmin = "/panel/products";
         public static $loginAdmin = "aid";
 
         public static $validLogin = "valid";
@@ -34,14 +34,16 @@
 
         /**
          * Restrict access only after login (clients)
+         *
+         * @param null $objUrl
          */
-        public static function restrictFront() {
-
+        public static function restrictFront($objUrl = null) {
+            $objUrl = is_object($objUrl) ? $objUrl : new Url();
             if (!self::isLogged(self::$loginFront)) {
-                $url = Url::currentPage() != "logout" ?
-                    self::$loginPageFront . "&" . self::$referrer . "=" .
-                        Url::currentPage() :
-                    self::$loginPageFront;
+                $url = $objUrl->currentPage != "logout" ?
+                    self::$loginPageFront . "/" . self::$referrer . "/" .
+                        $objUrl->currentPage . PAGE_EXTENSION :
+                    self::$loginPageFront . PAGE_EXTENSION;
                 Helper::redirect($url);
             }
         }
@@ -83,9 +85,10 @@
          * @param null $url
          */
         public static function loginFront($id = null, $url = null) {
-
             if (!empty($id)) {
-                $url = !empty($url) ? $url : self::$dashboardFront;
+                $url = !empty($url) ?
+                    $url :
+                    self::$dashboardFront . PAGE_EXTENSION;
                 $_SESSION[self::$loginFront] = $id;
                 $_SESSION[self::$validLogin] = 1;
                 Helper::redirect($url);
