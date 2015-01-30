@@ -5,11 +5,24 @@
      */
     class User extends Application {
 
+        // Url class instance
+        public $objUrl;
+
         // Users table name
         private $table = "clients";
 
         // User id
         public $id;
+
+        /**
+         * Constructor
+         *
+         * @param null $objUrl
+         */
+        public function __construct($objUrl = null) {
+            parent::__construct();
+            $this->objUrl = is_object($objUrl) ? $objUrl : new Url();
+        }
 
         /**
          * Check if the user exist
@@ -22,7 +35,8 @@
 
             $password = Login::stringToHash($password);
 
-            $sql = "SELECT * FROM `{$this->table}`
+            $sql = "SELECT *
+                    FROM `{$this->table}`
                     WHERE `email` = '" . $this->db->escape($email) . "'
                     AND `password` = '" . $this->db->escape($password) . "'
                     AND `active` = 1";
@@ -85,7 +99,8 @@
 
             if (!empty($hash)) {
 
-                $sql = "SELECT * FROM `{$this->table}`
+                $sql = "SELECT *
+                        FROM `{$this->table}`
                         WHERE `hash` = '" . $this->db->escape($hash) . "'";
 
                 return $this->db->fetchOne($sql);
@@ -124,9 +139,9 @@
 
             if (!empty($email)) {
 
-                $sql = "SELECT * FROM `{$this->table}`
-                        WHERE `email` = '" . $this->db->escape($email) . "'
-                        AND `active` = 1";
+                $sql = "SELECT *
+                        FROM `{$this->table}`
+                        WHERE `email` = '" . $this->db->escape($email) . "'";
 
                 return $this->db->fetchOne($sql);
             }
@@ -144,7 +159,8 @@
 
             if (!empty($id)) {
 
-                $sql = "SELECT * FROM `{$this->table}`
+                $sql = "SELECT *
+                        FROM `{$this->table}`
                         WHERE `id` = '" . $this->db->escape($id) . "'";
 
                 return $this->db->fetchOne($sql);
@@ -184,7 +200,8 @@
          */
         public function getUsers($search = null) {
 
-            $sql = "SELECT * FROM `{$this->table}`
+            $sql = "SELECT *
+                    FROM `{$this->table}`
                     WHERE `active` = 1";
 
             if (!empty($search)) {
