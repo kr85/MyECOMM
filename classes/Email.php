@@ -10,12 +10,18 @@
         // PHPMailer instance
         private $objMailer;
 
+        // Url class instance
+        public $objUrl;
+
         /**
          * Constructor
          *
+         * @param null $objUrl
          * @throws phpmailerException
          */
-        public function __construct() {
+        public function __construct($objUrl = null) {
+
+            $this->objUrl = is_object($objUrl) ? $objUrl : new Url();
 
             $this->objMailer = new PHPMailer();
             $this->objMailer->IsSMTP();
@@ -47,14 +53,19 @@
             if (!empty($case)) {
                 switch ($case) {
                     case 1:
-                        $link = "<a href=\"" . SITE_URL . "/?page=activate&code=";
-                        $link .= $parameters['hash'];
+                        $link = "<a href=\"";
+                        $link .= SITE_URL . $this->objUrl->href('activate', [
+                                    'code',
+                                    $parameters['hash']
+                                ]);
                         $link .= "\">";
-                        $link .= SITE_URL . "/?page=activate&code=";
-                        $link .= $parameters['hash'];
+                        $link .= SITE_URL . $this->objUrl->href('activate', [
+                                    'code',
+                                    $parameters['hash']
+                                ]);
                         $link .= "</a>";
                         $parameters['link'] = $link;
-                        $this->objMailer->Subject = "Activate your account";
+                        $this->objMailer->Subject = "Activate Your Account";
                         $this->objMailer->MsgHTML($this->fetchEmail(
                             $case,
                             $parameters)
