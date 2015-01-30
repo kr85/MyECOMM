@@ -2,6 +2,8 @@
 
     // Instantiate basket class
     $objBasket = new Basket();
+    // Instantiate url class
+    $objUrl = new Url();
 
 ?>
 
@@ -58,7 +60,7 @@
 </dl>
 <div class="dev br_td">&#160;</div>
 <p>
-    <a href="/?page=basket">View Basket</a> |
-    <a href="/?page=checkout">Checkout</a>
+    <a href="<?php echo $objUrl->href('basket'); ?>">View Basket</a> |
+    <a href="<?php echo $objUrl->href('checkout'); ?>">Checkout</a>
 </p>
 <div class="dev br_td">&#160;</div>
