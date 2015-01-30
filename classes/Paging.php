@@ -5,6 +5,9 @@
      */
     class Paging {
 
+        // Url instance
+        public $objUrl;
+
         // The actual records
         private $records;
 
@@ -32,16 +35,17 @@
         /**
          * Constructor
          *
-         * @param $row
+         * @param null $objUrl
+         * @param null $row
          * @param int $max
          */
-        public function __construct($row, $max = 10) {
-
+        public function __construct($objUrl = null, $row = null, $max = 10) {
+            $this->objUrl = is_object($objUrl) ? $objUrl : new Url();
             $this->records = $row;
             $this->numberOfRecords = count($this->records);
             $this->maxPerPage = $max;
-            $this->url = Url::getCurrentUrl(self::$key);
-            $current = Url::getParam(self::$key);
+            $this->url = $this->objUrl->getCurrent(self::$key);
+            $current = $this->objUrl->get(self::$key);
             $this->current = !empty($current) ? $current : 1;
             $this->getNumberOfPages();
             $this->getOffset();
@@ -52,7 +56,8 @@
          */
         private function getNumberOfPages() {
 
-            $this->numberOfPages = ceil($this->numberOfRecords / $this->maxPerPage);
+            $this->numberOfPages =
+                ceil($this->numberOfRecords / $this->maxPerPage);
         }
 
         /**
@@ -97,7 +102,8 @@
 
                 // First link
                 if ($this->current > 1) {
-                    $out[] = "<a href=\"" . $this->url . "\">First</a>";
+                    $out[] = "<a href=\"" . $this->url .
+                        PAGE_EXTENSION . "\">First</a>";
                 } else {
                     $out[] = "<span>First</span>";
                 }
@@ -108,8 +114,9 @@
                     // Previous page number
                     $id = ($this->current - 1);
                     $url = $id > 1 ?
-                        $this->url . "&amp;" . self::$key . "=" . $id :
-                        $this->url;
+                        $this->url . "/" . self::$key . "/" .
+                        $id . PAGE_EXTENSION:
+                        $this->url . PAGE_EXTENSION;
                     $out[] = "<a href=\"{$url}\">Previous</a>";
                 } else {
                     $out[] = "<span>Previous</span>";
@@ -120,14 +127,16 @@
 
                     // Next page number
                     $id = ($this->current + 1);
-                    $url = $this->url . "&amp;" . self::$key . "=" . $id;
+                    $url = $this->url . "/" . self::$key . "/" .
+                        $id . PAGE_EXTENSION;
                     $out[] = "<a href=\"{$url}\">Next</a>";
                 } else {
                     $out[] = "<span>Next</span>";
                 }
 
                 if ($this->current != $this->numberOfPages) {
-                    $url = $this->url . "&amp;" . self::$key . "=" . $this->numberOfPages;
+                    $url = $this->url . "/" . self::$key . "/" .
+                        $this->numberOfPages . PAGE_EXTENSION;
                     $out[] = "<a href=\"{$url}\">Last</a>";
                 } else {
                     $out[] = "<span>Last</span>";
@@ -147,6 +156,7 @@
         public function getPaging() {
 
             $links = $this->getLinks();
+
             if (!empty($links)) {
                 $out = "<ul class=\"paging\">";
                 $out .= $links;
