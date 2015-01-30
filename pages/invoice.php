@@ -1,8 +1,8 @@
 <?php
     // Restrict access only for logged in users
-    Login::restrictFront();
+    Login::restrictFront($this->objUrl);
 
-    $id = Url::getParam('id');
+    $id = $this->objUrl->get('id');
 
     if (!empty($id)) {
 
@@ -28,12 +28,12 @@
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
-                <title>Order Invoice</title>
+                <title>Invoice</title>
                 <link rel="stylesheet" href="/css/invoice.css" type="text/css"/>
             </head>
             <body>
             <div id="wrapper">
-                <h1>Order Invoice</h1>
+                <h1>Invoice</h1>
 
                 <div style="width: 50%; float: left;">
                     <p>
@@ -63,7 +63,10 @@
 
                 <div class="dev">&#160;</div>
 
-                <h3>Order Number <?php echo $id; ?></h3>
+                <h3>
+                    Order Number <?php echo $id; ?> /
+                    Date: <?php echo $order['date']; ?>
+                </h3>
 
                 <table cellpadding="0" cellspacing="0" border="0"
                        class="tbl_repeat">

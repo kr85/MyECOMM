@@ -1,10 +1,10 @@
 <?php
 
     // Restrict access only for logged in users
-    Login::restrictFront();
+    Login::restrictFront($this->objUrl);
     $objOrder = new Order();
     $orders = $objOrder->getClientOrders(Session::getSession(Login::$loginFront));
-    $objPaging = new Paging($orders, 5);
+    $objPaging = new Paging($this->objUrl, $orders, 5);
     $rows = $objPaging->getRecords();
     require_once('_header.php');
 ?>
@@ -47,7 +47,10 @@
                         <?php
                             if ($row['pp_status'] == 1) {
                                 ?>
-                                <a href="/?page=invoice&amp;id=<?php echo $row['id']; ?>"
+                                <a href="<?php echo $this->objUrl->href('invoice' , [
+                                    'id',
+                                    $row['id']
+                                ]); ?>"
                                    target="_blank">
                                     Invoice
                                 </a>
