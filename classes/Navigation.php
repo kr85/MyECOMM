@@ -23,12 +23,12 @@
          *
          * @param null $main
          * @param null $pairs
-         * @param null $single
+         * @param bool $single
          * @return bool|string
          */
-        public function active($main = null, $pairs = null, $single = null ) {
+        public function active($main = null, $pairs = null, $single = true ) {
             if (!empty($main)) {
-                if (!empty($pairs)) {
+                if (empty($pairs)) {
                     if ($main == $this->objUrl->main) {
                         return !$single ?
                             ' ' . $this->classActive :

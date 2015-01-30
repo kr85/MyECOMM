@@ -20,7 +20,7 @@ h4,h4 a{font-size:14px}
 #right{padding-left:30px;width:620px}
 #navigation,#basket_left{list-style:none;margin-bottom:14px}
 #navigation,#navigation li,#navigation li a{float:left;width:250px}
-#navigation li a.act{text-decoration:none;font-weight:700}
+#navigation li a.active{text-decoration:none;font-weight:700}
 .cl,.dev{height:0;font-size:0;line-height:0}
 .dev{height:14px}
 .br_td{border-top:dashed 1px #aaa}

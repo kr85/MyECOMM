@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8"/>
-    <title><?php echo $this->metaTitle; ?>/title>
+    <title><?php echo $this->metaTitle; ?></title>
     <meta name="description" content="<?php echo $this->metaDescription; ?>"/>
     <meta name="keywords" content="<?php echo $this->metaKeywords; ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,8 +70,7 @@
                                 ]);
                                 echo '"';
                                 echo $this->objNavigation->active('catalog', [
-                                    'category',
-                                    $c['identity']
+                                    'category' => $c['identity']
                                 ]);
                                 echo '>';
                                 echo Helper::encodeHTML($c['name']);
