@@ -1,6 +1,6 @@
 <?php
 
-    Login::restrictFront();
+    Login::restrictFront($this->objUrl);
 
     $token1 = mt_rand();
     $token2 = Login::stringToHash($token1);
@@ -119,7 +119,7 @@
                     </span>
                 </div>
                 <div class="sbm sbm_blue fl_l">
-                    <a href="/?page=basket" class="btn">
+                    <a href="<?php echo $this->objUrl->href('basket'); ?>" class="btn">
                         Continue Shopping
                     </a>
                 </div>
