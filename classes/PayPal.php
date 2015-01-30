@@ -59,21 +59,25 @@
         // Result of sending data back to PayPal after ipn
         private $ipnResult;
 
+        // Url object instance
+        public $objUrl;
+
         /**
          * Constructor
          *
+         * @param null $objUrl
          * @param string $cmd
          */
-        public function __construct($cmd = '_cart') {
-
+        public function __construct($objUrl = null, $cmd = '_cart') {
+            $this->objUrl = is_object($objUrl) ? $objUrl : new Url();
             $this->business = ProjectVariable::$PAYPAL_BUSINESS_ID;
             $this->url = $this->environment == 'sandbox' ?
                 $this->urlSandbox :
                 $this->urlProduction;
             $this->cmd = $cmd;
-            $this->returnUrl = SITE_URL . "/?page=return";
-            $this->cancelPaymentUrl = SITE_URL . "/?page=cancel";
-            $this->notifyUrl = SITE_URL . "/?page=ipn";
+            $this->returnUrl = SITE_URL . $this->objUrl->href('return');
+            $this->cancelPaymentUrl = SITE_URL . $this->objUrl->href('cancel');
+            $this->notifyUrl = SITE_URL . $this->objUrl->href('ipn');
         }
 
         /**
