@@ -11,7 +11,7 @@
         }
         Helper::redirect($url);
     } else {
-        $search = stripslashes(urlencode($this->objUrl->get('search')));
+        $search = stripslashes(urldecode($this->objUrl->get('search')));
         if (!empty($search)) {
             $products = $objCatalog->getAllProducts($search);
             $empty = 'There are no results matching your search criteria.';
