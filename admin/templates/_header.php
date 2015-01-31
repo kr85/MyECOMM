@@ -13,8 +13,8 @@
             <div id="header_in">
                 <h5>
                     <a href="<?php echo Login::isLogged(Login::$loginAdmin) ?
-                        "/admin/?page=products" :
-                        "/admin/" ?>">
+                        "/panel/products" :
+                        "/panel/" ?>">
                         Content Management System
                     </a>
                 </h5>
@@ -31,7 +31,7 @@
                                 );
                             ?>
                         </strong> |
-                        <a href="/admin/?page=logout">Log Out</a>
+                        <a href="/panel/logout">Log Out</a>
                     </div>
                 <?php
                     }
@@ -39,7 +39,7 @@
                     {
                 ?>
                     <div id="logged_as">
-                        <a href="/admin/">
+                        <a href="/panel/">
                             Log In
                         </a>
                     </div>;
@@ -56,42 +56,42 @@
                     <div class="dev br_td">&nbsp;</div>
                     <ul id="navigation">
                         <li>
-                            <a href="/admin/?page=products"
-                                <?php echo Helper::getActive([
-                                    'page' => 'products'
-                                ]); ?>>
+                            <a href="/panel/products"
+                                <?php echo $this->objNavigation->active(
+                                    'products'
+                                ); ?>>
                                 Products
                             </a>
                         </li>
                         <li>
-                            <a href="/admin/?page=categories"
-                                <?php echo Helper::getActive([
-                                    'page' => 'categories'
-                                ]); ?>>
+                            <a href="/panel/categories"
+                                <?php echo $this->objNavigation->active(
+                                    'categories'
+                                ); ?>>
                                 Categories
                             </a>
                         </li>
                         <li>
-                            <a href="/admin/?page=orders"
-                                <?php echo Helper::getActive([
-                                    'page' => 'orders'
-                                ]); ?>>
+                            <a href="/panel/orders"
+                                <?php echo $this->objNavigation->active(
+                                    'orders'
+                                ); ?>>
                                 Orders
                             </a>
                         </li>
                         <li>
-                            <a href="/admin/?page=clients"
-                                <?php echo Helper::getActive([
-                                    'page' => 'clients'
-                                ]); ?>>
+                            <a href="/panel/clients"
+                                <?php echo $this->objNavigation->active(
+                                    'clients'
+                                ); ?>>
                                 Clients
                             </a>
                         </li>
                         <li>
-                            <a href="/admin/?page=business"
-                                <?php echo Helper::getActive([
-                                    'page' => 'business'
-                                ]); ?>>
+                            <a href="/panel/business"
+                                <?php echo $this->objNavigation->active(
+                                    'business'
+                                ); ?>>
                                 Business
                             </a>
                         </li>

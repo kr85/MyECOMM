@@ -14,12 +14,14 @@
         ($objForm->getPost('login_email'),
             $objForm->getPost('login_password'))
         ) {
-            Login::loginAdmin($objAdmin->id, Url::getReferrerUrl());
+            Login::loginAdmin($objAdmin->id, $this->objUrl->href(
+                $this->objUrl->get(Login::$referrer))
+            );
         } else {
             $objValidation->addToErrors('login');
         }
     }
-    require_once('templates/_header.php'); ?>
+    require_once('_header.php'); ?>
 
     <h1>Log In</h1>
 
@@ -53,4 +55,4 @@
         </table>
     </form>
 
-<?php require_once('templates/_footer.php'); ?>
+<?php require_once('_footer.php'); ?>
