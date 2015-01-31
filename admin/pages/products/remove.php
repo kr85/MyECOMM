@@ -1,6 +1,6 @@
 <?php
 
-    $id = Url::getParam('id');
+    $id = $this->objUrl->get('id');
 
     if (!empty($id)) {
 
@@ -9,15 +9,15 @@
 
         if (!empty($product)) {
 
-            $yes = '/admin' . Url::getCurrentUrl() . '&amp;remove=1';
+            $yes = $this->objUrl->getCurrent() . '/remove/1';
             $no = 'javascript:history.go(-1)';
 
-            $remove = Url::getParam('remove');
+            $remove = $this->objUrl->get('remove');
 
             if (!empty($remove)) {
                 $objCatalog->removeProduct($id);
 
-                Helper::redirect('/admin' . Url::getCurrentUrl([
+                Helper::redirect($this->objUrl->get([
                         'action',
                         'id',
                         'remove',
@@ -27,17 +27,18 @@
                 );
             }
 
-            require_once('templates/_header.php'); ?>
+            require_once('_header.php'); ?>
 
         <h1>Products :: Remove</h1>
 
         <p>
             Are you sure you want to remove this product?<br/>
-            <a href="<?php echo $yes; ?>">Yes</a> | <a href="<?php echo $no; ?>">No</a>
+            <a href="<?php echo $yes; ?>">Yes</a> |
+            <a href="<?php echo $no; ?>">No</a>
         </p>
 
 <?php
-            require_once('templates/_footer.php');
+            require_once('_footer.php');
         }
     }
 ?>
