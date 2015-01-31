@@ -1,7 +1,7 @@
 <?php
-    $url = '/admin' . Url::getCurrentUrl(['action', 'id']);
+    $url = $this->objUrl->getCurrent(['action', 'id']);
 
-    require_once('templates/_header.php');
+    require_once('_header.php');
 ?>
 
     <h1>Products :: Edit</h1>
@@ -12,4 +12,4 @@
         </a>
     </p>
 
-<?php require_once('templates/_header.php'); ?>
+<?php require_once('_header.php'); ?>

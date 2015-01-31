@@ -239,11 +239,11 @@
                 $sql = "SELECT *
                         FROM `{$this->tableProducts}`
                         WHERE `identity` = '" . $this->db->escape($identity) . "'";
-                if (!empty($identity)) {
+                if (!empty($id)) {
                     $sql .= " AND `id` = '" . $this->db->escape($id) . "'";
                 }
-                $result = $this->db->fetchAll($sql);
-                return !empty($result) ? true : false;
+                $result = $this->db->fetchOne($sql);
+                return empty($result) ? true : false;
             }
             return false;
         }
