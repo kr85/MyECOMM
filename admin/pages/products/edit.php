@@ -37,48 +37,51 @@
                     'meta_keywords'
                 ];
 
-                if ($objValidation->isValid()) {
-                    $objValidation->post['identity'] = Helper::cleanString(
-                        $objValidation->post['identity']
-                    );
-                    $idd = 1;
-                    echo $objCatalog->isDuplicateProduct($objValidation->post['identity'], $idd);
-                    if ($objCatalog->isDuplicateProduct(
-                        $objValidation->post['identity'], $id)) {
+                $identity = Helper::cleanString($objForm->getPost('identity'));
+
+                // Check for duplicate product identity
+                if ($objCatalog->isDuplicateProduct(
+                    $objValidation->post['identity'], $id)) {
+                    if ($product['id'] != $id) {
                         $objValidation->addToErrors('duplicate_identity');
-                    } else {
-                        if ($objCatalog->updateProduct($objValidation->post, $id)) {
+                    }
+                }
 
-                            $objUpload = new Upload();
+                if ($objValidation->isValid()) {
+                    $objValidation->post['identity'] = $identity;
 
-                            if ($objUpload->upload(CATALOG_PATH)) {
+                    if ($objCatalog->updateProduct($objValidation->post, $id)) {
 
-                                if (is_file(CATALOG_PATH. DS. $product['image'])) {
-                                    unlink(CATALOG_PATH. DS. $product['image']);
-                                }
+                        $objUpload = new Upload();
 
-                                $objCatalog->updateProduct([
-                                    'image' => $objUpload->names[0]
-                                ], $id);
+                        if ($objUpload->upload(CATALOG_PATH)) {
 
-                                Helper::redirect($this->objUrl->getCurrent([
-                                        'action',
-                                        'id'
-                                    ]) . '/action/edited');
-                            } else {
-                                Helper::redirect($this->objUrl->getCurrent([
-                                        'action',
-                                        'id'
-                                    ]) . '/action/edited-no-upload');
+                            if (is_file(CATALOG_PATH. DS. $product['image'])) {
+                                unlink(CATALOG_PATH. DS. $product['image']);
                             }
+
+                            $objCatalog->updateProduct([
+                                'image' => $objUpload->names[0]
+                            ], $id);
+
+                            Helper::redirect($this->objUrl->getCurrent([
+                                    'action',
+                                    'id'
+                                ]) . '/action/edited');
                         } else {
                             Helper::redirect($this->objUrl->getCurrent([
                                     'action',
                                     'id'
-                                ]) . '/action/edited-failed'
-                            );
+                                ]) . '/action/edited-no-upload');
                         }
+                    } else {
+                        Helper::redirect($this->objUrl->getCurrent([
+                                'action',
+                                'id'
+                            ]) . '/action/edited-failed'
+                        );
                     }
+
                 }
             }
 

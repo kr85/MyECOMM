@@ -31,16 +31,16 @@
                 $name = $objForm->getPost('name');
                 $identity = Helper::cleanString($objForm->getPost('identity'));
 
-                // Check for duplicate name
+                // Check for duplicate category name
                 if ($objCatalog->duplicateCategory($name, $id)) {
-                    if ($objForm->getPost('id') == $id) {
+                    if ($category['id'] != $id) {
                         $objValidation->addToErrors('name_duplicate');
                     }
                 }
 
-                // Check for duplicate identity
+                // Check for duplicate category identity
                 if ($objCatalog->isDuplicateCategory($identity, $id)) {
-                    if ($objForm->getPost('id') == $id) {
+                    if ($category['id'] != $id) {
                         $objValidation->addToErrors('duplicate_identity');
                     }
                 }
