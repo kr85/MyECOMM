@@ -1,6 +1,6 @@
 <?php
 
-    $id = Url::getParam('id');
+    $id = $this->objUrl->get('id');
 
     if (!empty($id)) {
 
@@ -33,22 +33,22 @@
 
                 if ($objValidation->isValid()) {
                     if ($objOrder->updateOrder($id, $variables)) {
-                        Helper::redirect('/admin' . Url::getCurrentUrl([
+                        Helper::redirect($this->objUrl->getCurrent([
                                     'action',
-                                    'id']
-                            ) . '&action=edited'
+                                    'id'
+                                ]) . '/action/edited'
                         );
                     } else {
-                        Helper::redirect('/admin' . Url::getCurrentUrl([
+                        Helper::redirect($this->objUrl->getCurrent([
                                     'action',
-                                    'id']
-                            ) . '&action=edited-failed'
+                                    'id'
+                                ]) . '/action/edited-failed'
                         );
                     }
                 }
             }
 
-    require_once('templates/_header.php');
+    require_once('_header.php');
 ?>
             <h1>Orders :: View</h1>
 
@@ -141,7 +141,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>PP Status</th>
+                        <th>PayPal Status</th>
                         <td colspan="4">
                             <?php
                                  echo !empty($order['payment_status']) ?
@@ -184,16 +184,18 @@
                         <th>&nbsp;</th>
                         <td colspan="4">
                             <div class="sbm sbm_blue fl_r">
-                                <a href="<?php echo '/admin' .
-                                      Url::getCurrentUrl(['action']) .
-                                      '&action=invoice'; ?>"
+                                <a href="<?php echo $this->objUrl->getCurrent([
+                                        'action'
+                                    ]) . '/action/invoice'; ?>"
                                    class="btn" target="_blank">
                                     Invoice
                                 </a>
                             </div>
                             <div class="sbm sbm_blue fl_l mr_r4">
-                                <a href="<?php echo '/admin' .
-                                       Url::getCurrentUrl(['action', 'id']); ?>"
+                                <a href="<?php echo $this->objUrl->getCurrent([
+                                    'action',
+                                    'id'
+                                ]); ?>"
                                    class="btn">
                                     Go Back
                                 </a>
@@ -207,7 +209,7 @@
                 </table>
             </form>
 <?php
-            require_once('templates/_footer.php');
+            require_once('_footer.php');
         }
     }
 ?>
