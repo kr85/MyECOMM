@@ -7,7 +7,7 @@
 
     // Page extension
     defined("PAGE_EXTENSION")
-        || define("PAGE_EXTENSION", "");
+        || define("PAGE_EXTENSION", " ");
 
     // Site domain name with HTTP
     defined("SITE_URL")
