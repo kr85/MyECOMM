@@ -1,6 +1,6 @@
 <?php
 
-    $id = Url::getParam('id');
+    $id = $this->objUrl->get('id');
 
     if (!empty($id)) {
         $objCatalog = new Catalog();
@@ -11,33 +11,60 @@
             $objValidation = new Validation($objForm);
 
             if ($objForm->isPost('name')) {
-                $objValidation->expected = ['name'];
-                $objValidation->required = ['name'];
+
+                $objValidation->expected = [
+                    'name',
+                    'identity',
+                    'meta_title',
+                    'meta_description',
+                    'meta_keywords'
+                ];
+
+                $objValidation->required = [
+                    'name',
+                    'identity',
+                    'meta_title',
+                    'meta_description',
+                    'meta_keywords'
+                ];
 
                 $name = $objForm->getPost('name');
+                $identity = Helper::cleanString($objForm->getPost('identity'));
 
+                // Check for duplicate name
                 if ($objCatalog->duplicateCategory($name, $id)) {
-                    $objValidation->addToErrors('name_duplicate');
+                    if ($objForm->getPost('id') == $id) {
+                        $objValidation->addToErrors('name_duplicate');
+                    }
+                }
+
+                // Check for duplicate identity
+                if ($objCatalog->isDuplicateCategory($identity, $id)) {
+                    if ($objForm->getPost('id') == $id) {
+                        $objValidation->addToErrors('duplicate_identity');
+                    }
                 }
 
                 if ($objValidation->isValid()) {
-                    if ($objCatalog->updateCategory($name, $id)) {
-                        Helper::redirect('/admin' . Url::getCurrentUrl([
+                    $objValidation->post['identity'] = $identity;
+
+                    if ($objCatalog->updateCategory($objValidation->post, $id)) {
+                        Helper::redirect($this->objUrl->getCurrent([
                                     'action',
-                                    'id']
-                            ) . '&action=edited'
+                                    'id'
+                                ]) . '/action/edited'
                         );
                     } else {
-                        Helper::redirect('/admin' . Url::getCurrentUrl([
+                        Helper::redirect($this->objUrl->getCurrent([
                                     'action',
-                                    'id']
-                            ) . '&action=edited-failed'
+                                    'id'
+                                ]) . '/action/edited-failed'
                         );
                     }
                 }
             }
 
-    require_once('templates/_header.php');
+    require_once('_header.php');
 ?>
             <h1>Categories :: Edit</h1>
 
@@ -59,6 +86,59 @@
                         </td>
                     </tr>
                     <tr>
+                        <th><label for="identity">Identity: *</label></th>
+                        <td>
+                            <?php
+                                echo $objValidation->validate('identity');
+                                echo $objValidation->validate('duplicate_identity');
+                            ?>
+                            <input type="text" name="identity" id="identity"
+                                   value="<?php echo $objForm->stickyText(
+                                       'identity',
+                                       $category['identity']
+                                   ); ?>"
+                                   class="fld"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label for="meta_title">Meta Title: *</label></th>
+                        <td>
+                            <?php echo $objValidation->validate('meta_title'); ?>
+                            <input type="text" name="meta_title" id="meta_title"
+                                   value="<?php echo $objForm->stickyText(
+                                       'meta_title',
+                                       $category['meta_title']
+                                   ); ?>"
+                                   class="fld"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label for="meta_description">Meta Description: *</label></th>
+                        <td>
+                            <?php echo $objValidation->validate('meta_description'); ?>
+                            <textarea name="meta_description" id="meta_description"
+                                      cols="" rows="" class="tar_fixed"><?php
+                                    echo $objForm->stickyText(
+                                        'meta_description',
+                                        $category['meta_description']
+                                    );
+                                ?></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label for="meta_keywords">Meta Keywords: *</label></th>
+                        <td>
+                            <?php echo $objValidation->validate('meta_keywords'); ?>
+                            <textarea name="meta_keywords" id="meta_keywords"
+                                      cols="" rows="" class="tar_fixed"><?php
+                                    echo $objForm->stickyText(
+                                        'meta_keywords',
+                                        $category['meta_keywords']
+                                    );
+                                ?></textarea>
+                        </td>
+                    </tr>
+                    <tr>
                         <th>&nbsp;</th>
                         <td>
                             <label for="btn" class="sbm sbm_blue fl_l">
@@ -70,7 +150,7 @@
                 </table>
             </form>
 <?php
-            require_once('templates/_footer.php');
+            require_once('_footer.php');
         }
     }
 ?>

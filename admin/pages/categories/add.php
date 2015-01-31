@@ -5,34 +5,56 @@
 
     if ($objForm->isPost('name')) {
 
-        $objValidation->expected = ['name'];
-        $objValidation->required = ['name'];
+        $objValidation->expected = [
+            'name',
+            'identity',
+            'meta_title',
+            'meta_description',
+            'meta_keywords'
+        ];
+
+        $objValidation->required = [
+            'name',
+            'identity',
+            'meta_title',
+            'meta_description',
+            'meta_keywords'
+        ];
 
         $objCatalog = new Catalog();
         $name = $objForm->getPost('name');
+        $identity = Helper::cleanString($objForm->getPost('identity'));
 
+        // Check for duplicate name
         if ($objCatalog->duplicateCategory($name)) {
             $objValidation->addToErrors('name_duplicate');
         }
 
+        // Check for duplicate identity
+        if ($objCatalog->isDuplicateCategory($identity)) {
+            $objValidation->addToErrors('duplicate_identity');
+        }
+
         if ($objValidation->isValid()) {
-            if ($objCatalog->addCategory($name)) {
-                Helper::redirect('/admin' . Url::getCurrentUrl([
+            $objValidation->post['identity'] = $identity;
+
+            if ($objCatalog->addCategory($objValidation->post)) {
+                Helper::redirect($this->objUrl->getCurrent([
                             'action',
-                            'id']
-                    ) . '&action=added'
+                            'id'
+                        ]) . '/action/added'
                 );
             } else {
-                Helper::redirect('/admin' . Url::getCurrentUrl([
+                Helper::redirect($this->objUrl->getCurrent([
                             'action',
-                            'id']
-                    ) . '&action=added-failed'
+                            'id'
+                        ]) . 'action/added-failed'
                 );
             }
         }
     }
 
-    require_once('templates/_header.php');
+    require_once('_header.php');
 ?>
 
     <h1>Categories :: Add</h1>
@@ -52,6 +74,47 @@
                 </td>
             </tr>
             <tr>
+                <th><label for="identity">Identity: *</label></th>
+                <td>
+                    <?php
+                        echo $objValidation->validate('identity');
+                        echo $objValidation->validate('duplicate_identity');
+                    ?>
+                    <input type="text" name="identity" id="identity"
+                           value="<?php echo $objForm->stickyText('identity'); ?>"
+                           class="fld"/>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="meta_title">Meta Title: *</label></th>
+                <td>
+                    <?php echo $objValidation->validate('meta_title'); ?>
+                    <input type="text" name="meta_title" id="meta_title"
+                           value="<?php echo $objForm->stickyText('meta_title'); ?>"
+                           class="fld"/>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="meta_description">Meta Description: *</label></th>
+                <td>
+                    <?php echo $objValidation->validate('meta_description'); ?>
+                    <textarea name="meta_description" id="meta_description"
+                              cols="" rows="" class="tar_fixed"><?php
+                            echo $objForm->stickyText('meta_description');
+                        ?></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="meta_keywords">Meta Keywords: *</label></th>
+                <td>
+                    <?php echo $objValidation->validate('meta_keywords'); ?>
+                    <textarea name="meta_keywords" id="meta_keywords"
+                              cols="" rows="" class="tar_fixed"><?php
+                            echo $objForm->stickyText('meta_keywords');
+                        ?></textarea>
+                </td>
+            </tr>
+            <tr>
                 <th>&nbsp;</th>
                 <td>
                     <label for="btn" class="sbm sbm_blue fl_l">
@@ -62,4 +125,4 @@
         </table>
     </form>
 
-<?php require_once('templates/_footer.php'); ?>
+<?php require_once('_footer.php'); ?>

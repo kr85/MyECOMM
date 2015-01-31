@@ -155,10 +155,11 @@
                 $sql = "SELECT *
                         FROM `{$this->tableCategories}`
                         WHERE `name` = '" . $this->db->escape($name) . "'";
-                $sql .= !empty($id) ?
-                    " AND `id` = '" . $this->db->escape($id) . "'" :
-                    null;
-                return $this->db->fetchOne($sql);
+                if (!empty($id)) {
+                    $sql .= " AND `id` = '" . $this->db->escape($id) . "'";
+                }
+                $result = $this->db->fetchOne($sql);
+                return !empty($result) ? true : false;
             }
             return false;
         }
@@ -175,10 +176,10 @@
                 $sql = "SELECT *
                         FROM `{$this->tableCategories}`
                         WHERE `identity` = '" . $this->db->escape($identity) . "'";
-                if (!empty($identity)) {
+                if (!empty($id)) {
                     $sql .= " AND `id` = '" . $this->db->escape($id) . "'";
                 }
-                $result = $this->db->fetchAll($sql);
+                $result = $this->db->fetchOne($sql);
                 return !empty($result) ? true : false;
             }
             return false;
@@ -243,7 +244,7 @@
                     $sql .= " AND `id` = '" . $this->db->escape($id) . "'";
                 }
                 $result = $this->db->fetchOne($sql);
-                return empty($result) ? true : false;
+                return !empty($result) ? true : false;
             }
             return false;
         }

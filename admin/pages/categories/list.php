@@ -3,16 +3,18 @@
     $objCatalog = new Catalog();
     $categories = $objCatalog->getCategories();
 
-    $objPaging = new Paging($categories, 5);
+    $objPaging = new Paging($this->objUrl, $categories, 5);
     $rows = $objPaging->getRecords();
-    $objPaging->url = '/admin' . $objPaging->url;
 
-    require_once('templates/_header.php'); ?>
+    require_once('_header.php'); ?>
 
     <h1>Categories</h1>
 
     <p>
-        <a href="/admin/?page=categories&amp;action=add">
+        <a href="<?php echo $this->objUrl->getCurrent([
+                'action',
+                'id'
+            ]) . '/action/add'; ?>">
             New Category
         </a>
     </p>
@@ -29,14 +31,18 @@
             <tr>
                 <td><?php echo Helper::encodeHTML($category['name']); ?></td>
                 <td class="ta_r">
-                    <a href="/admin/?page=categories&amp;action=remove&amp;id=<?php
-                        echo $category['id']; ?>">
+                    <a href="<?php echo $this->objUrl->getCurrent([
+                            'action',
+                            'id'
+                        ]) . '/action/remove/id/' . $category['id']; ?>">
                         Remove
                     </a>
                 </td>
                 <td class="ta_r">
-                    <a href="/admin/?page=categories&amp;action=edit&amp;id=<?php
-                        echo $category['id']; ?>">
+                    <a href="<?php echo $this->objUrl->getCurrent([
+                            'action',
+                            'id'
+                        ]) . '/action/edit/id/' . $category['id']; ?>">
                         Edit
                     </a>
                 </td>
@@ -50,4 +56,4 @@
     <p>There are currently no categories created.</p>
 <?php } ?>
 
-<?php require_once('templates/_footer.php'); ?>
+<?php require_once('_footer.php'); ?>

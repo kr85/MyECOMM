@@ -1,6 +1,6 @@
 <?php
 
-    $id = Url::getParam('id');
+    $id = $this->objUrl->get('id');
 
     if (!empty($id)) {
 
@@ -9,35 +9,36 @@
 
         if (!empty($category)) {
 
-            $yes = '/admin' . Url::getCurrentUrl() . '&amp;remove=1';
+            $yes = $this->objUrl->getCurrent() . '/remove/1';
             $no = 'javascript:history.go(-1)';
 
-            $remove = Url::getParam('remove');
+            $remove = $this->objUrl->get('remove');
 
-            if (!empty($remove)) {
+            if (!empty($remove) && $category['products_count'] == 0) {
                 $objCatalog->removeCategory($id);
 
-                Helper::redirect('/admin' . Url::getCurrentUrl([
+                Helper::redirect($this->objUrl->getCurrent([
                         'action',
                         'id',
                         'remove',
-                        'srch',
+                        'search',
                         Paging::$key
                     ])
                 );
             }
 
-            require_once('templates/_header.php'); ?>
+            require_once('_header.php'); ?>
 
         <h1>Categories :: Remove</h1>
 
         <p>
             Are you sure you want to remove this category?<br/>
-            <a href="<?php echo $yes; ?>">Yes</a> | <a href="<?php echo $no; ?>">No</a>
+            <a href="<?php echo $yes; ?>">Yes</a> |
+            <a href="<?php echo $no; ?>">No</a>
         </p>
 
 <?php
-            require_once('templates/_footer.php');
+            require_once('_footer.php');
         }
     }
 ?>
