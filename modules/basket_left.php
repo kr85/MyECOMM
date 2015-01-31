@@ -23,9 +23,9 @@
         Subtotal:
     </dt>
     <dd class="bl_st">
-        <?php echo Catalog::$currency; ?>
         <span>
             <?php
+                echo Catalog::$currency;
                 echo number_format($objBasket->subTotal, 2);
             ?>
         </span>
@@ -39,9 +39,9 @@
         </span>%):
     </dt>
     <dd class="bl_vat">
-        <?php echo Catalog::$currency; ?>
         <span>
             <?php
+                echo Catalog::$currency;
                 echo number_format($objBasket->tax, 2);
             ?>
         </span>
@@ -50,9 +50,9 @@
         Total:
     </dt>
     <dd class="bl_total">
-        <?php echo Catalog::$currency; ?>
         <span>
             <?php
+                echo Catalog::$currency;
                 echo number_format($objBasket->total, 2);
             ?>
         </span>
