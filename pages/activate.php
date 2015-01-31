@@ -1,6 +1,6 @@
 <?php
 
-    $code = Url::getParam('code');
+    $code = $this->objUrl->get('code');
 
     if (!empty($code)) {
 
@@ -27,12 +27,12 @@
             }
         }
         else {
-            Helper::redirect("/?page=error");
+            Helper::redirect($this->objUrl->href('error'));
         }
         require_once("_header.php");
         echo $message;
         require_once("_footer.php");
     }
     else {
-        Helper::redirect("/?page=error");
+        Helper::redirect($this->objUrl->href('error'));
     }
