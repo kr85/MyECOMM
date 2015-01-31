@@ -17,7 +17,7 @@
             if (!empty($remove)) {
                 $objCatalog->removeProduct($id);
 
-                Helper::redirect($this->objUrl->get([
+                Helper::redirect($this->objUrl->getCurrent([
                         'action',
                         'id',
                         'remove',
