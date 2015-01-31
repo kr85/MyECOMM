@@ -3,7 +3,7 @@
     // Restrict access only for logged in admins
     Login::restrictAdmin();
 
-    $action = Url::getParam('action');
+    $action = $this->objUrl->get('action');
 
     switch ($action) {
         case 'add':

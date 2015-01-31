@@ -12,49 +12,62 @@
             'category',
             'name',
             'description',
-            'price'
+            'price',
+            'identity',
+            'meta_title',
+            'meta_description',
+            'meta_keywords'
         ];
 
         $objValidation->required = [
             'category',
             'name',
             'description',
-            'price'
+            'price',
+            'identity',
+            'meta_title',
+            'meta_description',
+            'meta_keywords'
         ];
 
         if ($objValidation->isValid()) {
-            if ($objCatalog->addProduct($objValidation->post)) {
+            $objValidation->post['identity'] = Helper::cleanString(
+                $objValidation->post['identity']
+            );
 
-                $objUpload = new Upload();
-
-                if ($objUpload->upload(CATALOG_PATH)) {
-                    $objCatalog->updateProduct([
-                        'image' => $objUpload->names[0]
-                    ], $objCatalog->id);
-
-                    Helper::redirect('/admin' . Url::getCurrentUrl([
-                            'action',
-                            'id']
-                        ) . '&action=added'
-                    );
-                } else {
-                    Helper::redirect('/admin' . Url::getCurrentUrl([
-                                'action',
-                                'id']
-                        ) . '&action=added-no-upload'
-                    );
-                }
+            if ($objCatalog->isDuplicateProduct($objValidation->post['identity'])) {
+                $objValidation->addToErrors('duplicate_identity');
             } else {
-                Helper::redirect('/admin' . Url::getCurrentUrl([
+                if ($objCatalog->addProduct($objValidation->post)) {
+
+                    $objUpload = new Upload();
+
+                    if ($objUpload->upload(CATALOG_PATH)) {
+                        $objCatalog->updateProduct([
+                            'image' => $objUpload->names[0]
+                        ], $objCatalog->id);
+
+                        Helper::redirect($this->objUrl->getCurrent([
+                                'action',
+                                'id'
+                            ]) . '/action/added');
+                    } else {
+                        Helper::redirect($this->objUrl->getCurrent([
+                                'action',
+                                'id'
+                            ]) . '/action/added-no-upload');
+                    }
+                } else {
+                    Helper::redirect($this->objUrl->getCurrent([
                             'action',
-                            'id']
-                    ) . '&action=added-failed'
-                );
+                            'id'
+                        ]) . '/action/added-failed');
+                }
             }
         }
     }
 
-    require_once('templates/_header.php');
+    require_once('_header.php');
 ?>
 
     <h1>Products :: Add</h1>
@@ -109,6 +122,43 @@
                 </td>
             </tr>
             <tr>
+                <th><label for="identity">Identity: *</label></th>
+                <td>
+                    <?php echo $objValidation->validate('identity'); ?>
+                    <?php echo $objValidation->validate('duplicate_identity'); ?>
+                    <input type="text" name="identity" id="identity"
+                           value="<?php echo $objForm->stickyText('identity'); ?>"
+                           class="fld"/>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="meta_title">Meta Title: *</label></th>
+                <td>
+                    <?php echo $objValidation->validate('meta_title'); ?>
+                    <input type="text" name="meta_title" id="meta_title"
+                           value="<?php echo $objForm->stickyText('meta_title'); ?>"
+                           class="fld"/>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="meta_description">Meta Description: *</label></th>
+                <td>
+                    <?php echo $objValidation->validate('meta_description'); ?>
+                    <textarea name="meta_description" id="meta_description"
+                        cols="" rows="" class="tar_fixed"><?php
+                        echo $objForm->stickyText('meta_description'); ?></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="meta_keywords">Meta Keywords: *</label></th>
+                <td>
+                    <?php echo $objValidation->validate('meta_keywords'); ?>
+                    <textarea name="meta_keywords" id="meta_keywords"
+                        cols="" rows="" class="tar_fixed"><?php
+                        echo $objForm->stickyText('meta_keywords'); ?></textarea>
+                </td>
+            </tr>
+            <tr>
                 <th><label for="image">Image:</label></th>
                 <td>
                     <?php echo $objValidation->validate('image'); ?>
@@ -126,4 +176,4 @@
         </table>
     </form>
 
-<?php require_once('templates/_footer.php'); ?>
+<?php require_once('_footer.php'); ?>
