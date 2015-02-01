@@ -1,6 +1,6 @@
 <?php
 
-    $id = Url::getParam('id');
+    $id = $this->objUrl->get('id');
 
     if (!empty($id)) {
 
@@ -61,20 +61,20 @@
                 if ($objValidation->isValid()) {
 
                     if ($objUser->updateUser($objValidation->post, $user['id'])) {
-                        Helper::redirect('/admin' . Url::getCurrentUrl([
+                        Helper::redirect($this->objUrl->getCurrent([
                                 'action',
                                 'id'
-                            ]) . '&action=edited');
+                            ]) . '/action/edited');
                     }
                     else {
-                        Helper::redirect('/admin' . Url::getCurrentUrl([
+                        Helper::redirect($this->objUrl->getCurrent([
                                 'action',
                                 'id'
-                            ]) . '&action=edited-failed');
+                            ]) . '/action/edited-failed');
                     }
                 }
             }
-            require_once('templates/_header.php');
+            require_once('_header.php');
 
             ?>
 
@@ -200,7 +200,7 @@
             </form>
 
             <?php
-            require_once('templates/_footer.php');
+            require_once('_footer.php');
         }
     }
 ?>

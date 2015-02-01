@@ -1,6 +1,6 @@
 <?php
 
-    $id = Url::getParam('id');
+    $id = $this->objUrl->get('id');
 
     if (!empty($id)) {
 
@@ -13,25 +13,25 @@
             $orders = $objOrder->getClientOrders($id);
 
             if (empty($orders)) {
-                $yes = '/admin' . Url::getCurrentUrl() . '&amp;remove=1';
+                $yes = $this->objUrl->getCurrent() . '/remove/1';
                 $no = 'javascript:history.go(-1)';
 
-                $remove = Url::getParam('remove');
+                $remove = $this->objUrl->get('remove');
 
                 if (!empty($remove)) {
                     $objUser->removeUser($id);
 
-                    Helper::redirect('/admin' . Url::getCurrentUrl([
+                    Helper::redirect($this->objUrl->getCurrent([
                             'action',
                             'id',
                             'remove',
-                            'srch',
+                            'search',
                             Paging::$key
                         ])
                     );
                 }
 
-                require_once('templates/_header.php'); ?>
+                require_once('_header.php'); ?>
 
                 <h1>Clients :: Remove</h1>
 
@@ -44,7 +44,7 @@
                 </p>
 
                 <?php
-                require_once('templates/_footer.php');
+                require_once('_footer.php');
             }
         }
     }
