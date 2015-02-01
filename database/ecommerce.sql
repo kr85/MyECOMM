@@ -530,6 +530,106 @@ INSERT INTO `statuses` VALUES (3, 'Dispatched');
 INSERT INTO `statuses` VALUES (4, 'Cancelled');
 
 --
+-- Table structure for table `shipping_type`
+--
+
+CREATE TABLE `shipping_type` (
+  `id`      INT(11)      NOT NULL AUTO_INCREMENT,
+  `name`    VARCHAR(255) NOT NULL,
+  `order`   INT(11)      NOT NULL DEFAULT '0',
+  `local`   TINYINT(1)   NOT NULL DEFAULT '0',
+  `default` TINYINT(1)   NOT NULL DEFAULT '0',
+  `active`  TINYINT(1)   NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8
+  AUTO_INCREMENT = 1;
+
+--
+-- Dumping data for table `shipping_type`
+--
+INSERT INTO `shipping_type` VALUES (1, 'Next Day', 1, 1, 0, 1);
+INSERT INTO `shipping_type` VALUES (2, 'Speedy 1-2 Days', 2, 1, 0, 1);
+INSERT INTO `shipping_type` VALUES (3, 'Standard 3-5 Days', 3, 1, 1, 1);
+INSERT INTO `shipping_type` VALUES (4, 'Economy 5-7 Days', 4, 1, 0, 1);
+INSERT INTO `shipping_type` VALUES (5, 'Standard International', 2, 0, 0, 1);
+INSERT INTO `shipping_type` VALUES (6, 'Express International', 1, 0, 1, 1);
+
+--
+-- Table structure for table `zones`
+--
+
+CREATE TABLE `zones` (
+  `id`   INT(11)     NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8
+  AUTO_INCREMENT = 1;
+
+--
+-- Dumping data for table `zones`
+--
+INSERT INTO `zones` VALUES (1, 'Local');
+INSERT INTO `zones` VALUES (2, 'Zone 1');
+INSERT INTO `zones` VALUES (3, 'Zone 2');
+
+--
+-- Table structure for table `zones_country_codes`
+--
+
+CREATE TABLE `zones_country_codes` (
+  `id`           INT(11)    NOT NULL AUTO_INCREMENT,
+  `zone`         INT(11)    NOT NULL DEFAULT '0',
+  `country_code` VARCHAR(3) NOT NULL,
+  PRIMARY KEY (`id`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8
+  AUTO_INCREMENT = 1;
+
+--
+-- Constraints for table `zones_country_codes`
+--
+ALTER TABLE `zones_country_codes`
+ADD CONSTRAINT `zones_country_codes_ibfk_1` FOREIGN KEY (`zone`) REFERENCES `zones` (`id`)
+  ON DELETE RESTRICT
+  ON UPDATE CASCADE;
+
+--
+-- Table structure for table `shipping`
+--
+
+CREATE TABLE `shipping` (
+  `id`      INT(11)       NOT NULL  AUTO_INCREMENT,
+  `type`    INT(11)       NOT NULL  DEFAULT '0',
+  `zone`    INT(11)       NOT NULL  DEFAULT '0',
+  `country` INT(11)       NOT NULL  DEFAULT '0',
+  `weight`  DECIMAL(8, 2) NOT NULL  DEFAULT '0.00',
+  `cost`    DECIMAL(8, 2) NOT NULL  DEFAULT '0.00',
+  PRIMARY KEY (`id`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8
+  AUTO_INCREMENT = 1;
+
+--
+-- Constraints for table `shipping`
+--
+ALTER TABLE `shipping`
+ADD CONSTRAINT `shipping_ibfk_1` FOREIGN KEY (`type`) REFERENCES `shipping_type` (`id`)
+  ON DELETE RESTRICT
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `shipping_ibfk_2` FOREIGN KEY (`zone`) REFERENCES `zones` (`id`)
+  ON DELETE RESTRICT
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `shipping_ibfk_3` FOREIGN KEY (`country`) REFERENCES `countries` (`id`)
+  ON DELETE RESTRICT
+  ON UPDATE CASCADE;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -608,3 +708,25 @@ UPDATE `products` SET `identity` = 'spring-web-flow-2-dev' WHERE `id` = 3;
 UPDATE `products` SET `identity` = 'autobiography-benjamin-franklin' WHERE `id` = 4;
 UPDATE `products` SET `identity` = 'rocky-marciano-biography' WHERE `id` = 5;
 UPDATE `products` SET `identity` = 'greatest-muhammad-ali' WHERE `id` = 6;
+
+--
+-- Dumping data for table `shipping`
+--
+INSERT INTO `shipping` VALUES (1, 1, 1, 230, 10.00, 6.50);
+INSERT INTO `shipping` VALUES (2, 3, 1, 230, 10.00, 3.50);
+INSERT INTO `shipping` VALUES (3, 4, 1, 230, 10.00, 2.00);
+INSERT INTO `shipping` VALUES (4, 1, 2, 230, 10.00, 9.50);
+INSERT INTO `shipping` VALUES (5, 3, 2, 230, 10.00, 5.50);
+INSERT INTO `shipping` VALUES (6, 4, 2, 230, 10.00, 5.00);
+INSERT INTO `shipping` VALUES (7, 1, 3, 230, 10.00, 12.50);
+INSERT INTO `shipping` VALUES (8, 3, 3, 230, 10.00, 9.50);
+INSERT INTO `shipping` VALUES (9, 4, 3, 230, 10.00, 8.00);
+
+--
+-- Dumping data for table `zones_country_codes`
+--
+INSERT INTO `zones_country_codes` VALUES (1, 1, 'US');
+INSERT INTO `zones_country_codes` VALUES (2, 2, 'CA');
+INSERT INTO `zones_country_codes` VALUES (3, 2, 'MX');
+INSERT INTO `zones_country_codes` VALUES (4, 3, 'BG');
+INSERT INTO `zones_country_codes` VALUES (5, 3, 'PL');
