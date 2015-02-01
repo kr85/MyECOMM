@@ -160,6 +160,18 @@ var basketObject = {
                 }
             });
         });
+    },
+    shipping: function(thisIdentity) {
+        $(document).on('change', thisIdentity, function(e) {
+            var thisOption = $(this).val();
+            $.getJSON('/modules/summary_update.php?shipping=' + thisOption, function(data) {
+                if (data && !data.error) {
+                    $('#basket_subtotal').html(data.totals.basketSubtotal);
+                    $('#basket_tax').html(data.totals.basketTax);
+                    $('#basket_total').html(data.totals.basketTotal);
+                }
+            });
+        });
     }
 };
 
