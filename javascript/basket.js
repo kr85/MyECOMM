@@ -1,7 +1,7 @@
 var basketObject = {
-    addToBasket: function(o) {
-        o.live('click', function() {
-            event.preventDefault();
+    addToBasket: function(thisIdentity) {
+        $(document).on('click', thisIdentity, function(e) {
+            e.preventDefault();
 
             var trigger = $(this);
             var param = trigger.attr("rel");
@@ -31,7 +31,6 @@ var basketObject = {
                     alert("An error has occurred.");
                 }
             });
-            return false;
         });
     },
     refreshMainBasket: function() {
@@ -60,29 +59,27 @@ var basketObject = {
             }
         });
     },
-    removeFromBasket: function(event) {
-        event.preventDefault();
-
-        var item = $(this).attr('rel');
-
-        $.ajax({
-            type: 'POST',
-            url: '/modules/basket_remove.php',
-            dataType: 'html',
-            data: ({ id: item }),
-            success: function() {
-                basketObject.refreshSmallBasket();
-                basketObject.refreshMainBasket();
-            },
-            error: function() {
-                alert("An error has occurred.");
-            }
+    removeFromBasket: function(thisIdentity) {
+        $(document).on('click', thisIdentity, function(e) {
+            e.preventDefault();
+            var item = $(this).attr('rel');
+            $.ajax({
+                type: 'POST',
+                url: '/modules/basket_remove.php',
+                dataType: 'html',
+                data: ({ id: item }),
+                success: function() {
+                    basketObject.refreshSmallBasket();
+                    basketObject.refreshMainBasket();
+                },
+                error: function() {
+                    alert("An error has occurred.");
+                }
+            });
         });
-
-        return false;
     },
     updateBasket: function() {
-        jQuery.each($('#frm_basket :input'), function() {
+        $.each($('#frm_basket :input'), function() {
             var sid = $(this).attr('id').split('-');
             var value = $(this).val();
 
@@ -100,75 +97,79 @@ var basketObject = {
             });
         });
     },
-    updateBasketKeyPres: function(o) {
-        o.live('keypress', function(e) {
+    updateBasketKeyPres: function(thisIdentity) {
+        $(document).on('keypress', thisIdentity, function(e) {
             var code = e.keyCode ? e.keyCode : e.which;
             if (code == 13) {
+                e.preventDefault();
+                e.stopPropagation();
                 basketObject.updateBasket();
             }
         });
     },
-    updateBasketButton: function(o) {
-        o.live('click', function(e) {
+    updateBasketButton: function(thisIdentity) {
+        $(document).on('click', thisIdentity, function(e) {
+            e.preventDefault();
             basketObject.updateBasket();
-            return false;
         });
     },
-    loadingPayPal: function(o) {
-        o.live('click', function() {
-            var token = $(this).attr('id');
-            var image = "<div style=\"text-align: center;\">";
-            image = image + "<img src=\"/images/loading.gif\"";
-            image = image + " alt=\"Proceeding to PayPal\" />";
-            image = image + "<br />Please wait while we are redirecting you to PayPal...";
-            image = image + "</div><div id=\"frm_pp\"></div>";
-
-            $('#main_basket').fadeOut(200, function() {
-                $(this).html(image).fadeIn(200, function() {
-                    basketObject.sendToPayPal(token);
+    loadingPayPal: function(thisIdentity) {
+        $(document).on('click', thisIdentity, function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var thisShippingOption = $('input[name="shipping"]:checked');
+            if (thisShippingOption.length > 0) {
+                var token = $(this).attr('id');
+                var image = "<div style=\"text-align: center;\">";
+                image = image + "<img src=\"/images/loading.gif\"";
+                image = image + " alt=\"Proceeding to PayPal\" />";
+                image = image + "<br />Please wait while we are redirecting you to PayPal...";
+                image = image + "</div><div id=\"frm_pp\"></div>";
+                $('#main_basket').fadeOut(200, function() {
+                    $(this).html(image).fadeIn(200, function() {
+                        basketObject.sendToPayPal(token);
+                    });
                 });
-            });
-
-            return false;
-        });
-    },
-    sendToPayPal: function(token) {
-        $.ajax({
-            type: 'POST',
-            url: '/modules/paypal.php',
-            data: ({ token: token }),
-            dataType: 'html',
-            success: function(data) {
-                $('#frm_pp').html(data);
-                $('#frm_paypal').submit();
-            },
-            error: function() {
-                alert('An error has occurred.');
+            } else {
+                systemObject.topValidation('Please select the shipping option.');
             }
         });
     },
-    emailInactive: function(o) {
-        o.live('click', function() {
+    sendToPayPal: function(token) {
+        $.post('/modules/paypal.php', { token: token }, function(data) {
+            if (data && !data.error) {
+                $('#frm_pp').html(data.form);
+                $('#frm_paypal').submit();
+            } else {
+                systemObject.topValidation(data.message);
+                var thisTimeout = setTimeout(function() {
+                    window.location.reload();
+                }, 5000);
+            }
+        }, 'json');
+    },
+    emailInactive: function(thisIdentity) {
+        $(document).on('click', thisIdentity, function(e) {
+            e.preventDefault();
             var thisId = $(this).attr('data-id');
-            jQuery.getJSON('/modules/resend.php?id=' + thisId, function(data) {
+            $.getJSON('/modules/resend.php?id=' + thisId, function(data) {
                 if (!data.error) {
                     location.href = '/resent'
                 } else {
                     location.href = '/resent-failed';
                 }
             });
-            return false;
         });
     }
 };
 
 $(document).ready(function() {
 
-    basketObject.addToBasket($('.add_to_basket'));
-    basketObject.updateBasketKeyPres($('.fld_qty'));
-    basketObject.updateBasketButton($('.update_basket'));
-    basketObject.removeFromBasket($('.remove_basket'));
-    basketObject.loadingPayPal($('.paypal'));
-    basketObject.emailInactive($('#emailInactive'));
+    basketObject.addToBasket('.add_to_basket');
+    basketObject.updateBasketKeyPres('.fld_qty');
+    basketObject.updateBasketButton('.update_basket');
+    basketObject.removeFromBasket('.remove_basket');
+    basketObject.loadingPayPal('.paypal');
+    basketObject.emailInactive('#emailInactive');
 
 });
