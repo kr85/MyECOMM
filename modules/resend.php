@@ -4,7 +4,12 @@
 
     // Instantiate the url class and get the id from the url
     $objUrl = new Url();
-    $id = $objUrl->getRaw('id');
+    $id = 0;
+    if (isset($_POST['id'])) {
+        $id = $_POST['id'];
+    } else {
+        $id = $objUrl->getRaw('id');
+    }
 
     // Check if the id is empty
     if (!empty($id)) {

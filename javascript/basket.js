@@ -152,11 +152,20 @@ var basketObject = {
         $(document).on('click', thisIdentity, function(e) {
             e.preventDefault();
             var thisId = $(this).attr('data-id');
-            $.getJSON('/modules/resend.php?id=' + thisId, function(data) {
-                if (!data.error) {
-                    location.href = '/resent'
-                } else {
-                    location.href = '/resent-failed';
+            $.ajax({
+                type: 'POST',
+                url: '/modules/resend.php',
+                dataType: 'json',
+                data: ({ id: thisId }),
+                success: function(data) {
+                    if (!data.error) {
+                        location.href = '/resent'
+                    } else {
+                        location.href = '/resent-failed';
+                    }
+                },
+                error: function() {
+                    alert('An error has occurred.');
                 }
             });
         });
@@ -182,6 +191,6 @@ $(document).ready(function() {
     basketObject.updateBasketButton('.update_basket');
     basketObject.removeFromBasket('.remove_basket');
     basketObject.loadingPayPal('.paypal');
-    basketObject.emailInactive('#emailInactive');
+    basketObject.emailInactive('#email_inactive');
 
 });

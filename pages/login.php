@@ -87,7 +87,7 @@
 
         if (!empty($user)) {
             if ($user['active'] != 1) {
-                $emailInactive = '<a href="" id="emailInactive"';
+                $emailInactive = '<a href="" id="email_inactive"';
                 $emailInactive .= ' data-id="';
                 $emailInactive .= $user['id'];
                 $emailInactive .= '">Email address is already taken.';
