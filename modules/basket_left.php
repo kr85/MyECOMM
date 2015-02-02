@@ -31,12 +31,7 @@
         </span>
     </dd>
     <dt>
-        Tax (
-        <span>
-            <?php
-                echo number_format($objBasket->taxRate, 2);
-            ?>
-        </span>%):
+        Tax (<span><?php echo number_format($objBasket->taxRate, 2); ?></span>%):
     </dt>
     <dd class="bl_vat">
         <span>
