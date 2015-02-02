@@ -1,5 +1,7 @@
 var basketObject = {
     addToBasket: function(thisIdentity) {
+        "use strict";
+
         $(document).on('click', thisIdentity, function(e) {
             e.preventDefault();
 
@@ -34,6 +36,8 @@ var basketObject = {
         });
     },
     refreshMainBasket: function() {
+        "use strict";
+
         $.ajax({
             url: '/modules/basket_view.php',
             dataType: 'html',
@@ -46,6 +50,8 @@ var basketObject = {
         });
     },
     refreshSmallBasket: function() {
+        "use strict";
+
         $.ajax({
             url: '/modules/basket_small_refresh.php',
             dataType: 'json',
@@ -60,6 +66,8 @@ var basketObject = {
         });
     },
     removeFromBasket: function(thisIdentity) {
+        "use strict";
+
         $(document).on('click', thisIdentity, function(e) {
             e.preventDefault();
             var item = $(this).attr('rel');
@@ -79,6 +87,8 @@ var basketObject = {
         });
     },
     updateBasket: function() {
+        "use strict";
+
         $.each($('#frm_basket :input'), function() {
             var sid = $(this).attr('id').split('-');
             var value = $(this).val();
@@ -98,6 +108,8 @@ var basketObject = {
         });
     },
     updateBasketKeyPres: function(thisIdentity) {
+        "use strict";
+
         $(document).on('keypress', thisIdentity, function(e) {
             var code = e.keyCode ? e.keyCode : e.which;
             if (code == 13) {
@@ -108,12 +120,16 @@ var basketObject = {
         });
     },
     updateBasketButton: function(thisIdentity) {
+        "use strict";
+
         $(document).on('click', thisIdentity, function(e) {
             e.preventDefault();
             basketObject.updateBasket();
         });
     },
     loadingPayPal: function(thisIdentity) {
+        "use strict";
+
         $(document).on('click', thisIdentity, function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -136,6 +152,8 @@ var basketObject = {
         });
     },
     sendToPayPal: function(token) {
+        "use strict";
+
         $.post('/modules/paypal.php', { token: token }, function(data) {
             if (data && !data.error) {
                 $('#frm_pp').html(data.form);
@@ -149,6 +167,8 @@ var basketObject = {
         }, 'json');
     },
     emailInactive: function(thisIdentity) {
+        "use strict";
+
         $(document).on('click', thisIdentity, function(e) {
             e.preventDefault();
             var thisId = $(this).attr('data-id');
@@ -171,6 +191,8 @@ var basketObject = {
         });
     },
     shipping: function(thisIdentity) {
+        "use strict";
+
         $(document).on('change', thisIdentity, function(e) {
             var thisOption = $(this).val();
             $.getJSON('/modules/summary_update.php?shipping=' + thisOption, function(data) {
@@ -181,16 +203,59 @@ var basketObject = {
                 }
             });
         });
+    },
+    topValidationTemplate: function(thisMessage) {
+        "use strict";
+
+        var thisTemplate = '<div id="top_message">';
+        thisTemplate += thisMessage;
+        thisTemplate += '</div>';
+        return thisTemplate;
+    },
+    topValidation: function(thisMessage) {
+        "use strict";
+
+        if (thisMessage !== '' && typeof thisMessage !== 'undefined') {
+            if ($('#top_message').length > 0) {
+                $('#top_message').remove();
+            }
+            $('body').prepend($(systemObject.topValidationTemplate(thisMessage)).fadeIn(200));
+            var thisTimeout = setTimeout(function() {
+                $('#top_message').fadeOut(function() {
+                    $(this).remove();
+                });
+            }, 5000);
+        }
+    }
+};
+
+var systemObject = {
+    showHideRadio: function(thisIdentity) {
+        "use strict";
+
+        $(document).on('click', thisIdentity, function(e) {
+            e.preventDefault();
+            var thisTarget = $(this).attr('name');
+            var thisValue = $(this).val();
+            if (thisValue == 1) {
+                $('.' + thisTarget).hide();
+            } else {
+                $('.' + thisTarget).show();
+            }
+        });
     }
 };
 
 $(document).ready(function() {
+    "use strict";
 
+    systemObject.showHideRadio('.show_hide_radio');
     basketObject.addToBasket('.add_to_basket');
     basketObject.updateBasketKeyPres('.fld_qty');
     basketObject.updateBasketButton('.update_basket');
     basketObject.removeFromBasket('.remove_basket');
     basketObject.loadingPayPal('.paypal');
     basketObject.emailInactive('#email_inactive');
+    basketObject.shipping('.shipping_radio');
 
 });
