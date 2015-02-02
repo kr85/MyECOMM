@@ -57,7 +57,12 @@ var basketObject = {
             dataType: 'json',
             success: function(data) {
                 $.each(data, function(k, v) {
-                    $("#basket_left ." + k + " span").text(v);
+                    console.log(v);
+                    if (typeof v == 'string' || v instanceof String) {
+                        $("#basket_left ." + k + " span").text('$' + v);
+                    } else {
+                        $("#basket_left ." + k + " span").text(v);
+                    }
                 });
             },
             error: function() {
