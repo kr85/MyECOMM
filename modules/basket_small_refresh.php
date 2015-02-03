@@ -1,6 +1,6 @@
 <?php
 
-    require_once("../includes/autoload.php");
+    require_once("../includes/config.php");
 
     // Instantiate basket class
     $objBasket = new Basket();

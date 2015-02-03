@@ -1,6 +1,6 @@
 <?php
 
-    require_once('../includes/autoload.php');
+    require_once('../includes/config.php');
 
     // Instantiate the url class and get the id from the url
     $objUrl = new Url();

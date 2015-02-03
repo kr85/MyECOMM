@@ -1,6 +1,6 @@
 <?php
 
-    require_once('../includes/autoload.php');
+    require_once('../includes/config.php');
 
     // Check if job and id are set
     if (isset($_POST['job']) && isset($_POST['id'])) {

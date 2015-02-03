@@ -1,6 +1,6 @@
 <?php
 
-    require_once('../includes/autoload.php');
+    require_once('../includes/config.php');
 
     // Create tokens
     $token2 = Session::getSession('token2');
