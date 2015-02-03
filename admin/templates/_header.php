@@ -95,6 +95,30 @@
                                 Business
                             </a>
                         </li>
+                        <li>
+                            <a href="/panel/shipping"
+                                <?php echo $this->objNavigation->active(
+                                    'shipping'
+                                ); ?>>
+                                Shipping
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/panel/zone"
+                                <?php echo $this->objNavigation->active(
+                                    'zone'
+                                ); ?>>
+                                Zones
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/panel/country"
+                                <?php echo $this->objNavigation->active(
+                                    'country'
+                                ); ?>>
+                                Countries
+                            </a>
+                        </li>
                     </ul>
                     <?php } else { ?>
                         &nbsp;
