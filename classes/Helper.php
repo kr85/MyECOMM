@@ -205,4 +205,51 @@
         public static function makeArray($array = null) {
             return is_array($array) ? $array : [$array];
         }
+
+        /**
+         * Print an array
+         *
+         * @param null $array
+         * @return string
+         */
+        public static function printArray($array = null) {
+            ob_start();
+            echo '<pre>';
+            print_r($array);
+            echo '</pre>';
+            return ob_get_clean();
+        }
+
+        /**
+         * Returns a string only with numbers and letter
+         * (without any special characters)
+         *
+         * @param null $string
+         * @return bool|mixed
+         */
+        public static function alphaNumericalOnly($string = null) {
+            if (!empty($string)) {
+                return preg_replace("/[^A-Za-z0-9]/", '', $string);
+            }
+            return false;
+        }
+
+        /**
+         * Returns the input as a json representation
+         *
+         * @param null $input
+         * @return bool|string
+         */
+        public static function json($input = null) {
+            if (!empty($input)) {
+                if (defined("JSON_UNESCAPED_UNICODE")) {
+                    return json_encode($input, JSON_HEX_TAG | JSON_HEX_APOS |
+                        JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
+                } else {
+                    return json_encode($input, JSON_HEX_TAG | JSON_HEX_APOS |
+                        JSON_HEX_QUOT | JSON_HEX_AMP);
+                }
+            }
+            return false;
+        }
     }
