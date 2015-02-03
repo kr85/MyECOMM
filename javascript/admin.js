@@ -56,5 +56,183 @@ var adminObject = {
                 });
             }
         });
+    },
+    clickRemoveRowTemplate: function(id, span, url) {
+        "use strict";
+
+        var thisTemplate = '<tr id="click_remove-' + id + '">';
+        if (span > 1) {
+            thisTemplate += '<td colspan="' + span + '">';
+        }
+        thisTemplate += '<div class="fl_r">';
+        thisTemplate += '<a href="#" data-url="' + url;
+        thisTemplate += '" class="click_remove_row mr_r5">Yes</a>';
+        thisTemplate += '<a href="#" class="click_remove_row_confirm">No</a>';
+        thisTemplate += '</div>';
+        thisTemplate += '<span class="warn">Do you really want to remove this row?</span>';
+        if (span > 1) {
+            thisTemplate += '</td>';
+        }
+        thisTemplate += '</tr>';
+        return thisTemplate;
+    },
+    clickAddRowConfirm: function(thisIdentity) {
+        "use strict";
+
+        $(document).on('click', thisIdentity, function(e) {
+            e.preventDefault();
+            var thisObj = $(this);
+            var thisParent = thisObj.closest('tr');
+            var thisId = thisParent.attr('id').split('-')[1];
+            var thisSpan = thisObj.data('span');
+            var thisUrl = thisObj.data('url');
+            if ($('#click_remove-' + thisId).length === 0) {
+                thisParent.before(adminObject.clickRemoveRowTemplate(thisId, thisSpan, thisUrl));
+            }
+        });
+    },
+    clickRemoveRowConfirm: function(thisIdentity) {
+        "use strict";
+
+        $(document).on('click', thisIdentity, function(e) {
+            e.preventDefault();
+            $(this).closest('tr').remove();
+        });
+    },
+    clickRemoveRow: function(thisIdentity) {
+        "use strict";
+
+        $(document).on('click', thisIdentity, function(e) {
+            e.preventDefault();
+            var thisObj = $(this);
+            var thisId = thisObj.closest('tr').attr('id').split('-')[1];
+            var thisUrl = thisObj.data('url');
+            $.getJSON(thisUrl, function(data) {
+                if (data && !data.error) {
+                    if (!adminObject.isEmpty(data.replace)) {
+                        $.each(data.replace, function(k, v) {
+                            $(k).html(v);
+                        });
+                    } else {
+                        $('#row-' + thisId).remove();
+                        thisObj.closest('tr').remove();
+                    }
+                }
+            });
+        });
+    },
+    clickHideShow: function(thisIdentity) {
+        "use strict";
+
+        $(document).on('click', thisIdentity, function(e) {
+            e.preventDefault();
+            var thisTarget = $(this).data('show');
+            $(this).hide();
+            $(thisTarget).show().focus();
+        });
+    },
+    blurUpdateHideShow: function(thisIdentity) {
+        "use strict";
+
+        $(document).on('focusout', thisIdentity, function(e) {
+            var thisObj = $(this);
+            var thisForm = thisObj.closest('form');
+            thisForm.find('.warn').remove();
+            var thisUrl = thisForm.data('url');
+            var thisId = thisObj.data('id');
+            var thisShow = thisObj.attr('id');
+            var thisValue = thisObj.val();
+            if (!adminObject.isEmpty(thisValue)) {
+                $.post(thisUrl + thisId, { id: thisId, value: thisValue }, function(data) {
+                    if (data && !data.error) {
+                        thisObj.hide();
+                        $('[data-show="' + thisShow + '"]').text(thisValue).show();
+                    }
+                }, 'json');
+            } else {
+                thisObj.before('<p class="warn">Please provide a value.</p>');
+            }
+        });
+    },
+    sortRows: function(obj) {
+        "use strict";
+
+        obj.find('tr').livequery(function() {
+            var thisObj = $(this).parent('tbody');
+            $.each(thisObj, function() {
+                var thisTbody = $(this);
+                var thisUrl = thisTbody.data('url');
+                if (!adminObject.isEmpty(thisUrl)) {
+                    thisTbody.tableDnD({
+                        onDrop: function(thisTable, thisRow) {
+                            var thisArray = $.tableDnD.serialize();
+                            $.ajax({
+                                type: 'POST',
+                                url: thisUrl,
+                                data: thisArray
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    },
+    submitAjax: function() {
+        "use strict";
+
+        $(document).on('submit', 'form.ajax', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var thisForm = $(this);
+            thisForm.find('.warn').remove();
+            var thisArray = thisForm.serializeArray();
+            var thisUrl = thisForm.data('action');
+            if (!adminObject.isEmpty(thisUrl)) {
+                $.post(thisUrl, thisArray, function(data) {
+                    if (data) {
+                        if (!data.error) {
+                            if (!adminObject.isEmpty(data.replace)) {
+                                $.each(data.replace, function(k, v) {
+                                    $(k).html(v);
+                                });
+                                thisForm[0].reset();
+                            } else {
+                                window.location.reload();
+                            }
+                        } else if (!adminObject.isEmpty(data.validation)) {
+                            $.each(data.validation, function(k, v) {
+                                $('.' + k).append(v);
+                            });
+                        }
+                    }
+                }, 'json');
+            }
+        });
+    },
+    selectRedirect: function(thisIdentity) {
+        "use strict";
+
+        $('form').on('change', thisIdentity, function(e) {
+            var thisSelected = $('option:selected', this);
+            var thisUrl = thisSelected.data('url');
+            if (!adminObject.isEmpty(thisUrl)) {
+                window.location.href = thisUrl;
+            }
+        });
     }
 };
+$(function() {
+    "use strict";
+
+    adminObject.clickReplace('.click_replace');
+    adminObject.clickCallReload('.click_call_reload');
+    adminObject.clickYesNoSingle('.click_yes_no_single');
+    adminObject.clickRemoveRowConfirm('.click_remove_row_confirm');
+    adminObject.clickAddRowConfirm('.click_add_row_confirm');
+    adminObject.clickRemoveRow('.click_remove_row');
+    adminObject.clickHideShow('.click_hide_show');
+    adminObject.blurUpdateHideShow('.blur_update_hide_show');
+    adminObject.sortRows($('.sort_rows'));
+    adminObject.submitAjax();
+    adminObject.selectRedirect('.select_redirect');
+});
