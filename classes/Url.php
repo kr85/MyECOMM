@@ -173,9 +173,10 @@
          *
          * @param null $exclude
          * @param bool $extension
+         * @param null $add
          * @return string
          */
-        public function getCurrent($exclude = null, $extension = false) {
+        public function getCurrent($exclude = null, $extension = false, $add = null) {
             $out = [];
             if ($this->module != 'front') {
                 $out[] = $this->module;
@@ -195,6 +196,12 @@
                         $out[] = $key;
                         $out[] = $value;
                     }
+                }
+            }
+            if (!empty($add)) {
+                $add = Helper::makeArray($add);
+                foreach ($add as $item) {
+                    $out[] = $item;
                 }
             }
             $url = '/' . implode('/', $out);
