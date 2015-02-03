@@ -8,6 +8,7 @@
         // Public variables
         public $objUrl;
         public $objNavigation;
+        public $objAdmin;
         public $metaTitle = 'eCommerce Website';
         public $metaDescription = 'eCommerce Website';
         public $metaKeywords = 'eCommerce Website';
@@ -34,6 +35,7 @@
                         realpath(ROOT_PATH . DS . 'admin' . DS . PAGES_DIR),
                         get_include_path()
                     ]));
+                    $this->objAdmin = new Admin();
                     $page = ROOT_PATH . DS . 'admin' . DS . PAGES_DIR .
                         DS . $this->objUrl->currentPage . '.php';
                     if (file_exists($page)) {
