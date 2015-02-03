@@ -73,9 +73,11 @@
          */
         public static function clear($id = null) {
 
-            if (!empty($id) && isset($_SESSION[$id])) {
-                $_SESSION[$id] = null;
-                unset($_SESSION[$id]);
+            if (!empty($id)) {
+                if (isset($_SESSION[$id])) {
+                    $_SESSION[$id] = null;
+                    unset($_SESSION[$id]);
+                }
             } else {
                 session_destroy();
             }
