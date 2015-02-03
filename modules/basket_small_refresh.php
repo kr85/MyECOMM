@@ -10,4 +10,4 @@
     $out['bl_vat'] = number_format($objBasket->tax, 2);
     $out['bl_total'] = number_format($objBasket->total, 2);
 
-    echo json_encode($out);
+    echo Helper::json($out);

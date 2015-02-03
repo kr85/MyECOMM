@@ -26,13 +26,13 @@
                 'last_name'  => $user['last_name'],
                 'hash'       => $user['hash']
             ])) {
-                echo json_encode(['error' => false]);
+                echo Helper::json(['error' => false]);
             } else {
-                echo json_encode(['error' => true]);
+                echo Helper::json(['error' => true]);
             }
         } else {
-            echo json_encode(['error' => true]);
+            echo Helper::json(['error' => true]);
         }
     } else {
-        echo json_encode(['error' => true]);
+        echo Helper::json(['error' => true]);
     }

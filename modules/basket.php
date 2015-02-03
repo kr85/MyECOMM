@@ -27,6 +27,6 @@
                     break;
             }
 
-            echo json_encode($out);
+            echo Helper::json($out);
         }
     }
