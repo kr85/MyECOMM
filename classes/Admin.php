@@ -58,4 +58,24 @@
 
             return false;
         }
+
+        /**
+         * Get the full name of a registered admin
+         *
+         * @param null $id
+         * @return bool
+         */
+        public function getFullNameAdmin($id = null) {
+            if (!empty($id)) {
+                $sql = "SELECT *,
+                        CONCAT_WS(' ', `first_name`, `last_name`) AS `full_name`
+                        FROM `{$this->table}`
+                        WHERE `id` = " . intval($id);
+                $result = $this->db->fetchOne($sql);
+                if (!empty($result)) {
+                    return $result['full_name'];
+                }
+            }
+            return false;
+        }
     }
