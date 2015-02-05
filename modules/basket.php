@@ -2,10 +2,11 @@
 
     require_once('../includes/config.php');
 
+    // Result array
+    $out = [];
+
     // Check if job and id are set
     if (isset($_POST['job']) && isset($_POST['id'])) {
-
-        $out = [];
 
         // Store job and id
         $job = $_POST['job'];
@@ -26,7 +27,13 @@
                     $out['job'] = 0;
                     break;
             }
-
+            $out['error'] = false;
+            echo Helper::json($out);
+        } else {
+            $out['error'] = true;
             echo Helper::json($out);
         }
+    } else {
+        $out['error'] = true;
+        echo Helper::json($out);
     }

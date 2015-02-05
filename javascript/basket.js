@@ -15,21 +15,27 @@ var basketObject = {
                 dataType: 'json',
                 data: ({ id: item[0], job: item[1] }),
                 success: function(data) {
-                    var newId = item[0] + '_' + data.job;
-                    if (data.job != item[1]) {
-                        if (data.job == 0) {
-                            trigger.attr("rel", newId);
-                            trigger.text("Remove from basket");
-                            trigger.addClass("red");
+                    if (data && !data.error) {
+                        var newId = item[0] + '_' + data.job;
+                        if (data.job != item[1]) {
+                            if (data.job == 0) {
+                                trigger.attr("rel", newId);
+                                trigger.text("Remove from basket");
+                                trigger.addClass("red");
+                            } else {
+                                trigger.attr("rel", newId);
+                                trigger.text("Add to basket");
+                                trigger.removeClass("red");
+                            }
+                            basketObject.refreshSmallBasket();
                         } else {
-                            trigger.attr("rel", newId);
-                            trigger.text("Add to basket");
-                            trigger.removeClass("red");
+                            console.log(data);
+                            alert("Error");
                         }
-                        basketObject.refreshSmallBasket();
                     }
                 },
-                error: function() {
+                error: function(data) {
+                    console.log(data);
                     alert("An error has occurred.");
                 }
             });
