@@ -38,21 +38,22 @@
          */
         private function connect() {
 
-            $this->connDb = mysql_connect(
+            $this->connDb = mysqli_connect(
                 $this->hostname,
                 $this->username,
-                $this->password
+                $this->password,
+                $this->database
             );
 
             if (!$this->connDb) {
-                die("Database connection failed: <br />" . mysql_error());
+                die("Database connection failed: <br />" . mysqli_error($this->connDb));
             } else {
-                $select = mysql_select_db($this->database, $this->connDb);
+                $select = mysqli_select_db($this->connDb, $this->database);
                 if (!$select) {
                     die("Database selection failed: <br />" . mysql_error());
                 }
             }
-            mysql_set_charset("utf8", $this->connDb);
+            mysqli_set_charset($this->connDb, "utf8");
         }
 
         /**
@@ -60,7 +61,7 @@
          */
         public function close() {
 
-            if (!mysql_close($this->connDb)) {
+            if (!mysqli_close($this->connDb)) {
                 die("Closing connection failed.");
             }
         }
@@ -77,7 +78,7 @@
                 if (get_magic_quotes_gpc()) {
                     $value = stripslashes($value);
                 }
-                $value = mysql_real_escape_string($value);
+                $value = mysqli_real_escape_string($this->connDb, $value);
             } else {
                 if (!get_magic_quotes_gpc()) {
                     $value = addslashes($value);
@@ -96,7 +97,7 @@
         public function query($sql) {
 
             $this->lastQuery = $sql;
-            $result = mysql_query($sql, $this->connDb);
+            $result = mysqli_query($this->connDb, $sql);
             $this->displayQuery($result);
 
             return $result;
@@ -110,12 +111,12 @@
         public function displayQuery($result) {
 
             if (!$result) {
-                $output = "Database query failed: " . mysql_error();
+                $output = "Database query failed: " . mysqli_error($this->connDb);
                 $output .= "Last SQL query was: " . $this->lastQuery;
-                Helper::addToErrorsLog('Query_Errors', $output);
+                //Helper::addToErrorsLog('Query_Errors', $output);
                 die($output);
             } else {
-                $this->affectedRows = mysql_affected_rows($this->connDb);
+                $this->affectedRows = mysqli_affected_rows($this->connDb);
             }
         }
 
@@ -129,10 +130,10 @@
 
             $result = $this->query($sql);
             $out = [];
-            while ($row = mysql_fetch_assoc($result)) {
+            while ($row = mysqli_fetch_assoc($result)) {
                 $out[] = $row;
             }
-            mysql_free_result($result);
+            mysqli_free_result($result);
 
             return $out;
         }
@@ -157,7 +158,7 @@
          */
         public function lastId() {
 
-            return mysql_insert_id($this->connDb);
+            return mysqli_insert_id($this->connDb);
         }
 
         /**
