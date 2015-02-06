@@ -15,7 +15,7 @@
         public $errorMessages = [];
 
         // List of validation error messages
-        public $message = [
+        public $messages = [
             'first_name'         => 'Please provide your first name.',
             'last_name'          => 'Please provide your last name.',
             'address_1'          => 'Please provide the first line of your address.',
@@ -147,9 +147,17 @@
          *
          * @param $key
          */
-        public function addToErrors($key) {
-
-            $this->errors[] = $key;
+        public function addToErrors($key = null, $value = null) {
+            if (!empty($key)) {
+                $this->errors[] = $key;
+                if (!empty($value)) {
+                    $this->errorMessages['valid_' . $key] =
+                        $this->wrapWarning($value);
+                } else if (array_key_exists($key, $this->messages)) {
+                    $this->errorMessages['valid_' . $key] =
+                        $this->wrapWarning($this->messages[$key]);
+                }
+            }
         }
 
         /**
@@ -225,7 +233,7 @@
         public function validate($key) {
 
             if (!empty($this->errors) && in_array($key, $this->errors)) {
-                return $this->wrapWarning($this->message[$key]);
+                return $this->wrapWarning($this->messages[$key]);
             }
 
             return false;
