@@ -9,7 +9,10 @@
         private $objForm;
 
         // List of validation errors
-        private $errors = [];
+        public $errors = [];
+
+        //
+        public $errorMessages = [];
 
         // List of validation error messages
         public $message = [
@@ -20,7 +23,15 @@
             'city'               => 'Please provide the name of your city.',
             'state'              => 'Please provide the name of your state.',
             'zip_code'           => 'Please provide your ZIP code.',
-            'country'            => 'Please provide your country.',
+            'country'            => 'Please select your country.',
+
+            'shipping_address_1' => 'Please provide the first line of the address.',
+            'shipping_address_2' => 'Please provide the second line of the address.',
+            'shipping_city'      => 'Please provide the name of the city.',
+            'shipping_state'     => 'Please provide the name of the state.',
+            'shipping_zip_code'  => 'Please provide the ZIP code.',
+            'shipping_country'   => 'Please select the country.',
+
             'email'              => 'Please provide your valid email address.',
             'email_duplicate'    => 'This email address already exists.',
             'email_inactive'     => 'This email address is inactive',
@@ -37,11 +48,15 @@
             'telephone'          => 'Please provide a phone number.',
             'website'            => 'Please provide a website.',
             'tax_rate'           => 'Please provide a tax rate.',
+
             'identity'           => 'Please provide the identity.',
             'duplicate_identity' => 'This identity already exists.',
             'meta_title'         => 'Please provide the meta title.',
             'meta_description'   => 'Please provide the meta description.',
-            'meta_keywords'      => 'Please provide the meta keywords.'
+            'meta_keywords'      => 'Please provide the meta keywords.',
+
+            'weight'             => 'Please provide the weight.',
+            'cost'               => 'Please provide the cost.'
         ];
 
         // List of expected fields
@@ -65,24 +80,23 @@
         /**
          * Constructor
          *
-         * @param Form $objForm
+         * @param null $objForm
          */
-        public function __construct($objForm) {
-
-            $this->objForm = $objForm;
+        public function __construct($objForm = null) {
+            $this->objForm = is_object($objForm) ?
+                $objForm :
+                new Form();
         }
 
         /**
          * Process form validation
          */
         public function process() {
-
-            if ($this->objForm->isPost() && !empty($this->required)) {
-
-                $this->post = $this->objForm->getPostArray($this->expected);
-
+            if ($this->objForm->isPost()) {
+                $this->post = !empty($this->post) ?
+                    $this->post :
+                    $this->objForm->getPostArray($this->expected);
                 if (!empty($this->post)) {
-
                     foreach ($this->post as $key => $value) {
                         $this->check($key, $value);
                     }
