@@ -5,6 +5,7 @@
      */
     class Country extends Application {
 
+        // The table name
         private $table = 'countries';
 
         /**
@@ -14,7 +15,9 @@
          */
         public function getCountries() {
 
-            $sql = "SELECT * FROM `{$this->table}`
+            $sql = "SELECT *
+                    FROM `{$this->table}`
+                    WHERE `include` = 1
                     ORDER BY `name` ASC";
 
             return $this->db->fetchAll($sql);
@@ -29,8 +32,10 @@
         public function getCountry($id = null) {
 
             if (!empty($id)) {
-                $sql = "SELECT * FROM `{$this->table}`
-                        WHERE `id` = '" . $this->db->escape($id) . "'";
+                $sql = "SELECT *
+                        FROM `{$this->table}`
+                        WHERE `id` = '" . intval($id) . "'
+                        AND `include` = 1";
 
                 return $this->db->fetchOne($sql);
             }
