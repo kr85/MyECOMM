@@ -13,14 +13,14 @@
     if ($objForm->isPost('login_email')) {
         if ($objUser->isUser(
             $objForm->getPost('login_email'),
-            $objForm->getPost('login_password'))
+            $objForm->getPost('login_password')
+        )
         ) {
             Login::loginFront(
                 $objUser->id,
                 $this->objUrl->href($this->objUrl->get(Login::$referrer))
             );
-        }
-        else {
+        } else {
             $objValidation->addToErrors('login');
         }
     }
@@ -76,8 +76,7 @@
         $password_1 = $objForm->getPost('password');
         $password_2 = $objForm->getPost('confirm_password');
 
-        if (!empty($password_1) && !empty($password_2)
-            && $password_1 != $password_2) {
+        if (!empty($password_1) && !empty($password_2) && $password_1 != $password_2) {
             $objValidation->addToErrors('password_mismatch');
         }
 
@@ -103,18 +102,19 @@
         if ($objValidation->isValid()) {
 
             // Add hash for activation account
-            $objValidation->post['hash'] = mt_rand() . date('YmdHis') . mt_rand();
+            $objValidation->post['hash'] = mt_rand() . date('YmdHis') . mt_rand(
+                );
 
             // Add registration date
             $objValidation->post['date'] = Helper::setDate();
 
             if ($objUser->addUser(
                 $objValidation->post,
-                $objForm->getPost('password'))
+                $objForm->getPost('password')
+            )
             ) {
                 Helper::redirect($this->objUrl->href('registered'));
-            }
-            else {
+            } else {
                 Helper::redirect($this->objUrl->href('registered-failed'));
             }
         }
@@ -133,9 +133,10 @@
                 </th>
                 <td>
                     <?php echo $objValidation->validate('login'); ?>
-                    <input type="email" name="login_email"
-                           id="login_email" class="fld"
-                           value="<?php echo $objForm->stickyText('login_email'); ?>"/>
+                    <input type="email" name="login_email" id="login_email"
+                           class="fld" value="<?php echo $objForm->stickyText(
+                        'login_email'
+                    ); ?>"/>
                 </td>
             </tr>
             <tr>
@@ -150,10 +151,9 @@
             <tr>
                 <th>&#160;</th>
                 <td>
-                    <label for="btn_login" class="sbm sbm_blue fl_l">
-                        <input type="submit" id="btn_login" class="btn"
-                               value="Log In"/>
-                    </label>
+                    <label for="btn_login" class="sbm sbm_blue fl_l"> <input
+                            type="submit" id="btn_login" class="btn"
+                            value="Log In"/> </label>
                 </td>
             </tr>
         </table>
@@ -170,9 +170,10 @@
                 </th>
                 <td>
                     <?php echo $objValidation->validate('first_name'); ?>
-                    <input type="text" name="first_name"
-                           id="first_name" class="fld"
-                           value="<?php echo $objForm->stickyText('first_name'); ?>"/>
+                    <input type="text" name="first_name" id="first_name"
+                           class="fld" value="<?php echo $objForm->stickyText(
+                        'first_name'
+                    ); ?>"/>
                 </td>
             </tr>
             <tr>
@@ -181,9 +182,10 @@
                 </th>
                 <td>
                     <?php echo $objValidation->validate('last_name'); ?>
-                    <input type="text" name="last_name"
-                           id="last_name" class="fld"
-                           value="<?php echo $objForm->stickyText('last_name'); ?>"/>
+                    <input type="text" name="last_name" id="last_name"
+                           class="fld" value="<?php echo $objForm->stickyText(
+                        'last_name'
+                    ); ?>"/>
                 </td>
             </tr>
             <tr>
@@ -192,9 +194,10 @@
                 </th>
                 <td>
                     <?php echo $objValidation->validate('address_1'); ?>
-                    <input type="text" name="address_1"
-                           id="address_1" class="fld"
-                           value="<?php echo $objForm->stickyText('address_1'); ?>"/>
+                    <input type="text" name="address_1" id="address_1"
+                           class="fld" value="<?php echo $objForm->stickyText(
+                        'address_1'
+                    ); ?>"/>
                 </td>
             </tr>
             <tr>
@@ -203,9 +206,10 @@
                 </th>
                 <td>
                     <?php echo $objValidation->validate('address_2'); ?>
-                    <input type="text" name="address_2"
-                           id="address_2" class="fld"
-                           value="<?php echo $objForm->stickyText('address_2'); ?>"/>
+                    <input type="text" name="address_2" id="address_2"
+                           class="fld" value="<?php echo $objForm->stickyText(
+                        'address_2'
+                    ); ?>"/>
                 </td>
             </tr>
             <tr>
@@ -214,8 +218,7 @@
                 </th>
                 <td>
                     <?php echo $objValidation->validate('city'); ?>
-                    <input type="text" name="city"
-                           id="city" class="fld"
+                    <input type="text" name="city" id="city" class="fld"
                            value="<?php echo $objForm->stickyText('city'); ?>"/>
                 </td>
             </tr>
@@ -225,9 +228,10 @@
                 </th>
                 <td>
                     <?php echo $objValidation->validate('state'); ?>
-                    <input type="text" name="state"
-                           id="state" class="fld"
-                           value="<?php echo $objForm->stickyText('state'); ?>"/>
+                    <input type="text" name="state" id="state" class="fld"
+                           value="<?php echo $objForm->stickyText(
+                               'state'
+                           ); ?>"/>
                 </td>
             </tr>
             <tr>
@@ -236,9 +240,10 @@
                 </th>
                 <td>
                     <?php echo $objValidation->validate('zip_code'); ?>
-                    <input type="text" name="zip_code"
-                           id="zip_code" class="fld"
-                           value="<?php echo $objForm->stickyText('zip_code'); ?>"/>
+                    <input type="text" name="zip_code" id="zip_code" class="fld"
+                           value="<?php echo $objForm->stickyText(
+                               'zip_code'
+                           ); ?>"/>
                 </td>
             </tr>
             <tr>
@@ -258,9 +263,10 @@
                     <?php echo $objValidation->validate('email'); ?>
                     <?php echo $objValidation->validate('email_duplicate'); ?>
                     <?php echo $objValidation->validate('email_inactive'); ?>
-                    <input type="email" name="email"
-                           id="email" class="fld"
-                           value="<?php echo $objForm->stickyText('email'); ?>"/>
+                    <input type="email" name="email" id="email" class="fld"
+                           value="<?php echo $objForm->stickyText(
+                               'email'
+                           ); ?>"/>
                 </td>
             </tr>
             <tr>
@@ -270,8 +276,8 @@
                 <td>
                     <?php echo $objValidation->validate('password'); ?>
                     <?php echo $objValidation->validate('password_mismatch'); ?>
-                    <input type="password" name="password"
-                           id="password" class="fld" value=""/>
+                    <input type="password" name="password" id="password"
+                           class="fld" value=""/>
                 </td>
             </tr>
             <tr>
@@ -288,9 +294,8 @@
             <tr>
                 <th>&#160;</th>
                 <td>
-                    <label for="btn" class="sbm sbm_blue fl_l">
-                        <input type="submit" id="btn" class="btn"
-                               value="Sign Up"/>
+                    <label for="btn" class="sbm sbm_blue fl_l"> <input
+                            type="submit" id="btn" class="btn" value="Sign Up"/>
                     </label>
                 </td>
             </tr>

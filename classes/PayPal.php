@@ -10,7 +10,7 @@
 
         // Urls
         private $urlProduction = 'https://www.paypal.com/cgi-bin/webscr';
-        private $urlSandbox = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
+        private $urlSandbox    = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
 
         // Standard url
         private $url;
@@ -69,7 +69,9 @@
          * @param string $cmd
          */
         public function __construct($objUrl = null, $cmd = '_cart') {
-            $this->objUrl = is_object($objUrl) ? $objUrl : new Url();
+            $this->objUrl = is_object($objUrl) ?
+                $objUrl :
+                new Url();
             $this->business = ProjectVariable::$PAYPAL_BUSINESS_ID;
             $this->url = $this->environment == 'sandbox' ?
                 $this->urlSandbox :
@@ -244,7 +246,10 @@
                     // Update order status
                     if (!empty($this->ipnData)) {
                         //Helper::addToErrorsLog('IPN_data_not_empty', null);
-                        $approved = $objOrder->approve($this->ipnData, $this->ipnResult);
+                        $approved = $objOrder->approve(
+                            $this->ipnData,
+                            $this->ipnResult
+                        );
                         if (!$approved) {
                             //Helper::addToErrorsLog('Order_is_not_approved', null);
                             return false;
@@ -286,10 +291,14 @@
             $this->ipnData = $objForm->getPostArray();
             // Check if the email of the business and the received email
             // from IPN are the same
-            if (!empty($this->ipnData) &&
-                array_key_exists('receiver_email', $this->ipnData) &&
-                strtolower($this->ipnData['receiver_email'] !=
-                    strtolower($this->business))
+            if (!empty($this->ipnData) && array_key_exists(
+                    'receiver_email',
+                    $this->ipnData
+                ) && strtolower(
+                    $this->ipnData['receiver_email'] != strtolower(
+                        $this->business
+                    )
+                )
             ) {
                 //Helper::addToErrorsLog('In_validateIpn_receiver_email_different', null);
                 return false;
@@ -309,29 +318,33 @@
             //Helper::addToErrorsLog('Response', $response);
 
             $curl = curl_init();
-            curl_setopt_array($curl, [
-                CURLOPT_URL            => $this->url,
-                CURLOPT_SSL_VERIFYPEER => 1,
-                CURLOPT_SSL_VERIFYHOST => 2,
-                CURLOPT_ENCODING       => 'gzip',
-                CURLOPT_BINARYTRANSFER => true,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POST           => true,
-                CURLOPT_POSTFIELDS     => $response,
-                CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
-                CURLOPT_FORBID_REUSE   => true,
-                CURLOPT_FORBID_REUSE   => true,
-                CURLOPT_CONNECTTIMEOUT => 30,
-                CURLOPT_TIMEOUT        => 60,
-                CURLOPT_HEADER         => false,
-                CURLOPT_FOLLOWLOCATION => 1,
-                CURLOPT_VERBOSE        => 1,
-                CURLINFO_HEADER_OUT    => true,
-                CURLOPT_HTTPHEADER     => [
-                    'Content-Type: application/x-www-form-urlencoded',
-                    'Content-Length: ' . strlen($response),
-                    'Connection: close']
-            ]);
+            curl_setopt_array(
+                $curl,
+                [
+                    CURLOPT_URL => $this->url,
+                    CURLOPT_SSL_VERIFYPEER => 1,
+                    CURLOPT_SSL_VERIFYHOST => 2,
+                    CURLOPT_ENCODING => 'gzip',
+                    CURLOPT_BINARYTRANSFER => true,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_POST => true,
+                    CURLOPT_POSTFIELDS => $response,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_FORBID_REUSE => true,
+                    CURLOPT_FORBID_REUSE => true,
+                    CURLOPT_CONNECTTIMEOUT => 30,
+                    CURLOPT_TIMEOUT => 60,
+                    CURLOPT_HEADER => false,
+                    CURLOPT_FOLLOWLOCATION => 1,
+                    CURLOPT_VERBOSE => 1,
+                    CURLINFO_HEADER_OUT => true,
+                    CURLOPT_HTTPHEADER => [
+                        'Content-Type: application/x-www-form-urlencoded',
+                        'Content-Length: ' . strlen($response),
+                        'Connection: close'
+                    ]
+                ]
+            );
 
             //Helper::addToErrorsLog('Curl', $curl);
             $this->ipnResult = curl_exec($curl);

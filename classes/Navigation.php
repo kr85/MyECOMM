@@ -15,7 +15,9 @@
          * @param null $objUrl
          */
         public function __construct($objUrl = null) {
-            $this->objUrl = is_object($objUrl) ? $objUrl : new Url();
+            $this->objUrl = is_object($objUrl) ?
+                $objUrl :
+                new Url();
         }
 
         /**
@@ -26,7 +28,7 @@
          * @param bool $single
          * @return bool|string
          */
-        public function active($main = null, $pairs = null, $single = true ) {
+        public function active($main = null, $pairs = null, $single = true) {
             if (!empty($main)) {
                 if (empty($pairs)) {
                     if ($main == $this->objUrl->main) {

@@ -21,7 +21,9 @@
          */
         public function __construct($objUrl = null) {
 
-            $this->objUrl = is_object($objUrl) ? $objUrl : new Url();
+            $this->objUrl = is_object($objUrl) ?
+                $objUrl :
+                new Url();
 
             $this->objMailer = new PHPMailer();
             $this->objMailer->IsSMTP();
@@ -33,10 +35,14 @@
             $this->objMailer->SMTPSecure = "tls";
             $this->objMailer->Username = ProjectVariable::$MAILER_USERNAME;
             $this->objMailer->Password = ProjectVariable::$MAILER_PASSWORD;
-            $this->objMailer->SetFrom(ProjectVariable::$MAILER_USERNAME,
-                ProjectVariable::$MAILER_NAME);
-            $this->objMailer->AddReplyTo(ProjectVariable::$MAILER_USERNAME,
-                ProjectVariable::$MAILER_NAME);
+            $this->objMailer->SetFrom(
+                ProjectVariable::$MAILER_USERNAME,
+                ProjectVariable::$MAILER_NAME
+            );
+            $this->objMailer->AddReplyTo(
+                ProjectVariable::$MAILER_USERNAME,
+                ProjectVariable::$MAILER_NAME
+            );
         }
 
         /**
@@ -54,21 +60,29 @@
                 switch ($case) {
                     case 1:
                         $link = "<a href=\"";
-                        $link .= SITE_URL . $this->objUrl->href('activate', [
+                        $link .= SITE_URL . $this->objUrl->href(
+                                'activate',
+                                [
                                     'code',
                                     $parameters['hash']
-                                ]);
+                                ]
+                            );
                         $link .= "\">";
-                        $link .= SITE_URL . $this->objUrl->href('activate', [
+                        $link .= SITE_URL . $this->objUrl->href(
+                                'activate',
+                                [
                                     'code',
                                     $parameters['hash']
-                                ]);
+                                ]
+                            );
                         $link .= "</a>";
                         $parameters['link'] = $link;
                         $this->objMailer->Subject = "Activate Your Account";
-                        $this->objMailer->MsgHTML($this->fetchEmail(
-                            $case,
-                            $parameters)
+                        $this->objMailer->MsgHTML(
+                            $this->fetchEmail(
+                                $case,
+                                $parameters
+                            )
                         );
                         $this->objMailer->AddAddress(
                             $parameters['email'],

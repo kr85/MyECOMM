@@ -25,29 +25,24 @@
                 if (Login::isLogged(Login::$loginFront)) {
                     ?>
                     <div id="logged_as">
-                        Logged in as:
-                        <strong>
+                        Logged in as: <strong>
                             <?php
                                 echo Login::getFullNameFront(
                                     Session::getSession(Login::$loginFront)
                                 );
                             ?>
-                        </strong> |
-                        <a href="<?php echo $this->objUrl->href('orders'); ?>">
-                            My Orders
-                        </a> |
-                        <a href="<?php echo $this->objUrl->href('logout'); ?>">
-                            Log Out
-                        </a>
+                        </strong> | <a
+                            href="<?php echo $this->objUrl->href('orders'); ?>">
+                            My Orders </a> | <a
+                            href="<?php echo $this->objUrl->href('logout'); ?>">
+                            Log Out </a>
                     </div>
                 <?php
-                }
-                else {
+                } else {
                     ?>
                     <div id="logged_as">
                         <a href="<?php echo $this->objUrl->href('login'); ?>">
-                            Log In
-                        </a>
+                            Log In </a>
                     </div>;
                 <?php
                 }
@@ -64,14 +59,20 @@
                         <?php
                             foreach ($categories as $c) {
                                 echo '<li><a href="';
-                                echo $this->objUrl->href('catalog', [
-                                    'category',
-                                    $c['identity']
-                                ]);
+                                echo $this->objUrl->href(
+                                    'catalog',
+                                    [
+                                        'category',
+                                        $c['identity']
+                                    ]
+                                );
                                 echo '"';
-                                echo $this->objNavigation->active('catalog', [
-                                    'category' => $c['identity']
-                                ]);
+                                echo $this->objNavigation->active(
+                                    'catalog',
+                                    [
+                                        'category' => $c['identity']
+                                    ]
+                                );
                                 echo '>';
                                 echo Helper::encodeHTML($c['name']);
                                 echo '</a></li>';

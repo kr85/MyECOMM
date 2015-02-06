@@ -98,7 +98,11 @@
          */
         public function check($key, $value) {
 
-            if (!empty($this->special) && array_key_exists($key, $this->special)) {
+            if (!empty($this->special) && array_key_exists(
+                    $key,
+                    $this->special
+                )
+            ) {
                 $this->checkSpecial($key, $value);
             } else {
                 if (in_array($key, $this->required) && empty($value)) {
@@ -145,7 +149,9 @@
             if (!empty($email)) {
                 $result = filter_var($email, FILTER_VALIDATE_EMAIL);
 
-                return !$result ? false : true;
+                return !$result ?
+                    false :
+                    true;
             }
 
             return false;

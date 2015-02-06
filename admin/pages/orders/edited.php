@@ -6,10 +6,8 @@
 
     <h1>Orders :: View</h1>
     <p>
-        The order has been updated successfully.<br/>
-        <a href="<?php echo $url; ?>">
-            Go back to the list of orders.
-        </a>
+        The order has been updated successfully.<br/> <a
+            href="<?php echo $url; ?>"> Go back to the list of orders. </a>
     </p>
 
 <?php require_once('_header.php'); ?>

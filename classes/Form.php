@@ -37,7 +37,9 @@
         public function getPost($field = null) {
 
             if (!empty($field)) {
-                return $this->isPost($field) ? strip_tags($_POST[$field]) : null;
+                return $this->isPost($field) ?
+                    strip_tags($_POST[$field]) :
+                    null;
             }
 
             return null;
@@ -56,10 +58,9 @@
             if ($this->isPost($field) && $this->getPost($field) == $value) {
                 return " selected=\"selected\"";
             } else {
-                return !empty($default) &&
-                    $default == $value ?
-                        " selected=\"selected\"" :
-                        null;
+                return !empty($default) && $default == $value ?
+                    " selected=\"selected\"" :
+                    null;
             }
         }
 
@@ -75,7 +76,9 @@
             if ($this->isPost($field)) {
                 return stripslashes($this->getPost($field));
             } else {
-                return !empty($value) ? $value : null;
+                return !empty($value) ?
+                    $value :
+                    null;
             }
         }
 
@@ -103,7 +106,11 @@
                     $out .= "<option value=\"";
                     $out .= $country['id'];
                     $out .= "\"";
-                    $out .= $this->stickySelect('country', $country['id'], $record);
+                    $out .= $this->stickySelect(
+                        'country',
+                        $country['id'],
+                        $record
+                    );
                     $out .= ">";
                     $out .= $country['name'];
                     $out .= "</option>";

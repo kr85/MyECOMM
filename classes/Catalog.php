@@ -38,7 +38,9 @@
             if (!empty($identity)) {
                 $sql = "SELECT *
                         FROM `{$this->tableCategories}`
-                        WHERE `identity` = '" . $this->db->escape($identity) . "'";
+                        WHERE `identity` = '" . $this->db->escape(
+                        $identity
+                    ) . "'";
                 return $this->db->fetchOne($sql);
             }
             return false;
@@ -118,11 +120,19 @@
             if (!empty($array) && is_array($array) && !empty($id)) {
                 $sql = "UPDATE `{$this->tableCategories}`
                         SET `name` = '" . $this->db->escape($array['name']) . "',
-                        `identity` = '" . $this->db->escape($array['identity']) . "',
-                        `meta_title` = '" . $this->db->escape($array['meta_title']) . "',
-                        `meta_description` = '" . $this->db->escape($array['meta_description']) . "',
-                        `meta_keywords` = '" . $this->db->escape($array['meta_keywords']) . "'
-                        WHERE `id` = '" . $this->db->escape($id) ."'";
+                        `identity` = '" . $this->db->escape(
+                        $array['identity']
+                    ) . "',
+                        `meta_title` = '" . $this->db->escape(
+                        $array['meta_title']
+                    ) . "',
+                        `meta_description` = '" . $this->db->escape(
+                        $array['meta_description']
+                    ) . "',
+                        `meta_keywords` = '" . $this->db->escape(
+                        $array['meta_keywords']
+                    ) . "'
+                        WHERE `id` = '" . $this->db->escape($id) . "'";
                 return $this->db->query($sql);
             }
             return false;
@@ -137,7 +147,7 @@
         public function removeCategory($id = null) {
             if (!empty($id)) {
                 $sql = "DELETE FROM `{$this->tableCategories}`
-                        WHERE `id` = '" . $this->db->escape($id) ."'";
+                        WHERE `id` = '" . $this->db->escape($id) . "'";
                 return $this->db->query($sql);
             }
             return false;
@@ -159,7 +169,9 @@
                     $sql .= " AND `id` = '" . $this->db->escape($id) . "'";
                 }
                 $result = $this->db->fetchOne($sql);
-                return !empty($result) ? true : false;
+                return !empty($result) ?
+                    true :
+                    false;
             }
             return false;
         }
@@ -175,12 +187,16 @@
             if (!empty($identity)) {
                 $sql = "SELECT *
                         FROM `{$this->tableCategories}`
-                        WHERE `identity` = '" . $this->db->escape($identity) . "'";
+                        WHERE `identity` = '" . $this->db->escape(
+                        $identity
+                    ) . "'";
                 if (!empty($id)) {
                     $sql .= " AND `id` = '" . $this->db->escape($id) . "'";
                 }
                 $result = $this->db->fetchOne($sql);
-                return !empty($result) ? true : false;
+                return !empty($result) ?
+                    true :
+                    false;
             }
             return false;
         }
@@ -195,7 +211,9 @@
             if (!empty($identity)) {
                 $sql = "SELECT *
                         FROM `{$this->tableProducts}`
-                        WHERE `identity` = '" . $this->db->escape($identity) . "'";
+                        WHERE `identity` = '" . $this->db->escape(
+                        $identity
+                    ) . "'";
                 return $this->db->fetchOne($sql);
             }
             return false;
@@ -239,12 +257,16 @@
             if (!empty($identity)) {
                 $sql = "SELECT *
                         FROM `{$this->tableProducts}`
-                        WHERE `identity` = '" . $this->db->escape($identity) . "'";
+                        WHERE `identity` = '" . $this->db->escape(
+                        $identity
+                    ) . "'";
                 if (!empty($id)) {
                     $sql .= " AND `id` = '" . $this->db->escape($id) . "'";
                 }
                 $result = $this->db->fetchOne($sql);
-                return !empty($result) ? true : false;
+                return !empty($result) ?
+                    true :
+                    false;
             }
             return false;
         }

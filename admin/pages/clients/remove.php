@@ -21,13 +21,16 @@
                 if (!empty($remove)) {
                     $objUser->removeUser($id);
 
-                    Helper::redirect($this->objUrl->getCurrent([
-                            'action',
-                            'id',
-                            'remove',
-                            'search',
-                            Paging::$key
-                        ])
+                    Helper::redirect(
+                        $this->objUrl->getCurrent(
+                            [
+                                'action',
+                                'id',
+                                'remove',
+                                'search',
+                                Paging::$key
+                            ]
+                        )
                     );
                 }
 
@@ -38,9 +41,8 @@
                 <p>
                     Are you sure you want to remove this client (<?php
                         echo $user['first_name'] . " " . $user['last_name'];
-                    ?>)?<br/>
-                    <a href="<?php echo $yes; ?>">Yes</a> |
-                    <a href="<?php echo $no; ?>">No</a>
+                    ?>)?<br/> <a href="<?php echo $yes; ?>">Yes</a> | <a
+                        href="<?php echo $no; ?>">No</a>
                 </p>
 
                 <?php

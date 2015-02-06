@@ -39,16 +39,22 @@
             $objValidation->post['identity'] = $identity;
 
             if ($objCatalog->addCategory($objValidation->post)) {
-                Helper::redirect($this->objUrl->getCurrent([
+                Helper::redirect(
+                    $this->objUrl->getCurrent(
+                        [
                             'action',
                             'id'
-                        ]) . '/action/added'
+                        ]
+                    ) . '/action/added'
                 );
             } else {
-                Helper::redirect($this->objUrl->getCurrent([
+                Helper::redirect(
+                    $this->objUrl->getCurrent(
+                        [
                             'action',
                             'id'
-                        ]) . 'action/added-failed'
+                        ]
+                    ) . 'action/added-failed'
                 );
             }
         }
@@ -81,8 +87,9 @@
                         echo $objValidation->validate('duplicate_identity');
                     ?>
                     <input type="text" name="identity" id="identity"
-                           value="<?php echo $objForm->stickyText('identity'); ?>"
-                           class="fld"/>
+                           value="<?php echo $objForm->stickyText(
+                               'identity'
+                           ); ?>" class="fld"/>
                 </td>
             </tr>
             <tr>
@@ -90,12 +97,14 @@
                 <td>
                     <?php echo $objValidation->validate('meta_title'); ?>
                     <input type="text" name="meta_title" id="meta_title"
-                           value="<?php echo $objForm->stickyText('meta_title'); ?>"
-                           class="fld"/>
+                           value="<?php echo $objForm->stickyText(
+                               'meta_title'
+                           ); ?>" class="fld"/>
                 </td>
             </tr>
             <tr>
-                <th><label for="meta_description">Meta Description: *</label></th>
+                <th><label for="meta_description">Meta Description: *</label>
+                </th>
                 <td>
                     <?php echo $objValidation->validate('meta_description'); ?>
                     <textarea name="meta_description" id="meta_description"
@@ -108,8 +117,8 @@
                 <th><label for="meta_keywords">Meta Keywords: *</label></th>
                 <td>
                     <?php echo $objValidation->validate('meta_keywords'); ?>
-                    <textarea name="meta_keywords" id="meta_keywords"
-                              cols="" rows="" class="tar_fixed"><?php
+                    <textarea name="meta_keywords" id="meta_keywords" cols=""
+                              rows="" class="tar_fixed"><?php
                             echo $objForm->stickyText('meta_keywords');
                         ?></textarea>
                 </td>
@@ -117,8 +126,8 @@
             <tr>
                 <th>&nbsp;</th>
                 <td>
-                    <label for="btn" class="sbm sbm_blue fl_l">
-                        <input type="submit" id="btn" class="btn" value="Add"/>
+                    <label for="btn" class="sbm sbm_blue fl_l"> <input
+                            type="submit" id="btn" class="btn" value="Add"/>
                     </label>
                 </td>
             </tr>

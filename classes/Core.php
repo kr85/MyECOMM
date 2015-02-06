@@ -30,32 +30,42 @@
 
             switch ($this->objUrl->module) {
                 case 'panel':
-                    set_include_path(implode(PATH_SEPARATOR, [
-                        realpath(ROOT_PATH . DS . 'admin' . DS . TEMPLATES_DIR),
-                        realpath(ROOT_PATH . DS . 'admin' . DS . PAGES_DIR),
-                        get_include_path()
-                    ]));
+                    set_include_path(
+                        implode(
+                            PATH_SEPARATOR,
+                            [
+                                realpath(
+                                    ROOT_PATH . DS . 'admin' . DS . TEMPLATES_DIR
+                                ),
+                                realpath(
+                                    ROOT_PATH . DS . 'admin' . DS . PAGES_DIR
+                                ),
+                                get_include_path()
+                            ]
+                        )
+                    );
                     $this->objAdmin = new Admin();
-                    $page = ROOT_PATH . DS . 'admin' . DS . PAGES_DIR .
-                        DS . $this->objUrl->currentPage . '.php';
+                    $page = ROOT_PATH . DS . 'admin' . DS . PAGES_DIR . DS . $this->objUrl->currentPage . '.php';
                     if (file_exists($page)) {
                         @require_once($page);
                     } else {
-                        @require_once(ROOT_PATH . DS . 'admin' . DS .
-                            PAGES_DIR . DS . 'error.php');
+                        @require_once(ROOT_PATH . DS . 'admin' . DS . PAGES_DIR . DS . 'error.php');
                     }
                     break;
                 default:
-                    set_include_path(implode(PATH_SEPARATOR, [
-                        realpath(ROOT_PATH . DS . TEMPLATES_DIR),
-                        realpath(ROOT_PATH . DS . PAGES_DIR),
-                        get_include_path()
-                    ]));
-                    $page = ROOT_PATH . DS . PAGES_DIR .
-                        DS . $this->objUrl->currentPage . '.php';
+                    set_include_path(
+                        implode(
+                            PATH_SEPARATOR,
+                            [
+                                realpath(ROOT_PATH . DS . TEMPLATES_DIR),
+                                realpath(ROOT_PATH . DS . PAGES_DIR),
+                                get_include_path()
+                            ]
+                        )
+                    );
+                    $page = ROOT_PATH . DS . PAGES_DIR . DS . $this->objUrl->currentPage . '.php';
                     if (file_exists($page)) {
-                        @require_once(ROOT_PATH . DS . PAGES_DIR .
-                            DS . $this->objUrl->currentPage . '.php');
+                        @require_once(ROOT_PATH . DS . PAGES_DIR . DS . $this->objUrl->currentPage . '.php');
                     } else {
                         @require_once(ROOT_PATH . DS . PAGES_DIR . DS . 'error.php');
                     }

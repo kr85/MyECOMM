@@ -20,12 +20,16 @@
         if (!empty($user)) {
             // Instantiate and process the email
             $objEmail = new Email();
-            if ($objEmail->process(1, [
-                'email'      => $user['email'],
-                'first_name' => $user['first_name'],
-                'last_name'  => $user['last_name'],
-                'hash'       => $user['hash']
-            ])) {
+            if ($objEmail->process(
+                1,
+                [
+                    'email'      => $user['email'],
+                    'first_name' => $user['first_name'],
+                    'last_name'  => $user['last_name'],
+                    'hash'       => $user['hash']
+                ]
+            )
+            ) {
                 echo Helper::json(['error' => false]);
             } else {
                 echo Helper::json(['error' => true]);

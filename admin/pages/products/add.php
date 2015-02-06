@@ -35,7 +35,10 @@
                 $objValidation->post['identity']
             );
 
-            if ($objCatalog->isDuplicateProduct($objValidation->post['identity'])) {
+            if ($objCatalog->isDuplicateProduct(
+                $objValidation->post['identity']
+            )
+            ) {
                 $objValidation->addToErrors('duplicate_identity');
             } else {
                 if ($objCatalog->addProduct($objValidation->post)) {
@@ -43,25 +46,40 @@
                     $objUpload = new Upload();
 
                     if ($objUpload->upload(CATALOG_PATH)) {
-                        $objCatalog->updateProduct([
-                            'image' => $objUpload->names[0]
-                        ], $objCatalog->id);
+                        $objCatalog->updateProduct(
+                            [
+                                'image' => $objUpload->names[0]
+                            ],
+                            $objCatalog->id
+                        );
 
-                        Helper::redirect($this->objUrl->getCurrent([
-                                'action',
-                                'id'
-                            ]) . '/action/added');
+                        Helper::redirect(
+                            $this->objUrl->getCurrent(
+                                [
+                                    'action',
+                                    'id'
+                                ]
+                            ) . '/action/added'
+                        );
                     } else {
-                        Helper::redirect($this->objUrl->getCurrent([
-                                'action',
-                                'id'
-                            ]) . '/action/added-no-upload');
+                        Helper::redirect(
+                            $this->objUrl->getCurrent(
+                                [
+                                    'action',
+                                    'id'
+                                ]
+                            ) . '/action/added-no-upload'
+                        );
                     }
                 } else {
-                    Helper::redirect($this->objUrl->getCurrent([
-                            'action',
-                            'id'
-                        ]) . '/action/added-failed');
+                    Helper::redirect(
+                        $this->objUrl->getCurrent(
+                            [
+                                'action',
+                                'id'
+                            ]
+                        ) . '/action/added-failed'
+                    );
                 }
             }
         }
@@ -82,13 +100,15 @@
                         <option value="">Select One&hellip;</option>
                         <?php if (!empty($categories)) { ?>
                             <?php foreach ($categories as $category) { ?>
-                            <option value="<?php echo $category['id']; ?>"
+                                <option value="<?php echo $category['id']; ?>"
                                     <?php echo $objForm->stickySelect(
                                         'category',
                                         $category['id']
-                                    );?>>
-                                <?php echo Helper::encodeHTML($category['name']); ?>
-                            </option>
+                                    ); ?>>
+                                    <?php echo Helper::encodeHTML(
+                                        $category['name']
+                                    ); ?>
+                                </option>
                             <?php } ?>
                         <?php } ?>
                     </select>
@@ -98,7 +118,7 @@
                 <th><label for="name">Name: *</label></th>
                 <td>
                     <?php echo $objValidation->validate('name'); ?>
-                    <input type="text" name="name" id="name" 
+                    <input type="text" name="name" id="name"
                            value="<?php echo $objForm->stickyText('name'); ?>"
                            class="fld"/>
                 </td>
@@ -108,8 +128,10 @@
                 <td>
                     <?php echo $objValidation->validate('description'); ?>
                     <textarea name="description" id="description" cols=""
-                              rows="" class="tar_fixed"><?php echo
-                        $objForm->stickyText('description'); ?></textarea>
+                              rows=""
+                              class="tar_fixed"><?php echo $objForm->stickyText(
+                            'description'
+                        ); ?></textarea>
                 </td>
             </tr>
             <tr>
@@ -125,10 +147,13 @@
                 <th><label for="identity">Identity: *</label></th>
                 <td>
                     <?php echo $objValidation->validate('identity'); ?>
-                    <?php echo $objValidation->validate('duplicate_identity'); ?>
+                    <?php echo $objValidation->validate(
+                        'duplicate_identity'
+                    ); ?>
                     <input type="text" name="identity" id="identity"
-                           value="<?php echo $objForm->stickyText('identity'); ?>"
-                           class="fld"/>
+                           value="<?php echo $objForm->stickyText(
+                               'identity'
+                           ); ?>" class="fld"/>
                 </td>
             </tr>
             <tr>
@@ -136,26 +161,32 @@
                 <td>
                     <?php echo $objValidation->validate('meta_title'); ?>
                     <input type="text" name="meta_title" id="meta_title"
-                           value="<?php echo $objForm->stickyText('meta_title'); ?>"
-                           class="fld"/>
+                           value="<?php echo $objForm->stickyText(
+                               'meta_title'
+                           ); ?>" class="fld"/>
                 </td>
             </tr>
             <tr>
-                <th><label for="meta_description">Meta Description: *</label></th>
+                <th><label for="meta_description">Meta Description: *</label>
+                </th>
                 <td>
                     <?php echo $objValidation->validate('meta_description'); ?>
                     <textarea name="meta_description" id="meta_description"
-                        cols="" rows="" class="tar_fixed"><?php
-                        echo $objForm->stickyText('meta_description'); ?></textarea>
+                              cols="" rows="" class="tar_fixed"><?php
+                            echo $objForm->stickyText(
+                                'meta_description'
+                            ); ?></textarea>
                 </td>
             </tr>
             <tr>
                 <th><label for="meta_keywords">Meta Keywords: *</label></th>
                 <td>
                     <?php echo $objValidation->validate('meta_keywords'); ?>
-                    <textarea name="meta_keywords" id="meta_keywords"
-                        cols="" rows="" class="tar_fixed"><?php
-                        echo $objForm->stickyText('meta_keywords'); ?></textarea>
+                    <textarea name="meta_keywords" id="meta_keywords" cols=""
+                              rows="" class="tar_fixed"><?php
+                            echo $objForm->stickyText(
+                                'meta_keywords'
+                            ); ?></textarea>
                 </td>
             </tr>
             <tr>
@@ -168,8 +199,8 @@
             <tr>
                 <th>&nbsp;</th>
                 <td>
-                    <label for="btn" class="sbm sbm_blue fl_l">
-                        <input type="submit" id="btn" class="btn" value="Add"/>
+                    <label for="btn" class="sbm sbm_blue fl_l"> <input
+                            type="submit" id="btn" class="btn" value="Add"/>
                     </label>
                 </td>
             </tr>

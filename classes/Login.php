@@ -7,11 +7,11 @@
 
         public static $loginPageFront = "/login";
         public static $dashboardFront = "/orders";
-        public static $loginFront = "cid";
+        public static $loginFront     = "cid";
 
         public static $loginPageAdmin = "/panel";
         public static $dashboardAdmin = "/panel/products";
-        public static $loginAdmin = "aid";
+        public static $loginAdmin     = "aid";
 
         public static $validLogin = "valid";
 
@@ -38,11 +38,12 @@
          * @param null $objUrl
          */
         public static function restrictFront($objUrl = null) {
-            $objUrl = is_object($objUrl) ? $objUrl : new Url();
+            $objUrl = is_object($objUrl) ?
+                $objUrl :
+                new Url();
             if (!self::isLogged(self::$loginFront)) {
                 $url = $objUrl->currentPage != "logout" ?
-                    self::$loginPageFront . "/" . self::$referrer . "/" .
-                        $objUrl->currentPage . PAGE_EXTENSION :
+                    self::$loginPageFront . "/" . self::$referrer . "/" . $objUrl->currentPage . PAGE_EXTENSION :
                     self::$loginPageFront . PAGE_EXTENSION;
                 Helper::redirect($url);
             }
@@ -67,9 +68,10 @@
         public static function isLogged($case = null) {
 
             if (!empty($case)) {
-                if (isset($_SESSION[self::$validLogin]) &&
-                    $_SESSION[self::$validLogin] == 1) {
-                    return isset($_SESSION[$case]) ? true : false;
+                if (isset($_SESSION[self::$validLogin]) && $_SESSION[self::$validLogin] == 1) {
+                    return isset($_SESSION[$case]) ?
+                        true :
+                        false;
                 }
 
                 return false;
@@ -104,7 +106,9 @@
         public static function loginAdmin($id = null, $url = null) {
 
             if (!empty($id)) {
-                $url = !empty($url) ? $url : self::$dashboardAdmin;
+                $url = !empty($url) ?
+                    $url :
+                    self::$dashboardAdmin;
                 $_SESSION[self::$loginAdmin] = $id;
                 $_SESSION[self::$validLogin] = 1;
                 Helper::redirect($url);

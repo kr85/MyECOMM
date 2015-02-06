@@ -11,7 +11,7 @@
         private $tableStatuses = 'statuses';
 
         private $basket = [];
-        private $items = [];
+        private $items  = [];
 
         private $fields = [];
         private $values = [];
@@ -30,7 +30,9 @@
             if (!empty($this->items)) {
 
                 $objUser = new User();
-                $user = $objUser->getUser(Session::getSession(Login::$loginFront));
+                $user = $objUser->getUser(
+                    Session::getSession(Login::$loginFront)
+                );
 
                 if (!empty($user)) {
 
@@ -97,7 +99,9 @@
                     }
                 }
 
-                return empty($errors) ? true : false;
+                return empty($errors) ?
+                    true :
+                    false;
             }
 
             return false;
@@ -128,7 +132,9 @@
          */
         public function getOrder($id = null) {
 
-            $id = !empty($id) ? $id : $this->id;
+            $id = !empty($id) ?
+                $id :
+                $this->id;
 
             $sql = "SELECT * FROM `{$this->tableOrders}`
                     WHERE `id` = '" . $this->db->escape($id) . "'";
@@ -144,7 +150,9 @@
          */
         public function getOrderItems($id = null) {
 
-            $id = !empty($id) ? $id : $this->id;
+            $id = !empty($id) ?
+                $id :
+                $this->id;
 
             $sql = "SELECT * FROM `{$this->tableOrdersItems}`
                     WHERE `order` = '" . $this->db->escape($id) . "'";
@@ -165,12 +173,16 @@
             if (!empty($data) && !empty($result)) {
 
                 //Helper::addToErrorsLog('data_result_not_null', null);
-                if (array_key_exists('txn_id', $data) &&
-                    array_key_exists('payment_status', $data) &&
-                    array_key_exists('custom', $data)) {
+                if (array_key_exists('txn_id', $data) && array_key_exists(
+                        'payment_status',
+                        $data
+                    ) && array_key_exists('custom', $data)
+                ) {
 
                     //Helper::addToErrorsLog('txn_id|payment_status|custom_exist', null);
-                    $active = $data['payment_status'] == 'Completed' ? 1 : 0;
+                    $active = $data['payment_status'] == 'Completed' ?
+                        1 :
+                        0;
                     $out = [];
 
                     foreach ($data as $key => $value) {
@@ -183,19 +195,28 @@
                     $sql = "UPDATE `{$this->tableOrders}`
                             SET `pp_status` = '" . $this->db->escape($active) . "',
                             `txn_id` = '" . $this->db->escape($data['txn_id']) . "',
-                            `payment_status` = '" . $this->db->escape($data['payment_status']) . "',
+                            `payment_status` = '" . $this->db->escape(
+                            $data['payment_status']
+                        ) . "',
                             `ipn` = '" . $this->db->escape($out) . "',
                             `response` = '" . $this->db->escape($result) . "'
-                            WHERE `id` = '" . $this->db->escape($data['custom']) . "'";
+                            WHERE `id` = '" . $this->db->escape(
+                            $data['custom']
+                        ) . "'";
 
                     //Helper::addToErrorsLog('SQL_approve', $sql);
                     if (!$this->db->query($sql)) {
-                        Helper::addToErrorsLog('Update_approve_query_failed', null);
+                        Helper::addToErrorsLog(
+                            'Update_approve_query_failed',
+                            null
+                        );
                         $errors[] = $sql;
                     }
 
                     //Helper::addToErrorsLog('After_approve_query', null);
-                    return empty($errors) ? true : false;
+                    return empty($errors) ?
+                        true :
+                        false;
                 }
 
                 //Helper::addToErrorsLog('txn_id_payment_status_or_custom_do_not_exist', null);
@@ -253,8 +274,8 @@
 
             $sql = "SELECT * FROM `$this->tableOrders`";
             $sql .= !empty($search) ?
-                    " WHERE `id` = '" . $this->db->escape($search) . "'" :
-                    null;
+                " WHERE `id` = '" . $this->db->escape($search) . "'" :
+                null;
             $sql .= " ORDER BY `date` DESC";
 
             return $this->db->fetchAll($sql);
@@ -270,11 +291,15 @@
         public function updateOrder($id = null, $data = null) {
 
             if (!empty($id) && !empty($data)) {
-                if (is_array($data) &&
-                    array_key_exists('status', $data) &&
-                    array_key_exists('notes', $data)) {
+                if (is_array($data) && array_key_exists(
+                        'status',
+                        $data
+                    ) && array_key_exists('notes', $data)
+                ) {
                     $sql = "UPDATE `{$this->tableOrders}`
-                            SET `status` = '" . $this->db->escape($data['status']) . "',
+                            SET `status` = '" . $this->db->escape(
+                            $data['status']
+                        ) . "',
                             `notes` = '" . $this->db->escape($data['notes']) . "'
                             WHERE `id` = '" . $this->db->escape($id) . "'";
 

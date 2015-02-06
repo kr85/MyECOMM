@@ -3,16 +3,14 @@
 
     if (empty($category)) {
         require_once("error.php");
-    }
-    else {
+    } else {
         // Instantiate catalog class
         $objCatalog = new Catalog();
         $category = $objCatalog->getCategoryByIdentity($category);
 
         if (empty($category)) {
             require_once("error.php");
-        }
-        else {
+        } else {
             $this->metaTitle = $category['meta_title'];
             $this->metaDescription = $category['meta_description'];
             $this->metaKeywords = $category['meta_keywords'];
@@ -43,36 +41,47 @@
                                     CATALOG_PATH . DS . $image,
                                     0
                                 );
-                                $width = $width > 120 ? 120 : $width;
+                                $width = $width > 120 ?
+                                    120 :
+                                    $width;
 
-                                $link = $this->objUrl->href('catalog-item', [
-                                    'category',
-                                    $category['identity'],
-                                    'item',
-                                    $row['identity']
-                                ]);
+                                $link = $this->objUrl->href(
+                                    'catalog-item',
+                                    [
+                                        'category',
+                                        $category['identity'],
+                                        'item',
+                                        $row['identity']
+                                    ]
+                                );
                             ?>
-                            <a href="<?php echo $link; ?>">
-                                <img src="<?php echo $objCatalog->path . $image; ?>"
-                                     alt="<?php echo Helper::encodeHTML($row['name'], 1); ?>"
-                                     width="<?php echo $width; ?>"/>
-                            </a>
+                            <a href="<?php echo $link; ?>"> <img
+                                    src="<?php echo $objCatalog->path . $image; ?>"
+                                    alt="<?php echo Helper::encodeHTML(
+                                        $row['name'],
+                                        1
+                                    ); ?>" width="<?php echo $width; ?>"/> </a>
                         </div>
                         <div class="catalog_wrapper_right">
                             <h4>
                                 <a href="<?php echo $link; ?>">
-                                    <?php echo Helper::encodeHTML($row['name'], 1); ?>
+                                    <?php echo Helper::encodeHTML(
+                                        $row['name'],
+                                        1
+                                    ); ?>
                                 </a>
                             </h4>
                             <h4>Price: <?php echo Catalog::$currency;
                                     echo number_format($row['price'], 2); ?>
                             </h4>
+
                             <p>
                                 <?php echo Helper::shortenString(
                                     Helper::encodeHTML($row['description'])
                                 );
                                 ?>
                             </p>
+
                             <p>
                                 <?php echo Basket::activeButton($row['id']); ?>
                             </p>
@@ -82,8 +91,7 @@
                 }
                 // Display pagination links
                 echo $objPaging->getPaging();
-            }
-            else {
+            } else {
                 ?>
                 <p>There are no products in this category.</p>
             <?php

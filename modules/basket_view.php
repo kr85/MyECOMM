@@ -43,8 +43,7 @@
                                        name="qty-<?php echo $item['id']; ?>"
                                        id="qty-<?php echo $item['id']; ?>"
                                        class="fld_qty"
-                                       value="<?php echo
-                                           $session[$item['id']]['quantity'];
+                                       value="<?php echo $session[$item['id']]['quantity'];
                                        ?>"/>
                             </td>
                             <td class="ta_r">
@@ -54,7 +53,9 @@
                                         $objBasket->itemTotal(
                                             $item['price'],
                                             $session[$item['id']]['quantity']
-                                        ), 2);
+                                        ),
+                                        2
+                                    );
                                 ?>
                             </td>
                             <td class="ta_r">
@@ -115,8 +116,7 @@
 
             <div class="sbm sbm_blue fl_r">
                 <a href="<?php echo $objUrl->href('checkout'); ?>" class="btn">
-                    Checkout
-                </a>
+                    Checkout </a>
             </div>
 
             <div class="sbm sbm_blue fl_l update_basket">
@@ -124,8 +124,7 @@
             </div>
         </form>
     <?php
-    }
-    else {
+    } else {
         ?>
         <p>Your basket is currently empty.</p>
     <?php

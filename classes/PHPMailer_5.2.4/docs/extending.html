@@ -1,20 +1,24 @@
 <html>
-<head>
-<title>Examples using phpmailer</title>
-</head>
+    <head>
+        <title>Examples using phpmailer</title>
+    </head>
 
-<body bgcolor="#FFFFFF">
+    <body bgcolor="#FFFFFF">
 
-<h2>Examples using phpmailer</h2>
+        <h2>Examples using phpmailer</h2>
 
-<h3>1. Advanced Example</h3>
-<p>
+        <h3>1. Advanced Example</h3>
 
-This demonstrates sending out multiple email messages with binary attachments
-from a MySQL database with multipart/alternative support.<p>
-<table cellpadding="4" border="1" width="80%">
-<tr>
-<td bgcolor="#CCCCCC">
+        <p>
+
+            This demonstrates sending out multiple email messages with binary
+            attachments from a MySQL database with multipart/alternative
+            support.
+
+        <p>
+        <table cellpadding="4" border="1" width="80%">
+            <tr>
+                <td bgcolor="#CCCCCC">
 <pre>
 require("class.phpmailer.php");
 
@@ -27,8 +31,8 @@ $mail->Mailer   = "smtp";
 
 @MYSQL_CONNECT("localhost","root","password");
 @mysql_select_db("my_company");
-$query  = "SELECT full_name, email, photo FROM employee WHERE id=$id";
-$result = @MYSQL_QUERY($query);
+$queryï¿½ =ï¿½"SELECT full_name, email,ï¿½photoï¿½FROM employeeï¿½WHEREï¿½id=$id";
+$resultï¿½=ï¿½@MYSQL_QUERY($query);
 
 while ($row = mysql_fetch_array ($result))
 {
@@ -57,31 +61,30 @@ while ($row = mysql_fetch_array ($result))
     $mail->ClearAttachments();
 }
 </pre>
-</td>
-</tr>
-</table>
-<p>
+                </td>
+            </tr>
+        </table>
+        <p>
 
-<h3>2. Extending phpmailer</h3>
-<p>
+        <h3>2. Extending phpmailer</h3>
 
-Extending classes with inheritance is one of the most
-powerful features of object-oriented
-programming.  It allows you to make changes to the
-original class for your
-own personal use without hacking the original
-classes.  Plus, it is very
-easy to do. I've provided an example:
+        <p>
 
-<p>
-Here's a class that extends the phpmailer class and sets the defaults
-for the particular site:<br>
-PHP include file: <b>mail.inc.php</b>
-<p>
+            Extending classes with inheritance is one of the most powerful
+            features of object-oriented programming. It allows you to make
+            changes to the original class for your own personal use without
+            hacking the original classes. Plus, it is very easy to do. I've
+            provided an example:
 
-<table cellpadding="4" border="1" width="80%">
-<tr>
-<td bgcolor="#CCCCCC">
+        <p>
+            Here's a class that extends the phpmailer class and sets the
+            defaults for the particular site:<br> PHP include file: <b>mail.inc.php</b>
+
+        <p>
+
+        <table cellpadding="4" border="1" width="80%">
+            <tr>
+                <td bgcolor="#CCCCCC">
 <pre>
 require("class.phpmailer.php");
 
@@ -106,19 +109,19 @@ class my_phpmailer extends phpmailer {
         // Place your new code here
     }
 }
-</td>
-</tr>
-</table>
-<br>
+                </td>
+            </tr>
+        </table>
+        <br>
 
-Now here's a normal PHP page in the site, which will have all the defaults set
-above:<br>
-Normal PHP file: <b>mail_test.php</b>
-<p>
+        Now here's a normal PHP page in the site, which will have all the
+        defaults set above:<br> Normal PHP file: <b>mail_test.php</b>
 
-<table cellpadding="4" border="1" width="80%">
-<tr>
-<td bgcolor="#CCCCCC">
+        <p>
+
+        <table cellpadding="4" border="1" width="80%">
+            <tr>
+                <td bgcolor="#CCCCCC">
 <pre>
 require("mail.inc.php");
 
@@ -139,10 +142,10 @@ if(!$mail->Send())
 
 echo "Message was sent successfully";
 </pre>
-</td>
-</tr>
-</table>
-</p>
+                </td>
+            </tr>
+        </table>
+        </p>
 
-</body>
+    </body>
 </html>

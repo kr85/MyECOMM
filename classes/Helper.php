@@ -28,11 +28,17 @@
                     foreach ($textMatches as $key => $value) {
                         $textSanitised[$key] = htmlentities(
                             html_entity_decode($value, ENT_QUOTES, 'UTF-8'),
-                            ENT_QUOTES, 'UTF-8');
+                            ENT_QUOTES,
+                            'UTF-8'
+                        );
                     }
 
                     foreach ($textMatches as $key => $value) {
-                        $string = str_replace($value, $textSanitised[$key], $string);
+                        $string = str_replace(
+                            $value,
+                            $textSanitised[$key],
+                            $string
+                        );
                     }
 
                     return $string;
@@ -103,7 +109,9 @@
          */
         public static function setDate($case = null, $date = null) {
 
-            $date = empty($date) ? time() : strtotime($date);
+            $date = empty($date) ?
+                time() :
+                strtotime($date);
             switch ($case) {
                 case 1:
                     // 23/01/2015
@@ -133,7 +141,10 @@
 
             if (!empty($name) && empty($errors)) {
                 $filePath = LOGS_DIR . DS . $name;
-                $file = fopen($filePath, 'w') or die('Unable to open the file.');
+                $file = fopen(
+                    $filePath,
+                    'w'
+                ) or die('Unable to open the file.');
                 fwrite($file, $name);
                 fclose($file);
             }
@@ -146,7 +157,10 @@
             if (!empty($name) && !empty($errors)) {
                 $fileName = date('Y-m-d_H:i:s_') . $name . '.log';
                 $filePath = LOGS_DIR . DS . $fileName;
-                $file = fopen($filePath, 'w') or die('Unable to open the file.');
+                $file = fopen(
+                    $filePath,
+                    'w'
+                ) or die('Unable to open the file.');
                 fwrite($file, $errors);
                 fclose($file);
             }
@@ -193,7 +207,9 @@
          * @return bool
          */
         public static function isEmpty($value = null) {
-            return empty($value) && !is_numeric($value) ? true : false;
+            return empty($value) && !is_numeric($value) ?
+                true :
+                false;
         }
 
         /**
@@ -203,7 +219,9 @@
          * @return array
          */
         public static function makeArray($array = null) {
-            return is_array($array) ? $array : [$array];
+            return is_array($array) ?
+                $array :
+                [$array];
         }
 
         /**
@@ -243,11 +261,15 @@
         public static function json($input = null) {
             if (!empty($input)) {
                 if (defined("JSON_UNESCAPED_UNICODE")) {
-                    return json_encode($input, JSON_HEX_TAG | JSON_HEX_APOS |
-                        JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
+                    return json_encode(
+                        $input,
+                        JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE
+                    );
                 } else {
-                    return json_encode($input, JSON_HEX_TAG | JSON_HEX_APOS |
-                        JSON_HEX_QUOT | JSON_HEX_AMP);
+                    return json_encode(
+                        $input,
+                        JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP
+                    );
                 }
             }
             return false;

@@ -21,7 +21,9 @@
          */
         public function __construct($objUrl = null) {
             parent::__construct();
-            $this->objUrl = is_object($objUrl) ? $objUrl : new Url();
+            $this->objUrl = is_object($objUrl) ?
+                $objUrl :
+                new Url();
         }
 
         /**

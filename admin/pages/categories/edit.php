@@ -48,28 +48,39 @@
                 if ($objValidation->isValid()) {
                     $objValidation->post['identity'] = $identity;
 
-                    if ($objCatalog->updateCategory($objValidation->post, $id)) {
-                        Helper::redirect($this->objUrl->getCurrent([
+                    if ($objCatalog->updateCategory(
+                        $objValidation->post,
+                        $id
+                    )
+                    ) {
+                        Helper::redirect(
+                            $this->objUrl->getCurrent(
+                                [
                                     'action',
                                     'id'
-                                ]) . '/action/edited'
+                                ]
+                            ) . '/action/edited'
                         );
                     } else {
-                        Helper::redirect($this->objUrl->getCurrent([
+                        Helper::redirect(
+                            $this->objUrl->getCurrent(
+                                [
                                     'action',
                                     'id'
-                                ]) . '/action/edited-failed'
+                                ]
+                            ) . '/action/edited-failed'
                         );
                     }
                 }
             }
 
-    require_once('_header.php');
-?>
+            require_once('_header.php');
+            ?>
             <h1>Categories :: Edit</h1>
 
             <form action="" method="POST">
-                <table cellpadding="0" cellspacing="0" border="0" class="tbl_insert">
+                <table cellpadding="0" cellspacing="0" border="0"
+                       class="tbl_insert">
                     <tr>
                         <th><label for="name">Name: *</label></th>
                         <td>
@@ -81,8 +92,7 @@
                                    value="<?php echo $objForm->stickyText(
                                        'name',
                                        $category['name']
-                                   ); ?>"
-                                   class="fld"/>
+                                   ); ?>" class="fld"/>
                         </td>
                     </tr>
                     <tr>
@@ -90,34 +100,40 @@
                         <td>
                             <?php
                                 echo $objValidation->validate('identity');
-                                echo $objValidation->validate('duplicate_identity');
+                                echo $objValidation->validate(
+                                    'duplicate_identity'
+                                );
                             ?>
                             <input type="text" name="identity" id="identity"
                                    value="<?php echo $objForm->stickyText(
                                        'identity',
                                        $category['identity']
-                                   ); ?>"
-                                   class="fld"/>
+                                   ); ?>" class="fld"/>
                         </td>
                     </tr>
                     <tr>
                         <th><label for="meta_title">Meta Title: *</label></th>
                         <td>
-                            <?php echo $objValidation->validate('meta_title'); ?>
+                            <?php echo $objValidation->validate(
+                                'meta_title'
+                            ); ?>
                             <input type="text" name="meta_title" id="meta_title"
                                    value="<?php echo $objForm->stickyText(
                                        'meta_title',
                                        $category['meta_title']
-                                   ); ?>"
-                                   class="fld"/>
+                                   ); ?>" class="fld"/>
                         </td>
                     </tr>
                     <tr>
-                        <th><label for="meta_description">Meta Description: *</label></th>
+                        <th><label for="meta_description">Meta Description:
+                                *</label></th>
                         <td>
-                            <?php echo $objValidation->validate('meta_description'); ?>
-                            <textarea name="meta_description" id="meta_description"
-                                      cols="" rows="" class="tar_fixed"><?php
+                            <?php echo $objValidation->validate(
+                                'meta_description'
+                            ); ?>
+                            <textarea name="meta_description"
+                                      id="meta_description" cols="" rows=""
+                                      class="tar_fixed"><?php
                                     echo $objForm->stickyText(
                                         'meta_description',
                                         $category['meta_description']
@@ -126,9 +142,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <th><label for="meta_keywords">Meta Keywords: *</label></th>
+                        <th><label for="meta_keywords">Meta Keywords: *</label>
+                        </th>
                         <td>
-                            <?php echo $objValidation->validate('meta_keywords'); ?>
+                            <?php echo $objValidation->validate(
+                                'meta_keywords'
+                            ); ?>
                             <textarea name="meta_keywords" id="meta_keywords"
                                       cols="" rows="" class="tar_fixed"><?php
                                     echo $objForm->stickyText(
@@ -141,15 +160,14 @@
                     <tr>
                         <th>&nbsp;</th>
                         <td>
-                            <label for="btn" class="sbm sbm_blue fl_l">
-                                <input type="submit" id="btn" class="btn"
-                                       value="Update"/>
-                            </label>
+                            <label for="btn" class="sbm sbm_blue fl_l"> <input
+                                    type="submit" id="btn" class="btn"
+                                    value="Update"/> </label>
                         </td>
                     </tr>
                 </table>
             </form>
-<?php
+            <?php
             require_once('_footer.php');
         }
     }

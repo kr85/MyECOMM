@@ -33,27 +33,34 @@
 
                 if ($objValidation->isValid()) {
                     if ($objOrder->updateOrder($id, $variables)) {
-                        Helper::redirect($this->objUrl->getCurrent([
+                        Helper::redirect(
+                            $this->objUrl->getCurrent(
+                                [
                                     'action',
                                     'id'
-                                ]) . '/action/edited'
+                                ]
+                            ) . '/action/edited'
                         );
                     } else {
-                        Helper::redirect($this->objUrl->getCurrent([
+                        Helper::redirect(
+                            $this->objUrl->getCurrent(
+                                [
                                     'action',
                                     'id'
-                                ]) . '/action/edited-failed'
+                                ]
+                            ) . '/action/edited-failed'
                         );
                     }
                 }
             }
 
-    require_once('_header.php');
-?>
+            require_once('_header.php');
+            ?>
             <h1>Orders :: View</h1>
 
             <form action="" method="POST">
-                <table cellpadding="0" cellspacing="0" border="0" class="tbl_insert">
+                <table cellpadding="0" cellspacing="0" border="0"
+                       class="tbl_insert">
                     <tr>
                         <th>Date</th>
                         <td colspan="4">
@@ -65,27 +72,34 @@
                         <td colspan="4"><?php echo $order['id']; ?></td>
                     </tr>
                     <?php if (!empty($items)) { ?>
-                    <tr>
-                        <th rowspan="<?php echo count($items) + 1; ?>">Items:</th>
-                        <td class="col_5">Id</td>
-                        <td>Item</td>
-                        <td class="col_5">Qty</td>
-                        <td class="ta_r col_15">Amount</td>
-                    </tr>
+                        <tr>
+                            <th rowspan="<?php echo count($items) + 1; ?>">
+                                Items:
+                            </th>
+                            <td class="col_5">Id</td>
+                            <td>Item</td>
+                            <td class="col_5">Qty</td>
+                            <td class="ta_r col_15">Amount</td>
+                        </tr>
                         <?php foreach ($items as $item) {
-                            $product = $objCatalog->getProduct($item['product']);
-                        ?>
+                            $product = $objCatalog->getProduct(
+                                $item['product']
+                            );
+                            ?>
                             <tr>
                                 <td><?php echo $product['id']; ?></td>
                                 <td>
-                                    <?php echo Helper::encodeHTML($product['name']); ?>
+                                    <?php echo Helper::encodeHTML(
+                                        $product['name']
+                                    ); ?>
                                 </td>
                                 <td class="ta_r"><?php echo $item['qty']; ?></td>
                                 <td class="ta_r">
                                     <?php
                                         echo Catalog::$currency;
                                         echo number_format(
-                                            $item['price'] * $item['qty'], 2
+                                            $item['price'] * $item['qty'],
+                                            2
                                         );
                                     ?>
                                 </td>
@@ -126,15 +140,25 @@
                         <td colspan="4">
                             <?php
                                 echo Helper::encodeHTML(
-                                    $user['first_name'] . " " . $user['last_name']
-                                ) . '<br/>';
-                                echo Helper::encodeHTML($user['address_1']) . '<br/>';
-                                echo Helper::encodeHTML($user['address_2']) . '<br/>';
+                                        $user['first_name'] . " " . $user['last_name']
+                                    ) . '<br/>';
+                                echo Helper::encodeHTML(
+                                        $user['address_1']
+                                    ) . '<br/>';
+                                echo Helper::encodeHTML(
+                                        $user['address_2']
+                                    ) . '<br/>';
                                 echo Helper::encodeHTML($user['city']) . ', ';
                                 echo Helper::encodeHTML($user['state']) . ' ';
-                                echo Helper::encodeHTML($user['zip_code']) . '<br/>';
-                                $country = $objCountry->getCountry($user['country']);
-                                echo Helper::encodeHTML($country['name']) . '<br/>';
+                                echo Helper::encodeHTML(
+                                        $user['zip_code']
+                                    ) . '<br/>';
+                                $country = $objCountry->getCountry(
+                                    $user['country']
+                                );
+                                echo Helper::encodeHTML(
+                                        $country['name']
+                                    ) . '<br/>';
                                 echo '<a href="mailto:' . $user['email'] . '">';
                                 echo $user['email'] . '</a>';
                             ?>
@@ -144,9 +168,11 @@
                         <th>PayPal Status</th>
                         <td colspan="4">
                             <?php
-                                 echo !empty($order['payment_status']) ?
-                                      Helper::encodeHTML($order['payment_status']) :
-                                      "Pending";
+                                echo !empty($order['payment_status']) ?
+                                    Helper::encodeHTML(
+                                        $order['payment_status']
+                                    ) :
+                                    "Pending";
                             ?>
                         </td>
                     </tr>
@@ -155,17 +181,20 @@
                         <td colspan="4">
                             <?php $objValidation->validate('status'); ?>
                             <?php if (!empty($status)) { ?>
-                            <select name="status" id="status" class="sel">
-                                <?php foreach ($status as $s) { ?>
-                                    <option value="<?php echo $s['id']; ?>"
-                                        <?php echo $objForm->stickySelect(
-                                            'status',
-                                            $s['id'],
-                                            $order['status']);
-                                        ?>><?php echo Helper::encodeHTML($s['name']); ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
+                                <select name="status" id="status" class="sel">
+                                    <?php foreach ($status as $s) { ?>
+                                        <option value="<?php echo $s['id']; ?>"
+                                            <?php echo $objForm->stickySelect(
+                                                'status',
+                                                $s['id'],
+                                                $order['status']
+                                            );
+                                            ?>><?php echo Helper::encodeHTML(
+                                                $s['name']
+                                            ); ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
                             <?php } ?>
                         </td>
                     </tr>
@@ -173,10 +202,10 @@
                         <th><label for="notes">Notes</label></th>
                         <td colspan="4">
                             <textarea name="notes" id="notes" cols="" rows=""
-                                      class="tar"><?php echo
-                                $objForm->stickyText(
+                                      class="tar"><?php echo $objForm->stickyText(
                                     'notes',
-                                    $order['notes']);
+                                    $order['notes']
+                                );
                                 ?></textarea>
                         </td>
                     </tr>
@@ -184,31 +213,29 @@
                         <th>&nbsp;</th>
                         <td colspan="4">
                             <div class="sbm sbm_blue fl_r">
-                                <a href="<?php echo $this->objUrl->getCurrent([
-                                        'action'
-                                    ]) . '/action/invoice'; ?>"
-                                   class="btn" target="_blank">
-                                    Invoice
-                                </a>
+                                <a href="<?php echo $this->objUrl->getCurrent(
+                                        [
+                                            'action'
+                                        ]
+                                    ) . '/action/invoice'; ?>" class="btn"
+                                   target="_blank"> Invoice </a>
                             </div>
                             <div class="sbm sbm_blue fl_l mr_r4">
-                                <a href="<?php echo $this->objUrl->getCurrent([
-                                    'action',
-                                    'id'
-                                ]); ?>"
-                                   class="btn">
-                                    Go Back
-                                </a>
+                                <a href="<?php echo $this->objUrl->getCurrent(
+                                    [
+                                        'action',
+                                        'id'
+                                    ]
+                                ); ?>" class="btn"> Go Back </a>
                             </div>
                             <label for="btn_update" class="sbm sbm_blue fl_l">
-                                <input type="submit" id="btn_update"
-                                       class="btn" value="Update"/>
-                            </label>
+                                <input type="submit" id="btn_update" class="btn"
+                                       value="Update"/> </label>
                         </td>
                     </tr>
                 </table>
             </form>
-<?php
+            <?php
             require_once('_footer.php');
         }
     }

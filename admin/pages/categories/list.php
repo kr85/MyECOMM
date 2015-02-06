@@ -11,12 +11,12 @@
     <h1>Categories</h1>
 
     <p>
-        <a href="<?php echo $this->objUrl->getCurrent([
-                'action',
-                'id'
-            ]) . '/action/add'; ?>">
-            New Category
-        </a>
+        <a href="<?php echo $this->objUrl->getCurrent(
+                [
+                    'action',
+                    'id'
+                ]
+            ) . '/action/add'; ?>"> New Category </a>
     </p>
 
 <?php if (!empty($rows)) { ?>
@@ -31,20 +31,21 @@
             <tr>
                 <td><?php echo Helper::encodeHTML($category['name']); ?></td>
                 <td class="ta_r">
-                    <a href="<?php echo $this->objUrl->getCurrent([
-                            'action',
-                            'id'
-                        ]) . '/action/remove/id/' . $category['id']; ?>">
-                        Remove
-                    </a>
+                    <a href="<?php echo $this->objUrl->getCurrent(
+                            [
+                                'action',
+                                'id'
+                            ]
+                        ) . '/action/remove/id/' . $category['id']; ?>">
+                        Remove </a>
                 </td>
                 <td class="ta_r">
-                    <a href="<?php echo $this->objUrl->getCurrent([
-                            'action',
-                            'id'
-                        ]) . '/action/edit/id/' . $category['id']; ?>">
-                        Edit
-                    </a>
+                    <a href="<?php echo $this->objUrl->getCurrent(
+                            [
+                                'action',
+                                'id'
+                            ]
+                        ) . '/action/edit/id/' . $category['id']; ?>"> Edit </a>
                 </td>
             </tr>
         <?php } ?>

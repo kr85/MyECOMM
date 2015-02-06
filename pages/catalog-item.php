@@ -27,7 +27,9 @@
             // Check if image is empty
             if (!empty($image)) {
                 $width = Helper::getImageSize(CATALOG_PATH . DS . $image, 0);
-                $width = $width > 120 ? 120 : $width;
+                $width = $width > 120 ?
+                    120 :
+                    $width;
                 echo "<div class=\"fl_l\">";
                 echo "<div class=\"lft\"><img src=\"";
                 echo $objCatalog->path . $image;
@@ -47,11 +49,9 @@
             echo "<p><a href=\"javascript:history.go(-1)\">Go back</a></p>";
 
             require_once('_footer.php');
-        }
-        else {
+        } else {
             require_once('error.php');
         }
-    }
-    else {
+    } else {
         require_once('error.php');
     }

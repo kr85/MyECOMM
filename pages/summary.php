@@ -58,7 +58,9 @@
                                             $objBasket->itemTotal(
                                                 $item['price'],
                                                 $session[$item['id']]['quantity']
-                                            ), 2);
+                                            ),
+                                            2
+                                        );
                                     ?>
                                 </td>
                             </tr>
@@ -78,7 +80,10 @@
                                 <td class="ta_r br_td">
                                     <?php
                                         echo Catalog::$currency;
-                                        echo number_format($objBasket->subTotal, 2);
+                                        echo number_format(
+                                            $objBasket->subTotal,
+                                            2
+                                        );
                                     ?>
                                 </td>
                             </tr>
@@ -119,17 +124,15 @@
                     </span>
                 </div>
                 <div class="sbm sbm_blue fl_l">
-                    <a href="<?php echo $this->objUrl->href('basket'); ?>" class="btn">
-                        Continue Shopping
-                    </a>
+                    <a href="<?php echo $this->objUrl->href('basket'); ?>"
+                       class="btn"> Continue Shopping </a>
                 </div>
             </form>
             <div class="dev">&#160;</div>
         </div>
 
     <?php
-    }
-    else {
+    } else {
         ?>
         <p>Your basket is currently empty.</p>
     <?php

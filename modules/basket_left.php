@@ -53,9 +53,8 @@
         </span>
     </dd>
 </dl>
-<div class="dev br_td">&#160;</div>
-<p>
-    <a href="<?php echo $objUrl->href('basket'); ?>">View Basket</a> |
-    <a href="<?php echo $objUrl->href('checkout'); ?>">Checkout</a>
+<div class="dev br_td">&#160;</div><p>
+    <a href="<?php echo $objUrl->href('basket'); ?>">View Basket</a> | <a
+        href="<?php echo $objUrl->href('checkout'); ?>">Checkout</a>
 </p>
 <div class="dev br_td">&#160;</div>

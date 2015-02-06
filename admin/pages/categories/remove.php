@@ -17,27 +17,30 @@
             if (!empty($remove) && $category['products_count'] == 0) {
                 $objCatalog->removeCategory($id);
 
-                Helper::redirect($this->objUrl->getCurrent([
-                        'action',
-                        'id',
-                        'remove',
-                        'search',
-                        Paging::$key
-                    ])
+                Helper::redirect(
+                    $this->objUrl->getCurrent(
+                        [
+                            'action',
+                            'id',
+                            'remove',
+                            'search',
+                            Paging::$key
+                        ]
+                    )
                 );
             }
 
             require_once('_header.php'); ?>
 
-        <h1>Categories :: Remove</h1>
+            <h1>Categories :: Remove</h1>
 
-        <p>
-            Are you sure you want to remove this category?<br/>
-            <a href="<?php echo $yes; ?>">Yes</a> |
-            <a href="<?php echo $no; ?>">No</a>
-        </p>
+            <p>
+                Are you sure you want to remove this category?<br/> <a
+                    href="<?php echo $yes; ?>">Yes</a> | <a
+                    href="<?php echo $no; ?>">No</a>
+            </p>
 
-<?php
+            <?php
             require_once('_footer.php');
         }
     }

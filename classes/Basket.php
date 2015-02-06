@@ -33,7 +33,9 @@
 
             // Instantiate catalog class
             $this->instanceCatalog = new Catalog();
-            $this->emptyBasket = empty($_SESSION['basket']) ? true : false;
+            $this->emptyBasket = empty($_SESSION['basket']) ?
+                true :
+                false;
 
             // Instantiate business class
             $objBusiness = new Business();
@@ -111,7 +113,9 @@
             }
 
             $out = "<a href=\"\" class=\"add_to_basket";
-            $out .= $id == 0 ? " red" : null;
+            $out .= $id == 0 ?
+                " red" :
+                null;
             $out .= "\" rel=\"";
             $out .= $sessionId . "_" . $id;
             $out .= "\">{$label}</a>";

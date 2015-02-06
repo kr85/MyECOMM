@@ -24,11 +24,9 @@
          */
         public static function removeItem($id, $quantity = null) {
 
-            if ($quantity != null &&
-                $quantity < $_SESSION['basket'][$id]['quantity']) {
+            if ($quantity != null && $quantity < $_SESSION['basket'][$id]['quantity']) {
 
-                $_SESSION['basket'][$id]['quantity'] =
-                    ($_SESSION['basket'][$id]['quantity'] - $quantity);
+                $_SESSION['basket'][$id]['quantity'] = ($_SESSION['basket'][$id]['quantity'] - $quantity);
 
             } else {
 
@@ -47,7 +45,9 @@
         public static function getSession($name = null) {
 
             if (!empty($name)) {
-                return isset($_SESSION[$name]) ? $_SESSION[$name] : null;
+                return isset($_SESSION[$name]) ?
+                    $_SESSION[$name] :
+                    null;
             }
 
             return false;

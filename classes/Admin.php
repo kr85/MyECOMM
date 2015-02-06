@@ -25,7 +25,9 @@
 
                 $sql = "SELECT * FROM `{$this->table}`
                         WHERE `email` = '" . $this->db->escape($email) . "'
-                        AND `password` = '" . $this->db->escape($password) . "'";
+                        AND `password` = '" . $this->db->escape(
+                        $password
+                    ) . "'";
 
                 $result = $this->db->fetchOne($sql);
 

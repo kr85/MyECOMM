@@ -34,16 +34,22 @@
 
             if ($objValidation->isValid()) {
                 if ($objBusiness->updateBusiness($variables)) {
-                    Helper::redirect($this->objUrl->getCurrent([
-                            'action',
-                            'id'
-                        ]) . '/action/edited'
+                    Helper::redirect(
+                        $this->objUrl->getCurrent(
+                            [
+                                'action',
+                                'id'
+                            ]
+                        ) . '/action/edited'
                     );
                 } else {
-                    Helper::redirect($this->objUrl->getCurrent([
-                            'action',
-                            'id'
-                        ]) . '/action/edited-failed'
+                    Helper::redirect(
+                        $this->objUrl->getCurrent(
+                            [
+                                'action',
+                                'id'
+                            ]
+                        ) . '/action/edited-failed'
                     );
                 }
             }
@@ -51,7 +57,7 @@
 
         require_once('_header.php');
 
-?>
+        ?>
 
         <h1>Business :: Edit</h1>
 
@@ -62,8 +68,7 @@
                     <th><label for="name">Name: *</label></th>
                     <td>
                         <?php echo $objValidation->validate('name') ?>
-                        <input type="text" name="name"
-                               id="name" class="fld"
+                        <input type="text" name="name" id="name" class="fld"
                                value="<?php echo $objForm->stickyText(
                                    'name',
                                    $business['name']
@@ -75,9 +80,10 @@
                     <td>
                         <?php echo $objValidation->validate('address') ?>
                         <textarea name="address" id="address"
-                            class="tar"><?php echo $objForm->stickyText(
+                                  class="tar"><?php echo $objForm->stickyText(
                                 'address',
-                                $business['address']);
+                                $business['address']
+                            );
                             ?></textarea>
                     </td>
                 </tr>
@@ -85,8 +91,8 @@
                     <th><label for="telephone">Phone: *</label></th>
                     <td>
                         <?php echo $objValidation->validate('telephone') ?>
-                        <input type="text" name="telephone"
-                               id="telephone" class="fld"
+                        <input type="text" name="telephone" id="telephone"
+                               class="fld"
                                value="<?php echo $objForm->stickyText(
                                    'telephone',
                                    $business['telephone']
@@ -97,8 +103,7 @@
                     <th><label for="email">Email Address: *</label></th>
                     <td>
                         <?php echo $objValidation->validate('email') ?>
-                        <input type="email" name="email"
-                               id="email" class="fld"
+                        <input type="email" name="email" id="email" class="fld"
                                value="<?php echo $objForm->stickyText(
                                    'email',
                                    $business['email']
@@ -109,8 +114,8 @@
                     <th><label for="website">Website: </label></th>
                     <td>
                         <?php echo $objValidation->validate('website') ?>
-                        <input type="text" name="website"
-                               id="website" class="fld"
+                        <input type="text" name="website" id="website"
+                               class="fld"
                                value="<?php echo $objForm->stickyText(
                                    'website',
                                    $business['website']
@@ -121,8 +126,8 @@
                     <th><label for="tax_rate">Tax Rate: *</label></th>
                     <td>
                         <?php echo $objValidation->validate('tax_rate') ?>
-                        <input type="text" name="tax_rate"
-                               id="tax_rate" class="fld"
+                        <input type="text" name="tax_rate" id="tax_rate"
+                               class="fld"
                                value="<?php echo $objForm->stickyText(
                                    'tax_rate',
                                    $business['tax_rate']
@@ -132,10 +137,9 @@
                 <tr>
                     <th>&nbsp;</th>
                     <td>
-                        <label for="btn" class="sbm sbm_blue fl_l">
-                            <input type="submit" id="btn" class="btn"
-                                   value="Update"/>
-                        </label>
+                        <label for="btn" class="sbm sbm_blue fl_l"> <input
+                                type="submit" id="btn" class="btn"
+                                value="Update"/> </label>
                     </td>
                 </tr>
             </table>

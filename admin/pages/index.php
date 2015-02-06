@@ -10,12 +10,16 @@
 
     if ($objForm->isPost('login_email')) {
         $objAdmin = new Admin();
-        if ($objAdmin->isUser
-        ($objForm->getPost('login_email'),
-            $objForm->getPost('login_password'))
+        if ($objAdmin->isUser(
+            $objForm->getPost('login_email'),
+            $objForm->getPost('login_password')
+        )
         ) {
-            Login::loginAdmin($objAdmin->id, $this->objUrl->href(
-                $this->objUrl->get(Login::$referrer))
+            Login::loginAdmin(
+                $objAdmin->id,
+                $this->objUrl->href(
+                    $this->objUrl->get(Login::$referrer)
+                )
             );
         } else {
             $objValidation->addToErrors('login');
@@ -39,17 +43,15 @@
                 <th><label for="login_password">Password:</label></th>
                 <td>
                     <input type="password" name="login_password"
-                           id="login_password"
-                           class="fld" value=""/>
+                           id="login_password" class="fld" value=""/>
                 </td>
             </tr>
             <tr>
                 <th>&nbsp;</th>
                 <td>
-                    <label for="btn_login" class="sbm sbm_blue fl_l">
-                        <input type="submit" id="btn_login"
-                               class="btn" value="Log In"/>
-                    </label>
+                    <label for="btn_login" class="sbm sbm_blue fl_l"> <input
+                            type="submit" id="btn_login" class="btn"
+                            value="Log In"/> </label>
                 </td>
             </tr>
         </table>

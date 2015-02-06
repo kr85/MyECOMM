@@ -6,14 +6,14 @@
     class Url {
 
         // Public variables
-        public $keyPage = 'page';
-        public $keyModules = ['panel'];
-        public $module = 'front';
-        public $main = 'index';
-        public $currentPage = 'index';
-        public $action = 'index';
-        public $controller = 'login';
-        public $parameters = [];
+        public $keyPage       = 'page';
+        public $keyModules    = ['panel'];
+        public $module        = 'front';
+        public $main          = 'index';
+        public $currentPage   = 'index';
+        public $action        = 'index';
+        public $controller    = 'login';
+        public $parameters    = [];
         public $rawParameters = [];
         public $rawString;
 
@@ -73,7 +73,9 @@
                     // Check if the first element is in the keyModules array
                     if (in_array($first, $this->keyModules)) {
                         $this->module = $first;
-                        $first = empty($uri) ? $this->main : array_shift($uri);
+                        $first = empty($uri) ?
+                            $this->main :
+                            array_shift($uri);
                     }
 
                     // Store the first element to the main and currentPage
@@ -89,10 +91,14 @@
                                 if (!Helper::isEmpty($pairs[1])) {
                                     if ($pairs[0] == $this->keyPage) {
                                         $this->currentPage = $pairs[1];
-                                    } else if ($pairs[0] == 'c') {
-                                        $this->controller = $pairs[1];
-                                    } else if ($pairs[0] == 'a') {
-                                        $this->action = $pairs[1];
+                                    } else {
+                                        if ($pairs[0] == 'c') {
+                                            $this->controller = $pairs[1];
+                                        } else {
+                                            if ($pairs[0] == 'a') {
+                                                $this->action = $pairs[1];
+                                            }
+                                        }
                                     }
                                     // Store the element at the parameters array
                                     $this->parameters[$pairs[0]] = $pairs[1];
@@ -127,8 +133,11 @@
          * @return mixed
          */
         public function getRaw($param = null) {
-            if (!empty($param) &&
-                array_key_exists($param, $this->rawParameters)) {
+            if (!empty($param) && array_key_exists(
+                    $param,
+                    $this->rawParameters
+                )
+            ) {
                 return $this->rawParameters[$param];
             }
             return false;
@@ -141,8 +150,7 @@
          * @return bool
          */
         public function get($param = null) {
-            if (!empty($param) &&
-                array_key_exists($param, $this->parameters)) {
+            if (!empty($param) && array_key_exists($param, $this->parameters)) {
                 return $this->parameters[$param];
             }
             return false;
@@ -176,7 +184,11 @@
          * @param null $add
          * @return string
          */
-        public function getCurrent($exclude = null, $extension = false, $add = null) {
+        public function getCurrent(
+            $exclude = null,
+            $extension = false,
+            $add = null
+        ) {
             $out = [];
             if ($this->module != 'front') {
                 $out[] = $this->module;
@@ -205,7 +217,9 @@
                 }
             }
             $url = '/' . implode('/', $out);
-            $url .= $extension ? PAGE_EXTENSION : null;
+            $url .= $extension ?
+                PAGE_EXTENSION :
+                null;
             return $url;
         }
     }

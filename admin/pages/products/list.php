@@ -4,8 +4,9 @@
 
     if (isset($_POST['search'])) {
         if (!empty($_POST['search'])) {
-            $url = $this->objUrl->getCurrent('search') . '/search/' .
-                urlencode(stripslashes($_POST['search']));
+            $url = $this->objUrl->getCurrent('search') . '/search/' . urlencode(
+                    stripslashes($_POST['search'])
+                );
         } else {
             $url = $this->objUrl->getCurrent('search');
         }
@@ -28,24 +29,22 @@
 
         <h1>Products</h1>
 
-        <form action="<?php echo $this->objUrl->getCurrent('search'); ?>" method="POST">
-            <table cellspacing="0" cellpadding="0" border="0" class="tbl_insert">
+        <form action="<?php echo $this->objUrl->getCurrent('search'); ?>"
+              method="POST">
+            <table cellspacing="0" cellpadding="0" border="0"
+                   class="tbl_insert">
                 <tr>
                     <th>
-                        <label for="search">
-                            Products:
-                        </label>
+                        <label for="search"> Products: </label>
                     </th>
                     <td>
                         <input type="text" name="search" id="search"
-                               value="<?php echo $search; ?>"
-                               class="fld"/>
+                               value="<?php echo $search; ?>" class="fld"/>
                     </td>
                     <td>
-                        <label for="btn_add" class="sbm sbm_blue fl_l">
-                            <input type="submit" id="btn_add" class="btn"
-                                   value="Search"/>
-                        </label>
+                        <label for="btn_add" class="sbm sbm_blue fl_l"> <input
+                                type="submit" id="btn_add" class="btn"
+                                value="Search"/> </label>
                     </td>
                 </tr>
             </table>
@@ -54,16 +53,16 @@
         <div class="dev br_td">&#160;</div>
 
         <p>
-            <a href="<?php echo $this->objUrl->getCurrent('action') .
-                '/action/add'; ?>">
-                New Product
-            </a>
+            <a href="<?php echo $this->objUrl->getCurrent(
+                    'action'
+                ) . '/action/add'; ?>"> New Product </a>
         </p>
 
         <?php
         if (!empty($rows)) {
             ?>
-            <table cellpadding="0" cellspacing="0" border="0" class="tbl_repeat">
+            <table cellpadding="0" cellspacing="0" border="0"
+                   class="tbl_repeat">
                 <tr>
                     <th class="col_15">Id</th>
                     <th>Product</th>
@@ -73,18 +72,20 @@
                 <?php foreach ($rows as $product) { ?>
                     <tr>
                         <td><?php echo $product['id']; ?></td>
-                        <td><?php echo Helper::encodeHTML($product['name']); ?></td>
+                        <td><?php echo Helper::encodeHTML(
+                                $product['name']
+                            ); ?></td>
                         <td class="ta_r">
-                            <a href="<?php echo $this->objUrl->getCurrent('action') .
-                                '/action/remove/id/' . $product['id']; ?>">
-                                Remove
-                            </a>
+                            <a href="<?php echo $this->objUrl->getCurrent(
+                                    'action'
+                                ) . '/action/remove/id/' . $product['id']; ?>">
+                                Remove </a>
                         </td>
                         <td class="ta_r">
-                            <a href="<?php echo $this->objUrl->getCurrent('action') .
-                                '/action/edit/id/' . $product['id']; ?>">
-                                Edit
-                            </a>
+                            <a href="<?php echo $this->objUrl->getCurrent(
+                                    'action'
+                                ) . '/action/edit/id/' . $product['id']; ?>">
+                                Edit </a>
                         </td>
                     </tr>
                 <?php } ?>

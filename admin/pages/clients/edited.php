@@ -6,10 +6,8 @@
 
     <h1>Clients :: Edit</h1>
     <p>
-        The client has been updated successfully.<br/>
-        <a href="<?php echo $url; ?>">
-            Go back to the list of clients.
-        </a>
+        The client has been updated successfully.<br/> <a
+            href="<?php echo $url; ?>"> Go back to the list of clients. </a>
     </p>
 
 <?php require_once('_header.php'); ?>

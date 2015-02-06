@@ -46,7 +46,9 @@
             );
 
             if (!$this->connDb) {
-                die("Database connection failed: <br />" . mysqli_error($this->connDb));
+                die("Database connection failed: <br />" . mysqli_error(
+                        $this->connDb
+                    ));
             } else {
                 $select = mysqli_select_db($this->connDb, $this->database);
                 if (!$select) {
@@ -111,7 +113,9 @@
         public function displayQuery($result) {
 
             if (!$result) {
-                $output = "Database query failed: " . mysqli_error($this->connDb);
+                $output = "Database query failed: " . mysqli_error(
+                        $this->connDb
+                    );
                 $output .= "Last SQL query was: " . $this->lastQuery;
                 //Helper::addToErrorsLog('Query_Errors', $output);
                 die($output);
@@ -184,9 +188,7 @@
          */
         public function insert($table = null) {
 
-            if (!empty($this) &&
-                !empty($this->insertKeys) &&
-                !empty($this->insertValues)) {
+            if (!empty($this) && !empty($this->insertKeys) && !empty($this->insertValues)) {
 
                 $sql = "INSERT INTO `{$table}` (`";
                 $sql .= implode("`, `", $this->insertKeys);
@@ -215,7 +217,9 @@
 
             if (!empty($parameters)) {
                 foreach ($parameters as $key => $value) {
-                    $this->updateSets[] = "`{$key}` = '" . $this->escape($value) . "'";
+                    $this->updateSets[] = "`{$key}` = '" . $this->escape(
+                            $value
+                        ) . "'";
                 }
             }
         }

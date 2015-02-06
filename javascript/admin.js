@@ -1,17 +1,17 @@
 var adminObject = {
-    isEmpty: function(thisValue) {
+    isEmpty: function (thisValue) {
         "use strict";
 
         return (thisValue !== '' && typeof thisValue !== 'undefined') ? false : true;
     },
-    clickReplace: function(thisIdentity) {
+    clickReplace: function (thisIdentity) {
         "use strict";
 
-        $(document).on('click', thisIdentity, function(e) {
+        $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var thisObj = $(this);
             var thisUrl = thisObj.data('url');
-            $.getJSON(thisUrl, function(data) {
+            $.getJSON(thisUrl, function (data) {
                 if (data && !data.error) {
                     if (!adminObject.isEmpty(data.replace)) {
                         thisObj.replaceWith(data.replace);
@@ -20,23 +20,23 @@ var adminObject = {
             });
         });
     },
-    clickCallReload: function(thisIdentity) {
+    clickCallReload: function (thisIdentity) {
         "use strict";
 
-        $(document).on('click', thisIdentity, function(e) {
+        $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var thisUrl = $(this).data('url');
-            $.getJSON(thisUrl, function(data) {
+            $.getJSON(thisUrl, function (data) {
                 if (data && !data.error) {
                     window.location.reload();
                 }
             });
         });
     },
-    clickYesNoSingle: function(thisIdentity) {
+    clickYesNoSingle: function (thisIdentity) {
         "use strict";
 
-        $(document).on('click', thisIdentity, function(e) {
+        $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var thisObj = $(this);
             var thisValue = thisObj.data('value');
@@ -44,9 +44,9 @@ var adminObject = {
                 var thisGroup = thisObj.data('group');
                 var thisGroupItems = $('[data-group="' + thisGroup + '"]');
                 var thisUrl = thisObj.data('url');
-                $.getJSON(thisUrl, function(data) {
+                $.getJSON(thisUrl, function (data) {
                     if (data && !data.error) {
-                        $.each(thisGroupItems, function() {
+                        $.each(thisGroupItems, function () {
                             $(this).text('No');
                             $(this).attr('data-value', 0);
                         });
@@ -57,7 +57,7 @@ var adminObject = {
             }
         });
     },
-    clickRemoveRowTemplate: function(id, span, url) {
+    clickRemoveRowTemplate: function (id, span, url) {
         "use strict";
 
         var thisTemplate = '<tr id="click_remove-' + id + '">';
@@ -76,10 +76,10 @@ var adminObject = {
         thisTemplate += '</tr>';
         return thisTemplate;
     },
-    clickAddRowConfirm: function(thisIdentity) {
+    clickAddRowConfirm: function (thisIdentity) {
         "use strict";
 
-        $(document).on('click', thisIdentity, function(e) {
+        $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var thisObj = $(this);
             var thisParent = thisObj.closest('tr');
@@ -91,26 +91,26 @@ var adminObject = {
             }
         });
     },
-    clickRemoveRowConfirm: function(thisIdentity) {
+    clickRemoveRowConfirm: function (thisIdentity) {
         "use strict";
 
-        $(document).on('click', thisIdentity, function(e) {
+        $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             $(this).closest('tr').remove();
         });
     },
-    clickRemoveRow: function(thisIdentity) {
+    clickRemoveRow: function (thisIdentity) {
         "use strict";
 
-        $(document).on('click', thisIdentity, function(e) {
+        $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var thisObj = $(this);
             var thisId = thisObj.closest('tr').attr('id').split('-')[1];
             var thisUrl = thisObj.data('url');
-            $.getJSON(thisUrl, function(data) {
+            $.getJSON(thisUrl, function (data) {
                 if (data && !data.error) {
                     if (!adminObject.isEmpty(data.replace)) {
-                        $.each(data.replace, function(k, v) {
+                        $.each(data.replace, function (k, v) {
                             $(k).html(v);
                         });
                     } else {
@@ -121,20 +121,20 @@ var adminObject = {
             });
         });
     },
-    clickHideShow: function(thisIdentity) {
+    clickHideShow: function (thisIdentity) {
         "use strict";
 
-        $(document).on('click', thisIdentity, function(e) {
+        $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var thisTarget = $(this).data('show');
             $(this).hide();
             $(thisTarget).show().focus();
         });
     },
-    blurUpdateHideShow: function(thisIdentity) {
+    blurUpdateHideShow: function (thisIdentity) {
         "use strict";
 
-        $(document).on('focusout', thisIdentity, function(e) {
+        $(document).on('focusout', thisIdentity, function (e) {
             var thisObj = $(this);
             var thisForm = thisObj.closest('form');
             thisForm.find('.warn').remove();
@@ -143,7 +143,10 @@ var adminObject = {
             var thisShow = thisObj.attr('id');
             var thisValue = thisObj.val();
             if (!adminObject.isEmpty(thisValue)) {
-                $.post(thisUrl + thisId, { id: thisId, value: thisValue }, function(data) {
+                $.post(thisUrl + thisId, {
+                    id: thisId,
+                    value: thisValue
+                }, function (data) {
                     if (data && !data.error) {
                         thisObj.hide();
                         $('[data-show="' + thisShow + '"]').text(thisValue).show();
@@ -154,17 +157,17 @@ var adminObject = {
             }
         });
     },
-    sortRows: function(obj) {
+    sortRows: function (obj) {
         "use strict";
 
-        obj.find('tr').livequery(function() {
+        obj.find('tr').livequery(function () {
             var thisObj = $(this).parent('tbody');
-            $.each(thisObj, function() {
+            $.each(thisObj, function () {
                 var thisTbody = $(this);
                 var thisUrl = thisTbody.data('url');
                 if (!adminObject.isEmpty(thisUrl)) {
                     thisTbody.tableDnD({
-                        onDrop: function(thisTable, thisRow) {
+                        onDrop: function (thisTable, thisRow) {
                             var thisArray = $.tableDnD.serialize();
                             $.ajax({
                                 type: 'POST',
@@ -177,10 +180,10 @@ var adminObject = {
             });
         });
     },
-    submitAjax: function() {
+    submitAjax: function () {
         "use strict";
 
-        $(document).on('submit', 'form.ajax', function(e) {
+        $(document).on('submit', 'form.ajax', function (e) {
             e.preventDefault();
             e.stopPropagation();
             var thisForm = $(this);
@@ -188,11 +191,11 @@ var adminObject = {
             var thisArray = thisForm.serializeArray();
             var thisUrl = thisForm.data('action');
             if (!adminObject.isEmpty(thisUrl)) {
-                $.post(thisUrl, thisArray, function(data) {
+                $.post(thisUrl, thisArray, function (data) {
                     if (data) {
                         if (!data.error) {
                             if (!adminObject.isEmpty(data.replace)) {
-                                $.each(data.replace, function(k, v) {
+                                $.each(data.replace, function (k, v) {
                                     $(k).html(v);
                                 });
                                 thisForm[0].reset();
@@ -200,7 +203,7 @@ var adminObject = {
                                 window.location.reload();
                             }
                         } else if (!adminObject.isEmpty(data.validation)) {
-                            $.each(data.validation, function(k, v) {
+                            $.each(data.validation, function (k, v) {
                                 $('.' + k).append(v);
                             });
                         }
@@ -209,10 +212,10 @@ var adminObject = {
             }
         });
     },
-    selectRedirect: function(thisIdentity) {
+    selectRedirect: function (thisIdentity) {
         "use strict";
 
-        $('form').on('change', thisIdentity, function(e) {
+        $('form').on('change', thisIdentity, function (e) {
             var thisSelected = $('option:selected', this);
             var thisUrl = thisSelected.data('url');
             if (!adminObject.isEmpty(thisUrl)) {
@@ -221,7 +224,7 @@ var adminObject = {
         });
     }
 };
-$(function() {
+$(function () {
     "use strict";
 
     adminObject.clickReplace('.click_replace');

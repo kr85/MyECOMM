@@ -5,8 +5,9 @@
 
     if (isset($_POST['search'])) {
         if (!empty($_POST['search'])) {
-            $url = $this->objUrl->getCurrent('search') . '/search/' .
-                urlencode(stripslashes($_POST['search']));
+            $url = $this->objUrl->getCurrent('search') . '/search/' . urlencode(
+                    stripslashes($_POST['search'])
+                );
         } else {
             $url = $this->objUrl->getCurrent('search');
         }
@@ -29,24 +30,22 @@
 
         <h1>Clients</h1>
 
-        <form action="<?php echo $this->objUrl->getCurrent('search'); ?>" method="POST">
-            <table cellspacing="0" cellpadding="0" border="0" class="tbl_insert">
+        <form action="<?php echo $this->objUrl->getCurrent('search'); ?>"
+              method="POST">
+            <table cellspacing="0" cellpadding="0" border="0"
+                   class="tbl_insert">
                 <tr>
                     <th>
-                        <label for="search">
-                            Name:
-                        </label>
+                        <label for="search"> Name: </label>
                     </th>
                     <td>
                         <input type="text" name="search" id="search"
-                               value="<?php echo $search; ?>"
-                               class="fld"/>
+                               value="<?php echo $search; ?>" class="fld"/>
                     </td>
                     <td>
-                        <label for="btn_add" class="sbm sbm_blue fl_l">
-                            <input type="submit" id="btn_add" class="btn"
-                                   value="Search"/>
-                        </label>
+                        <label for="btn_add" class="sbm sbm_blue fl_l"> <input
+                                type="submit" id="btn_add" class="btn"
+                                value="Search"/> </label>
                     </td>
                 </tr>
             </table>
@@ -55,7 +54,8 @@
         <?php
         if (!empty($rows)) {
             ?>
-            <table cellpadding="0" cellspacing="0" border="0" class="tbl_repeat">
+            <table cellpadding="0" cellspacing="0" border="0"
+                   class="tbl_repeat">
                 <tr>
                     <th>Name</th>
                     <th class="ta_r col_15">Remove</th>
@@ -70,25 +70,29 @@
                         </td>
                         <td class="ta_r">
                             <?php
-                                $orders = $objOrder->getClientOrders($user['id']);
+                                $orders = $objOrder->getClientOrders(
+                                    $user['id']
+                                );
                                 if (empty($orders)) { ?>
-                                    <a href="<?php echo $this->objUrl->getCurrent([
-                                        'action',
-                                        'id'
-                                    ]) . '/action/remove/id/' . $user['id']; ?>">
-                                        Remove
-                                    </a>
+                                    <a href="<?php echo $this->objUrl->getCurrent(
+                                            [
+                                                'action',
+                                                'id'
+                                            ]
+                                        ) . '/action/remove/id/' . $user['id']; ?>">
+                                        Remove </a>
                                 <?php } else { ?>
                                     <span class="inactive">Remove</span>
                                 <?php } ?>
                         </td>
                         <td class="ta_r">
-                            <a href="<?php echo $this->objUrl->getCurrent([
-                                    'action',
-                                    'id'
-                                ]) . '/action/edit/id/' . $user['id']; ?>">
-                                Edit
-                            </a>
+                            <a href="<?php echo $this->objUrl->getCurrent(
+                                    [
+                                        'action',
+                                        'id'
+                                    ]
+                                ) . '/action/edit/id/' . $user['id']; ?>">
+                                Edit </a>
                         </td>
                     </tr>
                 <?php } ?>
