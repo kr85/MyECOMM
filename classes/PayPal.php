@@ -50,6 +50,9 @@
         // Tax / Vat amount for xclick
         public $tax = 0;
 
+        // Shipping value
+        public $shipping = 0;
+
         // Pre-populate checkout
         public $populateCheckout = [];
 
@@ -77,7 +80,7 @@
                 $this->urlSandbox :
                 $this->urlProduction;
             $this->cmd = $cmd;
-            $this->returnUrl = SITE_URL . $this->objUrl->href('return');
+
             $this->cancelPaymentUrl = SITE_URL . $this->objUrl->href('cancel');
             $this->notifyUrl = SITE_URL . $this->objUrl->href('ipn');
         }
@@ -114,15 +117,18 @@
         /**
          * Run the transaction
          *
-         * @param null $transactionId
+         * @param null $transactionToken
          * @return string
          */
-        public function run($transactionId = null) {
+        public function run($transactionToken = null) {
 
-            if (!empty($transactionId)) {
-                $this->addField('custom', $transactionId);
+            if (!empty($transactionToken)) {
+                $this->returnUrl = SITE_URL . $this->objUrl->href('return', [
+                        'token',
+                        $transactionToken
+                    ]);
+                $this->addField('custom', $transactionToken);
             }
-
             return $this->render();
         }
 
@@ -216,6 +222,10 @@
             $this->addField('cancel_payment', $this->cancelPaymentUrl);
             $this->addField('currency_code', $this->currencyCode);
             $this->addField('rm', 2);
+
+            if (!empty($this->shipping)) {
+                $this->addField('handling_cart', $this->shipping);
+            }
 
             switch ($this->cmd) {
                 case '_cart':
