@@ -72,7 +72,6 @@
          * @return null|string
          */
         public function stickyText($field, $value = null) {
-
             if ($this->isPost($field)) {
                 return stripslashes($this->getPost($field));
             } else {
@@ -83,19 +82,72 @@
         }
 
         /**
+         * Keep the radio button selection after a refresh
+         *
+         * @param null $field
+         * @param null $value
+         * @param null $data
+         * @return null|string
+         */
+        public function stickyRadio($field = null, $value = null, $data = null) {
+            $post = $this->getPost($field);
+            if (!Helper::isEmpty($post)) {
+                if ($post == $value) {
+                    return ' checked="checked"';
+                }
+            } else {
+                return !Helper::isEmpty($data) && $value == $data ?
+                    ' checked="checked"' :
+                    null;
+            }
+            return null;
+        }
+
+        /**
+         * Add a class to a html element
+         *
+         * @param null $field
+         * @param null $value
+         * @param null $data
+         * @param null $class
+         * @param bool $single
+         * @return string
+         */
+        public function stickyRemoveClass(
+            $field = null, $value = null, $data = null,
+            $class = null, $single = false
+        ) {
+            $post = $this->getPost($field);
+            if (!Helper::isEmpty($post)) {
+                if ($post != $value) {
+                    return $single ?
+                        ' class="' . $class . '"' :
+                        ' ' . $class;
+                }
+            } else {
+                if ($value != $data) {
+                    return $single ?
+                        ' class="' . $class . '"' :
+                        ' ' . $class;
+                }
+            }
+        }
+
+        /**
          * Get countries for select option for the form
          *
          * @param null $record
-         * @return string
+         * @param string $name
+         * @return null|string
          */
-        public function getCountriesSelect($record = null) {
+        public function getCountriesSelect($record = null, $name = 'country') {
 
             $objCountry = new Country();
             $countries = $objCountry->getCountries();
 
             if (!empty($countries)) {
 
-                $out = "<select name=\"country\" id=\"country\" class='sel'>";
+                $out = "<select name=\"{$name}\" id=\"{$name}\" class='sel'>";
 
                 if (empty($record)) {
                     $out .= "<option value=\"\">Select one&hellip;</option>";
