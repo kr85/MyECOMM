@@ -111,15 +111,15 @@
          * @param $value
          */
         public function check($key, $value) {
-
-            if (!empty($this->special) && array_key_exists(
+            if (!empty($this->special) &&
+                array_key_exists(
                     $key,
                     $this->special
                 )
             ) {
                 $this->checkSpecial($key, $value);
             } else {
-                if (in_array($key, $this->required) && empty($value)) {
+                if (in_array($key, $this->required) && Helper::isEmpty($value)) {
                     $this->addToErrors($key);
                 }
             }
@@ -184,28 +184,28 @@
          *
          * @return bool
          */
-        public function isValid() {
-
+        public function isValid($array = null) {
+            // Check if something was passed and store it in post array
+            if (!empty($array)) {
+                $this->post = $array;
+            }
+            // Process validation
             $this->process();
             if (empty($this->errors) && !empty($this->post)) {
-
                 // Remove all unwanted fields
                 if (!empty($this->postRemove)) {
                     foreach ($this->postRemove as $value) {
                         unset($this->post[$value]);
                     }
                 }
-
                 // Format all required fields
                 if (!empty($this->postFormat)) {
                     foreach ($this->postFormat as $key => $value) {
                         $this->format($key, $value);
                     }
                 }
-
                 return true;
             }
-
             return false;
         }
 
