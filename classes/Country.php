@@ -90,4 +90,55 @@
 
             return false;
         }
+
+        /**
+         * Add a new country
+         *
+         * @param null $data
+         * @return bool
+         */
+        public function add($data = null) {
+
+            if (!empty($data)) {
+                $this->db->prepareInsert($data);
+                return $this->db->insert($this->table);
+            }
+
+            return false;
+        }
+
+        /**
+         * Update a country by id
+         *
+         * @param null $data
+         * @param null $id
+         * @return bool|resource
+         */
+        public function update($data = null, $id = null) {
+
+            if (!empty($data) && !empty($id)) {
+                $this->db->prepareUpdate($data);
+                return $this->db->update($data, $id);
+            }
+
+            return false;
+        }
+
+        /**
+         * Remove a country by id
+         *
+         * @param null $id
+         * @return bool|resource
+         */
+        public function remove($id = null) {
+
+            if (!empty($id)) {
+                $sql = "DELETE FROM `{$this->table}`
+                        WHERE `id` = " . intval($id);
+
+                return $this->db->query($sql);
+            }
+
+            return false;
+        }
     }
