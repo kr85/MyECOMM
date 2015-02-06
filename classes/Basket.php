@@ -198,6 +198,41 @@
         }
 
         /**
+         * Add shipping to the basket/session
+         *
+         * @param null $shipping
+         * @return bool
+         */
+        public function addShipping($shipping = null) {
+            // Check if shipping passed
+            if (!empty($shipping)) {
+                Session::setSession('shipping_id', $shipping['id']);
+                Session::setSession('shipping_cost', $shipping['cost']);
+                Session::setSession('shipping_type', $shipping['name']);
+                $this->process();
+                return true;
+            }
+            return false;
+        }
+
+        /**
+         * Clear the shipping
+         */
+        public function clearShipping() {
+            // Clear the sessions
+            Session::clear('id');
+            Session::clear('shipping_cost');
+            Session::clear('shipping_type');
+
+            // Clear the parameters
+            $this->finalShippingType = null;
+            $this->finalShippingCost = null;
+            $this->finalSubtotal = null;
+            $this->finalTax = null;
+            $this->finalTotal = null;
+        }
+
+        /**
          * Process helper
          */
         private function process() {
