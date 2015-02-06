@@ -26,10 +26,40 @@
         // Total amount variable
         public $total;
 
+        // The total weight of all products in the basket
+        public $weight;
+
+        // A list with the products' weight
+        private $weightList;
+
+        // The final shipping type
+        public $finalShippingType;
+
+        // The final shipping cost
+        public $finalShippingCost;
+
+        // The final subtotal amount
+        public $finalSubtotal;
+
+        // The final tax amount
+        public $finalTax;
+
+        // The final total amount
+        public $finalTotal;
+
+        public $user;
+
         /**
          * Constructor
+         *
+         * @param null $user
          */
-        public function __construct() {
+        public function __construct($user = null) {
+
+            // Check if a user was passed
+            if (!empty($user)) {
+                $this->user = $user;
+            }
 
             // Instantiate catalog class
             $this->instanceCatalog = new Catalog();
@@ -37,14 +67,20 @@
                 true :
                 false;
 
-            // Instantiate business class
-            $objBusiness = new Business();
-            $this->taxRate = $objBusiness->getTaxRate();
+            if (!empty($this->user) &&
+                ($this->user['country'] == COUNTRY_LOCAL || INTERNATIONAL_VAT)) {
+                // Instantiate business class and get the tax rate
+                $objBusiness = new Business();
+                $this->taxRate = $objBusiness->getTaxRate();
+            } else {
+                $this->taxRate = 0;
+            }
 
             $this->noItems();
             $this->subTotal();
             $this->tax();
             $this->total();
+            $this->process();
         }
 
         /**
@@ -71,8 +107,10 @@
                 foreach ($_SESSION['basket'] as $key => $basket) {
                     $product = $this->instanceCatalog->getProduct($key);
                     $value += ($basket['quantity'] * $product['price']);
+                    $this->weightList[] = ($basket['quantity'] * $product['weight']);
                 }
             }
+            $this->weight = array_sum($this->weightList);
             $this->subTotal = round($value, 2);
         }
 
@@ -157,5 +195,16 @@
             }
 
             return false;
+        }
+
+        /**
+         * Process helper
+         */
+        private function process() {
+            $this->finalShippingType = Session::getSession('shipping_type');
+            $this->finalShippingCost = Session::getSession('shipping_cost');
+            $this->finalSubtotal = round(($this->subTotal + $this->finalShippingCost), 2);
+            $this->finalTax = round(($this->taxRate * ($this->finalSubtotal / 100)), 2);
+            $this->finalTotal = round(($this->finalSubtotal + $this->finalTax), 2);
         }
     }
