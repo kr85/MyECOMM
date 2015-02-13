@@ -15,14 +15,10 @@
             $objUser = new User();
             $user = $objUser->getUser($order['client']);
 
-            $objCountry = new Country();
-
             $objCatalog = new Catalog();
 
             $items = $objOrder->getOrderItems($id);
-
             $status = $objOrder->getStatuses();
-
 
             if ($objForm->isPost('status')) {
 
@@ -35,20 +31,14 @@
                     if ($objOrder->updateOrder($id, $variables)) {
                         Helper::redirect(
                             $this->objUrl->getCurrent(
-                                [
-                                    'action',
-                                    'id'
-                                ]
-                            ) . '/action/edited'
+                                ['action', 'id'], false, ['action', 'edited']
+                            )
                         );
                     } else {
                         Helper::redirect(
                             $this->objUrl->getCurrent(
-                                [
-                                    'action',
-                                    'id'
-                                ]
-                            ) . '/action/edited-failed'
+                                ['action', 'id'], false, ['action', 'edited-failed']
+                            )
                         );
                     }
                 }
@@ -107,6 +97,18 @@
                         <?php } ?>
                     <?php } ?>
                     <tr>
+                        <th>Shipping:</th>
+                        <td colspan="3">
+                            <?php echo Helper::encodeHTML($order['shipping_type']); ?>
+                        </td>
+                        <td>
+                            <?php
+                                echo Catalog::$currency;
+                                echo number_format($order['shipping_cost'], 2);
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
                         <th>Subtotal:</th>
                         <td colspan="4" class="ta_r">
                             <?php
@@ -139,28 +141,39 @@
                         <th>Client:</th>
                         <td colspan="4">
                             <?php
-                                echo Helper::encodeHTML(
-                                        $user['first_name'] . " " . $user['last_name']
-                                    ) . '<br/>';
-                                echo Helper::encodeHTML(
-                                        $user['address_1']
-                                    ) . '<br/>';
-                                echo Helper::encodeHTML(
-                                        $user['address_2']
-                                    ) . '<br/>';
-                                echo Helper::encodeHTML($user['city']) . ', ';
-                                echo Helper::encodeHTML($user['state']) . ' ';
-                                echo Helper::encodeHTML(
-                                        $user['zip_code']
-                                    ) . '<br/>';
-                                $country = $objCountry->getCountry(
-                                    $user['country']
-                                );
-                                echo Helper::encodeHTML(
-                                        $country['name']
-                                    ) . '<br/>';
+                                echo '<p>';
+                                echo Helper::encodeHTML($order['full_name']) . '<br/>';
                                 echo '<a href="mailto:' . $user['email'] . '">';
                                 echo $user['email'] . '</a>';
+                                echo '</p>';
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Billing Address: </th>
+                        <td colspan="4">
+                            <?php
+                                echo '<p>';
+                                echo Helper::encodeHTML($order['address']) . '<br/>';
+                                echo Helper::encodeHTML($order['city']) . ', ';
+                                echo Helper::encodeHTML($order['state']) . ' ';
+                                echo Helper::encodeHTML($order['zip_code']) . '<br/>';
+                                echo Helper::encodeHTML($order['country_name']);
+                                echo '</p>';
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Shipping Address: </th>
+                        <td colspan="4">
+                            <?php
+                                echo '<p>';
+                                echo Helper::encodeHTML($order['shipping_address']) . '<br/>';
+                                echo Helper::encodeHTML($order['shipping_city']) . ', ';
+                                echo Helper::encodeHTML($order['shipping_state']) . ' ';
+                                echo Helper::encodeHTML($order['shipping_zip_code']) . '<br/>';
+                                echo Helper::encodeHTML($order['shipping_country_name']);
+                                echo '</p>';
                             ?>
                         </td>
                     </tr>
@@ -214,10 +227,8 @@
                         <td colspan="4">
                             <div class="sbm sbm_blue fl_r">
                                 <a href="<?php echo $this->objUrl->getCurrent(
-                                        [
-                                            'action'
-                                        ]
-                                    ) . '/action/invoice'; ?>" class="btn"
+                                        ['action'], false, ['action', 'invoice']
+                                    ); ?>" class="btn"
                                    target="_blank"> Invoice </a>
                             </div>
                             <div class="sbm sbm_blue fl_l mr_r4">
