@@ -20,6 +20,7 @@
                     'name',
                     'description',
                     'price',
+                    'weight',
                     'identity',
                     'meta_title',
                     'meta_description',
@@ -31,6 +32,7 @@
                     'name',
                     'description',
                     'price',
+                    'weight',
                     'identity',
                     'meta_title',
                     'meta_description',
@@ -74,30 +76,21 @@
 
                             Helper::redirect(
                                 $this->objUrl->getCurrent(
-                                    [
-                                        'action',
-                                        'id'
-                                    ]
-                                ) . '/action/edited'
+                                    ['action', 'id'], false, ['action', 'edited']
+                                )
                             );
                         } else {
                             Helper::redirect(
                                 $this->objUrl->getCurrent(
-                                    [
-                                        'action',
-                                        'id'
-                                    ]
-                                ) . '/action/edited-no-upload'
+                                    ['action', 'id'], false, ['action', 'edited-no-upload']
+                                )
                             );
                         }
                     } else {
                         Helper::redirect(
                             $this->objUrl->getCurrent(
-                                [
-                                    'action',
-                                    'id'
-                                ]
-                            ) . '/action/edited-failed'
+                                ['action', 'id'], false, ['action', 'edited-failed']
+                            )
                         );
                     }
 
@@ -169,6 +162,17 @@
                                    value="<?php echo $objForm->stickyText(
                                        'price',
                                        $product['price']
+                                   ); ?>" class="fld_price"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label for="weight">Weight: *</label></th>
+                        <td>
+                            <?php echo $objValidation->validate('weight'); ?>
+                            <input type="text" name="weight" id="weight"
+                                   value="<?php echo $objForm->stickyText(
+                                       'weight',
+                                       $product['weight']
                                    ); ?>" class="fld_price"/>
                         </td>
                     </tr>
