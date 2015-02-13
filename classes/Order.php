@@ -9,6 +9,8 @@
         private $tableOrders = 'orders';
         private $tableOrdersItems = 'orders_items';
         private $tableStatuses = 'statuses';
+        private $tableCountries = 'countries';
+        private $tableProducts = 'products';
 
         private $basket = [];
         private $items  = [];
@@ -21,53 +23,135 @@
         /**
          * Create a new order sql query
          *
+         * @param null $user
          * @return bool
          */
-        public function createOrder() {
+        public function createOrder($user = null) {
 
             $this->getItems();
 
-            if (!empty($this->items)) {
+            if (!empty($user) && !empty($this->items)) {
 
-                $objUser = new User();
-                $user = $objUser->getUser(
-                    Session::getSession(Login::$loginFront)
-                );
+                $objBasket = new Basket($user);
+                $objBusiness = new Business();
+                $business = $objBusiness->getBusiness();
 
-                if (!empty($user)) {
+                $this->fields[] = 'tax_number';
+                $this->values[] = $business['tax_number'];
 
-                    $objBasket = new Basket();
-                    $this->fields[] = 'client';
-                    $this->values[] = $this->db->escape($user['id']);
-                    $this->fields[] = 'tax_rate';
-                    $this->values[] = $this->db->escape($objBasket->taxRate);
-                    $this->fields[] = 'tax';
-                    $this->values[] = $this->db->escape($objBasket->tax);
-                    $this->fields[] = 'subtotal';
-                    $this->values[] = $this->db->escape($objBasket->subTotal);
-                    $this->fields[] = 'total';
-                    $this->values[] = $this->db->escape($objBasket->total);
-                    $this->fields[] = 'date';
-                    $this->values[] = Helper::setDate();
+                // Client information
+                $this->fields[] = 'client';
+                $this->values[] = $this->db->escape($user['id']);
 
-                    $sql = "INSERT INTO `{$this->tableOrders}` (`";
-                    $sql .= implode("`, `", $this->fields);
-                    $sql .= "`) VALUES ('";
-                    $sql .= implode("', '", $this->values);
-                    $sql .= "')";
+                $this->fields[] = 'first_name';
+                $this->values[] = $this->db->escape($user['first_name']);
 
-                    $this->db->query($sql);
-                    $this->id = $this->db->lastId();
+                $this->fields[] = 'last_name';
+                $this->values[] = $this->db->escape($user['last_name']);
 
-                    if (!empty($this->id)) {
-                        $this->fields = [];
-                        $this->values = [];
+                $this->fields[] = 'address_1';
+                $this->values[] = $this->db->escape($user['address_1']);
 
-                        return $this->addItems($this->id);
-                    }
+                $this->fields[] = 'address_2';
+                $this->values[] = $this->db->escape($user['address_2']);
+
+                $this->fields[] = 'city';
+                $this->values[] = $this->db->escape($user['city']);
+
+                $this->fields[] = 'state';
+                $this->values[] = $this->db->escape($user['state']);
+
+                $this->fields[] = 'zip_code';
+                $this->values[] = $this->db->escape($user['zip_code']);
+
+                $this->fields[] = 'country';
+                $this->values[] = $this->db->escape($user['country']);
+
+                // Shipping information
+                if ($user['same_address'] == 1) {
+
+                    $this->fields[] = 'shipping_address_1';
+                    $this->values[] = $this->db->escape($user['address_1']);
+
+                    $this->fields[] = 'shipping_address_2';
+                    $this->values[] = $this->db->escape($user['address_2']);
+
+                    $this->fields[] = 'shipping_city';
+                    $this->values[] = $this->db->escape($user['city']);
+
+                    $this->fields[] = 'shipping_state';
+                    $this->values[] = $this->db->escape($user['state']);
+
+                    $this->fields[] = 'shipping_zip_code';
+                    $this->values[] = $this->db->escape($user['zip_code']);
+
+                    $this->fields[] = 'shipping_country';
+                    $this->values[] = $this->db->escape($user['country']);
+
+                } else {
+
+                    $this->fields[] = 'shipping_address_1';
+                    $this->values[] = $this->db->escape($user['shipping_address_1']);
+
+                    $this->fields[] = 'shipping_address_2';
+                    $this->values[] = $this->db->escape($user['shipping_address_2']);
+
+                    $this->fields[] = 'shipping_city';
+                    $this->values[] = $this->db->escape($user['shipping_city']);
+
+                    $this->fields[] = 'shipping_state';
+                    $this->values[] = $this->db->escape($user['shipping_state']);
+
+                    $this->fields[] = 'shipping_zip_code';
+                    $this->values[] = $this->db->escape($user['shipping_zip_code']);
+
+                    $this->fields[] = 'shipping_country';
+                    $this->values[] = $this->db->escape($user['shipping_country']);
+
                 }
 
-                return false;
+                $this->fields[] = 'shipping_type';
+                $this->values[] = $this->db->escape($objBasket->finalShippingType);
+
+                $this->fields[] = 'shipping_cost';
+                $this->values[] = $this->db->escape($objBasket->finalShippingCost);
+
+                $this->fields[] = 'tax_rate';
+                $this->values[] = $this->db->escape($objBasket->taxRate);
+
+                $this->fields[] = 'tax';
+                $this->values[] = $this->db->escape($objBasket->finalTax);
+
+                $this->fields[] = 'subtotal_items';
+                $this->values[] = $this->db->escape($objBasket->subTotal);
+
+                $this->fields[] = 'subtotal';
+                $this->values[] = $this->db->escape($objBasket->finalSubtotal);
+
+                $this->fields[] = 'total';
+                $this->values[] = $this->db->escape($objBasket->finalTotal);
+
+                $this->fields[] = 'date';
+                $this->values[] = Helper::setDate();
+
+                $this->fields[] = 'token';
+                $this->values[] = date('YmdHis') . mt_rand() . md5(time());
+
+                $sql = "INSERT INTO `{$this->tableOrders}` (`";
+                $sql .= implode("`, `", $this->fields);
+                $sql .= "`) VALUES ('";
+                $sql .= implode("', '", $this->values);
+                $sql .= "')";
+
+                $this->db->query($sql);
+                $this->id = $this->db->lastId();
+
+                if (!empty($this->id)) {
+                    $this->fields = [];
+                    $this->values = [];
+
+                    return $this->addItems($this->id);
+                }
             }
 
             return false;
@@ -125,7 +209,7 @@
         }
 
         /**
-         * Get a specific order
+         * Get a specific order by id
          *
          * @param null $id
          * @return mixed
@@ -136,10 +220,74 @@
                 $id :
                 $this->id;
 
-            $sql = "SELECT * FROM `{$this->tableOrders}`
-                    WHERE `id` = '" . $this->db->escape($id) . "'";
+            $sql = "SELECT `o`.*,
+                    DATE_FORMAT(`o`.`date`, '%D %M %Y %r') AS `date_formatted`,
+                    CONCAT_WS(' ', `o`.`first_name`, `o`.`last_name`) AS `full_name`,
+                    IF (
+                      `o`.`address_2` != '',
+                      CONCAT_WS(', ', `o`.`address_1`, `o`.`address_2`),
+                      `o`.`address_1`
+                    ) AS `address`,
+                    IF (
+                      `o`.`shipping_address_2` != '',
+                      CONCAT_WS(', ', `o`.`shipping_address_1`, `o`.`shipping_address_2`),
+                      `o`.`shipping_address_1`
+                    ) AS `shipping_address`,
+                    (
+                      SELECT `name`
+                      FROM `{$this->tableCountries}`
+                      WHERE `id` = `o`.`country`
+                    ) AS `country_name`,
+                    (
+                      SELECT `name`
+                      FROM `{$this->tableCountries}`
+                      WHERE `id` = `o`.`shipping_country`
+                    ) AS `shipping_country_name`
+                    FROM `{$this->tableOrders}` `o`
+                    WHERE `o`.`id` = " . intval($id);
 
             return $this->db->fetchOne($sql);
+        }
+
+        /**
+         * Get a specific order by token
+         *
+         * @param null $token
+         * @return mixed|null
+         */
+        public function getOrderByToken($token = null) {
+
+            if (!empty($token)) {
+
+                $sql = "SELECT `o`.*,
+                    DATE_FORMAT(`o`.`date`, '%D %M %Y %r') AS `date_formatted`,
+                    CONCAT_WS(' ', `o`.`first_name`, `o`.`last_name`) AS `full_name`,
+                    IF (
+                      `o`.`address_2` != '',
+                      CONCAT_WS(', ', `o`.`address_1`, `o`.`address_2`),
+                      `o`.`address_1`
+                    ) AS `address`,
+                    IF (
+                      `o`.`shipping_address_2` != '',
+                      CONCAT_WS(', ', `o`.`shipping_address_1`, `o`.`shipping_address_2`),
+                      `o`.`shipping_address_1`
+                    ) AS `shipping_address`,
+                    (
+                      SELECT `name`
+                      FROM `{$this->tableCountries}`
+                      WHERE `id` = `o`.`country`
+                    ) AS `country_name`,
+                    (
+                      SELECT `name`
+                      FROM `{$this->tableCountries}`
+                      WHERE `id` = `o`.`shipping_country`
+                    ) AS `shipping_country_name`
+                    FROM `{$this->tableOrders}` `o`
+                    WHERE `o`.`token` = '" . $this->db->escape($token) . "'";
+
+                return $this->db->fetchOne($sql);
+            }
+            return null;
         }
 
         /**
@@ -154,8 +302,12 @@
                 $id :
                 $this->id;
 
-            $sql = "SELECT * FROM `{$this->tableOrdersItems}`
-                    WHERE `order` = '" . $this->db->escape($id) . "'";
+            $sql = "SELECT `i`.*, `p`.`name`,
+                      (`i`.`price` * `i`.`qty`) AS `price_total`
+                    FROM `{$this->tableOrdersItems}` `i`
+                    LEFT JOIN `{$this->tableProducts}` `p`
+                      ON `i`.`product` = `p`.`id`
+                    WHERE `i`.`order` = " . intval($id);
 
             return $this->db->fetchAll($sql);
         }
@@ -200,7 +352,7 @@
                         ) . "',
                             `ipn` = '" . $this->db->escape($out) . "',
                             `response` = '" . $this->db->escape($result) . "'
-                            WHERE `id` = '" . $this->db->escape(
+                            WHERE `token` = '" . $this->db->escape(
                             $data['custom']
                         ) . "'";
 
