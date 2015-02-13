@@ -13,6 +13,7 @@
             'name',
             'description',
             'price',
+            'weight',
             'identity',
             'meta_title',
             'meta_description',
@@ -24,6 +25,7 @@
             'name',
             'description',
             'price',
+            'weight',
             'identity',
             'meta_title',
             'meta_description',
@@ -55,30 +57,21 @@
 
                         Helper::redirect(
                             $this->objUrl->getCurrent(
-                                [
-                                    'action',
-                                    'id'
-                                ]
-                            ) . '/action/added'
+                                ['action', 'id'], false, ['action', 'added']
+                            )
                         );
                     } else {
                         Helper::redirect(
                             $this->objUrl->getCurrent(
-                                [
-                                    'action',
-                                    'id'
-                                ]
-                            ) . '/action/added-no-upload'
+                                ['action', 'id'], false, ['action', 'added-no-upload']
+                            )
                         );
                     }
                 } else {
                     Helper::redirect(
                         $this->objUrl->getCurrent(
-                            [
-                                'action',
-                                'id'
-                            ]
-                        ) . '/action/added-failed'
+                            ['action', 'id'], false, ['action', 'added-failed']
+                        )
                     );
                 }
             }
@@ -139,7 +132,16 @@
                 <td>
                     <?php echo $objValidation->validate('price'); ?>
                     <input type="text" name="price" id="price"
-                           value="<?php echo $objForm->stickyText('price'); ?>"
+                           value="<?php echo $objForm->stickyText('price', '0.00'); ?>"
+                           class="fld_price"/>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="weight">Weight: *</label></th>
+                <td>
+                    <?php echo $objValidation->validate('weight'); ?>
+                    <input type="text" name="weight" id="weight"
+                           value="<?php echo $objForm->stickyText('weight', '0.00'); ?>"
                            class="fld_price"/>
                 </td>
             </tr>
