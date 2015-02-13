@@ -22,12 +22,21 @@
                 $objValidation->expected = [
                     'first_name',
                     'last_name',
+
                     'address_1',
                     'address_2',
                     'city',
                     'state',
                     'zip_code',
                     'country',
+
+                    'shipping_address_1',
+                    'shipping_address_2',
+                    'shipping_city',
+                    'shipping_state',
+                    'shipping_zip_code',
+                    'shipping_country',
+
                     'email'
                 ];
 
@@ -67,20 +76,14 @@
                     ) {
                         Helper::redirect(
                             $this->objUrl->getCurrent(
-                                [
-                                    'action',
-                                    'id'
-                                ]
-                            ) . '/action/edited'
+                                ['action', 'id'], false, ['action', 'edited']
+                            )
                         );
                     } else {
                         Helper::redirect(
                             $this->objUrl->getCurrent(
-                                [
-                                    'action',
-                                    'id'
-                                ]
-                            ) . '/action/edited-failed'
+                                ['action', 'id'], false, ['action', 'edited-failed']
+                            )
                         );
                     }
                 }
@@ -92,8 +95,7 @@
             <h1>Clients :: Edit</h1>
 
             <form action="" method="POST">
-                <table cellpadding="0" cellspacing="0" border="0"
-                       class="tbl_insert">
+                <table cellpadding="0" cellspacing="0" border="0" class="tbl_insert">
                     <tr>
                         <th><label for="first_name">First Name: *</label></th>
                         <td>
@@ -118,6 +120,24 @@
                                    ) ?>"/>
                         </td>
                     </tr>
+                    <tr>
+                        <th><label for="email">Email address: *</label></th>
+                        <td>
+                            <?php echo $objValidation->validate('email') ?>
+                            <input type="text" name="email" id="email"
+                                   class="fld"
+                                   value="<?php echo $objForm->stickyText(
+                                       'email',
+                                       $user['email']
+                                   )
+                                   ?>"/>
+                        </td>
+                    </tr>
+                </table>
+
+                <h3>Billing Address</h3>
+
+                <table cellpadding="0" cellspacing="0" border="0" class="tbl_insert">
                     <tr>
                         <th><label for="address_1">Address 1: *</label></th>
                         <td>
@@ -187,21 +207,86 @@
                             ?>
                         </td>
                     </tr>
+                </table>
+
+                <h3>Shipping Address</h3>
+
+                <table cellpadding="0" cellspacing="0" border="0" class="tbl_insert">
                     <tr>
-                        <th><label for="email">Email address: *</label></th>
+                        <th><label for="shipping_address_1">Address 1: </label></th>
                         <td>
-                            <?php echo $objValidation->validate('email') ?>
-                            <input type="text" name="email" id="email"
-                                   class="fld"
+                            <?php echo $objValidation->validate('shipping_address_1') ?>
+                            <input type="text" name="shipping_address_1"
+                                   id="shipping_address_1" class="fld"
                                    value="<?php echo $objForm->stickyText(
-                                       'email',
-                                       $user['email']
-                                   )
-                                   ?>"/>
+                                       'shipping_address_1',
+                                       $user['shipping_address_1']
+                                   ) ?>"/>
                         </td>
                     </tr>
                     <tr>
-                        <th>&nbsp;</th>
+                        <th><label for="shipping_address_2">Address 2: </label></th>
+                        <td>
+                            <?php echo $objValidation->validate('shipping_address_2') ?>
+                            <input type="text" name="shipping_address_2"
+                                   id="shipping_address_2" class="fld"
+                                   value="<?php echo $objForm->stickyText(
+                                       'shipping_address_2',
+                                       $user['shipping_address_2']
+                                   ) ?>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label for="shipping_city">City: </label></th>
+                        <td>
+                            <?php echo $objValidation->validate('shipping_city') ?>
+                            <input type="text" name="shipping_city"
+                                   id="shipping_city" class="fld"
+                                   value="<?php echo $objForm->stickyText(
+                                       'shipping_city',
+                                       $user['shipping_city']
+                                   ) ?>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label for="shipping_state">State: </label></th>
+                        <td>
+                            <?php echo $objValidation->validate('shipping_state') ?>
+                            <input type="text" name="shipping_state" id="shipping_state"
+                                   class="fld"
+                                   value="<?php echo $objForm->stickyText(
+                                       'shipping_state',
+                                       $user['shipping_state']
+                                   ) ?>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label for="shipping_zip_code">ZIP code: </label></th>
+                        <td>
+                            <?php echo $objValidation->validate('shipping_zip_code') ?>
+                            <input type="text" name="shipping_zip_code"
+                                   id="shipping_zip_code" class="fld"
+                                   value="<?php echo $objForm->stickyText(
+                                       'shipping_zip_code',
+                                       $user['shipping_zip_code']
+                                   ) ?>"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label for="shipping_country">Country: </label></th>
+                        <td>
+                            <?php echo $objValidation->validate('shipping_country') ?>
+                            <?php echo $objForm->getCountriesSelect(
+                                $user['shipping_country'],
+                                'shipping_country',
+                                true
+                            );
+                            ?>
+                        </td>
+                    </tr>
+                </table>
+                <table cellpadding="0" cellspacing="0" border="0" class="tbl_insert">
+                    <tr>
                         <td>
                             <label for="btn" class="sbm sbm_blue fl_l"> <input
                                     type="submit" id="btn" class="btn"

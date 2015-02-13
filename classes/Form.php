@@ -138,9 +138,12 @@
          *
          * @param null $record
          * @param string $name
+         * @param bool $selectOption
          * @return null|string
          */
-        public function getCountriesSelect($record = null, $name = 'country') {
+        public function getCountriesSelect(
+            $record = null, $name = 'country', $selectOption = false
+        ) {
 
             $objCountry = new Country();
             $countries = $objCountry->getCountries();
@@ -149,7 +152,7 @@
 
                 $out = "<select name=\"{$name}\" id=\"{$name}\" class='sel'>";
 
-                if (empty($record)) {
+                if (empty($record) || $selectOption == true) {
                     $out .= "<option value=\"\">Select one&hellip;</option>";
                 }
 
