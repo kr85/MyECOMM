@@ -8,7 +8,7 @@
 
     $zones = $objShipping->getZones();
 
-    $international = $ObjShipping->getTypes();
+    $international = $objShipping->getTypes();
     $local = $objShipping->getTypes(1);
 
     $urlSort = $this->objUrl->getCurrent(['action', 'id'], false, ['action', 'sort']);

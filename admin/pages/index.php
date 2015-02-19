@@ -30,7 +30,7 @@
     <h1>Log In</h1>
 
     <form action="" method="POST">
-        <table cellpadding="0" cellspacing="0" border="0" class="tbl_insert">
+        <table class="tbl_insert">
             <tr>
                 <th><label for="login_email">Email Address:</label></th>
                 <td>
