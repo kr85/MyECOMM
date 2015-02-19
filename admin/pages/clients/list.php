@@ -51,9 +51,7 @@
             </table>
         </form>
 
-        <?php
-        if (!empty($rows)) {
-            ?>
+        <?php if (!empty($rows)): ?>
             <table cellpadding="0" cellspacing="0" border="0"
                    class="tbl_repeat">
                 <tr>
@@ -61,7 +59,7 @@
                     <th class="ta_r col_15">Remove</th>
                     <th class="ta_r col_15">Edit</th>
                 </tr>
-                <?php foreach ($rows as $user) { ?>
+                <?php foreach ($rows as $user): ?>
                     <tr>
                         <td>
                             <?php echo Helper::encodeHTML(
@@ -95,16 +93,14 @@
                                 Edit </a>
                         </td>
                     </tr>
-                <?php } ?>
+                <?php endforeach; ?>
             </table>
 
             <?php echo $objPaging->getPaging(); ?>
 
-        <?php
-        } else {
+        <?php else:
             echo '<p>' . $empty . '</p>';
-        }
-        ?>
+        endif; ?>
 
         <?php require_once('_footer.php');
     }

@@ -50,9 +50,7 @@
             </table>
         </form>
 
-        <?php
-        if (!empty($rows)) {
-            ?>
+        <?php if (!empty($rows)): ?>
             <table cellpadding="0" cellspacing="0" border="0"
                    class="tbl_repeat">
                 <tr>
@@ -64,62 +62,59 @@
                     <th class="ta_r col_15">Remove</th>
                     <th class="ta_r col_15">View</th>
                 </tr>
-                <?php foreach ($rows as $order) { ?>
-                    <tr>
-                        <td><?php echo $order['id']; ?></td>
-                        <td><?php echo Helper::setDate(
-                                1,
-                                $order['name']
-                            ); ?></td>
-                        <td class="ta_r">
-                            <?php
-                                echo Catalog::$currency;
-                                echo number_format($order['total'], 2);
-                            ?>
-                        </td>
-                        <td class="ta_r">
-                            <?php
-                                $status = $objOrder->getStatus(
-                                    $order['status']
-                                );
-                                echo $status['name'];
-                            ?>
-                        </td>
-                        <td class="ta_r">
-                            <?php
-                                echo $order['payment_status'] != null ?
-                                    $order['payment_status'] :
-                                    "Pending";
-                            ?>
-                        </td>
-                        <td class="ta_r">
-                            <?php if ($order['status'] == 1) { ?>
-                                <a href="<?php echo $this->objUrl->getCurrent(
-                                        'action'
-                                    ) . '/action/remove/id/' . $order['id']; ?>">
-                                    Remove </a>
-                            <?php } else { ?>
-                                <span class="inactive">Remove</span>
-                            <?php } ?>
-                        </td>
-                        <td class="ta_r">
+            <?php foreach ($rows as $order): ?>
+                <tr>
+                    <td><?php echo $order['id']; ?></td>
+                    <td><?php echo Helper::setDate(
+                            1,
+                            $order['name']
+                        ); ?></td>
+                    <td class="ta_r">
+                        <?php
+                            echo Catalog::$currency;
+                            echo number_format($order['total'], 2);
+                        ?>
+                    </td>
+                    <td class="ta_r">
+                        <?php
+                            $status = $objOrder->getStatus(
+                                $order['status']
+                            );
+                            echo $status['name'];
+                        ?>
+                    </td>
+                    <td class="ta_r">
+                        <?php
+                            echo $order['payment_status'] != null ?
+                                $order['payment_status'] :
+                                "Pending";
+                        ?>
+                    </td>
+                    <td class="ta_r">
+                        <?php if ($order['status'] == 1) { ?>
                             <a href="<?php echo $this->objUrl->getCurrent(
                                     'action'
-                                ) . '/action/edit/id/' . $order['id']; ?>">
-                                View </a>
-                        </td>
-                    </tr>
-                <?php } ?>
+                                ) . '/action/remove/id/' . $order['id']; ?>">
+                                Remove </a>
+                        <?php } else { ?>
+                            <span class="inactive">Remove</span>
+                        <?php } ?>
+                    </td>
+                    <td class="ta_r">
+                        <a href="<?php echo $this->objUrl->getCurrent(
+                                'action'
+                            ) . '/action/edit/id/' . $order['id']; ?>">
+                            View </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
             </table>
 
             <?php echo $objPaging->getPaging(); ?>
 
-        <?php
-        } else {
+        <?php else:
             echo '<p>' . $empty . '</p>';
-        }
-        ?>
-
-        <?php require_once('_footer.php');
+        endif;
+        require_once('_footer.php');
     }
 ?>

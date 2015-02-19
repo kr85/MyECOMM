@@ -61,7 +61,7 @@
                         <th>Order No.</th>
                         <td colspan="4"><?php echo $order['id']; ?></td>
                     </tr>
-                    <?php if (!empty($items)) { ?>
+                    <?php if (!empty($items)): ?>
                         <tr>
                             <th rowspan="<?php echo count($items) + 1; ?>">
                                 Items:
@@ -71,7 +71,7 @@
                             <td class="col_5">Qty</td>
                             <td class="ta_r col_15">Amount</td>
                         </tr>
-                        <?php foreach ($items as $item) {
+                        <?php foreach ($items as $item):
                             $product = $objCatalog->getProduct(
                                 $item['product']
                             );
@@ -94,8 +94,8 @@
                                     ?>
                                 </td>
                             </tr>
-                        <?php } ?>
-                    <?php } ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                     <tr>
                         <th>Shipping:</th>
                         <td colspan="3">
@@ -193,9 +193,9 @@
                         <th><label for="status">Order Status:</label></th>
                         <td colspan="4">
                             <?php $objValidation->validate('status'); ?>
-                            <?php if (!empty($status)) { ?>
+                            <?php if (!empty($status)): ?>
                                 <select name="status" id="status" class="sel">
-                                    <?php foreach ($status as $s) { ?>
+                                    <?php foreach ($status as $s): ?>
                                         <option value="<?php echo $s['id']; ?>"
                                             <?php echo $objForm->stickySelect(
                                                 'status',
@@ -206,9 +206,9 @@
                                                 $s['name']
                                             ); ?>
                                         </option>
-                                    <?php } ?>
+                                    <?php endforeach; ?>
                                 </select>
-                            <?php } ?>
+                            <?php endif; ?>
                         </td>
                     </tr>
                     <tr>

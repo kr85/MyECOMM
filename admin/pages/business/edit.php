@@ -88,7 +88,7 @@
                             ?></textarea>
                     </td>
                 </tr>
-                <?php if (!empty($countries)) { ?>
+                <?php if (!empty($countries)): ?>
                     <tr>
                         <th><label for="country">Country: *</label></th>
                         <td>
@@ -107,7 +107,7 @@
                             </select>
                         </td>
                     </tr>
-                <?php } ?>
+                <?php endif; ?>
                 <tr>
                     <th><label for="telephone">Phone: *</label></th>
                     <td>

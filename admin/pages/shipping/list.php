@@ -47,5 +47,29 @@
             </tr>
         </table>
 </form>
+<div class="dev br_td"></div>
+<form method="post" data-url="<?php echo $this->objUrl->getCurrent(
+        ['action', 'id'], false, ['action', 'update', 'id']) . '/';
+?>">
+    <h3>Local Types</h3>
+    <div id="typesLocal">
+        <?php echo Plugin::get('admin' . DS . 'shipping', [
+            'rows' => $local,
+            'zones' => $zones,
+            'objUrl' => $this->objUrl,
+            'urlSort' => $urlSort
+        ]); ?>
+    </div>
+
+    <h3>International Types</h3>
+    <div id="typesInternational">
+        <?php echo Plugin::get('admin' . DS . 'shipping', [
+            'rows' => $international,
+            'countries' => $countries,
+            'objUrl' => $this->objUrl,
+            'urlSort' => $urlSort
+        ]); ?>
+    </div>
+</form>
 
 <?php require_once('_footer.php'); ?>

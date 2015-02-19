@@ -19,7 +19,7 @@
             ) . '/action/add'; ?>"> New Category </a>
     </p>
 
-<?php if (!empty($rows)) { ?>
+<?php if (!empty($rows)): ?>
 
     <table cellpadding="0" cellspacing="0" border="0" class="tbl_repeat">
         <tr>
@@ -27,7 +27,7 @@
             <th class="ta_r col_15">Remove</th>
             <th class="ta_r col_15">Edit</th>
         </tr>
-        <?php foreach ($rows as $category) { ?>
+        <?php foreach ($rows as $category): ?>
             <tr>
                 <td><?php echo Helper::encodeHTML($category['name']); ?></td>
                 <td class="ta_r">
@@ -48,13 +48,13 @@
                         ) . '/action/edit/id/' . $category['id']; ?>"> Edit </a>
                 </td>
             </tr>
-        <?php } ?>
+        <?php endforeach; ?>
     </table>
 
     <?php echo $objPaging->getPaging(); ?>
 
-<?php } else { ?>
+<?php else: ?>
     <p>There are currently no categories created.</p>
-<?php } ?>
+<?php endif; ?>
 
 <?php require_once('_footer.php'); ?>

@@ -3,6 +3,9 @@
     Login::restrictFront($this->objUrl);
 
     $id = $this->objUrl->get('id');
+    $items = [];
+    $user = null;
+    $business = null;
 
     if (!empty($id)) {
 
@@ -84,7 +87,7 @@
                                 <th class="ta_r col_15">Price</th>
                             </tr>
 
-                            <?php foreach ($items as $item) { ?>
+                            <?php foreach ($items as $item): ?>
 
                                 <tr>
                                     <td>
@@ -114,9 +117,9 @@
                                     </td>
                                 </tr>
 
-                            <?php } ?>
+                            <?php endforeach; ?>
 
-                            <?php if ($order['tax_rate'] != 0) { ?>
+                            <?php if ($order['tax_rate'] != 0): ?>
 
                                 <tr>
                                     <td colspan="2" class="br_td">
@@ -148,7 +151,7 @@
                                     </td>
                                 </tr>
 
-                            <?php } ?>
+                            <?php endif; ?>
 
                             <tr>
                                 <td colspan="2" class="br_td">

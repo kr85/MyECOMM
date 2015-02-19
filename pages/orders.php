@@ -14,8 +14,7 @@
     <h1>My Orders</h1>
 
 <?php
-    if (!empty($rows)) {
-        ?>
+    if (!empty($rows)): ?>
         <table cellpadding="0" cellspacing="0" border="0" class="tbl_repeat">
             <tr>
                 <th>Id</th>
@@ -25,7 +24,7 @@
                 <th class="ta_r col_15">Invoice</th>
             </tr>
 
-            <?php foreach ($rows as $row) { ?>
+            <?php foreach ($rows as $row): ?>
                 <tr>
                     <td><?php echo $row['id']; ?></td>
                     <td class="ta_r">
@@ -46,35 +45,25 @@
                         ?>
                     </td>
                     <td class="ta_r">
-                        <?php
-                            if ($row['pp_status'] == 1) {
-                                ?>
-                                <a href="<?php echo $this->objUrl->href(
-                                    'invoice',
-                                    [
-                                        'id',
-                                        $row['id']
-                                    ]
-                                ); ?>" target="_blank"> Invoice </a>
-                            <?php
-                            } else {
-                                ?>
-                                <span class="inactive">Invoice</span>
-                            <?php
-                            }
-                        ?>
+                        <?php if ($row['pp_status'] == 1): ?>
+                            <a href="<?php echo $this->objUrl->href(
+                                'invoice',
+                                [
+                                    'id',
+                                    $row['id']
+                                ]
+                            ); ?>" target="_blank"> Invoice </a>
+                        <?php else: ?>
+                            <span class="inactive">Invoice</span>
+                        <?php endif; ?>
                     </td>
                 </tr>
-            <?php } ?>
+            <?php endforeach; ?>
         </table>
 
         <?php echo $objPaging->getPaging(); ?>
-    <?php
-    } else {
-        ?>
+    <?php else: ?>
         <p>You do not have any orders.</p>
-    <?php
-    }
-?>
+    <?php endif; ?>
 
 <?php require_once('_footer.php'); ?>

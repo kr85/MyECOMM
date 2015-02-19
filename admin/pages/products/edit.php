@@ -110,8 +110,8 @@
                             <?php echo $objValidation->validate('category'); ?>
                             <select name="category" id="category" class="sel">
                                 <option value="">Select One&hellip;</option>
-                                <?php if (!empty($categories)) { ?>
-                                    <?php foreach ($categories as $category) { ?>
+                                <?php if (!empty($categories)): ?>
+                                    <?php foreach ($categories as $category): ?>
                                         <option
                                             value="<?php echo $category['id']; ?>"
                                             <?php echo $objForm->stickySelect(
@@ -124,8 +124,8 @@
                                             );
                                             ?>
                                         </option>
-                                    <?php } ?>
-                                <?php } ?>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </select>
                         </td>
                     </tr>

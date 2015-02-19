@@ -3,12 +3,12 @@
     $id = $this->objUrl->get('item');
 
     // Check if id is empty
-    if (!empty($id)) {
+    if (!empty($id)):
         $objCatalog = new Catalog();
         $product = $objCatalog->getProductByIdentity($id);
 
         // Check if product is empty
-        if (!empty($product)) {
+        if (!empty($product)):
             $this->metaTitle = $product['meta_title'];
             $this->metaDescription = $product['meta_description'];
             $this->metaKeywords = $product['meta_keywords'];
@@ -25,7 +25,7 @@
                 'unavailable.png';
 
             // Check if image is empty
-            if (!empty($image)) {
+            if (!empty($image)):
                 $width = Helper::getImageSize(CATALOG_PATH . DS . $image, 0);
                 $width = $width > 120 ?
                     120 :
@@ -36,7 +36,7 @@
                 echo "\" alt=\"";
                 echo Helper::encodeHTML($product['name'], 1);
                 echo "\" width=\"{$width}\" /></div>";
-            }
+            endif;
 
             echo "<div class=\"rgt\"><h3>" . $product['name'] . "</h3>";
             echo "<h4><strong>" . Catalog::$currency;
@@ -49,9 +49,9 @@
             echo "<p><a href=\"javascript:history.go(-1)\">Go back</a></p>";
 
             require_once('_footer.php');
-        } else {
+        else:
             require_once('error.php');
-        }
-    } else {
+        endif;
+    else:
         require_once('error.php');
-    }
+    endif;

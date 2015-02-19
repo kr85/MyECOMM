@@ -25,8 +25,7 @@
 <h1>Order Summary</h1>
 
 <?php
-    if (!empty($out)) {
-        ?>
+    if (!empty($out)): ?>
         <div id="main_basket">
             <form action="" method="POST" id="frm_basket">
                 <table cellpadding="0" cellspacing="0" border="0"
@@ -38,8 +37,7 @@
                     </tr>
 
                     <?php
-                        foreach ($out as $item) {
-                            ?>
+                        foreach ($out as $item): ?>
                             <tr>
                                 <td>
                                     <?php
@@ -64,15 +62,12 @@
                                     ?>
                                 </td>
                             </tr>
-                        <?php
-                        }
-                    ?>
+                        <?php endforeach; ?>
                     <tr>
                         <td class="dev">&#160;</td>
                     </tr>
                     <?php
-                        if ($objBasket->taxRate > 0) {
-                            ?>
+                        if ($objBasket->taxRate > 0): ?>
                             <tr>
                                 <td colspan="2" class="br_td">
                                     Subtotal:
@@ -98,9 +93,7 @@
                                     ?>
                                 </td>
                             </tr>
-                        <?php
-                        }
-                    ?>
+                        <?php endif; ?>
 
                     <tr>
                         <td colspan="2" class="br_td">
@@ -131,12 +124,8 @@
             <div class="dev">&#160;</div>
         </div>
 
-    <?php
-    } else {
-        ?>
+    <?php else: ?>
         <p>Your basket is currently empty.</p>
-    <?php
-    }
-?>
+    <?php endif; ?>
 
 <?php require_once('_footer.php'); ?>

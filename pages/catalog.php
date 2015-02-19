@@ -1,16 +1,16 @@
 <?php
     $category = $this->objUrl->get('category');
 
-    if (empty($category)) {
+    if (empty($category)):
         require_once("error.php");
-    } else {
+    else:
         // Instantiate catalog class
         $objCatalog = new Catalog();
         $category = $objCatalog->getCategoryByIdentity($category);
 
-        if (empty($category)) {
+        if (empty($category)):
             require_once("error.php");
-        } else {
+        else:
             $this->metaTitle = $category['meta_title'];
             $this->metaDescription = $category['meta_description'];
             $this->metaKeywords = $category['meta_keywords'];
@@ -26,10 +26,8 @@
             <h1>Catalog :: <?php echo $category['name']; ?></h1>
 
             <?php
-            if (!empty($rows)) {
-
-                foreach ($rows as $row) {
-                    ?>
+            if (!empty($rows)):
+                foreach ($rows as $row): ?>
                     <div class="catalog_wrapper">
                         <div class="catalog_wrapper_left">
                             <?php
@@ -87,16 +85,14 @@
                             </p>
                         </div>
                     </div>
-                <?php
-                }
+                <?php endforeach;
                 // Display pagination links
                 echo $objPaging->getPaging();
-            } else {
-                ?>
+            else: ?>
                 <p>There are no products in this category.</p>
-            <?php
-            }
+            <?php endif;
+
             require_once("_footer.php");
-        }
-    }
+        endif;
+    endif;
 ?>

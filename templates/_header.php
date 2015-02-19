@@ -53,11 +53,11 @@
         <div id="wrapper">
             <div id="left">
                 <?php require_once('basket_left.php'); ?>
-                <?php if (!empty($categories)) { ?>
+                <?php if (!empty($categories)): ?>
                     <h2>Categories</h2>
                     <ul id="navigation">
                         <?php
-                            foreach ($categories as $c) {
+                            foreach ($categories as $c):
                                 echo '<li><a href="';
                                 echo $this->objUrl->href(
                                     'catalog',
@@ -76,9 +76,9 @@
                                 echo '>';
                                 echo Helper::encodeHTML($c['name']);
                                 echo '</a></li>';
-                            }
+                            endforeach;
                         ?>
                     </ul>
-                <?php } ?>
+                <?php endif; ?>
             </div>
             <div id="right">
