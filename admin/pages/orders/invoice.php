@@ -12,13 +12,9 @@
         if (!empty($order)) {
 
             $items = $objOrder->getOrderItems($id);
-            $objCatalog = new Catalog();
-            $objUser = new User();
-            $user = $objUser->getUser($order['client']);
-            $ObjCountry = new Country();
             $ObjBusiness = new Business();
             $business = $ObjBusiness->getBusiness();
-            $objBasket = new Basket();
+
             ?>
 
             <!DOCTYPE html>
@@ -35,23 +31,25 @@
 
                         <div style="width: 50%; float: left;">
                             <p>
-                                <strong>To:</strong>
-                                <?php echo Login::getFullNameFront(
-                                    $user['id']
-                                ); ?><br/>
-                                <?php echo $user['address_1']; ?><br/>
-                                <?php echo !empty($user['address_2']) ?
-                                    $user['address_2'] :
-                                    null;
-                                ?><br/>
-                                <?php echo $user['city']; ?>,
-                                <?php echo $user['state']; ?>
-                                <?php echo $user['zip_code']; ?><br/>
+                                <strong>Billing Address:</strong>
                                 <?php
-                                    $country = $ObjCountry->getCountry(
-                                        $user['country']
-                                    );
-                                    echo $country['name'];
+                                    echo $order['full_name'] . '<br/>';
+                                    echo $order['address'] . '<br/>';
+                                    echo $order['city'] . ', ';
+                                    echo $order['state'] . ' ';
+                                    echo $order['zip_code'] . '<br/>';
+                                    echo $order['country_name'];
+                                ?>
+                            </p>
+                            <p>
+                                <strong>Shipping Address:</strong>
+                                <?php
+                                    echo $order['full_name'] . '<br/>';
+                                    echo $order['shipping_address'] . '<br/>';
+                                    echo $order['shipping_city'] . ', ';
+                                    echo $order['shipping_state'] . ' ';
+                                    echo $order['shipping_zip_code'] . '<br/>';
+                                    echo $order['shipping_country_name'];
                                 ?>
                             </p>
                         </div>
@@ -63,12 +61,18 @@
                                 <?php echo $business['telephone']; ?><br/>
                                 <?php echo $business['email']; ?><br/>
                                 <?php echo $business['website']; ?>
+                                <?php
+                                    echo $order['tax_rate'] > 0 &&
+                                        !empty($order['tax_number']) ?
+                                        '<br/>Tax Number: ' . $order['tax_number'] :
+                                        null;
+                                ?>
                             </p>
                         </div>
 
                         <div class="dev">&#160;</div>
 
-                        <h3>Order Number <?php echo $id; ?> |
+                        <h3>Order Number <?php echo $order['id']; ?> |
                             Date: <?php echo $order['date']; ?>
                         </h3>
 
@@ -84,36 +88,44 @@
 
                                 <tr>
                                     <td>
-                                        <?php
-                                            $product = $objCatalog->getProduct(
-                                                $item['product']
-                                            );
-                                            echo $product['name'];
-                                        ?>
+                                        <?php echo $item['name']; ?>
                                     </td>
                                     <td class="ta_r">
-                                        <?php
-                                            echo $item['qty'];
-                                        ?>
+                                        <?php echo $item['qty']; ?>
                                     </td>
                                     <td class="ta_r">
                                         <?php
                                             echo Catalog::$currency;
-                                            echo number_format(
-                                                $objBasket->itemTotal(
-                                                    $item['price'],
-                                                    $item['qty']
-                                                ),
-                                                2
-                                            );
+                                            echo number_format($item['price_total'], 2);
                                         ?>
                                     </td>
                                 </tr>
 
                             <?php } ?>
 
-                            <?php if ($order['tax_rate'] != 0) { ?>
-
+                            <tbody class="summary_section">
+                                <tr>
+                                    <td colspan="2" class="br_td">
+                                        Items Total:
+                                    </td>
+                                    <td class="ta_r br_td">
+                                        <?php
+                                            echo Catalog::$currency;
+                                            echo number_format($order['subtotal_items'], 2);
+                                        ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="br_td">
+                                        Shipping: <?php echo $order['shipping_type']; ?>
+                                    </td>
+                                    <td class="ta_r br_td">
+                                        <?php
+                                            echo Catalog::$currency;
+                                            echo number_format($order['shipping_cost'], 2);
+                                        ?>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td colspan="2" class="br_td">
                                         Subtotal:
@@ -121,47 +133,35 @@
                                     <td class="ta_r br_td">
                                         <?php
                                             echo Catalog::$currency;
-                                            echo number_format(
-                                                $order['subtotal'],
-                                                2
-                                            );
+                                            echo number_format($order['subtotal'], 2);
                                         ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="br_td">
-                                        Tax (<?php echo $order['tax_rate']; ?>
-                                        %):
+                                        Tax (<?php echo $order['tax_rate']; ?>%):
                                     </td>
                                     <td class="ta_r br_td">
                                         <?php
                                             echo Catalog::$currency;
-                                            echo number_format(
-                                                $order['tax'],
-                                                2
-                                            );
+                                            echo number_format($order['tax'], 2);
                                         ?>
                                     </td>
                                 </tr>
-
-                            <?php } ?>
-
-                            <tr>
-                                <td colspan="2" class="br_td">
-                                    <strong>Total:</strong>
-                                </td>
-                                <td class="ta_r br_td">
-                                    <strong>
-                                        <?php
-                                            echo Catalog::$currency;
-                                            echo number_format(
-                                                $order['subtotal'],
-                                                2
-                                            );
-                                        ?>
-                                    </strong>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td colspan="2" class="br_td">
+                                        <strong>Total:</strong>
+                                    </td>
+                                    <td class="ta_r br_td">
+                                        <strong>
+                                            <?php
+                                                echo Catalog::$currency;
+                                                echo number_format($order['total'], 2);
+                                            ?>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
 
                         <div class="dev br_td">&nbsp;</div>
