@@ -55,4 +55,18 @@
                     ORDER BY `z`.`name` ASC";
             return $this->db->fetchAll($sql);
         }
+
+        /**
+         * Get shipping types
+         *
+         * @param int $local
+         * @return array
+         */
+        public function getTypes($local = 0) {
+            $sql = "SELECT *
+                    FROM `{$this->tableShippingType}`
+                    WHERE `local` = " . intval($local) . "
+                    ORDER BY `order` ASC";
+            return $this->db->fetchAll($sql);
+        }
     }
