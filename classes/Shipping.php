@@ -38,4 +38,21 @@
             }
             return null;
         }
+
+        /**
+         * Get shipping zones
+         *
+         * @return array
+         */
+        public function getZones() {
+            $sql = "SELECT `z`.*
+                    (
+                      SELECT GROUP_CONCAT(`country_code` ORDER BY `country_code` ASC SEPARATOR ', ')
+                      FROM `{$this->tableZonesCountryCodes}`
+                      WHERE `zones` = `z`.`id`
+                    ) AS `country_codes`
+                    FROM `{$this->tableZones}` `z`
+                    ORDER BY `z`.`name` ASC";
+            return $this->db->fetchAll($sql);
+        }
     }
