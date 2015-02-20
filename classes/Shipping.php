@@ -148,6 +148,55 @@
         }
 
         /**
+         * Duplicate a shipping type
+         *
+         * @param null $id
+         * @return bool
+         */
+        public function duplicateType($id = null) {
+            if (!empty($id)) {
+                $type = $this->getType($id);
+                if (!empty($type)) {
+                    $last = $this->getLastType($type['local']);
+                    $order = (!empty($last)) ? $last['order'] + 1 : 1;
+                    $this->db->prepareInsert([
+                        'name' => $type['name'] . ' copy',
+                        'order' => $order,
+                        'local' => $type['local'],
+                        'active' => 0
+                    ]);
+                    if ($this->db->insert($this->tableShippingType)) {
+                        $this->db->insertKeys = [];
+                        $this->db->insertValues = [];
+                        $newId = $this->db->id;
+                        $sql = "SELECT *
+                                FROM `{$this->tableShipping}`
+                                WHERE `type` = {$id}";
+                        $list = $this->db->fetchOne($sql);
+                        if (!empty($list)) {
+                            foreach ($list as $row) {
+                                $this->db->prepareInsert([
+                                    'type' => $newId,
+                                    'zone' => $row['zone'],
+                                    'country' => $row['country'],
+                                    'weight' => $row['weight'],
+                                    'cost' => $row['cost']
+                                ]);
+                            }
+                            $this->db->insert($this->tableShipping);
+                            $this->db->insertKeys = [];
+                            $this->db->insertValues = [];
+                        }
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            }
+            return false;
+        }
+
+        /**
          * Get last shipping type
          *
          * @param int $local
