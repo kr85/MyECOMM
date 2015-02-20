@@ -88,6 +88,26 @@
         }
 
         /**
+         * Delete a shipping type by id
+         *
+         * @param null $id
+         * @return bool|resource
+         */
+        public function removeType($id = null) {
+            if (!empty($id)) {
+                $sql = "DELETE FROM `{$this->tableShippingType}`
+                        WHERE `id` = " . intval($id);
+                if ($this->db->query($sql)) {
+                    $sql = "DELETE FROM `{$this->tableShipping}`
+                            WHERE `type` = " . intval($id);
+                    return $this->db->query($sql);
+                }
+                return false;
+            }
+            return false;
+        }
+
+        /**
          * Get last shipping type
          *
          * @param int $local
