@@ -7,20 +7,20 @@
 
     switch ($action) {
         case 'edit':
-            require_once('orders/edit.php');
+            require_once('orders' . DS . 'edit.php');
             break;
         case 'edited':
-            require_once('orders/edited.php');
+            require_once('orders' . DS . 'edited.php');
             break;
         case 'edited-failed':
-            require_once('orders/edited-failed.php');
+            require_once('orders' . DS . 'edited-failed.php');
             break;
         case 'invoice':
-            require_once('orders/invoice.php');
+            require_once('orders' . DS . 'invoice.php');
             break;
         case 'remove':
-            require_once('orders/remove.php');
+            require_once('orders' . DS . 'remove.php');
             break;
         default:
-            require_once('orders/list.php');
+            require_once('orders' . DS . 'list.php');
     }

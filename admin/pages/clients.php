@@ -7,17 +7,17 @@
 
     switch ($action) {
         case 'edit':
-            require_once('clients/edit.php');
+            require_once('clients' . DS . 'edit.php');
             break;
         case 'edited':
-            require_once('clients/edited.php');
+            require_once('clients' . DS . 'edited.php');
             break;
         case 'edited-failed':
-            require_once('clients/edited-failed.php');
+            require_once('clients' . DS . 'edited-failed.php');
             break;
         case 'remove':
-            require_once('clients/remove.php');
+            require_once('clients' . DS . 'remove.php');
             break;
         default:
-            require_once('clients/list.php');
+            require_once('clients' . DS . 'list.php');
     }
