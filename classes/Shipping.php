@@ -69,4 +69,36 @@
                     ORDER BY `order` ASC";
             return $this->db->fetchAll($sql);
         }
+
+        /**
+         * Add a new shipping type
+         *
+         * @param null $params
+         * @return bool
+         */
+        public function addType($params = null) {
+            if (!empty($params)) {
+                $params['local'] = !empty($params['local']) ? 1 : 0;
+                $last = $this->getLastType($params['local']);
+                $params['order'] = !empty($last) ? $last['order'] + 1 : 1;
+                $this->db->prepareInsert($params);
+                return $this->db->insert($this->tableShippingType);
+            }
+            return false;
+        }
+
+        /**
+         * Get last shipping type
+         *
+         * @param int $local
+         * @return mixed
+         */
+        private function getLastType($local = 0) {
+            $sql = "SELECT `order`
+                    FROM `{$this->tableShippingType}`
+                    WHERE `local` = {$local}
+                    ORDER BY `order` DESC
+                    LIMIT 0, 1";
+            return $this->db->fetchOne($sql);
+        }
     }
