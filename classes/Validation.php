@@ -11,7 +11,7 @@
         // List of validation errors
         public $errors = [];
 
-        //
+        // List of error messages
         public $errorMessages = [];
 
         // List of validation error messages
@@ -182,6 +182,7 @@
         /**
          * Check if fields are valid
          *
+         * @param null $array
          * @return bool
          */
         public function isValid($array = null) {
