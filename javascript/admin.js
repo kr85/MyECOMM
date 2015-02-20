@@ -149,7 +149,7 @@ var adminObject = {
                 }, function (data) {
                     if (data && !data.error) {
                         thisObj.hide();
-                        $('[data-show="' + thisShow + '"]').text(thisValue).show();
+                        $('[data-show="#' + thisShow + '"]').text(thisValue).show();
                     }
                 }, 'json');
             } else {
