@@ -197,6 +197,132 @@
         }
 
         /**
+         * Get a zone by id
+         *
+         * @param null $id
+         * @return bool|mixed
+         */
+        public function getZoneById($id = null) {
+            if (!empty($id)) {
+                $sql = "SELECT *
+                        FROM `{$this->tableZones}`
+                        WHERE `id` = " . intval($id);
+                return $this->db->fetchOne($sql);
+            }
+            return false;
+        }
+
+        /**
+         *
+         *
+         * @param null $typeId
+         * @param null $zoneId
+         * @return array|bool
+         */
+        public function getShippingByTypeZone($typeId = null, $zoneId = null) {
+            if (!empty($typeId) && !empty($zoneId)) {
+                $sql = "SELECT `s`.*,
+                        IF (
+                            (
+                              SELECT COUNT(`weight`)
+                              FROM `{$this->tableShipping}`
+                              WHERE `type` = `s`.`type`
+                              AND `zone` = `s`.`zone`
+                              AND `weight` < `s`.`weight`
+                              ORDER BY `weight` DESC
+                              LIMIT 0, 1
+                            ) > 0,
+                            (
+                              SELECT `weight`
+                              FROM `{$this->tableShipping}`
+                              WHERE `type` = `s`.`type`
+                              AND `zone` = `s`.`zone`
+                              AND `weight` < `s`.`weight`
+                              ORDER BY `weight` DESC
+                              LIMIT 0, 1
+                            ) + 0.01,
+                            0
+                        ) AS `weight_from`
+                        FROM `{$this->tableShipping}` `s`
+                        WHERE `s`.`type` = " . intval($typeId) . "
+                        AND `s`.`zone` = " . intval($zoneId) . "
+                        ORDER BY `s`.`weight` ASC";
+                return $this->db->fetchAll($sql);
+            }
+            return false;
+        }
+
+        /**
+         * Check if a shipping rate is duplicate
+         *
+         * @param null $typeId
+         * @param null $zoneId
+         * @param null $weight
+         * @return bool
+         */
+        public function isDuplicateLocal($typeId = null, $zoneId = null, $weight = null) {
+            if (!empty($typeId) && !empty($zoneId) && !empty($weight)) {
+                $sql = "SELECT *
+                        FROM `{$this->tableShipping}`
+                        WHERE `type` = " . intval($typeId) . "
+                        AND `zone` = " . intval($zoneId) . "
+                        AND `weight` = '" . floatval($weight) . "'";
+                $result = $this->db->fetchOne($sql);
+                return (!empty($result)) ? true : false;
+            }
+            return false;
+        }
+
+        /**
+         * Add new shipping rate
+         *
+         * @param null $params
+         * @return bool
+         */
+        public function addShipping($params = null) {
+            if (!empty($params)) {
+                $this->db->prepareInsert($params);
+                return $this->db->insert($this->tableShipping);
+            }
+            return false;
+        }
+
+        /**
+         * Get a shipping rate by id, type id and zone id
+         *
+         * @param null $id
+         * @param null $typeId
+         * @param null $zoneId
+         * @return bool|mixed
+         */
+        public function getShippingByIdTypeZone($id = null, $typeId = null, $zoneId = null) {
+            if (!empty($id) && !empty($typeId) && !empty($zoneId)) {
+                $sql = "SELECT *
+                        FROM `{$this->tableShipping}`
+                        WHERE `id` = " . intval($id) . "
+                        AND `type` = " . intval($typeId) . "
+                        AND `zone` = " . intval($zoneId);
+                return $this->db->fetchOne($sql);
+            }
+            return false;
+        }
+
+        /**
+         * Remove a shipping rate by id
+         *
+         * @param null $id
+         * @return bool|resource
+         */
+        public function removeShipping($id = null) {
+            if (!empty($id)) {
+                $sql = "DELETE FROM `{$this->tableShipping}`
+                        WHERE `id` = " . intval($id);
+                return $this->db->query($sql);
+            }
+            return false;
+        }
+
+        /**
          * Get last shipping type
          *
          * @param int $local

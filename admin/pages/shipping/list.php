@@ -39,8 +39,8 @@
             </tr>
             <tr>
                 <td>
-                    <label for="btn_add" class="sbm sbm_blue fl_l"> <input
-                            type="submit" id="btn_add" class="btn" value="Add"/>
+                    <label for="btn_add" class="sbm sbm_blue fl_l">
+                        <input type="submit" id="btn_add" class="btn" value="Add"/>
                     </label>
                 </td>
             </tr>
