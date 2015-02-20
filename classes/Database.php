@@ -29,7 +29,7 @@
             $this->username = ProjectVariable::$DB_USERNAME;
             $this->password = ProjectVariable::$DB_PASSWORD;
             $this->database = ProjectVariable::$DB_NAME;
-            $this->connDb = false;
+            $this->connDb = null;
             $this->connect();
         }
 
