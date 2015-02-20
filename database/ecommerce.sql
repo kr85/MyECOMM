@@ -712,15 +712,7 @@ UPDATE `products` SET `identity` = 'greatest-muhammad-ali' WHERE `id` = 6;
 --
 -- Dumping data for table `shipping`
 --
-INSERT INTO `shipping` VALUES (1, 1, 1, 230, 10.00, 6.50);
-INSERT INTO `shipping` VALUES (2, 3, 1, 230, 10.00, 3.50);
-INSERT INTO `shipping` VALUES (3, 4, 1, 230, 10.00, 2.00);
-INSERT INTO `shipping` VALUES (4, 1, 2, 230, 10.00, 9.50);
-INSERT INTO `shipping` VALUES (5, 3, 2, 230, 10.00, 5.50);
-INSERT INTO `shipping` VALUES (6, 4, 2, 230, 10.00, 5.00);
-INSERT INTO `shipping` VALUES (7, 1, 3, 230, 10.00, 12.50);
-INSERT INTO `shipping` VALUES (8, 3, 3, 230, 10.00, 9.50);
-INSERT INTO `shipping` VALUES (9, 4, 3, 230, 10.00, 8.00);
+
 
 --
 -- Dumping data for table `zones_country_codes`
