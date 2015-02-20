@@ -5,7 +5,6 @@
     $objCountry = new Country();
     $countries = $objCountry->getAllExceptLocal();
 
-
     $zones = $objShipping->getZones();
 
     $international = $objShipping->getTypes();
@@ -51,6 +50,7 @@
 <form method="post" data-url="<?php echo $this->objUrl->getCurrent(
         ['action', 'id'], false, ['action', 'update', 'id']) . '/';
 ?>">
+
     <h3>Local Types</h3>
     <div id="typesLocal">
         <?php echo Plugin::get('admin' . DS . 'shipping', [

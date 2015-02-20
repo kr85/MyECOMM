@@ -9,9 +9,10 @@
          * Get a plugin file
          *
          * @param null $file
+         * @param null $data
          * @return bool|string
          */
-        public static function get($file = null) {
+        public static function get($file = null, $data = null) {
             // Create a path to the file
             $path = PLUGIN_PATH . DS . $file . '.php';
             // Check if the file and path exist
