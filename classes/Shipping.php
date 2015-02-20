@@ -108,6 +108,21 @@
         }
 
         /**
+         * Update shipping type
+         *
+         * @param null $params
+         * @param null $id
+         * @return bool|resource
+         */
+        public function updateType($params = null, $id = null) {
+            if (!empty($params) && !empty($id)) {
+                $this->db->prepareUpdate($params);
+                return $this->db->update($this->tableShippingType, $id);
+            }
+            return false;
+        }
+
+        /**
          * Get last shipping type
          *
          * @param int $local
