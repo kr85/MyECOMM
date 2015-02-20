@@ -123,6 +123,31 @@
         }
 
         /**
+         * Set a default shipping type
+         *
+         * @param null $id
+         * @param int $local
+         * @return bool|resource
+         */
+        public function setTypeDefault($id = null, $local = 0) {
+            if (!empty($id)) {
+                $sql = "UPDATE `{$this->tableShippingType}`
+                        SET `default` = 0
+                        WHERE `local` = {$local}
+                        AND `id` != " . intval($id);
+                if ($this->db->query($sql)) {
+                    $sql = "UPDATE `{$this->tableShippingType}`
+                            SET `default` = 1
+                            WHERE `local` = {$local}
+                            AND `id` = " . intval($id);
+                    return $this->db->query($sql);
+                }
+                return false;
+            }
+            return false;
+        }
+
+        /**
          * Get last shipping type
          *
          * @param int $local
