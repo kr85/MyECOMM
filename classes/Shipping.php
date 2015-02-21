@@ -88,6 +88,20 @@
         }
 
         /**
+         * Add a new zone
+         *
+         * @param null $params
+         * @return bool
+         */
+        public function addZone($params = null) {
+            if (!empty($params)) {
+                $this->db->prepareInsert($params);
+                return $this->db->insert($this->tableZones);
+            }
+            return false;
+        }
+
+        /**
          * Delete a shipping type by id
          *
          * @param null $id
@@ -108,7 +122,22 @@
         }
 
         /**
-         * Update shipping type
+         * Remove a zone by id
+         *
+         * @param null $id
+         * @return bool|resource
+         */
+        public function removeZone($id = null) {
+            if (!empty($id)) {
+                $sql = "DELETE FROM `{$this->tableZones}`
+                        WHERE `id` = " . intval($id);
+                return $this->db->query($sql);
+            }
+            return false;
+        }
+
+        /**
+         * Update a shipping type
          *
          * @param null $params
          * @param null $id
@@ -118,6 +147,21 @@
             if (!empty($params) && !empty($id)) {
                 $this->db->prepareUpdate($params);
                 return $this->db->update($this->tableShippingType, $id);
+            }
+            return false;
+        }
+
+        /**
+         * Update a zone
+         *
+         * @param null $params
+         * @param null $id
+         * @return bool
+         */
+        public function updateZone($params = null, $id = null) {
+            if (!empty($params) && !empty($id)) {
+                $this->db->prepareUpdate($params);
+                return $this->db->update($this->tableZones, $id);
             }
             return false;
         }

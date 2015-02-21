@@ -29,7 +29,7 @@
                             class="fld fld_list blur_update_hide_show dn"
                             data-id="<?php echo $item['id']; ?>"
                             value="<?php echo $item['name']; ?>"
-                            style="display: none;"/>
+                        />
                     </td>
                     <td>
                         <select name="rate-<?php echo $item['id']; ?>"
