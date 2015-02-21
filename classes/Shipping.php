@@ -213,7 +213,7 @@
         }
 
         /**
-         *
+         * Get a shipping rates by type id and zone id
          *
          * @param null $typeId
          * @param null $zoneId
@@ -253,14 +253,56 @@
         }
 
         /**
-         * Check if a shipping rate is duplicate
+         * Get shipping rates by type id and country id
+         *
+         * @param null $typeId
+         * @param null $countryId
+         * @return array|bool
+         */
+        public function getShippingByTypeCountry($typeId = null, $countryId = null) {
+            if (!empty($typeId) && !empty($countryId)) {
+                $sql = "SELECT `s`.*,
+                        IF (
+                            (
+                              SELECT COUNT(`weight`)
+                              FROM `{$this->tableShipping}`
+                              WHERE `type` = `s`.`type`
+                              AND `country` = `s`.`country`
+                              AND `weight` < `s`.`weight`
+                              ORDER BY `weight` DESC
+                              LIMIT 0, 1
+                            ) > 0,
+                            (
+                              SELECT `weight`
+                              FROM `{$this->tableShipping}`
+                              WHERE `type` = `s`.`type`
+                              AND `country` = `s`.`country`
+                              AND `weight` < `s`.`weight`
+                              ORDER BY `weight` DESC
+                              LIMIT 0, 1
+                            ) + 0.01,
+                            0
+                        ) AS `weight_from`
+                        FROM `{$this->tableShipping}` `s`
+                        WHERE `s`.`type` = " . intval($typeId) . "
+                        AND `s`.`country` = " . intval($countryId) . "
+                        ORDER BY `s`.`weight` ASC";
+                return $this->db->fetchAll($sql);
+            }
+            return false;
+        }
+
+        /**
+         * Check if a local shipping rate is duplicate
          *
          * @param null $typeId
          * @param null $zoneId
          * @param null $weight
          * @return bool
          */
-        public function isDuplicateLocal($typeId = null, $zoneId = null, $weight = null) {
+        public function isDuplicateLocal(
+            $typeId = null, $zoneId = null, $weight = null
+        ) {
             if (!empty($typeId) && !empty($zoneId) && !empty($weight)) {
                 $sql = "SELECT *
                         FROM `{$this->tableShipping}`
@@ -270,7 +312,30 @@
                 $result = $this->db->fetchOne($sql);
                 return (!empty($result)) ? true : false;
             }
-            return false;
+            return true;
+        }
+
+        /**
+         * Check if a international shipping rate is duplicate
+         *
+         * @param null $typeId
+         * @param null $countryId
+         * @param null $weight
+         * @return bool
+         */
+        public function isDuplicateInternational(
+            $typeId = null, $countryId = null, $weight = null
+        ) {
+            if (!empty($typeId) && !empty($countryId) && !empty($weight)) {
+                $sql = "SELECT *
+                        FROM `{$this->tableShipping}`
+                        WHERE `type` = " . intval($typeId) . "
+                        AND `country` = " . intval($countryId) . "
+                        AND `weight` = '" . floatval($weight) . "'";
+                $result = $this->db->fetchOne($sql);
+                return (!empty($result)) ? true : false;
+            }
+            return true;
         }
 
         /**
@@ -295,13 +360,37 @@
          * @param null $zoneId
          * @return bool|mixed
          */
-        public function getShippingByIdTypeZone($id = null, $typeId = null, $zoneId = null) {
+        public function getShippingByIdTypeZone(
+            $id = null, $typeId = null, $zoneId = null
+        ) {
             if (!empty($id) && !empty($typeId) && !empty($zoneId)) {
                 $sql = "SELECT *
                         FROM `{$this->tableShipping}`
                         WHERE `id` = " . intval($id) . "
                         AND `type` = " . intval($typeId) . "
                         AND `zone` = " . intval($zoneId);
+                return $this->db->fetchOne($sql);
+            }
+            return false;
+        }
+
+        /**
+         * Get a shipping rate by id, type id and country id
+         *
+         * @param null $id
+         * @param null $typeId
+         * @param null $countryId
+         * @return bool|mixed
+         */
+        public function getShippingByIdTypeCountry(
+            $id = null, $typeId = null, $countryId = null
+        ) {
+            if (!empty($id) && !empty($typeId) && !empty($countryId)) {
+                $sql = "SELECT *
+                        FROM `{$this->tableShipping}`
+                        WHERE `id` = " . intval($id) . "
+                        AND `type` = " . intval($typeId) . "
+                        AND `country` = " . intval($countryId);
                 return $this->db->fetchOne($sql);
             }
             return false;
