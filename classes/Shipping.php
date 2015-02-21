@@ -71,6 +71,41 @@
         }
 
         /**
+         * Get a post code by id and zone id
+         *
+         * @param null $id
+         * @param null $zoneId
+         * @return mixed|null
+         */
+        public function getPostCode($id = null, $zoneId = null) {
+            if (!empty($id) && !empty($zoneId)) {
+                $sql = "SELECT *
+                        FROM `{$this->tableZonesCountryCodes}`
+                        WHERE `id` = " . intval($id) . "
+                        AND `zone` = " . intval($zoneId);
+                return $this->db->fetchOne($sql);
+            }
+            return null;
+        }
+
+        /**
+         * Get all post codes of the a zone by zone id
+         *
+         * @param null $zoneId
+         * @return array|null
+         */
+        public function getPostCodes($zoneId = null) {
+            if (!empty($zoneId)) {
+                $sql = "SELECT *
+                        FROM `{$this->tableZonesCountryCodes}`
+                        WHERE `zone` = " . intval($zoneId) . "
+                        ORDER BY `country_code` ASC";
+                return $this->db->fetchAll($sql);
+            }
+            return null;
+        }
+
+        /**
          * Add a new shipping type
          *
          * @param null $params
@@ -383,6 +418,23 @@
         }
 
         /**
+         * Check if a post/country code is duplicate
+         *
+         * @param null $postCode
+         * @return bool
+         */
+        public function isDuplicatePostCode($postCode = null) {
+            if (!empty($postCode)) {
+                $sql = "SELECT *
+                        FROM `{$this->tableZonesCountryCodes}`
+                        WHERE `country_code` = '" . $this->db->escape($postCode) . "'";
+                $result = $this->db->fetchOne($sql);
+                return (!empty($result)) ? true : false;
+            }
+            return true;
+        }
+
+        /**
          * Add new shipping rate
          *
          * @param null $params
@@ -392,6 +444,20 @@
             if (!empty($params)) {
                 $this->db->prepareInsert($params);
                 return $this->db->insert($this->tableShipping);
+            }
+            return false;
+        }
+
+        /**
+         * Add a new post/country code
+         *
+         * @param null $params
+         * @return bool
+         */
+        public function addPostCode($params = null) {
+            if (!empty($params)) {
+                $this->db->prepareInsert($params);
+                return $this->db->insert($this->tableZonesCountryCodes);
             }
             return false;
         }
@@ -449,6 +515,21 @@
         public function removeShipping($id = null) {
             if (!empty($id)) {
                 $sql = "DELETE FROM `{$this->tableShipping}`
+                        WHERE `id` = " . intval($id);
+                return $this->db->query($sql);
+            }
+            return false;
+        }
+
+        /**
+         * Remove a post/country code by id
+         *
+         * @param null $id
+         * @return bool|resource
+         */
+        public function removePostCode($id = null) {
+            if (!empty($id)) {
+                $sql = "DELETE FROM `{$this->tableZonesCountryCodes}`
                         WHERE `id` = " . intval($id);
                 return $this->db->query($sql);
             }
