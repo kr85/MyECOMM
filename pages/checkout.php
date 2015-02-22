@@ -24,7 +24,15 @@
                 'state',
                 'zip_code',
                 'country',
-                'email'
+                'email',
+
+                'same_address',
+                'shipping_address_1',
+                'shipping_address_2',
+                'shipping_city',
+                'shipping_state',
+                'shipping_zip_code',
+                'shipping_country'
             ];
 
             // Required fields
@@ -36,7 +44,8 @@
                 'state',
                 'zip_code',
                 'country',
-                'email'
+                'email',
+                'same_address'
             ];
 
             // Special validation field
@@ -44,9 +53,25 @@
                 'email' => 'email'
             ];
 
-            // Check if validation was successful
-            if ($objValidation->isValid()) {
+            $array = $objForm->getPostArray($objValidation->expected);
 
+            if (empty($array['same_address'])) {
+                $objValidation->required[] = 'shipping_address_1';
+                $objValidation->required[] = 'shipping_city';
+                $objValidation->required[] = 'shipping_state';
+                $objValidation->required[] = 'shipping_zip_code';
+                $objValidation->required[] = 'shipping_country';
+            } else {
+                $array['shipping_address_1'] = null;
+                $array['shipping_address_2'] = null;
+                $array['shipping_city'] = null;
+                $array['shipping_state'] = null;
+                $array['shipping_zip_code'] = null;
+                $array['shipping_country'] = null;
+            }
+
+            // Check if validation was successful
+            if ($objValidation->isValid($array)) {
                 if ($objUser->updateUser($objValidation->post, $user['id'])) {
                     Helper::redirect($this->objUrl->href('summary'));
                 } else {
@@ -69,8 +94,10 @@
             null; ?>
 
         <form action="" method="POST">
-            <table cellpadding="0" cellspacing="0" border="0"
-                   class="tbl_insert">
+            <table class="tbl_insert">
+                <tbody>
+
+                </tbody>
                 <tr>
                     <th><label for="first_name">First Name: *</label></th>
                     <td>
@@ -173,6 +200,38 @@
                                    $user['email']
                                )
                                ?>"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                    <td>Is delivery address the same?</td>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                    <td>
+                        <?php echo $objValidation->validate('same_address'); ?>
+                        <label for="same_address_1">
+                            <input
+                                type="radio"
+                                name="same_address"
+                                id="same_address_1"
+                                value="1"
+                                class="show_hide_radio"
+                                <?php echo $objForm->stickyRadio(
+                                    'same_address', 1, $user['same_address']
+                                ); ?>/> Yes
+                        </label>
+                        <label for="same_address_0">
+                            <input
+                                type="radio"
+                                name="same_address"
+                                id="same_address_0"
+                                value="0"
+                                class="show_hide_radio"
+                                <?php echo $objForm->stickyRadio(
+                                    'same_address', 0, $user['same_address']
+                                ); ?>/> No
+                        </label>
                     </td>
                 </tr>
                 <tr>

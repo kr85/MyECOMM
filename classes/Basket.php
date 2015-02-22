@@ -106,9 +106,13 @@
             if (!$this->emptyBasket) {
                 foreach ($_SESSION['basket'] as $key => $basket) {
                     $product = $this->instanceCatalog->getProduct($key);
+                    //var_dump($product);
                     $value += ($basket['quantity'] * $product['price']);
                     $this->weightList[] = ($basket['quantity'] * $product['weight']);
                 }
+            }
+            if (!is_array($this->weightList)) {
+                $this->weightList = Helper::makeArray($this->weightList);
             }
             $this->weight = array_sum($this->weightList);
             $this->subTotal = round($value, 2);

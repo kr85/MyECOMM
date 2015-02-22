@@ -708,7 +708,12 @@ UPDATE `products` SET `identity` = 'spring-web-flow-2-dev' WHERE `id` = 3;
 UPDATE `products` SET `identity` = 'autobiography-benjamin-franklin' WHERE `id` = 4;
 UPDATE `products` SET `identity` = 'rocky-marciano-biography' WHERE `id` = 5;
 UPDATE `products` SET `identity` = 'greatest-muhammad-ali' WHERE `id` = 6;
-
+UPDATE `products` SET `weight` = 0.5 WHERE `id` = 1;
+UPDATE `products` SET `weight` = 0.5 WHERE `id` = 2;
+UPDATE `products` SET `weight` = 0.5 WHERE `id` = 3;
+UPDATE `products` SET `weight` = 0.5 WHERE `id` = 4;
+UPDATE `products` SET `weight` = 0.5 WHERE `id` = 5;
+UPDATE `products` SET `weight` = 0.5 WHERE `id` = 6;
 --
 -- Dumping data for table `shipping`
 --

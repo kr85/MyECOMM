@@ -1,7 +1,7 @@
 <?php
 
     // Instantiate basket class
-    $objBasket = new Basket();
+    $objBasket = is_object($objBasket) ? $objBasket : new Basket();
     // Instantiate url class
     $objUrl = new Url();
 
@@ -27,28 +27,6 @@
             <?php
                 echo Catalog::$currency;
                 echo number_format($objBasket->subTotal, 2);
-            ?>
-        </span>
-    </dd>
-    <dt>
-        Tax (<span><?php echo number_format($objBasket->taxRate, 2); ?></span>%):
-    </dt>
-    <dd class="bl_vat">
-        <span>
-            <?php
-                echo Catalog::$currency;
-                echo number_format($objBasket->tax, 2);
-            ?>
-        </span>
-    </dd>
-    <dt>
-        Total:
-    </dt>
-    <dd class="bl_total">
-        <span>
-            <?php
-                echo Catalog::$currency;
-                echo number_format($objBasket->total, 2);
             ?>
         </span>
     </dd>

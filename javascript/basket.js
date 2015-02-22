@@ -45,7 +45,7 @@ var basketObject = {
         "use strict";
 
         $.ajax({
-            url: '/modules/basket_view.php',
+            url: '/basket/action/view',
             dataType: 'html',
             success: function (data) {
                 $('#main_basket').html(data);

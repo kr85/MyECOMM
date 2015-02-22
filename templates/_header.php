@@ -52,7 +52,11 @@
     <div id="outer">
         <div id="wrapper">
             <div id="left">
-                <?php require_once('basket_left.php'); ?>
+                <?php
+                    if ($this->objUrl->currentPage != 'summary'):
+                        require_once('basket_left.php');
+                    endif;
+                ?>
                 <?php if (!empty($categories)): ?>
                     <h2>Categories</h2>
                     <ul id="navigation">
