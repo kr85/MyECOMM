@@ -118,7 +118,7 @@
 
             if (!empty($data) && !empty($id)) {
                 $this->db->prepareUpdate($data);
-                return $this->db->update($data, $id);
+                return $this->db->update($this->table, $id);
             }
 
             return false;
