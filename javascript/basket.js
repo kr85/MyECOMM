@@ -147,9 +147,9 @@ var basketObject = {
             if (thisShippingOption.length > 0) {
                 var token = $(this).attr('id');
                 var image = "<div style=\"text-align: center;\">";
-                image = image + "<img src=\"/images/loading.gif\"";
+                image = image + "<p><img src=\"/images/loading.gif\"";
                 image = image + " alt=\"Proceeding to PayPal\" />";
-                image = image + "<br />Please wait while we are redirecting you to PayPal...";
+                image = image + "<br />Please wait while we are redirecting you to PayPal...</p>";
                 image = image + "</div><div id=\"frm_pp\"></div>";
                 $('#main_basket').fadeOut(200, function () {
                     $(this).html(image).fadeIn(200, function () {

@@ -517,7 +517,7 @@
                 $weight = $this->objBasket->weight;
 
                 if (($user['same_address'] == 1 && $user['country'] == COUNTRY_LOCAL) ||
-                    ($user['same_address'] == 0 && $user['shipping_address'] == COUNTRY_LOCAL)
+                    ($user['same_address'] == 0 && $user['shipping_country'] == COUNTRY_LOCAL)
                 ) {
                     $postCode = ($user['same_address'] == 1) ?
                         $user['zip_code'] :
@@ -526,7 +526,7 @@
                     $zone = $this->getZone($postCode);
 
                     if (empty($zone)) {
-                        return 'no zone';
+                        return null;
                     }
 
                     $zoneId = $zone['zone'];
@@ -634,12 +634,19 @@
             return null;
         }
 
+        /**
+         * Get shipping
+         *
+         * @param null $user
+         * @param null $shippingId
+         * @return mixed|null
+         */
         public function getShipping($user = null, $shippingId = null) {
             if (!empty($user) && !empty($shippingId)) {
                 $weight = $this->objBasket->weight;
 
                 if (($user['same_address'] == 1 && $user['country'] == COUNTRY_LOCAL) ||
-                    ($user['same_address'] == 0 && $user['shipping_address'] == COUNTRY_LOCAL)
+                    ($user['same_address'] == 0 && $user['shipping_country'] == COUNTRY_LOCAL)
                 ) {
                     $postCode = ($user['same_address'] == 1) ?
                         $user['zip_code'] :

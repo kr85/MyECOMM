@@ -426,7 +426,7 @@ CREATE TABLE `orders` (
   `tax_number`         VARCHAR(20)   NULL,
   `tax_rate`           DECIMAL(5, 2) NOT NULL,
   `tax`                DECIMAL(8, 2) NOT NULL,
-  `subtotal-items`     DECIMAL(8, 2) NOT NULL DEFAULT '0',
+  `subtotal_items`     DECIMAL(8, 2) NOT NULL DEFAULT '0',
   `subtotal`           DECIMAL(8, 2) NOT NULL,
   `total`              DECIMAL(8, 2) NOT NULL,
   `date`               DATETIME      NOT NULL,

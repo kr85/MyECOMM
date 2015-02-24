@@ -2,46 +2,45 @@
 
     require_once('../includes/config.php');
 
-    // Create tokens
-    $token2 = Session::getSession('token2');
-    $objForm = new Form();
-    $token1 = $objForm->getPost('token');
+    try {
+        // Create tokens
+        $token2 = Session::getSession('token2');
+        $objForm = new Form();
+        $token1 = $objForm->getPost('token');
 
-    if ($token2 == Login::stringToHash($token1)) {
+        if ($token2 == Login::stringToHash($token1)) {
 
-        // Create a new order
-        $objOrder = new Order();
+            $objUser = new User();
+            $user = $objUser->getUser(Session::getSession(Login::$loginFront));
 
-        if ($objOrder->createOrder()) {
+            // Create a new order
+            $objOrder = new Order();
 
-            // Get order details
-            $order = $objOrder->getOrder();
-            $items = $objOrder->getOrderItems();
+            if (!empty($user) && $objOrder->createOrder($user)) {
 
-            if (!empty($order) && !empty($items)) {
+                // Get order details
+                $order = $objOrder->getOrder();
+                $items = $objOrder->getOrderItems();
 
-                $objBasket = new Basket();
-                $objCatalog = new Catalog();
-                $objPayPal = new PayPal();
+                if (!empty($order) && !empty($items)) {
 
-                foreach ($items as $item) {
+                    $objBasket = new Basket($user);
+                    $objCatalog = new Catalog();
+                    $objPayPal = new PayPal();
 
-                    $product = $objCatalog->getProduct($item['product']);
-                    $objPayPal->addProduct(
-                        $item['product'],
-                        $product['name'],
-                        $item['price'],
-                        $item['qty']
-                    );
-                }
+                    foreach ($items as $item) {
 
-                $objPayPal->taxCart = $objBasket->tax;
+                        $product = $objCatalog->getProduct($item['product']);
+                        $objPayPal->addProduct(
+                            $item['product'],
+                            $product['name'],
+                            $item['price'],
+                            $item['qty']
+                        );
+                    }
 
-                // Populate user's details
-                $objUser = new User();
-                $user = $objUser->getUser($order['client']);
-
-                if (!empty($user)) {
+                    $objPayPal->taxCart = $objBasket->finalTax;
+                    $objPayPal->shipping = $objBasket->finalShippingCost;
 
                     // Get user's country
                     $objCountry = new Country();
@@ -61,8 +60,18 @@
                     ];
 
                     // Redirect user to PayPal
-                    echo $objPayPal->run($order['id']);
+                    $form = $objPayPal->run($order['token']);
+                    echo Helper::json(['error' => false, 'form' => $form]);
+
+                } else {
+                    throw new Exception('There was a problem retrieving your order.');
                 }
+            } else {
+                throw new Exception('Order could not be created.');
             }
+        } else {
+            throw new Exception('Invalid request.');
         }
+    } catch (Exception $e) {
+        echo Helper::json(['error' => true, 'message' => $e->getMessage()]);
     }

@@ -180,12 +180,10 @@
 <?php endif;
                 require_once('_footer.php');
             else:
-                //require_once('error-shipping.php');
-                echo 'Error 1';
+                require_once('error-shipping.php');
             endif;
         else:
-            //require_once('error-shipping.php');
-            echo 'Error 2';
+            require_once('error-shipping.php');
         endif;
     else:
         Helper::redirect($this->objUrl->href('error'));
