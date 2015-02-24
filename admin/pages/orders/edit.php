@@ -49,8 +49,7 @@
             <h1>Orders :: View</h1>
 
             <form action="" method="POST">
-                <table cellpadding="0" cellspacing="0" border="0"
-                       class="tbl_insert">
+                <table class="tbl_insert">
                     <tr>
                         <th>Date</th>
                         <td colspan="4">
@@ -96,47 +95,55 @@
                             </tr>
                         <?php endforeach; ?>
                     <?php endif; ?>
-                    <tr>
-                        <th>Shipping:</th>
-                        <td colspan="3">
-                            <?php echo Helper::encodeHTML($order['shipping_type']); ?>
-                        </td>
-                        <td>
-                            <?php
-                                echo Catalog::$currency;
-                                echo number_format($order['shipping_cost'], 2);
-                            ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Subtotal:</th>
-                        <td colspan="4" class="ta_r">
-                            <?php
-                                echo Catalog::$currency;
-                                echo number_format($order['subtotal'], 2);
-                            ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Tax (<?php echo $order['tax_rate']; ?>%):</th>
-                        <td colspan="4" class="ta_r">
-                            <?php
-                                echo Catalog::$currency;
-                                echo number_format($order['tax'], 2);
-                            ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Total:</th>
-                        <td colspan="4" class="ta_r">
-                            <strong>
-                                <?php
-                                    echo Catalog::$currency;
-                                    echo number_format($order['total'], 2);
-                                ?>
-                            </strong>
-                        </td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <th><i>Shipping:</i></th>
+                            <td colspan="3">
+                                <i><?php echo Helper::encodeHTML($order['shipping_type']); ?></i>
+                            </td>
+                            <td class="ta_r">
+                                <i>
+                                    <?php
+                                        echo Catalog::$currency;
+                                        echo number_format($order['shipping_cost'], 2);
+                                    ?>
+                                </i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><i>Subtotal:</i></th>
+                            <td colspan="4" class="ta_r">
+                                <i>
+                                    <?php
+                                        echo Catalog::$currency;
+                                        echo number_format($order['subtotal'], 2);
+                                    ?>
+                                </i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><i>Tax (<?php echo $order['tax_rate']; ?>%):</i></th>
+                            <td colspan="4" class="ta_r">
+                                <i>
+                                    <?php
+                                        echo Catalog::$currency;
+                                        echo number_format($order['tax'], 2);
+                                    ?>
+                                </i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><strong>Total:</strong></th>
+                            <td colspan="4" class="ta_r">
+                                <strong>
+                                    <?php
+                                        echo Catalog::$currency;
+                                        echo number_format($order['total'], 2);
+                                    ?>
+                                </strong>
+                            </td>
+                        </tr>
+                    </tbody>
                     <tr>
                         <th>Client:</th>
                         <td colspan="4">
