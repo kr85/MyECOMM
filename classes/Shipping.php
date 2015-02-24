@@ -288,7 +288,7 @@
                         WHERE `id` = " . intval($id);
                 return $this->db->fetchOne($sql);
             }
-            return false;
+            return null;
         }
 
         /**
@@ -328,7 +328,7 @@
                         ORDER BY `s`.`weight` ASC";
                 return $this->db->fetchAll($sql);
             }
-            return false;
+            return null;
         }
 
         /**
@@ -368,7 +368,7 @@
                         ORDER BY `s`.`weight` ASC";
                 return $this->db->fetchAll($sql);
             }
-            return false;
+            return null;
         }
 
         /**
@@ -481,7 +481,7 @@
                         AND `zone` = " . intval($zoneId);
                 return $this->db->fetchOne($sql);
             }
-            return false;
+            return null;
         }
 
         /**
@@ -503,7 +503,251 @@
                         AND `country` = " . intval($countryId);
                 return $this->db->fetchOne($sql);
             }
-            return false;
+            return null;
+        }
+
+        /**
+         * Get the shipping options
+         *
+         * @param null $user
+         * @return array|null
+         */
+        public function getShippingOptions($user = null) {
+            if (!empty($user)) {
+                $weight = $this->objBasket->weight;
+
+                if (($user['same_address'] == 1 && $user['country'] == COUNTRY_LOCAL) ||
+                    ($user['same_address'] == 0 && $user['shipping_address'] == COUNTRY_LOCAL)
+                ) {
+                    $postCode = ($user['same_address'] == 1) ?
+                        $user['zip_code'] :
+                        $user['shipping_zip_code'];
+                    $postCode = strtoupper(Helper::alphaNumericalOnly($postCode));
+                    $zone = $this->getZone($postCode);
+
+                    if (empty($zone)) {
+                        return 'no zone';
+                    }
+
+                    $zoneId = $zone['zone'];
+
+                    $sql = "SELECT `t`.*,
+                            IF (
+                              {$weight} > (
+                                SELECT MAX(`weight`)
+                                FROM `{$this->tableShipping}`
+                                WHERE `type` = `t`.`id`
+                                AND `zone` = {$zoneId}
+                              ),
+                              (
+                                SELECT `cost`
+                                FROM `{$this->tableShipping}`
+                                WHERE `type` = `t`.`id`
+                                AND `zone` = {$zoneId}
+                                ORDER BY `weight` DESC
+                                LIMIT 0, 1
+                              ),
+                              (
+                                SELECT `cost`
+                                FROM `{$this->tableShipping}`
+                                WHERE `type` = `t`.`id`
+                                AND `zone` = {$zoneId}
+                                AND `weight` >= {$weight}
+                                ORDER BY `weight` ASC
+                                LIMIT 0, 1
+                              )
+                            ) AS `cost`
+                            FROM `{$this->tableShippingType}` `t`
+                            WHERE `t`.`active` = 1
+                            AND `t`.`local` = 1
+                            ORDER BY `t`.`order` ASC";
+                    return $this->db->fetchAll($sql);
+                } else {
+                    $countryId = ($user['same_address'] == 1) ?
+                        $user['country'] :
+                        $user['shipping_country'];
+
+                    $sql = "SELECT `t`.*,
+                            IF (
+                              {$weight} > (
+                                SELECT MAX(`weight`)
+                                FROM `{$this->tableShipping}`
+                                WHERE `type` = `t`.`id`
+                                AND `country` = {$countryId}
+                              ),
+                              (
+                                SELECT `cost`
+                                FROM `{$this->tableShipping}`
+                                WHERE `type` = `t`.`id`
+                                AND `country` = {$countryId}
+                                ORDER BY `weight` DESC
+                                LIMIT 0, 1
+                              ),
+                              (
+                                SELECT `cost`
+                                FROM `{$this->tableShipping}`
+                                WHERE `type` = `t`.`id`
+                                AND `country` = {$countryId}
+                                AND `weight` >= {$weight}
+                                ORDER BY `weight` ASC
+                                LIMIT 0, 1
+                              )
+                            ) AS `cost`
+                            FROM `{$this->tableShippingType}` `t`
+                            WHERE `t`.`active` = 1
+                            AND `t`.`local` = 0
+                            ORDER BY `t`.`order` ASC";
+                    return $this->db->fetchAll($sql);
+                }
+            }
+            return null;
+        }
+
+        /**
+         * Get the default shipping type
+         *
+         * @param null $user
+         * @return mixed|null
+         */
+        public function getDefault($user = null) {
+            if (!empty($user)) {
+                $countryId = ($user['same_address'] == 1) ?
+                    $user['country'] :
+                    $user['shipping_country'];
+
+                if ($countryId == COUNTRY_LOCAL) {
+                    $sql = "SELECT *
+                            FROM `{$this->tableShippingType}`
+                            WHERE `local` = 1
+                            AND `active` = 1
+                            AND `default` = 1";
+                    return $this->db->fetchOne($sql);
+                } else {
+                    $sql = "SELECT *
+                            FROM `{$this->tableShippingType}`
+                            WHERE `local` = 0
+                            AND `active` = 1
+                            AND `default` = 1";
+                    return $this->db->fetchOne($sql);
+                }
+            }
+            return null;
+        }
+
+        public function getShipping($user = null, $shippingId = null) {
+            if (!empty($user) && !empty($shippingId)) {
+                $weight = $this->objBasket->weight;
+
+                if (($user['same_address'] == 1 && $user['country'] == COUNTRY_LOCAL) ||
+                    ($user['same_address'] == 0 && $user['shipping_address'] == COUNTRY_LOCAL)
+                ) {
+                    $postCode = ($user['same_address'] == 1) ?
+                        $user['zip_code'] :
+                        $user['shipping_zip_code'];
+                    $postCode = strtoupper(Helper::alphaNumericalOnly($postCode));
+                    $zone = $this->getZone($postCode);
+
+                    if (empty($zone)) {
+                        return null;
+                    }
+
+                    $zoneId = $zone['zone'];
+
+                    $sql = "SELECT `t`.*,
+                            IF (
+                              {$weight} > (
+                                SELECT MAX(`weight`)
+                                FROM `{$this->tableShipping}`
+                                WHERE `type` = `t`.`id`
+                                AND `zone` = {$zoneId}
+                              ),
+                              (
+                                SELECT `cost`
+                                FROM `{$this->tableShipping}`
+                                WHERE `type` = `t`.`id`
+                                AND `zone` = {$zoneId}
+                                ORDER BY `weight` DESC
+                                LIMIT 0, 1
+                              ),
+                              (
+                                SELECT `cost`
+                                FROM `{$this->tableShipping}`
+                                WHERE `type` = `t`.`id`
+                                AND `zone` = {$zoneId}
+                                AND `weight` >= {$weight}
+                                ORDER BY `weight` ASC
+                                LIMIT 0, 1
+                              )
+                            ) AS `cost`
+                            FROM `{$this->tableShippingType}` `t`
+                            WHERE `t`.`active` = 1
+                            AND `t`.`local` = 1
+                            AND `t`.`id` = {$shippingId}";
+                    return $this->db->fetchOne($sql);
+                } else {
+                    $countryId = ($user['same_address'] == 1) ?
+                        $user['country'] :
+                        $user['shipping_country'];
+
+                    $sql = "SELECT `t`.*,
+                            IF (
+                              {$weight} > (
+                                SELECT MAX(`weight`)
+                                FROM `{$this->tableShipping}`
+                                WHERE `type` = `t`.`id`
+                                AND `country` = {$countryId}
+                              ),
+                              (
+                                SELECT `cost`
+                                FROM `{$this->tableShipping}`
+                                WHERE `type` = `t`.`id`
+                                AND `country` = {$countryId}
+                                ORDER BY `weight` DESC
+                                LIMIT 0, 1
+                              ),
+                              (
+                                SELECT `cost`
+                                FROM `{$this->tableShipping}`
+                                WHERE `type` = `t`.`id`
+                                AND `country` = {$countryId}
+                                AND `weight` >= {$weight}
+                                ORDER BY `weight` ASC
+                                LIMIT 0, 1
+                              )
+                            ) AS `cost`
+                            FROM `{$this->tableShippingType}` `t`
+                            WHERE `t`.`active` = 1
+                            AND `t`.`local` = 0
+                            AND `t`.`id` = {$shippingId}";
+                    return $this->db->fetchOne($sql);
+                }
+            }
+            return null;
+        }
+
+        /**
+         * Get a zone by post code and post code length
+         *
+         * @param null $postCode
+         * @param int $strLen
+         * @return mixed|null
+         */
+        public function getZone($postCode = null, $strLen = 5) {
+            if (!empty($postCode)) {
+                $pc = substr($postCode, 0, $strLen);
+                $sql = "SELECT *
+                        FROM `{$this->tableZonesCountryCodes}`
+                        WHERE `country_code` = '" . $this->db->escape($pc) . "'
+                        LIMIT 0, 1";
+                $result = $this->db->fetchOne($sql);
+                if (empty($result) && $strLen > 1) {
+                    $strLen--;
+                    return $this->getZone($postCode, $strLen);
+                } else {
+                    return $result;
+                }
+            }
+            return null;
         }
 
         /**

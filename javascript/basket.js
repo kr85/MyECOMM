@@ -207,9 +207,9 @@ var basketObject = {
             var thisOption = $(this).val();
             $.getJSON('/modules/summary_update.php?shipping=' + thisOption, function (data) {
                 if (data && !data.error) {
-                    $('#basket_subtotal').html(data.totals.basketSubtotal);
-                    $('#basket_tax').html(data.totals.basketTax);
-                    $('#basket_total').html(data.totals.basketTotal);
+                    $('#basketSubTotal').html(data.totals.basketSubtotal);
+                    $('#basketTax').html(data.totals.basketTax);
+                    $('#basketTotal').html(data.totals.basketTotal);
                 }
             });
         });
@@ -244,7 +244,6 @@ var systemObject = {
         "use strict";
 
         $(document).on('click', thisIdentity, function (e) {
-            e.preventDefault();
             var thisTarget = $(this).attr('name');
             var thisValue = $(this).val();
             if (thisValue == 1) {

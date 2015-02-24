@@ -162,7 +162,7 @@
                     $out .= $country['id'];
                     $out .= "\"";
                     $out .= $this->stickySelect(
-                        'country',
+                        $name,
                         $country['id'],
                         $record
                     );
