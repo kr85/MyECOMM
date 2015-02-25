@@ -603,7 +603,7 @@ ADD CONSTRAINT `zones_country_codes_ibfk_1` FOREIGN KEY (`zone`) REFERENCES `zon
 CREATE TABLE `shipping` (
   `id`      INT(11)       NOT NULL  AUTO_INCREMENT,
   `type`    INT(11)       NOT NULL  DEFAULT '0',
-  `zone`    INT(11)       NOT NULL  DEFAULT '0',
+  `zone`    INT(11)       NULL  DEFAULT '0',
   `country` INT(11)       NOT NULL  DEFAULT '0',
   `weight`  DECIMAL(8, 2) NOT NULL  DEFAULT '0.00',
   `cost`    DECIMAL(8, 2) NOT NULL  DEFAULT '0.00',
@@ -620,9 +620,9 @@ ALTER TABLE `shipping`
 ADD CONSTRAINT `shipping_ibfk_1` FOREIGN KEY (`type`) REFERENCES `shipping_type` (`id`)
   ON DELETE RESTRICT
   ON UPDATE CASCADE,
-ADD CONSTRAINT `shipping_ibfk_2` FOREIGN KEY (`zone`) REFERENCES `zones` (`id`)
+/*ADD CONSTRAINT `shipping_ibfk_2` FOREIGN KEY (`zone`) REFERENCES `zones` (`id`)
   ON DELETE RESTRICT
-  ON UPDATE CASCADE,
+  ON UPDATE CASCADE,*/
 ADD CONSTRAINT `shipping_ibfk_3` FOREIGN KEY (`country`) REFERENCES `countries` (`id`)
   ON DELETE RESTRICT
   ON UPDATE CASCADE;
