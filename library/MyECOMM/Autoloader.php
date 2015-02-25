@@ -1,4 +1,4 @@
-<?php
+<?php namespace MyECOMM;
 
     /**
      * Class Autoloader
@@ -12,7 +12,7 @@
          */
         public static function load($className) {
             $class = str_replace('\\', DS, ltrim($className, '\\'));
-            $class = str_replace('_', DS, $class) . '.php';
-            @require_once(CLASSES_PATH . DS . $class);
+            $class = str_replace('_', DS, $class).'.php';
+            @require_once($class);
         }
     }
