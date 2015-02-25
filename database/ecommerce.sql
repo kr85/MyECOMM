@@ -72,7 +72,6 @@ CREATE TABLE `categories` (
   `identity`         VARCHAR(200)          DEFAULT NULL,
   `meta_title`       VARCHAR(255)          DEFAULT NULL,
   `meta_description` VARCHAR(255)          DEFAULT NULL,
-  `meta_keywords`    VARCHAR(255)          DEFAULT NULL,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -87,7 +86,7 @@ INSERT INTO `categories` (`id`, `name`) VALUES (1, 'Biographies & Autobiographie
 INSERT INTO `categories` (`id`, `name`) VALUES (2, 'Computers & IT');
 INSERT INTO `categories` (`id`, `name`) VALUES (3, 'Art & Architecture');
 
-UPDATE `categories` SET `meta_title`  = `name`, `meta_description` = `name`, `meta_keywords` = `name`;
+UPDATE `categories` SET `meta_title`  = `name`, `meta_description` = `name`;
 UPDATE `categories` SET `identity` = 'biographies-autobiographies' WHERE `id` = 1;
 UPDATE `categories` SET `identity` = 'computers-it' WHERE `id` = 2;
 UPDATE `categories` SET `identity` = 'art-architecture' WHERE `id` = 3;
@@ -485,14 +484,13 @@ CREATE TABLE `products` (
   `name`             VARCHAR(255)  NOT NULL,
   `description`      TEXT          NOT NULL,
   `price`            DECIMAL(8, 2) NOT NULL,
-  `date`             DATETIME      NOT NULL,
+  `date`             TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `category`         INT(11)       NOT NULL,
   `weight`           DECIMAL(8, 2) NOT NULL DEFAULT '0.00',
   `image`            VARCHAR(100)           DEFAULT NULL,
   `identity`         VARCHAR(200)           DEFAULT NULL,
   `meta_title`       VARCHAR(255)           DEFAULT NULL,
   `meta_description` VARCHAR(255)           DEFAULT NULL,
-  `meta_keywords`    VARCHAR(255)           DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `category` (`category`)
 )
@@ -701,7 +699,7 @@ VALUES (6, 'The Greatest: Muhammad Ali',
         'Gr 7 Up-An introduction to Ali''s life from his childhood to the present day, focusing on his career and the controversies surrounding him. Both his talent in the boxing ring and his showmanship earned him international fame, while his refusal to accept the stereotypical role of a black athletic star in the 1960s and his membership in the Nation of Islam brought him notoriety. Myers interweaves fight sequences with the boxer''s life story and the political events and issues of the day. He doesn''t shy away from reporting on the brutality of the sport and documents the toll it has taken on its many stars. Ample black-and-white photographs of the subject in and out of the ring illustrate the book. Covering Ali is a daunting task, especially since dozens of books and hundreds of articles have been written about him in the last 40 years. Fortunately, young adults have their own award-winning author, one with the perspective of being a young African American in Harlem during the height of the boxer''s fame, to tell his story. Myers''s writing flows while describing the boxing action and the legend''s larger-than-life story.-Michael McCullough, Byron-Bergen Middle School, Bergen, NY',
         '15.99', NOW(), 1, 'muhammad-ali-the-greatest.jpg');
 
-UPDATE `products` SET `meta_title`  = `name`, `meta_description` = `name`,   `meta_keywords` = `name`;
+UPDATE `products` SET `meta_title`  = `name`, `meta_description` = `name`;
 UPDATE `products` SET `identity` = 'begging-php-mysql' WHERE `id` = 1;
 UPDATE `products` SET `identity` = 'jquery-mobile-web-dev-ess' WHERE `id` = 2;
 UPDATE `products` SET `identity` = 'spring-web-flow-2-dev' WHERE `id` = 3;
@@ -714,10 +712,6 @@ UPDATE `products` SET `weight` = 0.5 WHERE `id` = 3;
 UPDATE `products` SET `weight` = 0.5 WHERE `id` = 4;
 UPDATE `products` SET `weight` = 0.5 WHERE `id` = 5;
 UPDATE `products` SET `weight` = 0.5 WHERE `id` = 6;
---
--- Dumping data for table `shipping`
---
-
 
 --
 -- Dumping data for table `zones_country_codes`
@@ -727,3 +721,33 @@ INSERT INTO `zones_country_codes` VALUES (2, 2, 'CA');
 INSERT INTO `zones_country_codes` VALUES (3, 2, 'MX');
 INSERT INTO `zones_country_codes` VALUES (4, 3, 'BG');
 INSERT INTO `zones_country_codes` VALUES (5, 3, 'PL');
+INSERT INTO `zones_country_codes` VALUES (6, 1, '94086');
+INSERT INTO `zones_country_codes` VALUES (7, 1, '95192');
+
+--
+-- Dumping data for table `shipping`
+--
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
+    VALUES (1, 1, 230, 10.00, 15.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
+    VALUES (2, 1, 230, 10.00, 12.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
+    VALUES (3, 1, 230, 10.00, 9.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
+    VALUES (4, 1, 230, 10.00, 5.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
+    VALUES (1, 2, 230, 10.00, 17.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
+    VALUES (2, 2, 230, 10.00, 15.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
+    VALUES (3, 2, 230, 10.00, 10.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
+    VALUES (4, 2, 230, 10.00, 7.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
+    VALUES (1, 3, 230, 10.00, 18.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
+    VALUES (2, 3, 230, 10.00, 16.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
+    VALUES (3, 3, 230, 10.00, 12.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
+    VALUES (4, 3, 230, 10.00, 8.50);
