@@ -1,4 +1,4 @@
-<?php
+<?php namespace MyECOMM;
 
 /**
  * Class Helper
@@ -138,7 +138,6 @@ class Helper {
      * @param null $errors
      */
     public static function addToErrorsLog($name = null, $errors = null) {
-
         if (!empty($name) && empty($errors)) {
             $filePath = LOGS_DIR . DS . $name;
             $file = fopen(
@@ -273,5 +272,15 @@ class Helper {
             }
         }
         return false;
+    }
+
+    /**
+     * Check if an array is empty
+     *
+     * @param null $array
+     * @return bool
+     */
+    public static function isArrayEmpty($array = null) {
+        return (empty($array) || !is_array($array));
     }
 }
