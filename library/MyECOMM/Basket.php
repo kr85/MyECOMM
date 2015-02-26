@@ -1,53 +1,84 @@
-<?php
+<?php namespace MyECOMM;
 
 /**
  * Class Basket
  */
 class Basket {
 
-    // Catalog instance
-    public $instanceCatalog;
+    /**
+     * @var Catalog object instance
+     */
+    private $objCatalog;
 
-    // Empty basket variable
+    /**
+     * @var bool Empty basket variable
+     */
     public $emptyBasket;
 
-    // Tax rate variable
+    /**
+     * @var int Tax rate variable
+     */
     public $taxRate;
 
-    // Number of items variable
+    /**
+     * @var int Number of items variable
+     */
     public $numberOfItems;
 
-    // Sub-total amount variable
+    /**
+     * @var double Subtotal amount variable
+     */
     public $subTotal;
 
-    // Tax variable
-    public $tax;
+    /**
+     * @var double Tax variable
+     */
+    private $tax;
 
-    // Total amount variable
-    public $total;
+    /**
+     * @var double Total amount variable
+     */
+    private $total;
 
-    // The total weight of all products in the basket
+    /**
+     * @var double The total weight of all products in the basket
+     */
     public $weight;
 
-    // A list with the products' weight
+    /**
+     * @var double List with the products' weight
+     */
     private $weightList;
 
-    // The final shipping type
+    /**
+     * @var The final shipping type
+     */
     public $finalShippingType;
 
-    // The final shipping cost
+    /**
+     * @var double The final shipping cost
+     */
     public $finalShippingCost;
 
-    // The final subtotal amount
+    /**
+     * @var double The final subtotal amount
+     */
     public $finalSubtotal;
 
-    // The final tax amount
+    /**
+     * @var double The final tax amount
+     */
     public $finalTax;
 
-    // The final total amount
+    /**
+     * @var double The final total amount
+     */
     public $finalTotal;
 
-    public $user;
+    /**
+     * @var User client
+     */
+    private $user;
 
     /**
      * Constructor
@@ -55,17 +86,13 @@ class Basket {
      * @param null $user
      */
     public function __construct($user = null) {
-
         // Check if a user was passed
         if (!empty($user)) {
             $this->user = $user;
         }
-
         // Instantiate catalog class
-        $this->instanceCatalog = new Catalog();
-        $this->emptyBasket = empty($_SESSION['basket']) ?
-            true :
-            false;
+        $this->objCatalog = new Catalog();
+        $this->emptyBasket = empty($_SESSION['basket']) ? true : false;
 
         if (!empty($this->user) &&
             ($this->user['country'] == COUNTRY_LOCAL || INTERNATIONAL_VAT)) {
@@ -75,7 +102,7 @@ class Basket {
         } else {
             $this->taxRate = 0;
         }
-
+        // Call helper functions
         $this->noItems();
         $this->subTotal();
         $this->tax();
@@ -86,8 +113,7 @@ class Basket {
     /**
      * Get the number of items
      */
-    public function noItems() {
-
+    private function noItems() {
         $value = 0;
         if (!$this->emptyBasket) {
             foreach ($_SESSION['basket'] as $key => $basket) {
@@ -100,13 +126,11 @@ class Basket {
     /**
      * Get the subtotal
      */
-    public function subTotal() {
-
+    private function subTotal() {
         $value = 0;
         if (!$this->emptyBasket) {
             foreach ($_SESSION['basket'] as $key => $basket) {
-                $product = $this->instanceCatalog->getProduct($key);
-                //var_dump($product);
+                $product = $this->objCatalog->getProduct($key);
                 $value += ($basket['quantity'] * $product['price']);
                 $this->weightList[] = ($basket['quantity'] * $product['weight']);
             }
@@ -121,8 +145,7 @@ class Basket {
     /**
      * Get the tax
      */
-    public function tax() {
-
+    private function tax() {
         $value = 0;
         if (!$this->emptyBasket) {
             $value = ($this->taxRate * ($this->subTotal / 100));
@@ -133,8 +156,7 @@ class Basket {
     /**
      * Get the total
      */
-    public function total() {
-
+    private function total() {
         $this->total = round(($this->subTotal + $this->tax), 2);
     }
 
@@ -145,7 +167,6 @@ class Basket {
      * @return string
      */
     public static function activeButton($sessionId) {
-
         if (isset($_SESSION['basket'][$sessionId])) {
             $id = 0;
             $label = "Remove from basket";
@@ -153,15 +174,11 @@ class Basket {
             $id = 1;
             $label = "Add to basket";
         }
-
         $out = "<a href=\"\" class=\"add_to_basket";
-        $out .= $id == 0 ?
-            " red" :
-            null;
+        $out .= ($id == 0) ? " red" : null;
         $out .= "\" rel=\"";
         $out .= $sessionId . "_" . $id;
         $out .= "\">{$label}</a>";
-
         return $out;
     }
 
@@ -173,11 +190,9 @@ class Basket {
      * @return float
      */
     public function itemTotal($price = null, $quantity = null) {
-
         if (!empty($price) && !empty($quantity)) {
             return round(($price * $quantity), 2);
         }
-
         return false;
     }
 
@@ -188,16 +203,13 @@ class Basket {
      * @return string
      */
     public static function removeButton($id = null) {
-
         if (!empty($id)) {
             if (isset($_SESSION['basket'][$id])) {
                 $out = "<a href=\"\" class=\"remove_basket red";
                 $out .= "\" rel=\"{$id}\">Remove</a>";
-
                 return $out;
             }
         }
-
         return false;
     }
 
@@ -227,7 +239,6 @@ class Basket {
         Session::clear('id');
         Session::clear('shipping_cost');
         Session::clear('shipping_type');
-
         // Clear the parameters
         $this->finalShippingType = null;
         $this->finalShippingCost = null;
