@@ -1,18 +1,19 @@
-<?php
+<?php namespace MyECOMM;
 
 /**
  * Class User
  */
 class User extends Application {
 
-    // Url class instance
+    /**
+     * @var Url|null Url class instance
+     */
     public $objUrl;
 
-    // Users table name
-    private $table = "clients";
-
-    // User id
-    public $id;
+    /**
+     * @var string Users table name
+     */
+    protected $table = "clients";
 
     /**
      * Constructor
@@ -21,9 +22,7 @@ class User extends Application {
      */
     public function __construct($objUrl = null) {
         parent::__construct();
-        $this->objUrl = is_object($objUrl) ?
-            $objUrl :
-            new Url();
+        $this->objUrl = is_object($objUrl) ? $objUrl : new Url();
     }
 
     /**
@@ -33,62 +32,72 @@ class User extends Application {
      * @param $password
      * @return bool
      */
-    public function isUser($email, $password) {
-
-        $password = Login::stringToHash($password);
-
-        $sql = "SELECT *
-                FROM `{$this->table}`
-                WHERE `email` = '" . $this->db->escape($email) . "'
-                AND `password` = '" . $this->db->escape($password) . "'
-                AND `active` = 1";
-
-        $result = $this->db->fetchOne($sql);
-
-        if (!empty($result)) {
-            $this->id = $result['id'];
-
-            return true;
+    public function isUser($email = null, $password = null) {
+        if (!$this->isEmailPasswordEmpty($email, $password)) {
+            $password = Login::stringToHash($password);
+            $sql = "SELECT *
+                    FROM `{$this->table}`
+                    WHERE `email` = ?
+                    AND `password` = ?
+                    AND `active` = ?";
+            $result = $this->Db->fetchOne($sql, [$email, $password, 1]);
+            if (!empty($result)) {
+                $this->id = $result['id'];
+                return true;
+            }
+            return false;
         }
-
         return false;
+    }
+
+    /**
+     * Check if email and password are empty
+     *
+     * @param null $email
+     * @param null $password
+     * @return bool
+     */
+    private function isEmailPasswordEmpty($email = null, $password = null) {
+        return (empty($email) || empty($password));
     }
 
     /**
      * Add user and send confirmation email
      *
-     * @param null $parameters
+     * @param null $params
      * @param null $password
      * @return bool
      */
-    public function addUser($parameters = null, $password = null) {
-
-        if (!empty($parameters) && !empty($password)) {
-
-            $this->db->prepareInsert($parameters);
-
-            if ($this->db->insert($this->table)) {
-
-                $objEmail = new Email();
-                $email = [
-                    'email'      => $parameters['email'],
-                    'first_name' => $parameters['first_name'],
-                    'last_name'  => $parameters['last_name'],
-                    'password'   => $password,
-                    'hash'       => $parameters['hash']
-                ];
-
-                if ($objEmail->process(1, $email)) {
-                    return true;
-                }
-
-                return false;
+    public function addUser($params = null, $password = null) {
+        if (
+            $this->areAddUserParametersValid($params, $password) &&
+            $this->insert($params)
+        ) {
+            $objEmail = new Email();
+            $email = [
+                'email'      => $params['email'],
+                'first_name' => $params['first_name'],
+                'last_name'  => $params['last_name'],
+                'password'   => $password,
+                'hash'       => $params['hash']
+            ];
+            if ($objEmail->process(1, $email)) {
+                return true;
             }
-
             return false;
         }
-
         return false;
+    }
+
+    /**
+     * Check if the add user parameters are valid
+     *
+     * @param null $params
+     * @param null $password
+     * @return bool
+     */
+    private function areAddUserParametersValid($params = null, $password = null) {
+        return (!empty($params) && !empty($password));
     }
 
     /**
@@ -98,17 +107,7 @@ class User extends Application {
      * @return mixed
      */
     public function getUserByHash($hash = null) {
-
-        if (!empty($hash)) {
-
-            $sql = "SELECT *
-                    FROM `{$this->table}`
-                    WHERE `hash` = '" . $this->db->escape($hash) . "'";
-
-            return $this->db->fetchOne($sql);
-        }
-
-        return false;
+        return $this->getOne($hash, 'hash');
     }
 
     /**
@@ -118,17 +117,7 @@ class User extends Application {
      * @return resource
      */
     public function activate($id = null) {
-
-        if (!empty($id)) {
-
-            $sql = "UPDATE `{$this->table}`
-                    SET `active` = 1
-                    WHERE `id` = '" . $this->db->escape($id) . "'";
-
-            return $this->db->query($sql);
-        }
-
-        return false;
+        return $this->update(['active' => 1], $id);
     }
 
     /**
@@ -138,17 +127,7 @@ class User extends Application {
      * @return mixed
      */
     public function getByEmail($email = null) {
-
-        if (!empty($email)) {
-
-            $sql = "SELECT *
-                    FROM `{$this->table}`
-                    WHERE `email` = '" . $this->db->escape($email) . "'";
-
-            return $this->db->fetchOne($sql);
-        }
-
-        return false;
+        return $this->getOne($email, 'email');
     }
 
     /**
@@ -158,40 +137,18 @@ class User extends Application {
      * @return mixed
      */
     public function getUser($id = null) {
-
-        if (!empty($id)) {
-
-            $sql = "SELECT *
-                    FROM `{$this->table}`
-                    WHERE `id` = '" . $this->db->escape($id) . "'";
-
-            return $this->db->fetchOne($sql);
-        }
-
-        return false;
+        return $this->getOne($id);
     }
 
     /**
      * Update an existing user
      *
-     * @param null $parameters
+     * @param null $params
      * @param null $id
      * @return bool
      */
-    public function updateUser($parameters = null, $id = null) {
-
-        if (!empty($parameters) && !empty($id)) {
-
-            $this->db->prepareUpdate($parameters);
-
-            if ($this->db->update($this->table, $id)) {
-                return true;
-            }
-
-            return false;
-        }
-
-        return false;
+    public function updateUser($params = null, $id = null) {
+        return $this->update($params, $id);
     }
 
     /**
@@ -201,20 +158,18 @@ class User extends Application {
      * @return array
      */
     public function getUsers($search = null) {
-
+        $params = [];
+        $params[] = 1;
         $sql = "SELECT *
                 FROM `{$this->table}`
-                WHERE `active` = 1";
-
+                WHERE `active` = ?";
         if (!empty($search)) {
-            $search = $this->db->escape($search);
-            $sql .= " AND (`first_name` LIKE '%{$search}%' ||
-                    `last_name` LIKE '%{$search}%')";
+            $params[] = "%{$search}%";
+            $params[] = "%{$search}%";
+            $sql .= " AND (`first_name` LIKE ? || `last_name` LIKE ?)";
         }
-
         $sql .= " ORDER BY `last_name`, `first_name` ASC";
-
-        return $this->db->fetchAll($sql);
+        return $this->Db->fetchAll($sql, $params);
     }
 
     /**
@@ -224,14 +179,6 @@ class User extends Application {
      * @return bool|resource
      */
     public function removeUser($id = null) {
-
-        if (!empty($id)) {
-            $sql = "DELETE FROM `{$this->table}`
-                    WHERE `id` = '" . $this->db->escape($id) . "'";
-
-            return $this->db->query($sql);
-        }
-
-        return false;
+        return $this->delete($id);
     }
 }
