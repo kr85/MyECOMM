@@ -1,68 +1,110 @@
-<?php
+<?php namespace MyECOMM;
 
 /**
  * Class PayPal
  */
 class PayPal {
 
-    // Environment
+    /**
+     * @var string Environment
+     */
     private $environment = 'sandbox';
 
-    // Urls
+    /**
+     * @var string PayPal production url
+     */
     private $urlProduction = 'https://www.paypal.com/cgi-bin/webscr';
+
+    /**
+     * @var string PayPal development url
+     */
     private $urlSandbox    = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
 
-    // Standard url
+    /**
+     * @var string Standard url
+     */
     private $url;
 
-    // Transaction type:
-    // xclick = Buy Now buttons
-    // cart = basket
+    /**
+     * @var string Transaction type:
+     * xclick => Buy Now buttons
+     * cart => basket
+     */
     private $cmd;
 
-    // List of all products
+    /**
+     * @var array List of all products
+     */
     private $products = [];
 
-    // List of all fields
+    /**
+     * @var array List of all fields
+     */
     private $fields = [];
 
-    // PayPal id
+    /**
+     * @var null PayPal id
+     */
     private $business = null;
 
-    // Page style
+    /**
+     * @var null Custom page style
+     */
     private $pageStyle = null;
 
-    // Return url
+    /**
+     * @var Return url
+     */
     private $returnUrl;
 
-    // Cancel payment url
+    /**
+     * @var string Cancel payment url
+     */
     private $cancelPaymentUrl;
 
-    // Notify url (IPN)
+    /**
+     * @var string Notify url (IPN)
+     */
     private $notifyUrl;
 
-    // Currency code
+    /**
+     * @var string Currency code
+     */
     private $currencyCode = 'USD';
 
-    // Tax / Vat amount for cart
+    /**
+     * @var int Tax / Vat amount for cart
+     */
     public $taxCart = 0;
 
-    // Tax / Vat amount for xclick
+    /**
+     * @var int Tax / Vat amount for xclick
+     */
     public $tax = 0;
 
-    // Shipping value
+    /**
+     * @var int Shipping value
+     */
     public $shipping = 0;
 
-    // Pre-populate checkout
+    /**
+     * @var array Pre-populate checkout
+     */
     public $populateCheckout = [];
 
-    // Data received from PayPal
+    /**
+     * @var array Data received from PayPal
+     */
     private $ipnData = [];
 
-    // Result of sending data back to PayPal after ipn
+    /**
+     * @var Result of sending data back to PayPal after ipn
+     */
     private $ipnResult;
 
-    // Url object instance
+    /**
+     * @var Url|null Url object instance
+     */
     public $objUrl;
 
     /**
@@ -72,17 +114,14 @@ class PayPal {
      * @param string $cmd
      */
     public function __construct($objUrl = null, $cmd = '_cart') {
-        $this->objUrl = is_object($objUrl) ?
-            $objUrl :
-            new Url();
+        $this->objUrl = is_object($objUrl) ? $objUrl : new Url();
         $this->business = ProjectVariable::$PAYPAL_BUSINESS_ID;
-        $this->url = $this->environment == 'sandbox' ?
+        $this->url = ($this->environment == 'sandbox') ?
             $this->urlSandbox :
             $this->urlProduction;
         $this->cmd = $cmd;
-
-        $this->cancelPaymentUrl = SITE_URL . $this->objUrl->href('cancel');
-        $this->notifyUrl = SITE_URL . $this->objUrl->href('ipn');
+        $this->cancelPaymentUrl = SITE_URL.$this->objUrl->href('cancel');
+        $this->notifyUrl = SITE_URL.$this->objUrl->href('ipn');
     }
 
     /**
@@ -94,14 +133,13 @@ class PayPal {
      * @param int $quantity
      */
     public function addProduct($number, $name, $price = 0, $quantity = 1) {
-
         switch ($this->cmd) {
             case '_cart';
                 $id = count($this->products) + 1;
-                $this->products[$id]['item_number_' . $id] = $number;
-                $this->products[$id]['item_name_' . $id] = $name;
-                $this->products[$id]['amount_' . $id] = $price;
-                $this->products[$id]['quantity_' . $id] = $quantity;
+                $this->products[$id]['item_number_'.$id] = $number;
+                $this->products[$id]['item_name_'.$id] = $name;
+                $this->products[$id]['amount_'.$id] = $price;
+                $this->products[$id]['quantity_'.$id] = $quantity;
                 break;
             case '_xclick':
                 if (empty($this->products)) {
@@ -121,9 +159,8 @@ class PayPal {
      * @return string
      */
     public function run($transactionToken = null) {
-
         if (!empty($transactionToken)) {
-            $this->returnUrl = SITE_URL . $this->objUrl->href('return', [
+            $this->returnUrl = SITE_URL.$this->objUrl->href('return', [
                     'token',
                     $transactionToken
                 ]);
@@ -139,10 +176,9 @@ class PayPal {
      * @param null $value
      */
     private function addField($name = null, $value = null) {
-
         if (!empty($name) && !empty($value)) {
-            $field = '<input type="hidden" name="' . $name . '" ';
-            $field .= 'value="' . $value . '">';
+            $field = '<input type="hidden" name="'.$name.'" ';
+            $field .= 'value="'.$value.'">';
             $this->fields[] = $field;
         }
     }
@@ -153,12 +189,10 @@ class PayPal {
      * @return string
      */
     private function render() {
-
-        $out = '<form action="' . $this->url . '" method="POST" id="frm_paypal">';
+        $out = '<form action="'.$this->url.'" method="POST" id="frm_paypal">';
         $out .= $this->getFields();
         $out .= '<input type="submit" value="Submit" />';
         $out .= '</form>';
-
         return $out;
     }
 
@@ -168,12 +202,10 @@ class PayPal {
      * @return string
      */
     private function getFields() {
-
         $this->processFields();
         if (!empty($this->fields)) {
             return implode("", $this->fields);
         }
-
         return false;
     }
 
@@ -181,7 +213,6 @@ class PayPal {
      * Process all fields
      */
     private function processFields() {
-
         $this->standardFields();
         if (!empty($this->products)) {
             foreach ($this->products as $product) {
@@ -197,7 +228,6 @@ class PayPal {
      * Pre-populate PayPal checkout form
      */
     private function prePopulate() {
-
         if (!empty($this->populateCheckout)) {
             foreach ($this->populateCheckout as $key => $value) {
                 $this->addField($key, $value);
@@ -246,7 +276,6 @@ class PayPal {
      * Instant Payment Notification
      */
     public function ipn() {
-
         if ($this->validateIpn()) {
             //Helper::addToErrorsLog('Validate_IPN_true', null);
             $this->sendCurl();
