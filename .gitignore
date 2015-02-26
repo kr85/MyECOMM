@@ -5,3 +5,5 @@ logs/errors.txt
 .env.*.php
 /classes/ProjectVariable.php
 node_modules
+/vendor/
+composer.lock

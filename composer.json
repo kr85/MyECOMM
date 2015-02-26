@@ -1,0 +1,16 @@
+{
+    "name": "kr85/my-ecomm",
+    "authors": [
+        {
+            "name": "Kosta Rashev",
+            "email": "kosta.rashev@gmail.com"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/kr85/MyECOMM.git"
+    },
+    "require": {
+      "zendframework/zend-mail": "2.0.*"
+    }
+}
