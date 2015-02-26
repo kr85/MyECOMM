@@ -1,27 +1,27 @@
 <?php namespace MyECOMM;
 
+/**
+ * Class Business
+ */
+class Business extends Application {
+
     /**
-     * Class Business
+     * @var string The name of the database table
      */
-    class Business extends Application {
+    protected $table = 'business';
 
-        /**
-         * @var string The name of the database table
-         */
-        protected $table = 'business';
+    /**
+     * Business id
+     */
+    const BUSINESS_ID = 1;
 
-        /**
-         * Business id
-         */
-        const BUSINESS_ID = 1;
-
-        /**
-         * Get tax rate
-         *
-         * @return mixed
-         */
-        public function getTaxRate() {
-            $business = $this->getOne(self::BUSINESS_ID);
-            return $business['tax_rate'];
-        }
+    /**
+     * Get tax rate
+     *
+     * @return mixed
+     */
+    public function getTaxRate() {
+        $business = $this->getOne(self::BUSINESS_ID);
+        return $business['tax_rate'];
     }
+}

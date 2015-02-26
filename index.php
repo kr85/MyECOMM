@@ -1,5 +1,5 @@
 <?php
-
+    // Set default timezone
     date_default_timezone_set('America/Los_Angeles');
 
     // Checks if a session is set and if it's not then starts a new session
