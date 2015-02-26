@@ -1,23 +1,23 @@
-<?php
+<?php namespace MyECOMM;
 
 /**
  * Class Catalog
  */
 class Catalog extends Application {
 
-    // The name of the categories table
-    private $tableCategories = 'categories';
+    /**
+     * @var string The name of the categories table
+     */
+    protected $tableCategories = 'categories';
 
-    // The name of the products table
-    private $tableProducts = 'products';
+    /**
+     * @var string The name of the products table
+     */
+    protected $tableProducts = 'products';
 
-    // The path to the catalog images
-    public $path = null;
-
-    // Country's official currency
-    public static $currency = '&dollar;';
-
-    // Record id
+    /**
+     * @var Record id
+     */
     public $id;
 
     /**
@@ -25,7 +25,6 @@ class Catalog extends Application {
      */
     public function __construct() {
         parent::__construct();
-        $this->path = DS . 'media' . DS . 'catalog' . DS;
     }
 
     /**
@@ -38,12 +37,10 @@ class Catalog extends Application {
         if (!empty($identity)) {
             $sql = "SELECT *
                     FROM `{$this->tableCategories}`
-                    WHERE `identity` = '" . $this->db->escape(
-                    $identity
-                ) . "'";
-            return $this->db->fetchOne($sql);
+                    WHERE `identity` = ?";
+            return $this->Db->fetchOne($sql, $identity);
         }
-        return false;
+        return null;
     }
 
     /**
@@ -57,7 +54,7 @@ class Catalog extends Application {
                 FROM `{$this->tableCategories}`
                 ORDER BY `name` ASC";
 
-        return $this->db->fetchAll($sql);
+        return $this->Db->fetchAll($sql);
     }
 
     /**
@@ -75,10 +72,10 @@ class Catalog extends Application {
                         WHERE `category` = `c`.`id`
                     ) AS `product_count`
                     FROM `{$this->tableCategories}` `c`
-                    WHERE `c`.`id` = '" . $this->db->escape($id) . "'";
-            return $this->db->fetchOne($sql);
+                    WHERE `c`.`id` = ?";
+            return $this->Db->fetchOne($sql, $id);
         }
-        return false;
+        return null;
     }
 
     /**
@@ -88,23 +85,13 @@ class Catalog extends Application {
      * @return bool|resource
      */
     public function addCategory($array = null) {
-        if (!empty($array) && is_array($array)) {
-            $sql = "INSERT INTO `$this->tableCategories`
-                    (
-                        `name`,
-                        `identity`,
-                        `meta_title`,
-                        `meta_description`,
-                        `meta_keywords`
-                    )
-                    VALUES (
-                        '" . $this->db->escape($array['name']) . "',
-                        '" . $this->db->escape($array['identity']) . "',
-                        '" . $this->db->escape($array['meta_title']) . "',
-                        '" . $this->db->escape($array['meta_description']) . "',
-                        '" . $this->db->escape($array['meta_keywords']) . "'
-                    )";
-            return $this->db->query($sql);
+        if (!Helper::isArrayEmpty($array)) {
+            return $this->Db->insert($this->table, [
+                'name' => $array['name'],
+                'identity' => $array['identity'],
+                'meta_title' => $array['meta_title'],
+                'meta_description' => $array['meta_description']
+            ]);
         }
         return false;
     }
@@ -117,23 +104,13 @@ class Catalog extends Application {
      * @return bool|resource
      */
     public function updateCategory($array = null, $id = null) {
-        if (!empty($array) && is_array($array) && !empty($id)) {
-            $sql = "UPDATE `{$this->tableCategories}`
-                    SET `name` = '" . $this->db->escape($array['name']) . "',
-                    `identity` = '" . $this->db->escape(
-                    $array['identity']
-                ) . "',
-                    `meta_title` = '" . $this->db->escape(
-                    $array['meta_title']
-                ) . "',
-                    `meta_description` = '" . $this->db->escape(
-                    $array['meta_description']
-                ) . "',
-                    `meta_keywords` = '" . $this->db->escape(
-                    $array['meta_keywords']
-                ) . "'
-                    WHERE `id` = '" . $this->db->escape($id) . "'";
-            return $this->db->query($sql);
+        if (!Helper::isArrayEmpty($array) && !empty($id)) {
+            return $this->Db->update($this->table, [
+                'name' => $array['name'],
+                'identity' => $array['identity'],
+                'meta_title' => $array['meta_title'],
+                'meta_description' => $array['meta_description']
+            ], $id);
         }
         return false;
     }
@@ -145,12 +122,7 @@ class Catalog extends Application {
      * @return bool|resource
      */
     public function removeCategory($id = null) {
-        if (!empty($id)) {
-            $sql = "DELETE FROM `{$this->tableCategories}`
-                    WHERE `id` = '" . $this->db->escape($id) . "'";
-            return $this->db->query($sql);
-        }
-        return false;
+        return $this->delete($id);
     }
 
     /**
@@ -162,16 +134,16 @@ class Catalog extends Application {
      */
     public function duplicateCategory($name = null, $id = null) {
         if (!empty($name)) {
+            $params = [];
+            $params[] = $name;
             $sql = "SELECT *
                     FROM `{$this->tableCategories}`
-                    WHERE `name` = '" . $this->db->escape($name) . "'";
+                    WHERE `name` = ?";
             if (!empty($id)) {
-                $sql .= " AND `id` = '" . $this->db->escape($id) . "'";
+                $params[] = $id;
+                $sql .= " AND `id` = ?";
             }
-            $result = $this->db->fetchOne($sql);
-            return !empty($result) ?
-                true :
-                false;
+            return $this->Db->fetchOne($sql, $params);
         }
         return false;
     }
@@ -185,18 +157,17 @@ class Catalog extends Application {
      */
     public function isDuplicateCategory($identity = null, $id = null) {
         if (!empty($identity)) {
+            $params = [];
+            $params[] = $identity;
             $sql = "SELECT *
                     FROM `{$this->tableCategories}`
-                    WHERE `identity` = '" . $this->db->escape(
-                    $identity
-                ) . "'";
+                    WHERE `identity` = ?";
             if (!empty($id)) {
-                $sql .= " AND `id` = '" . $this->db->escape($id) . "'";
+                $params[] = $id;
+                $sql .= " AND `id` = ?";
             }
-            $result = $this->db->fetchOne($sql);
-            return !empty($result) ?
-                true :
-                false;
+            $result = $this->Db->fetchAll($sql, $params);
+            return (!empty($result)) ? true : false;
         }
         return false;
     }
@@ -211,26 +182,24 @@ class Catalog extends Application {
         if (!empty($identity)) {
             $sql = "SELECT *
                     FROM `{$this->tableProducts}`
-                    WHERE `identity` = '" . $this->db->escape(
-                    $identity
-                ) . "'";
-            return $this->db->fetchOne($sql);
+                    WHERE `identity` = ?";
+            return $this->Db->fetchOne($sql, $identity);
         }
-        return false;
+        return null;
     }
 
     /**
-     * Get all products
+     * Get all products of a category
      *
      * @param $category
      * @return array
      */
-    public function getProducts($category) {
+    public function getProducts($category = null) {
         $sql = "SELECT *
                 FROM `{$this->tableProducts}`
-                WHERE `category` ='" . $this->db->escape($category['id']) . "'
+                WHERE `category` = ?
                 ORDER BY `date` DESC";
-        return $this->db->fetchAll($sql);
+        return $this->Db->fetchAll($sql, $category);
     }
 
     /**
@@ -239,11 +208,8 @@ class Catalog extends Application {
      * @param $id
      * @return mixed
      */
-    public function getProduct($id) {
-        $sql = "SELECT *
-                FROM `{$this->tableProducts}`
-                WHERE `id` ='" . $this->db->escape($id) . "'";
-        return $this->db->fetchOne($sql);
+    public function getProduct($id = null) {
+        return $this->Db->selectOne($this->tableProducts, $id);
     }
 
     /**
@@ -255,18 +221,17 @@ class Catalog extends Application {
      */
     public function isDuplicateProduct($identity = null, $id = null) {
         if (!empty($identity)) {
+            $params = [];
+            $params[] = $identity;
             $sql = "SELECT *
                     FROM `{$this->tableProducts}`
-                    WHERE `identity` = '" . $this->db->escape(
-                    $identity
-                ) . "'";
+                    WHERE `identity` = ?";
             if (!empty($id)) {
-                $sql .= " AND `id` = '" . $this->db->escape($id) . "'";
+                $params[] = $id;
+                $sql .= " AND `id` = ?";
             }
-            $result = $this->db->fetchOne($sql);
-            return !empty($result) ?
-                true :
-                false;
+            $result = $this->Db->fetchAll($sql, $params);
+            return (!empty($result)) ? true : false;
         }
         return false;
     }
@@ -278,14 +243,16 @@ class Catalog extends Application {
      * @return array
      */
     public function getAllProducts($search = null) {
+        $params = [];
         $sql = "SELECT *
                 FROM `{$this->tableProducts}`";
         if (!empty($search)) {
-            $search = $this->db->escape($search);
-            $sql .= " WHERE `name` LIKE '%{$search}%' || `id` = '{$search}'";
+            $sql .= " WHERE `name` LIKE ? || `id` = ?";
+            $params[] = "%{$search}%";
+            $params[] = "%{$search}%";
         }
         $sql .= " ORDER BY `date` DESC";
-        return $this->db->fetchAll($sql);
+        return $this->Db->fetchAll($sql, $params);
     }
 
     /**
@@ -295,12 +262,9 @@ class Catalog extends Application {
      * @return bool
      */
     public function addProduct($data = null) {
-        if (!empty($data)) {
-            $data['date'] = Helper::setDate();
-            $this->db->prepareInsert($data);
-            $out = $this->db->insert($this->tableProducts);
-            $this->id = $this->db->id;
-            return $out;
+        if ($this->Db->insert($this->tableProducts, $data)) {
+            $this->id = $this->Db->id;
+            return true;
         }
         return false;
     }
@@ -313,11 +277,7 @@ class Catalog extends Application {
      * @return resource
      */
     public function updateProduct($data = null, $id = null) {
-        if (!empty($data) && !empty($id)) {
-            $this->db->prepareUpdate($data);
-            return $this->db->update($this->tableProducts, $id);
-        }
-        return false;
+        return $this->Db->update($this->tableProducts, $data, $id);
     }
 
     /**
@@ -333,9 +293,7 @@ class Catalog extends Application {
                 if (is_file(CATALOG_PATH . DS . $product['image'])) {
                     unlink(CATALOG_PATH . DS . $product['image']);
                 }
-                $sql = "DELETE FROM `{$this->tableProducts}`
-                        WHERE `id` = '" . $this->db->escape($id) . "'";
-                return $this->db->query($sql);
+                return $this->Db->delete($this->tableProducts, $id);
             }
             return false;
         }

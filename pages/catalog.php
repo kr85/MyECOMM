@@ -36,12 +36,10 @@
                                     'unavailable.png';
 
                                 $width = Helper::getImageSize(
-                                    CATALOG_PATH . DS . $image,
+                                    CATALOG_PATH.DS.$image,
                                     0
                                 );
-                                $width = $width > 120 ?
-                                    120 :
-                                    $width;
+                                $width = ($width > 120) ? 120 : $width;
 
                                 $link = $this->objUrl->href(
                                     'catalog-item',
@@ -54,7 +52,7 @@
                                 );
                             ?>
                             <a href="<?php echo $link; ?>"> <img
-                                    src="<?php echo $objCatalog->path . $image; ?>"
+                                    src="<?php echo DS.CATALOG_DIR.DS.$image; ?>"
                                     alt="<?php echo Helper::encodeHTML(
                                         $row['name'],
                                         1

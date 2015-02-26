@@ -18,7 +18,7 @@
 
             require_once('_header.php');
 
-            echo "<h1>Catalog :: " . $category['name'] . "</h1>";
+            echo "<h1>Catalog :: ".$category['name']."</h1>";
 
             $image = !empty($product['image']) ?
                 $product['image'] :
@@ -26,13 +26,11 @@
 
             // Check if image is empty
             if (!empty($image)):
-                $width = Helper::getImageSize(CATALOG_PATH . DS . $image, 0);
-                $width = $width > 120 ?
-                    120 :
-                    $width;
+                $width = Helper::getImageSize(CATALOG_PATH.DS.$image, 0);
+                $width = ($width > 120) ? 120 : $width;
                 echo "<div class=\"fl_l\">";
                 echo "<div class=\"lft\"><img src=\"";
-                echo $objCatalog->path . $image;
+                echo DS.CATALOG_DIR.DS.$image;
                 echo "\" alt=\"";
                 echo Helper::encodeHTML($product['name'], 1);
                 echo "\" width=\"{$width}\" /></div>";
