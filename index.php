@@ -27,8 +27,14 @@
     // Require config file
     require_once('includes'.DS.'config.php');
 
+    // Required custom exception handler
+    require_once('MyECOMM'.DS.'MyECOMMException.php');
+
     // Require Autoloader file
     require_once('MyECOMM'.DS.'Autoloader.php');
+
+    // Set the custom handler
+    set_exception_handler(['MyECOMM\MyECOMMException', 'getOutput']);
 
     // Register Autoloader class
     spl_autoload_register(['MyECOMM\Autoloader', 'load']);
