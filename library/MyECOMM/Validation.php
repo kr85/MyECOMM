@@ -1,20 +1,28 @@
-<?php
+<?php namespace MyECOMM;
 
 /**
  * Class Validation
  */
 class Validation {
 
-    // Form object
+    /**
+     * @var Form|null Form object instance
+     */
     private $objForm;
 
-    // List of validation errors
-    public $errors = [];
+    /**
+     * @var array List of validation errors
+     */
+    private $errors = [];
 
-    // List of error messages
+    /**
+     * @var array List of error messages
+     */
     public $errorMessages = [];
 
-    // List of validation error messages
+    /**
+     * @var array List of validation error messages
+     */
     public $messages = [
         'first_name'         => 'Please provide your first name.',
         'last_name'          => 'Please provide your last name.',
@@ -59,22 +67,34 @@ class Validation {
         'cost'               => 'Please provide the cost.'
     ];
 
-    // List of expected fields
+    /**
+     * @var array List of expected fields
+     */
     public $expected = [];
 
-    // List of required fields
+    /**
+     * @var array List of required fields
+     */
     public $required = [];
 
-    // List of special validation
+    /**
+     * @var array List of special validation
+     */
     public $special = [];
 
-    // List of post
+    /**
+     * @var array List of post parameters
+     */
     public $post = [];
 
-    // List of fields to be removed from post
+    /**
+     * @var array List of fields to be removed from post
+     */
     public $postRemove = [];
 
-    // List of fields to be specifically formatted
+    /**
+     * @var array List of fields to be specifically formatted
+     */
     public $postFormat = [];
 
     /**
@@ -83,9 +103,7 @@ class Validation {
      * @param null $objForm
      */
     public function __construct($objForm = null) {
-        $this->objForm = is_object($objForm) ?
-            $objForm :
-            new Form();
+        $this->objForm = (is_object($objForm)) ? $objForm : new Form();
     }
 
     /**
@@ -110,13 +128,8 @@ class Validation {
      * @param $key
      * @param $value
      */
-    public function check($key, $value) {
-        if (!empty($this->special) &&
-            array_key_exists(
-                $key,
-                $this->special
-            )
-        ) {
+    public function check($key = null, $value = null) {
+        if (!empty($this->special) && array_key_exists($key, $this->special)) {
             $this->checkSpecial($key, $value);
         } else {
             if (in_array($key, $this->required) && Helper::isEmpty($value)) {
@@ -131,8 +144,7 @@ class Validation {
      * @param $key
      * @param $value
      */
-    public function checkSpecial($key, $value) {
-
+    public function checkSpecial($key = null, $value = null) {
         switch ($this->special[$key]) {
             case 'email':
                 if (!$this->isEmail($value)) {
@@ -145,16 +157,16 @@ class Validation {
     /**
      * Add to errors list
      *
-     * @param $key
+     * @param null $key
+     * @param null $value
      */
     public function addToErrors($key = null, $value = null) {
         if (!empty($key)) {
             $this->errors[] = $key;
             if (!empty($value)) {
-                $this->errorMessages['valid_' . $key] =
-                    $this->wrapWarning($value);
+                $this->errorMessages['valid_'.$key] = $this->wrapWarning($value);
             } else if (array_key_exists($key, $this->messages)) {
-                $this->errorMessages['valid_' . $key] =
+                $this->errorMessages['valid_'.$key] =
                     $this->wrapWarning($this->messages[$key]);
             }
         }
@@ -167,15 +179,10 @@ class Validation {
      * @return bool
      */
     public function isEmail($email = null) {
-
         if (!empty($email)) {
             $result = filter_var($email, FILTER_VALIDATE_EMAIL);
-
-            return !$result ?
-                false :
-                true;
+            return (!$result) ? false : true;
         }
-
         return false;
     }
 
@@ -216,8 +223,7 @@ class Validation {
      * @param $key
      * @param $value
      */
-    public function format($key, $value) {
-
+    public function format($key = null, $value = null) {
         switch ($value) {
             case 'password':
                 $this->post[$key] = Login::stringToHash($this->post[$key]);
@@ -231,12 +237,10 @@ class Validation {
      * @param $key
      * @return string
      */
-    public function validate($key) {
-
+    public function validate($key = null) {
         if (!empty($this->errors) && in_array($key, $this->errors)) {
             return $this->wrapWarning($this->messages[$key]);
         }
-
         return false;
     }
 
@@ -247,11 +251,9 @@ class Validation {
      * @return string
      */
     public function wrapWarning($message = null) {
-
         if (!empty($message)) {
             return "<span class=\"warn\">{$message}</span>";
         }
-
         return false;
     }
 }
