@@ -1,24 +1,46 @@
-<?php
+<?php namespace MyECOMM;
+
+use \PDOException;
 
 /**
  * Class Order
  */
 class Order extends Application {
 
-    // Database table names
-    private $tableOrders = 'orders';
-    private $tableOrdersItems = 'orders_items';
-    private $tableStatuses = 'statuses';
-    private $tableCountries = 'countries';
-    private $tableProducts = 'products';
+    /**
+     * @var string Database orders table
+     */
+    protected $tableOrders = 'orders';
 
+    /**
+     * @var string Database orders items table
+     */
+    protected $tableOrdersItems = 'orders_items';
+
+    /**
+     * @var string Database statuses table
+     */
+    protected $tableStatuses = 'statuses';
+
+    /**
+     * @var string Database countries table
+     */
+    protected $tableCountries = 'countries';
+
+    /**
+     * @var string Database products table
+     */
+    protected $tableProducts = 'products';
+
+    /**
+     * @var array Array of basket items
+     */
     private $basket = [];
+
+    /**
+     * @var array Array of items
+     */
     private $items  = [];
-
-    private $fields = [];
-    private $values = [];
-
-    private $id = null;
 
     /**
      * Create a new order sql query
@@ -27,181 +49,94 @@ class Order extends Application {
      * @return bool
      */
     public function createOrder($user = null) {
-
         $this->getItems();
-
-        if (!empty($user) && !empty($this->items)) {
-
+        if ($this->isUserAndItemsValid($user)) {
             $objBasket = new Basket($user);
             $objBusiness = new Business();
-            $business = $objBusiness->getBusiness();
-
-            $this->fields[] = 'tax_number';
-            $this->values[] = $business['tax_number'];
-
-            // Client information
-            $this->fields[] = 'client';
-            $this->values[] = $this->db->escape($user['id']);
-
-            $this->fields[] = 'first_name';
-            $this->values[] = $this->db->escape($user['first_name']);
-
-            $this->fields[] = 'last_name';
-            $this->values[] = $this->db->escape($user['last_name']);
-
-            $this->fields[] = 'address_1';
-            $this->values[] = $this->db->escape($user['address_1']);
-
-            $this->fields[] = 'address_2';
-            $this->values[] = $this->db->escape($user['address_2']);
-
-            $this->fields[] = 'city';
-            $this->values[] = $this->db->escape($user['city']);
-
-            $this->fields[] = 'state';
-            $this->values[] = $this->db->escape($user['state']);
-
-            $this->fields[] = 'zip_code';
-            $this->values[] = $this->db->escape($user['zip_code']);
-
-            $this->fields[] = 'country';
-            $this->values[] = $this->db->escape($user['country']);
-
+            $business = $objBusiness->getOne(Business::BUSINESS_ID);
+            // Order parameters
+            $params = [
+                'tax_number'     => $business['tax_number'],
+                'client'         => $user['id'],
+                'first_name'     => $user['first_name'],
+                'last_name'      => $user['last_name'],
+                'address_1'      => $user['address_1'],
+                'address_2'      => $user['address_2'],
+                'city'           => $user['city'],
+                'state'          => $user['state'],
+                'zip_code'       => $user['zip_code'],
+                'country'        => $user['country'],
+                'shipping_type'  => $objBasket->finalShippingType,
+                'shipping_cost'  => $objBasket->finalShippingCost,
+                'tax_rate'       => $objBasket->taxRate,
+                'tax'            => $objBasket->finalTax,
+                'subtotal_items' => $objBasket->subTotal,
+                'subtotal'       => $objBasket->finalSubtotal,
+                'total'          => $objBasket->finalTotal,
+                'date'           => Helper::setDate(),
+                'token'          => date('YmdHis').mt_rand().md5(time())
+            ];
             // Shipping information
             if ($user['same_address'] == 1) {
-
-                $this->fields[] = 'shipping_address_1';
-                $this->values[] = $this->db->escape($user['address_1']);
-
-                $this->fields[] = 'shipping_address_2';
-                $this->values[] = $this->db->escape($user['address_2']);
-
-                $this->fields[] = 'shipping_city';
-                $this->values[] = $this->db->escape($user['city']);
-
-                $this->fields[] = 'shipping_state';
-                $this->values[] = $this->db->escape($user['state']);
-
-                $this->fields[] = 'shipping_zip_code';
-                $this->values[] = $this->db->escape($user['zip_code']);
-
-                $this->fields[] = 'shipping_country';
-                $this->values[] = $this->db->escape($user['country']);
-
+                $params['shipping_address_1'] = $user['address_1'];
+                $params['shipping_address_2'] = $user['address_2'];
+                $params['shipping_city']      = $user['city'];
+                $params['shipping_state']     = $user['state'];
+                $params['shipping_zip_code']  = $user['zip_code'];
+                $params['shipping_country']   = $user['country'];
             } else {
-
-                $this->fields[] = 'shipping_address_1';
-                $this->values[] = $this->db->escape($user['shipping_address_1']);
-
-                $this->fields[] = 'shipping_address_2';
-                $this->values[] = $this->db->escape($user['shipping_address_2']);
-
-                $this->fields[] = 'shipping_city';
-                $this->values[] = $this->db->escape($user['shipping_city']);
-
-                $this->fields[] = 'shipping_state';
-                $this->values[] = $this->db->escape($user['shipping_state']);
-
-                $this->fields[] = 'shipping_zip_code';
-                $this->values[] = $this->db->escape($user['shipping_zip_code']);
-
-                $this->fields[] = 'shipping_country';
-                $this->values[] = $this->db->escape($user['shipping_country']);
-
+                $params['shipping_address_1'] = $user['shipping_address_1'];
+                $params['shipping_address_2'] = $user['shipping_address_2'];
+                $params['shipping_city']      = $user['shipping_city'];
+                $params['shipping_state']     = $user['shipping_state'];
+                $params['shipping_zip_code']  = $user['shipping_zip_code'];
+                $params['shipping_country']   = $user['shipping_country'];
             }
 
-            $this->fields[] = 'shipping_type';
-            $this->values[] = $this->db->escape($objBasket->finalShippingType);
-
-            $this->fields[] = 'shipping_cost';
-            $this->values[] = $this->db->escape($objBasket->finalShippingCost);
-
-            $this->fields[] = 'tax_rate';
-            $this->values[] = $this->db->escape($objBasket->taxRate);
-
-            $this->fields[] = 'tax';
-            $this->values[] = $this->db->escape($objBasket->finalTax);
-
-            $this->fields[] = 'subtotal_items';
-            $this->values[] = $this->db->escape($objBasket->subTotal);
-
-            $this->fields[] = 'subtotal';
-            $this->values[] = $this->db->escape($objBasket->finalSubtotal);
-
-            $this->fields[] = 'total';
-            $this->values[] = $this->db->escape($objBasket->finalTotal);
-
-            $this->fields[] = 'date';
-            $this->values[] = Helper::setDate();
-
-            $this->fields[] = 'token';
-            $this->values[] = date('YmdHis') . mt_rand() . md5(time());
-
-            $sql = "INSERT INTO `{$this->tableOrders}` (`";
-            $sql .= implode("`, `", $this->fields);
-            $sql .= "`) VALUES ('";
-            $sql .= implode("', '", $this->values);
-            $sql .= "')";
-
-            $this->db->query($sql);
-            $this->id = $this->db->lastId();
-
-            if (!empty($this->id)) {
-                $this->fields = [];
-                $this->values = [];
-
-                return $this->addItems($this->id);
+            try {
+                // Begin the transaction
+                $this->Db->beginTransaction();
+                // Insert the into table
+                $this->Db->insertTransaction($this->tableOrders, $params);
+                // Get record id
+                $this->id = $this->Db->id;
+                // For each item insert it into the table
+                foreach ($this->items as $item) {
+                    $this->Db->insertTransaction($this->tableOrdersItems, [
+                        'order'   => $this->id,
+                        'product' => $item['id'],
+                        'price'   => $item['price'],
+                        'qty'     => $this->basket[$item['id']['quantity']]
+                    ]);
+                }
+                // Commit the transaction
+                $this->Db->commit();
+                return true;
+            } catch (PDOException $e) {
+                $this->Db->rollBack();
+                return false;
             }
         }
-
         return false;
     }
 
     /**
-     * Add items to the database sql query
+     * Check if the user and the items are valid
      *
-     * @param null $orderId
+     * @param null $user
      * @return bool
      */
-    public function addItems($orderId = null) {
-
-        if (!empty($orderId)) {
-
-            $errors = [];
-
-            foreach ($this->items as $item) {
-
-                $sql = "INSERT INTO `{$this->tableOrdersItems}`
-                        (`order`, `product`, `price`, `qty`)
-                        VALUES ('{$orderId}',
-                              '" . $item['id'] . "',
-                              '" . $item['price'] . "',
-                              '" . $this->basket[$item['id']]['quantity'] . "')";
-
-                if (!$this->db->query($sql)) {
-                    $errors[] = $sql;
-                }
-            }
-
-            return empty($errors) ?
-                true :
-                false;
-        }
-
-        return false;
+    private function isUserAndItemsValid($user = null) {
+        return (!empty($user) && !empty($this->items));
     }
 
     /**
      * Get all items from the session
      */
     public function getItems() {
-
         $this->basket = Session::getSession('basket');
-
         if (!empty($this->basket)) {
-
             $objCatalog = new Catalog();
-
             foreach ($this->basket as $key => $value) {
                 $this->items[$key] = $objCatalog->getProduct($key);
             }
@@ -215,11 +150,7 @@ class Order extends Application {
      * @return mixed
      */
     public function getOrder($id = null) {
-
-        $id = !empty($id) ?
-            $id :
-            $this->id;
-
+        $id = (!empty($id)) ? $id : $this->id;
         $sql = "SELECT `o`.*,
                 DATE_FORMAT(`o`.`date`, '%D %M %Y %r') AS `date_formatted`,
                 CONCAT_WS(' ', `o`.`first_name`, `o`.`last_name`) AS `full_name`,
@@ -244,9 +175,8 @@ class Order extends Application {
                   WHERE `id` = `o`.`shipping_country`
                 ) AS `shipping_country_name`
                 FROM `{$this->tableOrders}` `o`
-                WHERE `o`.`id` = " . intval($id);
-
-        return $this->db->fetchOne($sql);
+                WHERE `o`.`id` = ?";
+        return $this->Db->fetchOne($sql, $id);
     }
 
     /**
@@ -256,9 +186,7 @@ class Order extends Application {
      * @return mixed|null
      */
     public function getOrderByToken($token = null) {
-
         if (!empty($token)) {
-
             $sql = "SELECT `o`.*,
                 DATE_FORMAT(`o`.`date`, '%D %M %Y %r') AS `date_formatted`,
                 CONCAT_WS(' ', `o`.`first_name`, `o`.`last_name`) AS `full_name`,
@@ -283,9 +211,8 @@ class Order extends Application {
                   WHERE `id` = `o`.`shipping_country`
                 ) AS `shipping_country_name`
                 FROM `{$this->tableOrders}` `o`
-                WHERE `o`.`token` = '" . $this->db->escape($token) . "'";
-
-            return $this->db->fetchOne($sql);
+                WHERE `o`.`token` = ?";
+            return $this->Db->fetchOne($sql, $token);
         }
         return null;
     }
@@ -297,19 +224,14 @@ class Order extends Application {
      * @return array
      */
     public function getOrderItems($id = null) {
-
-        $id = !empty($id) ?
-            $id :
-            $this->id;
-
+        $id = !empty($id) ? $id : $this->id;
         $sql = "SELECT `i`.*, `p`.`name`,
                   (`i`.`price` * `i`.`qty`) AS `price_total`
                 FROM `{$this->tableOrdersItems}` `i`
                 LEFT JOIN `{$this->tableProducts}` `p`
                   ON `i`.`product` = `p`.`id`
-                WHERE `i`.`order` = " . intval($id);
-
-        return $this->db->fetchAll($sql);
+                WHERE `i`.`order` = ?";
+        return $this->Db->fetchAll($sql, $id);
     }
 
     /**
@@ -320,63 +242,44 @@ class Order extends Application {
      * @return bool
      */
     public function approve($data = null, $result = null) {
-
-        //Helper::addToErrorsLog('In_approve', null);
-        if (!empty($data) && !empty($result)) {
-
-            //Helper::addToErrorsLog('data_result_not_null', null);
-            if (array_key_exists('txn_id', $data) && array_key_exists(
-                    'payment_status',
-                    $data
-                ) && array_key_exists('custom', $data)
-            ) {
-
-                //Helper::addToErrorsLog('txn_id|payment_status|custom_exist', null);
-                $active = $data['payment_status'] == 'Completed' ?
-                    1 :
-                    0;
-                $out = [];
-
-                foreach ($data as $key => $value) {
-                    $out[] = "{$key} : {$value}";
-                }
-
-                $out = implode("\n", $out);
-                $errors = [];
-
-                $sql = "UPDATE `{$this->tableOrders}`
-                        SET `pp_status` = '" . $this->db->escape($active) . "',
-                        `txn_id` = '" . $this->db->escape($data['txn_id']) . "',
-                        `payment_status` = '" . $this->db->escape(
-                        $data['payment_status']
-                    ) . "',
-                        `ipn` = '" . $this->db->escape($out) . "',
-                        `response` = '" . $this->db->escape($result) . "'
-                        WHERE `token` = '" . $this->db->escape(
-                        $data['custom']
-                    ) . "'";
-
-                //Helper::addToErrorsLog('SQL_approve', $sql);
-                if (!$this->db->query($sql)) {
-                    Helper::addToErrorsLog(
-                        'Update_approve_query_failed',
-                        null
-                    );
-                    $errors[] = $sql;
-                }
-
-                //Helper::addToErrorsLog('After_approve_query', null);
-                return empty($errors) ?
-                    true :
-                    false;
+        if ($this->isApprovalValid($data, $result)) {
+            // PayPal payment status
+            $active = ($data['payment_status'] == 'Completed') ? 1 : 0;
+            // An array to hold the IPN response
+            $out = [];
+            // Reassign the data received from PayPal
+            foreach ($data as $key => $value) {
+                $out[] = "{$key} : {$value}";
             }
-
-            //Helper::addToErrorsLog('txn_id_payment_status_or_custom_do_not_exist', null);
-            return false;
+            // IPN response
+            $out = implode("\n", $out);
+            // Update the order with the response from PayPal
+            return $this->Db->update($this->tableOrders, [
+                'pp_status' => $active,
+                'txn_id' => $data['txn_id'],
+                'payment_status' => $data['payment_status'],
+                'ipn' => $out,
+                'response' => $result
+            ], $data['custom'], 'token');
         }
-
-        //Helper::addToErrorsLog('Data_and_result_for_approve_are_empty', null);
         return false;
+    }
+
+    /**
+     * Check if the approve parameters are valid
+     *
+     * @param null $data
+     * @param null $result
+     * @return bool
+     */
+    private function isApprovalValid($data = null, $result = null) {
+        return (
+            !empty($data) &&
+            !empty($result) &&
+            array_key_exists('txn_id', $data) &&
+            array_key_exists('payment_status', $data) &&
+            array_key_exists('custom', $data)
+        );
     }
 
     /**
@@ -386,16 +289,14 @@ class Order extends Application {
      * @return array
      */
     public function getClientOrders($clientId = null) {
-
         if (!empty($clientId)) {
-            $sql = "SELECT * FROM `{$this->tableOrders}`
-                    WHERE `client` = '" . $this->db->escape($clientId) . "'
+            $sql = "SELECT *
+                    FROM `{$this->tableOrders}`
+                    WHERE `client` = ?
                     ORDER BY `date` DESC";
-
-            return $this->db->fetchAll($sql);
+            return $this->Db->fetchAll($sql, $clientId);
         }
-
-        return false;
+        return null;
     }
 
     /**
@@ -405,15 +306,13 @@ class Order extends Application {
      * @return mixed
      */
     public function getStatus($id = null) {
-
         if (!empty($id)) {
-            $sql = "SELECT * FROM `{$this->tableStatuses}`
-                    WHERE `id` = '" . $this->db->escape($id) . "'";
-
-            return $this->db->fetchOne($sql);
+            $sql = "SELECT *
+                    FROM `{$this->tableStatuses}`
+                    WHERE `id` = ?";
+            return $this->Db->fetchOne($sql, $id);
         }
-
-        return false;
+        return null;
     }
 
     /**
@@ -423,14 +322,15 @@ class Order extends Application {
      * @return array
      */
     public function getAllOrders($search = null) {
-
-        $sql = "SELECT * FROM `$this->tableOrders`";
-        $sql .= !empty($search) ?
-            " WHERE `id` = '" . $this->db->escape($search) . "'" :
-            null;
+        $params = [];
+        $sql = "SELECT *
+                FROM `$this->tableOrders`";
+        if(!empty($search)) {
+            $params[] = $search;
+            $sql .= " WHERE `id` = ?";
+        }
         $sql .= " ORDER BY `date` DESC";
-
-        return $this->db->fetchAll($sql);
+        return $this->Db->fetchAll($sql, $params);
     }
 
     /**
@@ -441,43 +341,30 @@ class Order extends Application {
      * @return bool|resource
      */
     public function updateOrder($id = null, $data = null) {
-
-        if (!empty($id) && !empty($data)) {
-            if (is_array($data) && array_key_exists(
-                    'status',
-                    $data
-                ) && array_key_exists('notes', $data)
-            ) {
-                $sql = "UPDATE `{$this->tableOrders}`
-                        SET `status` = '" . $this->db->escape(
-                        $data['status']
-                    ) . "',
-                        `notes` = '" . $this->db->escape($data['notes']) . "'
-                        WHERE `id` = '" . $this->db->escape($id) . "'";
-
-                return $this->db->query($sql);
-            }
+        if ($this->isUpdateOrderValid($id, $data)) {
+            return $this->Db->update($this->tableOrders, [
+                'status' => $data['status'],
+                'notes'  => $data['notes']
+            ], $id);
         }
-
         return false;
     }
 
     /**
-     * Delete an existing order
+     * Check if the update order parameters are valid
      *
      * @param null $id
-     * @return bool|resource
+     * @param null $data
+     * @return bool
      */
-    public function removeOrder($id = null) {
-
-        if (!empty($id)) {
-            $sql = "DELETE FROM `{$this->tableOrders}`
-                    WHERE `id` = '" . $this->db->escape($id) . "'";
-
-            return $this->db->query($sql);
-        }
-
-        return false;
+    private function isUpdateOrderValid($id = null, $data = null) {
+        return (
+            !empty($id) &&
+            !empty($data) &&
+            is_array($data) &&
+            array_key_exists('status', $data) &&
+            array_key_exists('notes', $data)
+        );
     }
 
     /**
@@ -486,10 +373,9 @@ class Order extends Application {
      * @return array
      */
     public function getStatuses() {
-
-        $sql = "SELECT * FROM `$this->tableStatuses`
+        $sql = "SELECT *
+                FROM `$this->tableStatuses`
                 ORDER BY `id` ASC";
-
-        return $this->db->fetchAll($sql);
+        return $this->Db->fetchAll($sql);
     }
 }
