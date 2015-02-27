@@ -1,4 +1,4 @@
-<?php
+<?php namespace MyECOMM;
 
 /**
  * Class Plugin
@@ -14,13 +14,13 @@ class Plugin {
      */
     public static function get($file = null, $data = null) {
         // Create a path to the file
-        $path = PLUGIN_PATH . DS . $file . '.php';
+        $path = PLUGIN_PATH.DS.$file.'.php';
         // Check if the file and path exist
         if (!empty($file) && is_file($path)) {
             ob_start();
             @include($path);
             return ob_get_clean();
         }
-        return false;
+        return null;
     }
 }
