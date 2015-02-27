@@ -21,7 +21,7 @@ class Helper {
             case 2:
                 $pattern = '<([a-zA-Z0-9\.\, "\'_\/\-\+~=;:\(\)?&#%![\]@]+)>';
                 // put text only, devided with html tags into array
-                $textMatches = preg_split('/' . $pattern . '/', $string);
+                $textMatches = preg_split('/'.$pattern.'/', $string);
                 // array for sanitised output
                 $textSanitised = [];
 
@@ -93,7 +93,6 @@ class Helper {
      * @param null $url
      */
     public static function redirect($url = null) {
-
         if (!empty($url)) {
             header("Location: {$url}");
             exit;
@@ -109,9 +108,7 @@ class Helper {
      */
     public static function setDate($case = null, $date = null) {
 
-        $date = empty($date) ?
-            time() :
-            strtotime($date);
+        $date = empty($date) ? time() : strtotime($date);
         switch ($case) {
             case 1:
                 // 23/01/2015
@@ -175,7 +172,6 @@ class Helper {
         if (!empty($name)) {
             return strtolower(preg_replace('/[^a-zA-Z0-9.]/', '-', $name));
         }
-
         return false;
     }
 
@@ -192,10 +188,8 @@ class Helper {
             foreach ($remove as $key => $value) {
                 $string = str_replace($value, '', $string);
             }
-
             return $string;
         }
-
         return false;
     }
 
@@ -206,9 +200,7 @@ class Helper {
      * @return bool
      */
     public static function isEmpty($value = null) {
-        return empty($value) && !is_numeric($value) ?
-            true :
-            false;
+        return (empty($value) && !is_numeric($value)) ? true : false;
     }
 
     /**
@@ -218,9 +210,7 @@ class Helper {
      * @return array
      */
     public static function makeArray($array = null) {
-        return is_array($array) ?
-            $array :
-            [$array];
+        return (is_array($array)) ? $array : [$array];
     }
 
     /**
@@ -262,7 +252,8 @@ class Helper {
             if (defined("JSON_UNESCAPED_UNICODE")) {
                 return json_encode(
                     $input,
-                    JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE
+                    JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT |
+                    JSON_HEX_AMP | JSON_UNESCAPED_UNICODE
                 );
             } else {
                 return json_encode(
