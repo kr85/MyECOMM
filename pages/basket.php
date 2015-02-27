@@ -1,19 +1,16 @@
 <?php
 
-    $action = $this->objUrl->get('action');
+use MyECOMM\Plugin;
 
-    if ($action == 'view'):
-        echo Plugin::get('front' . DS . 'basket_view');
-    else:
-        require_once('_header.php');
-?>
-    <h1>Basket</h1>
+require_once('_header.php'); ?>
 
-    <div id="main_basket">
-        <?php echo Plugin::get('front' . DS . 'basket_view'); ?>
-    </div>
+<h1>Basket</h1>
 
-<?php
-        require_once('_footer.php');
-    endif;
-?>
+<div id="main_basket">
+    <?php echo Plugin::get('front'.DS.'basket_view', [
+        'objUrl' => $this->objUrl,
+        'objCurrency' => $this->objCurrency
+    ]); ?>
+</div>
+
+<?php require_once('_footer.php'); ?>
