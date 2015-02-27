@@ -1,4 +1,4 @@
-<?php
+<?php namespace MyECOMM;
 
 /**
  * Class Session
@@ -12,7 +12,6 @@ class Session {
      * @param int $quantity
      */
     public static function setItem($id, $quantity = 1) {
-
         $_SESSION['basket'][$id]['quantity'] = $quantity;
     }
 
@@ -23,16 +22,11 @@ class Session {
      * @param null $quantity
      */
     public static function removeItem($id, $quantity = null) {
-
         if ($quantity != null && $quantity < $_SESSION['basket'][$id]['quantity']) {
-
             $_SESSION['basket'][$id]['quantity'] = ($_SESSION['basket'][$id]['quantity'] - $quantity);
-
         } else {
-
             $_SESSION['basket'][$id] = null;
             unset($_SESSION['basket'][$id]);
-
         }
     }
 
@@ -43,14 +37,12 @@ class Session {
      * @return null
      */
     public static function getSession($name = null) {
-
         if (!empty($name)) {
             return isset($_SESSION[$name]) ?
                 $_SESSION[$name] :
                 null;
         }
-
-        return false;
+        return null;
     }
 
     /**
@@ -60,7 +52,6 @@ class Session {
      * @param null $value
      */
     public static function setSession($name = null, $value = null) {
-
         if (!empty($name) && !empty($value)) {
             $_SESSION[$name] = $value;
         }
@@ -72,7 +63,6 @@ class Session {
      * @param null $id
      */
     public static function clear($id = null) {
-
         if (!empty($id)) {
             if (isset($_SESSION[$id])) {
                 $_SESSION[$id] = null;
