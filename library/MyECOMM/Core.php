@@ -5,12 +5,34 @@
  */
 class Core {
 
-    // Public variables
+    /**
+     * @var Url object instance
+     */
     public $objUrl;
+
+    /**
+     * @var Navigation object instance
+     */
     public $objNavigation;
+
+    /**
+     * @var Currency object instance
+     */
     public $objCurrency;
+
+    /**
+     * @var Admin object instance
+     */
     public $objAdmin;
+
+    /**
+     * @var string Meta title
+     */
     public $metaTitle = 'eCommerce Website';
+
+    /**
+     * @var string Meta description
+     */
     public $metaDescription = 'eCommerce Website';
 
     /**

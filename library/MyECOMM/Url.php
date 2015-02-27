@@ -6,17 +6,53 @@
 class Url {
 
     /**
-     * Public variables
+     * @var string  Key page
      */
-    public $keyPage       = 'page';
-    public $keyModules    = ['panel'];
-    public $module        = 'front';
-    public $main          = 'index';
-    public $currentPage   = 'index';
-    public $action        = 'index';
-    public $controller    = 'login';
-    public $parameters    = [];
+    public $keyPage = 'page';
+
+    /**
+     * @var array List of key modules
+     */
+    public $keyModules = ['panel'];
+
+    /**
+     * @var string Default module
+     */
+    public $module = 'front';
+
+    /**
+     * @var string Main page
+     */
+    public $main = 'index';
+
+    /**
+     * @var string Current page
+     */
+    public $currentPage = 'index';
+
+    /**
+     * @var string Action
+     */
+    public $action = 'index';
+
+    /**
+     * @var string Controller
+     */
+    public $controller = 'login';
+
+    /**
+     * @var array List of parameters
+     */
+    public $parameters = [];
+
+    /**
+     * @var array List of raw parameters
+     */
     public $rawParameters = [];
+
+    /**
+     * @var Raw string
+     */
     public $rawString;
 
     /**
