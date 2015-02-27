@@ -1,4 +1,4 @@
-<?php
+<?php namespace MyECOMM;
 
 /**
  * Class Form
@@ -96,7 +96,7 @@ class Form {
                 return ' checked="checked"';
             }
         } else {
-            return !Helper::isEmpty($data) && $value == $data ?
+            return (!Helper::isEmpty($data) && $value == $data) ?
                 ' checked="checked"' :
                 null;
         }
@@ -121,16 +121,17 @@ class Form {
         if (!Helper::isEmpty($post)) {
             if ($post != $value) {
                 return $single ?
-                    ' class="' . $class . '"' :
-                    ' ' . $class;
+                    ' class="'.$class.'"' :
+                    ' '.$class;
             }
         } else {
             if ($value != $data) {
                 return $single ?
-                    ' class="' . $class . '"' :
-                    ' ' . $class;
+                    ' class="'.$class.'"' :
+                    ' '.$class;
             }
         }
+        return null;
     }
 
     /**
