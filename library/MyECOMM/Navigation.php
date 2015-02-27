@@ -1,12 +1,18 @@
-<?php
+<?php namespace MyECOMM;
 
 /**
  * Class Navigation
  */
 class Navigation {
 
-    // Public variables
+    /**
+     * @var Url object instance
+     */
     public $objUrl;
+
+    /**
+     * @var string Active class
+     */
     public $classActive = 'active';
 
     /**
@@ -15,9 +21,7 @@ class Navigation {
      * @param null $objUrl
      */
     public function __construct($objUrl = null) {
-        $this->objUrl = is_object($objUrl) ?
-            $objUrl :
-            new Url();
+        $this->objUrl = is_object($objUrl) ? $objUrl : new Url();
     }
 
     /**
@@ -33,8 +37,8 @@ class Navigation {
             if (empty($pairs)) {
                 if ($main == $this->objUrl->main) {
                     return !$single ?
-                        ' ' . $this->classActive :
-                        ' class="' . $this->classActive . '"';
+                        ' '.$this->classActive :
+                        ' class="'.$this->classActive.'"';
                 }
             } else {
                 $exceptions = [];
@@ -46,8 +50,8 @@ class Navigation {
                 }
                 if ($main == $this->objUrl->main && empty($exceptions)) {
                     return !$single ?
-                        ' ' . $this->classActive :
-                        ' class="' . $this->classActive . '"';
+                        ' '.$this->classActive :
+                        ' class="'.$this->classActive.'"';
                 }
             }
         }
