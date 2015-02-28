@@ -1,8 +1,11 @@
 <?php
 
-    $shipping = $objShipping->getShippingByTypeZone($id, $zid);
+use MyECOMM\Plugin;
 
-    require_once('_header.php');
+$shipping = $objShipping->getShippingByTypeZone($id, $zid);
+
+require_once('_header.php');
+
 ?>
 
 <h1>Rates for : <?php echo $zone['name']; ?> : <?php echo $type['name']; ?></h1>
@@ -34,9 +37,10 @@
 </form>
 <div class="dev br_td">&nbsp;</div>
 <div id="shippingList">
-    <?php echo Plugin::get('admin' . DS . 'shipping-cost', [
+    <?php echo Plugin::get('admin'.DS.'shipping-cost', [
         'rows' => $shipping,
-        'objUrl' => $this->objUrl
+        'objUrl' => $this->objUrl,
+        'objCurrency' => $this->objCurrency
     ]); ?>
 </div>
 

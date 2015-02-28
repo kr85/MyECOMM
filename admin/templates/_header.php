@@ -1,10 +1,16 @@
+<?php
+
+use MyECOMM\Login;
+use MyECOMM\Session;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>E-Commerce Website Project</title>
         <meta name="description" content="E-Commerce Website Project"/>
-        <meta name="keywords" content="E-Commerce Website Project"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="/css/core.css" rel="stylesheet" type="text/css"/>
     </head>

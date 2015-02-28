@@ -1,16 +1,19 @@
 <?php
 
-    $active = ($country['include'] == 1) ? 0 : 1;
+use \Exception;
+use MyECOMM\Helper;
 
-    if ($objCountry->update(['include' => $active], $country['id'])) {
+$active = ($country['include'] == 1) ? 0 : 1;
 
-        $replace = '<a href="#" data-url="';
-        $replace .= $this->objUrl->getCurrent();
-        $replace .= '" class="click_replace">';
-        $replace .= ($active == 1) ? 'Yes' : 'No';
-        $replace .= '</a>';
+if ($objCountry->update(['include' => $active], $country['id'])) {
 
-        echo Helper::json(['error' => false, 'replace' => $replace]);
-    } else {
-        throw new Exception('Record could not be updated.');
-    }
+    $replace = '<a href="#" data-url="';
+    $replace .= $this->objUrl->getCurrent();
+    $replace .= '" class="click_replace">';
+    $replace .= ($active == 1) ? 'Yes' : 'No';
+    $replace .= '</a>';
+
+    echo Helper::json(['error' => false, 'replace' => $replace]);
+} else {
+    throw new Exception('Record could not be updated.');
+}

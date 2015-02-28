@@ -1,44 +1,49 @@
 <?php
 
-    Login::restrictAdmin();
+use \Exception;
+use MyECOMM\Login;
+use MyECOMM\Country;
+use MyECOMM\Helper;
 
-    $objCountry = new Country();
+Login::restrictAdmin();
 
-    $id = $this->objUrl->get('id');
-    $action = $this->objUrl->get('action');
+$objCountry = new Country();
 
-    try {
-        switch ($action) {
-            case 'active':
-            case 'remove':
-            case 'update':
-            if (!empty($id)) {
-                $country = $objCountry->getOne($id);
-                if (!empty($country)) {
-                    switch ($action) {
-                        case 'active':
-                            require_once('country' . DS . 'active.php');
-                            break;
-                        case 'remove':
-                            require_once('country' . DS . 'remove.php');
-                            break;
-                        case 'update':
-                            require_once('country' . DS . 'update.php');
-                            break;
-                    }
-                } else {
-                    throw new Exception('Record could not be found.');
+$id = $this->objUrl->get('id');
+$action = $this->objUrl->get('action');
+
+try {
+    switch ($action) {
+        case 'active':
+        case 'remove':
+        case 'update':
+        if (!empty($id)) {
+            $country = $objCountry->getOne($id);
+            if (!empty($country)) {
+                switch ($action) {
+                    case 'active':
+                        require_once('country'.DS.'active.php');
+                        break;
+                    case 'remove':
+                        require_once('country'.DS.'remove.php');
+                        break;
+                    case 'update':
+                        require_once('country'.DS.'update.php');
+                        break;
                 }
             } else {
-                throw new Exception('Missing parameter.');
+                throw new Exception('Record could not be found.');
             }
-                break;
-            case 'add':
-                require_once('country' . DS . 'add.php');
-                break;
-            default:
-                require_once('country' . DS . 'list.php');
+        } else {
+            throw new Exception('Missing parameter.');
         }
-    } catch (Exception $e) {
-        echo Helper::json(['error' => true, 'message' => $e->getMessage()]);
+            break;
+        case 'add':
+            require_once('country'.DS.'add.php');
+            break;
+        default:
+            require_once('country'.DS.'list.php');
     }
+} catch (Exception $e) {
+    echo Helper::json(['error' => true, 'message' => $e->getMessage()]);
+}

@@ -1,10 +1,16 @@
 <?php
-    $objForm = new Form();
-    $objValidation = new Validation($objForm);
 
-    $zones = $objShipping->getZones();
+use MyECOMM\Form;
+use MyECOMM\Validation;
+use MyECOMM\Plugin;
 
-    require_once('_header.php');
+$objForm = new Form();
+$objValidation = new Validation($objForm);
+
+$zones = $objShipping->getZones();
+
+require_once('_header.php');
+
 ?>
 
 <h1>Local Zones</h1>

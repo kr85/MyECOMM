@@ -1,47 +1,49 @@
 <?php
 
-    $id = $this->objUrl->get('id');
+use MyECOMM\Order;
+use MyECOMM\Helper;
+use MyECOMM\Paging;
 
-    if (!empty($id)) {
+$id = $this->objUrl->get('id');
 
-        $objOrder = new Order();
-        $order = $objOrder->getOrder($id);
+if (!empty($id)) {
 
-        if (!empty($order)) {
+    $objOrder = new Order();
+    $order = $objOrder->getOrder($id);
 
-            $yes = $this->objUrl->getCurrent() . '/remove/1';
-            $no = 'javascript:history.go(-1)';
+    if (!empty($order)) {
 
-            $remove = $this->objUrl->get('remove');
+        $yes = $this->objUrl->getCurrent() . '/remove/1';
+        $no = 'javascript:history.go(-1)';
 
-            if (!empty($remove)) {
-                $objOrder->removeOrder($id);
+        $remove = $this->objUrl->get('remove');
 
-                Helper::redirect(
-                    $this->objUrl->getCurrent(
-                        [
-                            'action',
-                            'id',
-                            'remove',
-                            'search',
-                            Paging::$key
-                        ]
-                    )
-                );
-            }
+        if (!empty($remove)) {
+            $objOrder->delete($id);
 
-            require_once('_header.php'); ?>
-
-            <h1>Orders :: Remove</h1>
-
-            <p>
-                Are you sure you want to remove this order?<br/> <a
-                    href="<?php echo $yes; ?>">Yes</a> | <a
-                    href="<?php echo $no; ?>">No</a>
-            </p>
-
-            <?php
-            require_once('_footer.php');
+            Helper::redirect(
+                $this->objUrl->getCurrent([
+                    'action',
+                    'id',
+                    'remove',
+                    'search',
+                    Paging::$key
+                ])
+            );
         }
+
+        require_once('_header.php'); ?>
+
+        <h1>Orders :: Remove</h1>
+
+        <p>
+            Are you sure you want to remove this order?<br/>
+            <a href="<?php echo $yes; ?>">Yes</a> |
+            <a href="<?php echo $no; ?>">No</a>
+        </p>
+
+        <?php
+        require_once('_footer.php');
     }
+}
 ?>

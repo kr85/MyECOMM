@@ -1,25 +1,30 @@
 <?php
 
-    $rid = $this->objUrl->get('rid');
+use \Exception;
+use MyECOMM\Plugin;
+use MyECOMM\Helper;
 
-    if (!empty($rid)) {
-        $record = $objShipping->getShippingByIdTypeCountry($rid, $id, $zid);
+$rid = $this->objUrl->get('rid');
 
-        if (empty($record)) {
-            throw new Exception('Record does not exist.');
-        }
+if (!empty($rid)) {
+    $record = $objShipping->getShippingByIdTypeCountry($rid, $id, $zid);
 
-        if ($objShipping->removeShipping($record['id'])) {
-            $shipping = $objShipping->getShippingByTypeCountry($id, $zid);
-            $replace = [];
-            $replace['#shippingList'] = Plugin::get('admin' . DS . 'shipping-cost', [
-                'rows' => $shipping,
-                'objUrl' => $this->objUrl
-            ]);
-            echo Helper::json(['error' => false, 'replace' => $replace]);
-        } else {
-            throw new Exception('Record could not be removed.');
-        }
-    } else {
-        throw new Exception('Missing parameter.');
+    if (empty($record)) {
+        throw new Exception('Record does not exist.');
     }
+
+    if ($objShipping->removeShipping($record['id'])) {
+        $shipping = $objShipping->getShippingByTypeCountry($id, $zid);
+        $replace = [];
+        $replace['#shippingList'] = Plugin::get('admin'.DS.'shipping-cost', [
+            'rows' => $shipping,
+            'objUrl' => $this->objUrl,
+            'objCurrency' => $this->objCurrency
+        ]);
+        echo Helper::json(['error' => false, 'replace' => $replace]);
+    } else {
+        throw new Exception('Record could not be removed.');
+    }
+} else {
+    throw new Exception('Missing parameter.');
+}

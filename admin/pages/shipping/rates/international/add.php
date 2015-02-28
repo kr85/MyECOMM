@@ -1,38 +1,45 @@
 <?php
 
-    $objForm = new Form();
-    $objValidation = new Validation($objForm);
-    $objValidation->expected = ['weight', 'cost'];
-    $objValidation->required = ['weight', 'cost'];
+use \Exception;
+use MyECOMM\Form;
+use MyECOMM\Validation;
+use MyECOMM\Plugin;
+use MyECOMM\Helper;
 
-    try {
-        if ($objValidation->isValid()) {
-            if ($objShipping->isDuplicateInternational($id, $zid, $objValidation->post['weight'])) {
-                $objValidation->addToErrors('weight', 'Duplicate weight.');
-                throw new Exception('Duplicate weight.');
-            }
+$objForm = new Form();
+$objValidation = new Validation($objForm);
+$objValidation->expected = ['weight', 'cost'];
+$objValidation->required = ['weight', 'cost'];
 
-            $objValidation->post['type'] = $id;
-            $objValidation->post['country'] = $zid;
-
-            if ($objShipping->addShipping($objValidation->post)) {
-                $shipping = $objShipping->getShippingByTypeCountry($id, $zid);
-                $replace = [];
-                $replace['#shippingList'] = Plugin::get('admin' . DS . 'shipping-cost', [
-                    'rows' => $shipping,
-                    'objUrl' => $this->objUrl
-                ]);
-                echo Helper::json(['error' => false, 'replace' => $replace]);
-            } else {
-                $objValidation->addToErrors('weight', 'Record could not be added.');
-                throw new Exception('Record could not be added.');
-            }
-        } else {
-            throw new Exception('Invalid request.');
+try {
+    if ($objValidation->isValid()) {
+        if ($objShipping->isDuplicateInternational($id, $zid, $objValidation->post['weight'])) {
+            $objValidation->addToErrors('weight', 'Duplicate weight.');
+            throw new Exception('Duplicate weight.');
         }
-    } catch (Exception $e) {
-        echo Helper::json([
-            'error' => true,
-            'validation' => $objValidation->errorMessages
-        ]);
+
+        $objValidation->post['type'] = $id;
+        $objValidation->post['country'] = $zid;
+
+        if ($objShipping->addShipping($objValidation->post)) {
+            $shipping = $objShipping->getShippingByTypeCountry($id, $zid);
+            $replace = [];
+            $replace['#shippingList'] = Plugin::get('admin'.DS.'shipping-cost', [
+                'rows' => $shipping,
+                'objUrl' => $this->objUrl,
+                'objCurrency' => $this->objCurrency
+            ]);
+            echo Helper::json(['error' => false, 'replace' => $replace]);
+        } else {
+            $objValidation->addToErrors('weight', 'Record could not be added.');
+            throw new Exception('Record could not be added.');
+        }
+    } else {
+        throw new Exception('Invalid request.');
     }
+} catch (Exception $e) {
+    echo Helper::json([
+        'error' => true,
+        'validation' => $objValidation->errorMessages
+    ]);
+}

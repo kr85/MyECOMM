@@ -1,53 +1,56 @@
 <?php
 
-    $id = $this->objUrl->get('id');
+use MyECOMM\User;
+use MyECOMM\Order;
+use MyECOMM\Helper;
+use MyECOMM\Paging;
 
-    if (!empty($id)) {
+$id = $this->objUrl->get('id');
 
-        $objUser = new User();
-        $user = $objUser->getUser($id);
+if (!empty($id)) {
 
-        if (!empty($user)) {
+    $objUser = new User();
+    $user = $objUser->getUser($id);
 
-            $objOrder = new Order();
-            $orders = $objOrder->getClientOrders($id);
+    if (!empty($user)) {
 
-            if (empty($orders)) {
-                $yes = $this->objUrl->getCurrent() . '/remove/1';
-                $no = 'javascript:history.go(-1)';
+        $objOrder = new Order();
+        $orders = $objOrder->getClientOrders($id);
 
-                $remove = $this->objUrl->get('remove');
+        if (empty($orders)) {
+            $yes = $this->objUrl->getCurrent().'/remove/1';
+            $no = 'javascript:history.go(-1)';
 
-                if (!empty($remove)) {
-                    $objUser->removeUser($id);
+            $remove = $this->objUrl->get('remove');
 
-                    Helper::redirect(
-                        $this->objUrl->getCurrent(
-                            [
-                                'action',
-                                'id',
-                                'remove',
-                                'search',
-                                Paging::$key
-                            ]
-                        )
-                    );
-                }
+            if (!empty($remove)) {
+                $objUser->removeUser($id);
 
-                require_once('_header.php'); ?>
-
-                <h1>Clients :: Remove</h1>
-
-                <p>
-                    Are you sure you want to remove this client (<?php
-                        echo $user['first_name'] . " " . $user['last_name'];
-                    ?>)?<br/> <a href="<?php echo $yes; ?>">Yes</a> | <a
-                        href="<?php echo $no; ?>">No</a>
-                </p>
-
-                <?php
-                require_once('_footer.php');
+                Helper::redirect(
+                    $this->objUrl->getCurrent([
+                        'action',
+                        'id',
+                        'remove',
+                        'search',
+                        Paging::$key
+                    ])
+                );
             }
+
+            require_once('_header.php'); ?>
+
+            <h1>Clients :: Remove</h1>
+
+            <p>
+                Are you sure you want to remove this client (<?php
+                    echo $user['first_name']." ".$user['last_name'];
+                ?>)?<br/> <a href="<?php echo $yes; ?>">Yes</a> |
+                <a href="<?php echo $no; ?>">No</a>
+            </p>
+
+            <?php
+            require_once('_footer.php');
         }
     }
+}
 ?>

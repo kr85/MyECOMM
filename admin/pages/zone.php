@@ -1,47 +1,52 @@
 <?php
 
-    Login::restrictAdmin();
+use \Exception;
+use MyECOMM\Login;
+use MyECOMM\Shipping;
+use MyECOMM\Helper;
 
-    $objShipping = new Shipping();
+Login::restrictAdmin();
 
-    $id = $this->objUrl->get('id');
-    $action = $this->objUrl->get('action');
+$objShipping = new Shipping();
 
-    try {
-        switch ($action) {
-            case 'update':
-            case 'remove':
-            case 'codes':
-            if (!empty($id)) {
-                $zone = $objShipping->getZoneById($id);
-                if (!empty($zone)) {
-                    switch ($action) {
-                        case 'update':
-                            require_once('zone' . DS . 'update.php');
-                            break;
-                        case 'remove':
-                            require_once('zone' . DS . 'remove.php');
-                            break;
-                        case 'codes':
-                            require_once('zone' . DS . 'codes.php');
-                            break;
-                    }
-                } else {
-                    throw new Exception('Record does not exist');
+$id = $this->objUrl->get('id');
+$action = $this->objUrl->get('action');
+
+try {
+    switch ($action) {
+        case 'update':
+        case 'remove':
+        case 'codes':
+        if (!empty($id)) {
+            $zone = $objShipping->getZoneById($id);
+            if (!empty($zone)) {
+                switch ($action) {
+                    case 'update':
+                        require_once('zone'.DS.'update.php');
+                        break;
+                    case 'remove':
+                        require_once('zone'.DS.'remove.php');
+                        break;
+                    case 'codes':
+                        require_once('zone'.DS.'codes.php');
+                        break;
                 }
             } else {
-                throw new Exception('Missing parameter.');
+                throw new Exception('Record does not exist');
             }
-                break;
-            case 'add':
-                require_once('zone' . DS . 'add.php');
-                break;
-            default:
-                require_once('zone' . DS . 'list.php');
+        } else {
+            throw new Exception('Missing parameter.');
         }
-    } catch (Exception $e) {
-        echo Helper::json([
-            'error' => true,
-            'message' => $e->getMessage()
-        ]);
+            break;
+        case 'add':
+            require_once('zone'.DS.'add.php');
+            break;
+        default:
+            require_once('zone'.DS.'list.php');
     }
+} catch (Exception $e) {
+    echo Helper::json([
+        'error' => true,
+        'message' => $e->getMessage()
+    ]);
+}

@@ -1,8 +1,10 @@
 <?php
 
-    $postCodes = $objShipping->getPostCodes($zone['id']);
+use MyECOMM\Plugin;
 
-    require_once('_header.php');
+$postCodes = $objShipping->getPostCodes($zone['id']);
+
+require_once('_header.php');
 
 ?>
 
@@ -34,8 +36,8 @@
             </tr>
             <tr>
                 <td>
-                    <label for="btn_add" class="sbm sbm_blue fl_l"> <input
-                            type="submit" id="btn_add" class="btn" value="Add"/>
+                    <label for="btn_add" class="sbm sbm_blue fl_l">
+                        <input type="submit" id="btn_add" class="btn" value="Add"/>
                     </label>
                 </td>
             </tr>
@@ -47,7 +49,7 @@
 
 <div id="postCodeList">
     <?php
-        echo Plugin::get('admin' . DS . 'post-code', [
+        echo Plugin::get('admin'.DS.'post-code', [
             'rows' => $postCodes,
             'objUrl' => $this->objUrl
         ]);

@@ -1,17 +1,19 @@
 <?php
 
-    // Restrict access only for logged in admins
-    Login::restrictAdmin();
+use MyECOMM\Login;
 
-    $action = $this->objUrl->get('action');
+// Restrict access only for logged in admins
+Login::restrictAdmin();
 
-    switch ($action) {
-        case 'edited':
-            require_once('business' . DS . 'edited.php');
-            break;
-        case 'edited-failed':
-            require_once('business' . DS . 'edited-failed.php');
-            break;
-        default:
-            require_once('business' . DS . 'edit.php');
-    }
+$action = $this->objUrl->get('action');
+
+switch ($action) {
+    case 'edited':
+        require_once('business'.DS.'edited.php');
+        break;
+    case 'edited-failed':
+        require_once('business'.DS.'edited-failed.php');
+        break;
+    default:
+        require_once('business'.DS.'edit.php');
+}
