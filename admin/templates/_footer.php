@@ -11,4 +11,8 @@
 <script src="/javascript/jquery-1.11.2.min.js" type="text/javascript"></script>
 <script src="/javascript/jquery.livequery.js" type="text/javascript"></script>
 <script src="/javascript/jquery.tablednd.0.7.min.js" type="text/javascript"></script>
-<script src="/javascript/admin.js" type="text/javascript"></script></body></html>
+<script src="/javascript/object/systemObject.js" type="text/javascript"></script>
+<script src="/javascript/object/adminObject.js" type="text/javascript"></script>
+<script src="/javascript/admin.js" type="text/javascript"></script>
+</body>
+</html>
