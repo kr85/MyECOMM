@@ -1,4 +1,8 @@
-<?php if (!empty($data['rows'])): ?>
+<?php
+
+use MyECOMM\Helper;
+
+if (!empty($data['rows'])): ?>
 <table class="tbl_repeat">
     <thead>
         <tr>

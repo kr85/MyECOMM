@@ -1,11 +1,15 @@
 <?php
-    if (!empty($data['rows'])):
 
-        unset($data['objUrl']->params['action']);
-        unset($data['objUrl']->params['id']);
+use MyECOMM\Paging;
+use MyECOMM\Helper;
 
-        $objPaging = new Paging($data['objUrl'], $data['rows'], 10);
-        $countries = $objPaging->getRecords();
+if (!empty($data['rows'])):
+
+    unset($data['objUrl']->params['action']);
+    unset($data['objUrl']->params['id']);
+
+    $objPaging = new Paging($data['objUrl'], $data['rows'], 10);
+    $countries = $objPaging->getRecords();
 ?>
 <table class="tbl_repeat">
     <thead>

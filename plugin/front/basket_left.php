@@ -2,8 +2,9 @@
 
 use MyECOMM\Basket;
 
-    // Instantiate basket class
-    $objBasket = (is_object($objBasket)) ? $objBasket : new Basket();
+// Instantiate basket class
+$objBasket = (is_object($objBasket)) ? $objBasket : new Basket();
+
 ?>
 
 <h2>Your Basket</h2>

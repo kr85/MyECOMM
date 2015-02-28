@@ -19,8 +19,9 @@
             </td>
             <td class="ta_r">
                 <?php
-                    echo Catalog::$currency;
-                    echo number_format($item['cost'], 2);
+                    echo $data['objCurrency']->display(
+                        number_format($item['cost'], 2)
+                    );
                 ?>
             </td>
             <td class="ta_r">

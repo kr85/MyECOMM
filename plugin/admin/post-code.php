@@ -1,4 +1,8 @@
-<?php if (!empty($data['rows'])):
+<?php
+
+use MyECOMM\Paging;
+
+if (!empty($data['rows'])):
     unset($data['objUrl']->params['call']);
     $objPaging = new Paging($data['objForm'], $data['rows'], 10);
     $postCodes = $objPaging->getRecords();
