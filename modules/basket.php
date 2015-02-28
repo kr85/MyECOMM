@@ -1,6 +1,9 @@
 <?php
 
-    require_once('../includes/config.php');
+use MyECOMM\Catalog;
+use MyECOMM\Session;
+use MyECOMM\Helper;
+use MyECOMM\Basket;
 
     // Result array
     $out = [];
@@ -27,6 +30,14 @@
                     $out['job'] = 0;
                     break;
             }
+
+            $objBasket = (is_object($objBasket)) ? $objBasket : new Basket();
+
+            $out['replace_values']['.bl_ti'] = $objBasket->numberOfItems;
+            $out['replace_values']['.bl_st'] = $this->objCurrency->display(
+                number_format($objBasket->subTotal, 2)
+            );
+
             $out['error'] = false;
             echo Helper::json($out);
         } else {
