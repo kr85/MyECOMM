@@ -33,7 +33,7 @@ if (!empty($id)):
             $width = ($width > 120) ? 120 : $width;
             echo "<div class=\"fl_l\">";
             echo "<div class=\"lft\"><img src=\"";
-            echo DS.CATALOG_DIR.DS.$image;
+            echo DS.ASSETS_DIR.DS.CATALOG_DIR.DS.$image;
             echo "\" alt=\"";
             echo Helper::encodeHTML($product['name'], 1);
             echo "\" width=\"{$width}\" /></div>";

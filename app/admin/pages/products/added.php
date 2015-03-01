@@ -1,6 +1,6 @@
 <?php
 
-$url = $this->objUrl->get(['action', 'id']);
+$url = $this->objUrl->getCurrent(['action', 'id']);
 
 require_once('_header.php');
 
@@ -10,7 +10,7 @@ require_once('_header.php');
 
 <p>
     The new product has been added successfully.<br/>
-    <a href="<?php echo $url ?>"> Go back to the list of products.</a>
+    <a href="<?php echo $url; ?>"> Go back to the list of products.</a>
 </p>
 
 <?php require_once('_header.php'); ?>

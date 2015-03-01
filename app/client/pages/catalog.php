@@ -57,7 +57,7 @@ else:
                         );
                     ?>
                     <a href="<?php echo $link; ?>"> <img
-                            src="<?php echo DS.CATALOG_DIR.DS.$image; ?>"
+                            src="<?php echo DS.ASSETS_DIR.DS.CATALOG_DIR.DS.$image; ?>"
                             alt="<?php echo Helper::encodeHTML(
                                 $row['name'],
                                 1

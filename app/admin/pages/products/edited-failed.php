@@ -11,7 +11,7 @@ require_once('_header.php');
 <p>
     There was a problem updating this product.
     Please contact the administrator.<br/>
-    <a href="<?php echo $url ?>">Go back to the list of products.</a>
+    <a href="<?php echo $url; ?>">Go back to the list of products.</a>
 </p>
 
 <?php require_once('_header.php'); ?>
