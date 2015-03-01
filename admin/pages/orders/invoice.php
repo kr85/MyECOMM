@@ -35,7 +35,7 @@ if (!empty($id)):
 
             <div style="width: 50%; float: left;">
                 <p>
-                    <strong>Billing Address:</strong>
+                    <strong>Billing Address:</strong><br/>
                     <?php
                         echo $order['full_name'].'<br/>';
                         echo $order['address'].'<br/>';
@@ -46,7 +46,7 @@ if (!empty($id)):
                     ?>
                 </p>
                 <p>
-                    <strong>Shipping Address:</strong>
+                    <strong>Shipping Address:</strong><br/>
                     <?php
                         echo $order['full_name'].'<br/>';
                         echo $order['shipping_address'].'<br/>';
