@@ -107,50 +107,58 @@ if (!empty($id)):
                 <tbody class="summary_section">
                     <tr>
                         <td colspan="2" class="br_td">
-                            Items Total:
+                            <i>Items Total:</i>
                         </td>
                         <td class="ta_r br_td">
+                            <i>
                             <?php
                                 echo $this->objCurrency->display(
                                     number_format($order['subtotal_items'], 2)
                                 );
                             ?>
+                            </i>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2" class="br_td">
-                            Shipping: <?php echo $order['shipping_type']; ?>
+                            <i>Shipping: <?php echo $order['shipping_type']; ?></i>
                         </td>
                         <td class="ta_r br_td">
+                            <i>
                             <?php
                                 echo $this->objCurrency->display(
                                     number_format($order['shipping_cost'], 2)
                                 );
                             ?>
+                            </i>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2" class="br_td">
-                            Subtotal:
+                            <i>Subtotal:</i>
                         </td>
                         <td class="ta_r br_td">
+                            <i>
                             <?php
                                 echo $this->objCurrency->display(
                                     number_format($order['subtotal'], 2)
                                 );
                             ?>
+                            </i>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2" class="br_td">
-                            Tax (<?php echo $order['tax_rate']; ?>%):
+                            <i>Tax (<?php echo $order['tax_rate']; ?>%):</i>
                         </td>
                         <td class="ta_r br_td">
+                            <i>
                             <?php
                                 echo $this->objCurrency->display(
                                     number_format($order['tax'], 2)
                                 );
                             ?>
+                            </i>
                         </td>
                     </tr>
                     <tr>
