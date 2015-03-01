@@ -333,9 +333,9 @@ class PayPal {
                 )
             )
         ) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -343,6 +343,7 @@ class PayPal {
      */
     private function sendCurl() {
         $response = $this->getReturnParameters();
+        Helper::addToErrorsLog('IPN_DATA_RESPONSE_IN_CURL', $response);
         $curl = curl_init();
         curl_setopt_array(
             $curl,
