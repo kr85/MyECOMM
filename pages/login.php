@@ -97,7 +97,7 @@ if ($objForm->isPost('first_name')) {
             $emailInactive .= $user['id'];
             $emailInactive .= '">Email address is already taken.';
             $emailInactive .= ' Resend activation email.</a>';
-            $objValidation->message['email_inactive'] = $emailInactive;
+            $objValidation->messages['email_inactive'] = $emailInactive;
             $objValidation->addToErrors('email_inactive');
         } else {
             $objValidation->addToErrors('email_duplicate');

@@ -42,7 +42,6 @@ class Validation {
 
         'email'              => 'Please provide your valid email address.',
         'email_duplicate'    => 'This email address already exists.',
-        'email_inactive'     => 'This email address is inactive',
         'login'              => 'Email address and/or password are incorrect.',
         'password'           => 'Please choose your password.',
         'confirm_password'   => 'Please confirm your password.',

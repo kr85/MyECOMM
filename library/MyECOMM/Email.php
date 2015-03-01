@@ -3,7 +3,7 @@
 use Zend\Mail\Message;
 use Zend\Mail\Transport\Sendmail as SendmailTransport;
 use Zend\Mail\Transport\Smtp as SmtpTransport;
-use Zend\Mail\Transport\SmtpOptions;
+use Zend\Mail\Transport\SmtpOptions as SmtpOptions;
 use Zend\Mime\Message as MimeMessage;
 use Zend\Mime\Part as MimePart;
 
@@ -56,21 +56,16 @@ class Email {
         // Set SMTP configs if it exists
         if ($this->useSmtp) {
             $this->objTransport = new SmtpTransport();
-            $options = new SmtpOptions(
-                [
-                    'host' => $this->smtpHost,
-                    'port' => $this->smtpPort,
-                    'connection_class' => 'login',
-                    'connection_config' => [
-                        'username' => $this->smtpUsername,
-                        'password' => $this->smtpPassword
-                    ]
-                ]
-            );
-            // Add ssl to connection config if it exists
-            if ($this->smtpSsl) {
-                $options['connection_config']['ssl'] = $this->smtpSsl;
-            }
+            $options = new SmtpOptions();
+            $options->setName($this->smtpHost);
+            $options->setHost($this->smtpHost);
+            $options->setPort($this->smtpPort);
+            $options->setConnectionClass('login');
+            $options->setConnectionConfig([
+                'username' => $this->smtpUsername,
+                'password' => $this->smtpPassword,
+                'ssl' => $this->smtpSsl
+            ]);
             // Set transport options
             $this->objTransport->setOptions($options);
         } else {
@@ -90,18 +85,17 @@ class Email {
             switch ($case) {
                 case 1:
                     $link = "<a href=\"";
-                    $link .= SITE_URL . $this->objUrl->href('activate', [
+                    $link .= SITE_URL.$this->objUrl->href('activate', [
                             'code',
                             $parameters['hash']
                         ]);
                     $link .= "\">";
-                    $link .= SITE_URL . $this->objUrl->href('activate', [
+                    $link .= SITE_URL.$this->objUrl->href('activate', [
                             'code',
                             $parameters['hash']
                         ]);
                     $link .= "</a>";
                     $parameters['link'] = $link;
-
                     $this->objMessage->addTo($parameters['email'],
                         $parameters['first_name'].' '.$parameters['last_name']
                     );
@@ -151,7 +145,7 @@ class Email {
                 }
             }
             ob_start();
-            require_once(EMAILS_PATH . DS . $case . ".php");
+            require_once(EMAILS_PATH.DS.$case.".php");
             $out = ob_get_clean();
             return $this->wrapEmail($out);
         }

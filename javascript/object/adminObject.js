@@ -1,7 +1,6 @@
 var adminObject = {
     clickReplace: function (thisIdentity) {
         "use strict";
-
         $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var thisObj = $(this);
@@ -17,7 +16,6 @@ var adminObject = {
     },
     clickCallReload: function (thisIdentity) {
         "use strict";
-
         $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var thisUrl = $(this).data('url');
@@ -30,7 +28,6 @@ var adminObject = {
     },
     clickYesNoSingle: function (thisIdentity) {
         "use strict";
-
         $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var thisObj = $(this);
@@ -54,7 +51,6 @@ var adminObject = {
     },
     clickRemoveRowTemplate: function (id, span, url) {
         "use strict";
-
         var thisTemplate = '<tr id="click_remove-' + id + '">';
         if (span > 1) {
             thisTemplate += '<td colspan="' + span + '">';
@@ -73,7 +69,6 @@ var adminObject = {
     },
     clickAddRowConfirm: function (thisIdentity) {
         "use strict";
-
         $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var thisObj = $(this);
@@ -88,7 +83,6 @@ var adminObject = {
     },
     clickRemoveRowConfirm: function (thisIdentity) {
         "use strict";
-
         $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             $(this).closest('tr').remove();
@@ -96,7 +90,6 @@ var adminObject = {
     },
     clickRemoveRow: function (thisIdentity) {
         "use strict";
-
         $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var thisObj = $(this);
@@ -118,7 +111,6 @@ var adminObject = {
     },
     clickHideShow: function (thisIdentity) {
         "use strict";
-
         $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var thisTarget = $(this).data('show');
@@ -128,7 +120,6 @@ var adminObject = {
     },
     blurUpdateHideShow: function (thisIdentity) {
         "use strict";
-
         $(document).on('focusout', thisIdentity, function (e) {
             var thisObj = $(this);
             var thisForm = thisObj.closest('form');
@@ -154,7 +145,6 @@ var adminObject = {
     },
     sortRows: function (obj) {
         "use strict";
-
         obj.find('tr').livequery(function () {
             var thisObj = $(this).parent('tbody');
             $.each(thisObj, function () {
@@ -177,7 +167,6 @@ var adminObject = {
     },
     submitAjax: function () {
         "use strict";
-
         $(document).on('submit', 'form.ajax', function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -209,7 +198,6 @@ var adminObject = {
     },
     selectRedirect: function (thisIdentity) {
         "use strict";
-
         $('form').on('change', thisIdentity, function (e) {
             var thisSelected = $('option:selected', this);
             var thisUrl = thisSelected.data('url');

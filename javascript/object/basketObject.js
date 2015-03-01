@@ -1,94 +1,53 @@
 var basketObject = {
     addToBasket: function (thisIdentity) {
         "use strict";
-
         $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
-
             var trigger = $(this);
             var param = trigger.attr("rel");
             var item = param.split("_");
-
-            $.ajax({
-                type: 'POST',
-                url: '/modules/call/basket',
-                dataType: 'json',
-                data: ({id: item[0], job: item[1]}),
-                success: function (data) {
-                    if (data && !data.error) {
-                        var newId = item[0] + '_' + data.job;
-                        if (data.job != item[1]) {
-                            if (data.job == 0) {
-                                trigger.attr("rel", newId);
-                                trigger.text("Remove from basket");
-                                trigger.addClass("red");
-                            } else {
-                                trigger.attr("rel", newId);
-                                trigger.text("Add to basket");
-                                trigger.removeClass("red");
-                            }
-                            if (!systemObject.isEmpty(data.replace_values)) {
-                                systemObject.replaceValues(data.replace_values);
-                            }
-                        } else {
-                            console.log(data);
-                            alert("Error");
-                        }
+            $.post('/module/call/basket', { id: item[0], job: item[1] }, function(data) {
+                var newId = item[0] + '_' + data.job;
+                if (data.job != item[1]) {
+                    if (data.job == 0) {
+                        trigger.attr("rel", newId);
+                        trigger.text("Remove from basket");
+                        trigger.addClass("red");
+                    } else {
+                        trigger.attr("rel", newId);
+                        trigger.text("Add to basket");
+                        trigger.removeClass("red");
                     }
-                },
-                error: function (data) {
-                    console.log(data);
-                    alert("An error has occurred.");
+                    if (!systemObject.isEmpty(data.replace_values)) {
+                        systemObject.replaceValues(data.replace_values);
+                    }
                 }
-            });
+            }, 'json');
         });
     },
     removeFromBasket: function (thisIdentity) {
         "use strict";
-
         $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var item = $(this).attr('rel');
-            $.ajax({
-                type: 'POST',
-                url: '/modules/call/basket-remove',
-                dataType: 'json',
-                data: ({id: item}),
-                success: function () {
-                    if (!systemObject.isEmpty(data.replace_values)) {
-                        systemObject.replaceValues(data.replace_values);
-                    }
-                },
-                error: function () {
-                    alert("An error has occurred.");
+            $.post('/module/call/basket-remove', { id: item }, function(data) {
+                if (!systemObject.isEmpty(data.replace_values)) {
+                    systemObject.replaceValues(data.replace_values);
                 }
-            });
+            }, 'json');
         });
     },
     updateBasket: function () {
         "use strict";
-
         var thisArray = $('#frm_basket').serializeArray();
-
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            url: '/modules/call/basket-qty',
-            data: thisArray,
-            success: function () {
-                if (!systemObject.isEmpty(data.replace_values)) {
-                    systemObject.replaceValues(data.replace_values);
-                }
-            },
-            error: function () {
-                alert('An error has occurred.');
+        $.post('/module/call/basket-qty', thisArray, function(data) {
+            if (!systemObject.isEmpty(data.replace_values)) {
+                systemObject.replaceValues(data.replace_values);
             }
-        });
-
+        }, 'json');
     },
     updateBasketKeyPres: function (thisIdentity) {
         "use strict";
-
         $(document).on('keypress', thisIdentity, function (e) {
             var code = e.keyCode ? e.keyCode : e.which;
             if (code == 13) {
@@ -100,7 +59,6 @@ var basketObject = {
     },
     updateBasketButton: function (thisIdentity) {
         "use strict";
-
         $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             basketObject.updateBasket();
@@ -108,7 +66,6 @@ var basketObject = {
     },
     loadingPayPal: function (thisIdentity) {
         "use strict";
-
         $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -132,8 +89,7 @@ var basketObject = {
     },
     sendToPayPal: function (token) {
         "use strict";
-
-        $.post('/modules/call/paypal', {token: token}, function (data) {
+        $.post('/module/call/paypal', { token: token }, function (data) {
             if (data && !data.error) {
                 $('#frm_pp').html(data.form);
                 $('#frm_paypal').submit();
@@ -145,35 +101,11 @@ var basketObject = {
             }
         }, 'json');
     },
-    emailInactive: function (thisIdentity) {
-        "use strict";
-
-        $(document).on('click', thisIdentity, function (e) {
-            e.preventDefault();
-            var thisId = $(this).attr('data-id');
-            $.ajax({
-                type: 'POST',
-                url: '/modules/call/resend/id/' + thisId,
-                dataType: 'json',
-                success: function (data) {
-                    if (!data.error) {
-                        location.href = '/resent'
-                    } else {
-                        location.href = '/resent-failed';
-                    }
-                },
-                error: function () {
-                    alert('An error has occurred.');
-                }
-            });
-        });
-    },
     shipping: function (thisIdentity) {
         "use strict";
-
         $(document).on('change', thisIdentity, function (e) {
             var thisOption = $(this).val();
-            $.getJSON('/modules/call/summary-update/shipping/' + thisOption, function (data) {
+            $.getJSON('/module/call/summary-update/shipping/' + thisOption, function (data) {
                 if (data && !data.error) {
                     $('#basketSubTotal').html(data.totals.basketSubtotal);
                     $('#basketTax').html(data.totals.basketTax);

@@ -1,7 +1,6 @@
 var systemObject = {
     topValidationTemplate: function (thisMessage) {
         "use strict";
-
         var thisTemplate = '<div id="top_message">';
         thisTemplate += thisMessage;
         thisTemplate += '</div>';
@@ -9,13 +8,12 @@ var systemObject = {
     },
     topValidation: function (thisMessage) {
         "use strict";
-
         if (thisMessage !== '' && typeof thisMessage !== 'undefined') {
             if ($('#top_message').length > 0) {
                 $('#top_message').remove();
             }
             $('body').prepend($(systemObject.topValidationTemplate(thisMessage)).fadeIn(200));
-            var thisTimeout = setTimeout(function () {
+            setTimeout(function () {
                 $('#top_message').fadeOut(function () {
                     $(this).remove();
                 });
@@ -24,7 +22,6 @@ var systemObject = {
     },
     showHideRadio: function (thisIdentity) {
         "use strict";
-
         $(document).on('click', thisIdentity, function (e) {
             var thisTarget = $(this).attr('name');
             var thisValue = $(this).val();
@@ -37,14 +34,26 @@ var systemObject = {
     },
     isEmpty: function (thisValue) {
         "use strict";
-
         return (!(thisValue !== '' && typeof thisValue !== 'undefined'));
     },
     replaceValues: function(thisArray) {
         "use strict";
-
         $.each(thisArray, function(thisKey, thisValue) {
             $(thisKey).html(thisValue);
+        });
+    },
+    emailInactive: function (thisIdentity) {
+        "use strict";
+        $(document).on('click', thisIdentity, function (e) {
+            e.preventDefault();
+            var thisId = $(this).attr('data-id');
+            $.post('/module/call/resend', { id: thisId }, function(data) {
+                if (!data.error) {
+                    location.href = '/resent';
+                } else {
+                    location.href = '/resent-failed';
+                }
+            }, 'json');
         });
     }
 };

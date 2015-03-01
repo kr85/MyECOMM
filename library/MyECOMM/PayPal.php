@@ -115,7 +115,7 @@ class PayPal {
      */
     public function __construct($objUrl = null, $cmd = '_cart') {
         $this->objUrl = is_object($objUrl) ? $objUrl : new Url();
-        $this->business = ProjectVariable::$PAYPAL_BUSINESS_ID;
+        $this->business = PAYPAL_BUSINESS_ID;
         $this->url = ($this->environment == 'sandbox') ?
             $this->urlSandbox :
             $this->urlProduction;

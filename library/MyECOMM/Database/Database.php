@@ -612,7 +612,7 @@ abstract class Database {
             $sql = "DELETE FROM `{$table}`
                     WHERE `{$field}` = ?";
             // Execute the transaction and return the result
-            return $this->executeTransaction($sql, $field);
+            return $this->executeTransaction($sql, $value);
         }
         return false;
     }

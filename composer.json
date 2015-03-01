@@ -11,6 +11,6 @@
         "url": "https://github.com/kr85/MyECOMM.git"
     },
     "require": {
-      "zendframework/zend-mail": "2.0.*"
+      "zendframework/zend-mail": "2.3.*"
     }
 }

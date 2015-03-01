@@ -1,6 +1,5 @@
 $(function () {
     "use strict";
-
     adminObject.clickReplace('.click_replace');
     adminObject.clickCallReload('.click_call_reload');
     adminObject.clickYesNoSingle('.click_yes_no_single');
