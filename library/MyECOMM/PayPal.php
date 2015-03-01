@@ -367,7 +367,7 @@ class PayPal {
                 CURLINFO_HEADER_OUT => true,
                 CURLOPT_HTTPHEADER => [
                     'Content-Type: application/x-www-form-urlencoded',
-                    'Content-Length: ' . strlen($response),
+                    'Content-Length: '.strlen($response),
                     'Connection: close'
                 ]
             ]
