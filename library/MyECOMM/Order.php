@@ -106,7 +106,7 @@ class Order extends Application {
                         'order'   => $this->id,
                         'product' => $item['id'],
                         'price'   => $item['price'],
-                        'qty'     => $this->basket[$item['id']['quantity']]
+                        'qty'     => $this->basket[$item['id']]['quantity']
                     ]);
                 }
                 // Commit the transaction

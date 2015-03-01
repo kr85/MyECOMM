@@ -32,12 +32,12 @@ The following is the summary of your order.
 
 <p>
 <strong>Your items will be delivered to:</strong><br />
-<?php echo $order['full_name']; ?>,
-<?php echo $order['shipping_address']; ?>,
+<?php echo $order['full_name']; ?><br/>
+<?php echo $order['shipping_address']; ?><br/>
 <?php echo $order['shipping_city']; ?>,
-<?php echo $order['shipping_state']; ?>,
-<?php echo $order['shipping_zip_code']; ?>,
-<?php echo $order['shipping_country']; ?>
+<?php echo $order['shipping_state'].' '; ?>
+<?php echo $order['shipping_zip_code']; ?><br/>
+<?php echo $order['shipping_country_name']; ?>
 </p>
 
 <p>
@@ -59,7 +59,7 @@ The following is the summary of your order.
 <?php foreach ($items as $item): ?>
     <tr>
         <td><?php echo $item['name']; ?></td>
-        <td class="ta_r"><?php echo $item['quantity']; ?></td>
+        <td class="ta_r"><?php echo $item['qty']; ?></td>
         <td class="ta_r">
             <?php
                 echo $this->objCurrency->display(
