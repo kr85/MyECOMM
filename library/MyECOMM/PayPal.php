@@ -287,23 +287,14 @@ class PayPal {
                         $this->ipnResult
                     );
                     if (!$approved) {
-                        Helper::addToErrorsLog('Order_is_not_approved', null);
                         return false;
                     }
-
-                    Helper::addToErrorsLog('Order_approved', null);
                     return true;
                 }
-
-                Helper::addToErrorsLog('IPN_data_is_empty', null);
                 return false;
             }
-
-            Helper::addToErrorsLog('IPN_result_not_VERIFIED', null);
             return false;
         }
-
-        Helper::addToErrorsLog('Validate_IPN_failed', null);
         return false;
     }
 
@@ -321,7 +312,6 @@ class PayPal {
         // Store all posted parameters
         $objForm = new Form();
         $this->ipnData = $objForm->getPostArray();
-        Helper::addToErrorsLog('IPN_DATA_IN_VALID', $this->ipnData);
         // Check if the email of the business and the received email
         // from IPN are the same
         if (!empty($this->ipnData) && array_key_exists(
@@ -343,7 +333,6 @@ class PayPal {
      */
     private function sendCurl() {
         $response = $this->getReturnParameters();
-        Helper::addToErrorsLog('IPN_DATA_RESPONSE_IN_CURL', $response);
         $curl = curl_init();
         curl_setopt_array(
             $curl,

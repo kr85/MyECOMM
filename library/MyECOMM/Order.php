@@ -243,7 +243,6 @@ class Order extends Application {
      */
     public function approve($data = null, $result = null) {
         if ($this->isApprovalValid($data, $result)) {
-            Helper::addToErrorsLog('APPROVED', null);
             // PayPal payment status
             $active = ($data['payment_status'] == 'Completed') ? 1 : 0;
             // An array to hold the IPN response
@@ -254,7 +253,6 @@ class Order extends Application {
             }
             // IPN response
             $out = implode("\n", $out);
-            Helper::addToErrorsLog('ORDER_OUT', $out);
             // Update the order with the response from PayPal
             return $this->Db->update($this->tableOrders, [
                 'pp_status' => $active,
@@ -379,5 +377,15 @@ class Order extends Application {
                 FROM `$this->tableStatuses`
                 ORDER BY `id` ASC";
         return $this->Db->fetchAll($sql);
+    }
+
+    /**
+     * Delete a order by id
+     *
+     * @param null $id
+     * @return bool|mixed
+     */
+    public function removeOrder($id = null) {
+        return $this->Db->delete($this->tableOrders, $id);
     }
 }

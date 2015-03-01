@@ -86,7 +86,7 @@ class Catalog extends Application {
      */
     public function addCategory($array = null) {
         if (!Helper::isArrayEmpty($array)) {
-            return $this->Db->insert($this->table, [
+            return $this->Db->insert($this->tableCategories, [
                 'name' => $array['name'],
                 'identity' => $array['identity'],
                 'meta_title' => $array['meta_title'],
@@ -105,7 +105,7 @@ class Catalog extends Application {
      */
     public function updateCategory($array = null, $id = null) {
         if (!Helper::isArrayEmpty($array) && !empty($id)) {
-            return $this->Db->update($this->table, [
+            return $this->Db->update($this->tableCategories, [
                 'name' => $array['name'],
                 'identity' => $array['identity'],
                 'meta_title' => $array['meta_title'],
@@ -122,7 +122,7 @@ class Catalog extends Application {
      * @return bool|resource
      */
     public function removeCategory($id = null) {
-        return $this->delete($id);
+        return $this->Db->delete($this->tableCategories, $id);
     }
 
     /**

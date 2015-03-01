@@ -181,9 +181,9 @@ class Shipping extends Application {
             // Begin the transaction
             $this->Db->beginTransaction();
             // Delete the shipping type and shipping rates associated with it
-            $this->Db->deleteTransaction($this->tableShippingType, $id);
             $this->Db->deleteTransaction($this->tableShipping, $id, 'type');
-            // Execute
+            $this->Db->deleteTransaction($this->tableShippingType, $id);
+            // Commit the transaction
             $this->Db->commit();
             return true;
         } catch (PDOException $e) {
@@ -199,7 +199,24 @@ class Shipping extends Application {
      * @return bool|resource
      */
     public function removeZone($id = null) {
-        return $this->Db->delete($this->tableZones, $id);
+        if (empty($id)) {
+            return false;
+        }
+
+        try {
+            // Begin the transaction
+            $this->Db->beginTransaction();
+            // Delete the zones and post codes associated with it
+            $this->Db->deleteTransaction($this->tableZonesCountryCodes, $id, 'zone');
+            $this->Db->deleteTransaction($this->tableZones, $id);
+            // Commit the transaction
+            $this->Db->commit();
+            return true;
+        } catch (PDOException $e) {
+            $this->Db->rollBack();
+            return false;
+        }
+        //return $this->Db->delete($this->tableZones, $id);
     }
 
     /**
@@ -890,7 +907,7 @@ class Shipping extends Application {
      * @return bool|resource
      */
     public function removeShipping($id = null) {
-        return $this->delete($id);
+        return $this->Db->delete($this->tableShipping, $id);
     }
 
     /**

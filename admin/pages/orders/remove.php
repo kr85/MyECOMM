@@ -13,14 +13,13 @@ if (!empty($id)) {
 
     if (!empty($order)) {
 
-        $yes = $this->objUrl->getCurrent() . '/remove/1';
+        $yes = $this->objUrl->getCurrent().'/remove/1';
         $no = 'javascript:history.go(-1)';
 
         $remove = $this->objUrl->get('remove');
 
         if (!empty($remove)) {
-            $objOrder->delete($id);
-
+            $objOrder->removeOrder($id);
             Helper::redirect(
                 $this->objUrl->getCurrent([
                     'action',

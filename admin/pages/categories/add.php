@@ -43,10 +43,14 @@ if ($objForm->isPost('name')) {
 
         if ($objCatalog->addCategory($objValidation->post)) {
             Helper::redirect(
-                $this->objUrl->getCurrent(['action', 'id']).'/action/added');
+                $this->objUrl->getCurrent(
+                    ['action', 'id'], false, ['action', 'added'])
+            );
         } else {
             Helper::redirect(
-                $this->objUrl->getCurrent(['action', 'id']).'action/added-failed');
+                $this->objUrl->getCurrent(
+                    ['action', 'id'], false, ['action', 'added-failed'])
+            );
         }
     }
 }

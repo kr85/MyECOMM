@@ -434,6 +434,7 @@ CREATE TABLE `orders` (
   `txn_id`             VARCHAR(100)           DEFAULT NULL,
   `payment_status`     VARCHAR(100)           DEFAULT NULL,
   `ipn`                TEXT,
+  `response`           TEXT,
   `notes`              TEXT,
   PRIMARY KEY (`id`),
   KEY `client` (`client`),
