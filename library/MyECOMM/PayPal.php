@@ -282,8 +282,6 @@ class PayPal {
                 $objOrder = new Order();
                 // Update order status
                 if (!empty($this->ipnData)) {
-                    Helper::addToErrorsLog('IPN_DATA', $this->ipnData);
-                    Helper::addToErrorsLog('IPN_RESULT', $this->ipnResult);
                     $approved = $objOrder->approve(
                         $this->ipnData,
                         $this->ipnResult
@@ -323,6 +321,7 @@ class PayPal {
         // Store all posted parameters
         $objForm = new Form();
         $this->ipnData = $objForm->getPostArray();
+        Helper::addToErrorsLog('IPN_DATA_IN_VALID', $this->ipnData);
         // Check if the email of the business and the received email
         // from IPN are the same
         if (!empty($this->ipnData) && array_key_exists(
@@ -334,9 +333,9 @@ class PayPal {
                 )
             )
         ) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -372,7 +371,6 @@ class PayPal {
                 ]
             ]
         );
-        Helper::addToErrorsLog('Curl', $curl);
         $this->ipnResult = curl_exec($curl);
         curl_close($curl);
     }
