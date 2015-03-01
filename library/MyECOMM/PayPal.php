@@ -277,14 +277,13 @@ class PayPal {
      */
     public function ipn() {
         if ($this->validateIpn()) {
-            Helper::addToErrorsLog('Validate_IPN_true', null);
             $this->sendCurl();
             if (strcmp($this->ipnResult, "VERIFIED") == 0) {
-                Helper::addToErrorsLog('IPN_result_verified', null);
                 $objOrder = new Order();
                 // Update order status
                 if (!empty($this->ipnData)) {
-                    Helper::addToErrorsLog('IPN_data_not_empty', null);
+                    Helper::addToErrorsLog('IPN_DATA', $this->ipnData);
+                    Helper::addToErrorsLog('IPN_RESULT', $this->ipnResult);
                     $approved = $objOrder->approve(
                         $this->ipnData,
                         $this->ipnResult
@@ -316,15 +315,11 @@ class PayPal {
      * @return bool
      */
     private function validateIpn() {
-
         $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-
         // Check if post has been received back from PayPal
         if (!preg_match('/paypal\.com$/', $hostname)) {
-            Helper::addToErrorsLog('Post_not_received_from_PayPal', null);
             return false;
         }
-
         // Store all posted parameters
         $objForm = new Form();
         $this->ipnData = $objForm->getPostArray();
@@ -339,11 +334,8 @@ class PayPal {
                 )
             )
         ) {
-            Helper::addToErrorsLog('In_validateIpn_receiver_email_different', null);
             return false;
         }
-
-        Helper::addToErrorsLog('IPN_validated', null);
         return true;
     }
 
@@ -351,11 +343,7 @@ class PayPal {
      * Send a curl request
      */
     private function sendCurl() {
-
-        Helper::addToErrorsLog('In_send_curl', null);
         $response = $this->getReturnParameters();
-        Helper::addToErrorsLog('Response', $response);
-
         $curl = curl_init();
         curl_setopt_array(
             $curl,
@@ -384,14 +372,8 @@ class PayPal {
                 ]
             ]
         );
-
         Helper::addToErrorsLog('Curl', $curl);
         $this->ipnResult = curl_exec($curl);
-        Helper::addToErrorsLog('IPN_result', $this->ipnResult);
-        if (empty($this->ipnResult))
-        {
-            Helper::addToErrorsLog('IPN_result_after_curl_empty', null);
-        }
         curl_close($curl);
     }
 
@@ -401,9 +383,7 @@ class PayPal {
      * @return string
      */
     private function getReturnParameters() {
-
         $out = ['cmd=_notify-validate'];
-
         if (!empty($this->ipnData)) {
             foreach ($this->ipnData as $key => $value) {
                 $value = function_exists('get_magic_quotes_gpc') ?
@@ -412,12 +392,6 @@ class PayPal {
                 $out[] = "{$key}={$value}";
             }
         }
-        else
-        {
-            Helper::addToErrorsLog('IPN_data_empty_in_getParameters', null);
-        }
-
-        Helper::addToErrorsLog('Get_return_param_success', null);
         return implode("&", $out);
     }
 }

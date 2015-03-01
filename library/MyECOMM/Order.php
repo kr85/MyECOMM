@@ -242,7 +242,10 @@ class Order extends Application {
      * @return bool
      */
     public function approve($data = null, $result = null) {
+        Helper::addToErrorsLog('Approve_data', $data);
+        Helper::addToErrorsLog('Approve_result', $data);
         if ($this->isApprovalValid($data, $result)) {
+            Helper::addToErrorsLog('ORDER_APPROVED', null);
             // PayPal payment status
             $active = ($data['payment_status'] == 'Completed') ? 1 : 0;
             // An array to hold the IPN response
