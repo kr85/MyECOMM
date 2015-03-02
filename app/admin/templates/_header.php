@@ -12,7 +12,7 @@ use MyECOMM\Session;
         <title>E-Commerce Website Project</title>
         <meta name="description" content="E-Commerce Website Project"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="/assets/css/core.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/main/all.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div id="header">

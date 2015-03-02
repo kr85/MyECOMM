@@ -7,7 +7,7 @@ $objBasket = (is_object($objBasket)) ? $objBasket : new Basket();
 
 ?>
 
-<h2>Your Basket</h2>
+<h2>My Cart</h2>
 <dl id="basket_left">
     <dt>
         No. of items:

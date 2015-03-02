@@ -168,6 +168,11 @@ require_once('_header.php');
 <h1>Not registered yet?</h1>
 
 <form action="" method="POST">
+    <!-- Avoid remember me for sign up form -->
+    <div class="dn">
+        <input type="email" name="email"/>
+        <input type="password" name="password"/>
+    </div>
     <table class="tbl_insert">
         <tr>
             <th>
@@ -271,7 +276,7 @@ require_once('_header.php');
                 <input type="email" name="email" id="email" class="fld"
                        value="<?php echo $objForm->stickyText(
                            'email'
-                       ); ?>"/>
+                       ); ?>" autocomplete="off"/>
             </td>
         </tr>
         <tr>
@@ -282,18 +287,18 @@ require_once('_header.php');
                 <?php echo $objValidation->validate('password'); ?>
                 <?php echo $objValidation->validate('password_mismatch'); ?>
                 <input type="password" name="password" id="password"
-                       class="fld" value=""/>
+                       class="fld" value="" autocomplete="off"/>
             </td>
         </tr>
         <tr>
             <th>
-                <label for="confirm_password">Password confirmation:
-                    *</label>
+                <label for="confirm_password">Password confirmation: *</label>
             </th>
             <td>
                 <?php echo $objValidation->validate('confirm_password'); ?>
                 <input type="password" name="confirm_password"
-                       id="confirm_password" class="fld" value=""/>
+                       id="confirm_password" class="fld" value=""
+                       autocomplete="off"/>
             </td>
         </tr>
         <tr>

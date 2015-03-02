@@ -2,18 +2,28 @@
             <div class="cl">&#160;</div>
         </div>
     </div>
-    <div id="footer">
-        <div id="footer_in">
-            &copy; <a href="http://www.kostarashev.com"
-                      title="Kosta Rashev"
-                      target="_blank">Kosta Rashev
-            </a>
-        </div>
+    <div class="push"></div>
     </div>
-    <script src="/assets/js/jquery-1.11.2.min.js" type="text/javascript"></script>
-    <script src="/assets/js/jquery.livequery.js" type="text/javascript"></script>
-    <script src="/assets/js/object/systemObject.js" type="text/javascript"></script>
-    <script src="/assets/js/object/basketObject.js" type="text/javascript"></script>
-    <script src="/assets/js/basket.js" type="text/javascript"></script>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-row-1">
+
+            </div>
+            <div class="footer-row-2">
+                <a href="http://www.kostarashev.com"
+                   title="Kosta Rashev"
+                   target="_blank">
+                    <address>
+                        &copy;
+                        <script type="text/javascript">
+                            var mdate = new Date(); document.write(mdate.getFullYear());
+                        </script>
+                        Kosta Rashev
+                    </address>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/main/all.js" type="text/javascript"></script>
 </body>
 </html>

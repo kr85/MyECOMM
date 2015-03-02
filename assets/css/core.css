@@ -3,12 +3,10 @@
   outline: none;
   font-weight: 100;
   color: #333;
-  margin: 0;
   padding: 0;
 }
 
 body {
-  background: #111;
   text-align: center;
   font-family: Arial, Verdana, Sans-serif;
   font-size: 12px;
@@ -57,12 +55,6 @@ h4, h4 a {
   background: #fff;
 }
 
-#wrapper, #header_in, #footer_in {
-  width: 900px;
-  text-align: left;
-  margin: 0 auto;
-}
-
 #header_in h5, #header_in h5 a {
   font-size: 18px;
   color: #fff;
@@ -87,7 +79,7 @@ h4, h4 a {
   color: #fff;
 }
 
-#wrapper, #footer {
+#footer {
   padding: 14px 0;
 }
 

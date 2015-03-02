@@ -1,0 +1,58 @@
+@import "modules/header";
+@import "modules/footer";
+
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/*body {
+  background: #F3F3F3;
+  font: 12px/1.35 Arial, Helvetica, sans-serif;
+  color: #999;
+  text-align: center;
+}*/
+
+header, section, footer, aside, nav, main, article, figure {
+  display: block;
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  min-width: 1025px;
+  margin: 0 auto -110px;
+}
+
+.container {
+  width: 975px;
+  text-align: left;
+  margin: 0 auto;
+  padding: 15px 25px 15px 25px;
+}
+
+a:focus, a:active,
+.btn:focus, .btn:active,
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+select::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+  border: 0;
+  outline: 0 !important;
+  appearance: none;
+
+}

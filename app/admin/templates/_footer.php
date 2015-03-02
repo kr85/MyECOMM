@@ -8,11 +8,6 @@
                   target="_blank">Kosta Rashev </a>
     </div>
 </div>
-<script src="/assets/js/jquery-1.11.2.min.js" type="text/javascript"></script>
-<script src="/assets/js/jquery.livequery.js" type="text/javascript"></script>
-<script src="/assets/js/jquery.tablednd.0.7.min.js" type="text/javascript"></script>
-<script src="/assets/js/object/systemObject.js" type="text/javascript"></script>
-<script src="/assets/js/object/adminObject.js" type="text/javascript"></script>
-<script src="/assets/js/admin.js" type="text/javascript"></script>
+<script src="/assets/main/all.js" type="text/javascript"></script>
 </body>
 </html>
