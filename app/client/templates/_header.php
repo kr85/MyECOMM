@@ -6,6 +6,7 @@ use MyECOMM\Login;
 use MyECOMM\Session;
 use MyECOMM\Helper;
 use MyECOMM\Plugin;
+use MyECOMM\Basket;
 
     // Instantiate catalog class
     $objCatalog = new Catalog();
@@ -14,6 +15,9 @@ use MyECOMM\Plugin;
     // Instantiate business class
     $objBusiness = new Business();
     $business = $objBusiness->getOne(Business::BUSINESS_ID);
+
+    // Instantiate basket class
+    $objBasket = (is_object($objBasket)) ? $objBasket : new Basket();
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +26,7 @@ use MyECOMM\Plugin;
     <title><?php echo $this->metaTitle; ?></title>
     <meta name="description" content="<?php echo $this->metaDescription; ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Kosta Rashev">
     <link href="/assets/main/all.css" rel="stylesheet" type="text/css"/>
     <script src="../assets/js/lib/modernizr.js" type="text/javascript"></script>
 </head>
@@ -35,11 +40,16 @@ use MyECOMM\Plugin;
                         <li class="msg-nav-padding">
                             <span class="welcome-msg">Welcome to our online store!</span>
                         </li>
-                        <li><a href="">My Account</a></li>
-                        <li><a href="">My Wishlist</a></li>
-                        <li><a href="">My Cart</a></li>
-                        <li><a href="">Checkout</a></li>
-                        <li><a href="">Log In</a></li>
+                        <li><a href="" title="My Account">My Account</a></li>
+                        <li><a href="" title="My Wishlist">My Wishlist</a></li>
+                        <li class="my-cart-items">
+                            <a href="<?php echo $this->objUrl->href('basket'); ?>" title="My Cart">My Cart
+                                <span class="h_ti">
+                                </span>
+                            </a>
+                        </li>
+                        <li><a href="<?php echo $this->objUrl->href('checkout'); ?>" title="Checkout">Checkout</a></li>
+                        <li><a href="<?php echo $this->objUrl->href('login'); ?>" title="Log In">Log In</a></li>
                     </ul>
                     <div class="currencies">
                         <label for="currencies">Currencies:</label>
@@ -102,9 +112,9 @@ use MyECOMM\Plugin;
             <?php endif; ?>
         </div>-->
     </header>
-    <div id="outer">
+    <section>
         <div class="container">
-            <?php if ($this->objUrl->currentPage != 'index'): ?>
+            <?php if (($this->objUrl->currentPage != 'index') && ($this->objUrl->currentPage != 'login')): ?>
                 <div id="left">
                 <?php if ($this->objUrl->currentPage != 'summary'):
                     echo Plugin::get('front'.DS.'basket_left', [
@@ -128,4 +138,3 @@ use MyECOMM\Plugin;
                 <?php endif; ?>
                 </div>
             <?php endif; ?>
-            <div id="right">

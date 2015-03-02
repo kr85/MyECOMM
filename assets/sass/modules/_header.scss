@@ -10,8 +10,8 @@ header {
 
 .header-row-1-container {
   background-color: #000000;
+  width: 900px;
   height: 32px;
-  width: 975px;
   text-align: left;
   margin-left: auto;
   margin-right: auto;
@@ -39,6 +39,10 @@ header {
           font-weight: bold;
           font-size: 10px;
           padding: 4px 0 0 0;
+
+          span {
+            color: #ffffff;
+          }
 
           &:hover {
             color: #19BDFA;
@@ -74,6 +78,12 @@ header {
   }
 }
 
+.my-cart-items {
+  &:hover {
+    color: #19BDFA;
+  }
+}
+
 .header-row-1 .welcome-msg {
   float: left;
   font-weight: bold;
@@ -89,8 +99,8 @@ header {
   width: 100%;
 
   .header-row-2-container {
+    width: 900px;
     background: url("../images/header_wrapper.jpg") no-repeat scroll 50% 0 transparent;
-    width: 975px;
     text-align: left;
     margin-left: auto;
     margin-right: auto;
@@ -127,6 +137,10 @@ header {
               font-size: 16px;
               text-transform: uppercase;
               color: #6A6A6A;
+
+              &:hover {
+                color: #333;
+              }
             }
           }
         }

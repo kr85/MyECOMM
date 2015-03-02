@@ -15,6 +15,7 @@ gulp.task('css', function() {
 
 gulp.task('css-concat', function() {
     gulp.src([
+        'assets/css/font-awesome.css',
         'assets/css/core.css',
         'assets/css/invoice.css',
         'assets/css/main.css'
