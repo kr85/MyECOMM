@@ -32,11 +32,11 @@
                     <div class="footer-cols footer-col-3">
                         <h3>My Account</h3>
                         <ul>
-                            <li><a href="">My Account</a></li>
+                            <li><a href="<?php echo $this->objUrl->href('orders'); ?>" title="My Account">My Account</a></li>
                             <li><a href="">My Wishlist</a></li>
-                            <li><a href="">My Cart</a></li>
-                            <li><a href="">Checkout</a></li>
-                            <li><a href="">Log In</a></li>
+                            <li><a href="<?php echo $this->objUrl->href('basket'); ?>" title="My Cart">My Cart</a></li>
+                            <li><a href="<?php echo $this->objUrl->href('checkout'); ?>" title="Checkout">Checkout</a></li>
+                            <li><a href="<?php echo $this->objUrl->href('login'); ?>" title="Log In">Log In</a></li>
                         </ul>
                     </div>
                 </div>

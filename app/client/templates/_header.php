@@ -40,7 +40,7 @@ use MyECOMM\Basket;
                         <li class="msg-nav-padding">
                             <span class="welcome-msg">Welcome to our online store!</span>
                         </li>
-                        <li><a href="" title="My Account">My Account</a></li>
+                        <li><a href="<?php echo $this->objUrl->href('orders'); ?>" title="My Account">My Account</a></li>
                         <li><a href="" title="My Wishlist">My Wishlist</a></li>
                         <li class="my-cart-items">
                             <a href="<?php echo $this->objUrl->href('basket'); ?>" title="My Cart">My Cart
