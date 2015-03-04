@@ -1,0 +1,36 @@
+.login-btn {
+  border: solid 1px #959595;
+  border-radius: 3px;
+  box-shadow: 2px 2px 5px #ddd;
+  background: url(../images/button.gif) repeat-x;
+  background-size: 30px auto;
+  color: #fff;
+  padding: 3.5px 20px;
+  text-transform: uppercase;
+
+  &:hover {
+    border: solid 1px #676767;
+    background: url(../images/button.gif) repeat-x 0 -24px;
+  }
+
+  input {
+    background-color: transparent;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+    font-size: 13px;
+    font-weight: 400;
+    border: none;
+  }
+}
+
+.login-btn-reset {
+  background: none;
+  border: none;
+  box-shadow: none;
+
+  &:focus {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+}

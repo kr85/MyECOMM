@@ -1,0 +1,107 @@
+.main {
+  padding-top: 30px;
+
+  .page-title {
+    padding-bottom: 20px;
+
+    h1 {
+      font-family: 'Quattrocento Sans', sans-serif;
+      font-weight: normal;
+      color: #2F2F2F;
+    }
+  }
+
+  .account-login {
+    .row-1 {
+      height: 170px;
+
+      .col-1 {
+        float: left;
+        width: 500px;
+
+        .content {
+          h2 {
+
+          }
+
+          p {
+
+          }
+        }
+      }
+
+      .col-2 {
+        float: left;
+        width: 400px;
+
+        .content {
+          padding-left: 40px;
+
+          p {
+            padding-bottom: 6px;
+          }
+
+          .required {
+            font-size: 10px;
+            text-transform: uppercase;
+            text-align: right;
+            color: #19BDFA;
+            padding-top: 10px;
+          }
+
+          .form-list {
+            ul {
+              list-style: none;
+
+              li {
+                margin-top: 8px;
+
+                label {
+                  display: list-item;
+
+                  em {
+                    color: #19BDFA;
+                  }
+                }
+
+                input {
+                  display: list-item;
+                }
+
+                .login-input-field {
+                  padding: 3px;
+                  width: 350px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .row-2 {
+      height: 35px;
+      padding-top: 20px;
+      padding-bottom: 15px;
+
+      .col-1 {
+        width: 500px;
+        float: left;
+      }
+
+      .col-2 {
+        width: 400px;
+        float: left;
+
+        .buttons-set {
+          padding-left: 40px;
+
+          a {
+            color: #19BDFA;
+            margin-top: 6px;
+          }
+        }
+      }
+    }
+  }
+}

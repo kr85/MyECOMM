@@ -8,7 +8,7 @@ footer {
   background-color: #F3F3F3;
 
     .footer-row-1 {
-      height: 305px;
+      height: 275px;
 
       .footer-container {
         background-color: #F3F3F3;
@@ -17,11 +17,10 @@ footer {
         width: 900px;
         text-align: left;
         margin: 0 auto;
-        padding: 15px 25px 15px 25px;
 
         .footer-block {
           margin-left: 175px;
-          padding-top: 35px;
+          padding-top: 40px;
 
           .footer-cols {
             float: left;
@@ -39,12 +38,13 @@ footer {
               list-style: none;
 
               li {
-                background: url(../images/f_arr.gif) no-repeat 0 11px;
+                background: url(../images/f_arr.gif) no-repeat 0 7px;
                 padding: 0 0 9px 9px;
 
                 a {
                   color: #7B7B7B;
                   text-decoration: none;
+                  font-size: 12px;
 
                   &:hover {
                     color: #D96137;
@@ -70,11 +70,11 @@ footer {
     }
 
     .footer-row-2 {
-      padding-top: 50px;
+      padding-top: 10px;
 
       .footer-container {
         background-color: #F3F3F3;
-        height: 75px;
+        height: 50px;
         width: 900px;
         text-align: left;
         margin: 0 auto;
@@ -151,7 +151,7 @@ footer {
 }
 
 footer, .push {
-  height: 460px;
+  height: 366px;
 }
 
 .footer-text {

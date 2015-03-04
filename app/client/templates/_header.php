@@ -114,7 +114,10 @@ use MyECOMM\Basket;
     </header>
     <section>
         <div class="container">
-            <?php if (($this->objUrl->currentPage != 'index') && ($this->objUrl->currentPage != 'login')): ?>
+            <?php if (($this->objUrl->currentPage != 'index') &&
+                      ($this->objUrl->currentPage != 'login') &&
+                      ($this->objUrl->currentPage != 'register')):
+            ?>
                 <div id="left">
                 <?php if ($this->objUrl->currentPage != 'summary'):
                     echo Plugin::get('front'.DS.'basket_left', [
