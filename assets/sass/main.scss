@@ -3,6 +3,7 @@
 @import "modules/button";
 @import "modules/validation";
 @import "pages/login";
+@import "pages/register";
 
 * {
   border: none;
@@ -89,6 +90,9 @@ section {
 
 form input, form textarea {
   border: 1px solid #AAA;;
+}
+small {
+  font-size: 1em;
 }
 
 a:focus, a:active,

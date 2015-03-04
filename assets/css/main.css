@@ -42,17 +42,18 @@ header {
       float: right;
       padding: 2px 0 0 0; }
       .header-row-1-container nav .currencies select {
-        width: 45px;
+        width: 50px;
         border: solid 1px #fff;
         font-size: 12px;
-        color: #7F7F7F; }
+        color: #7F7F7F;
+        background-color: #fff; }
         .header-row-1-container nav .currencies select option {
           padding-left: 3px; }
       .header-row-1-container nav .currencies label {
         color: #9D9D9D;
         font-size: 12px; }
   .header-row-1-container .msg-nav-padding {
-    padding-right: 155px; }
+    padding-right: 135px; }
 
 .my-cart-items:hover {
   color: #19BDFA; }
@@ -226,12 +227,12 @@ footer, .push {
     box-shadow: none; }
 
 .form-valid .input:focus:valid, form textarea:focus:valid {
-  background: #fff url(../images/valid.png) no-repeat 98% center;
+  background: #fff url(../images/valid.png) no-repeat 99% center;
   box-shadow: 0 0 5px #5cd053;
   border-color: #28921f; }
 
 .form-valid .input:focus:invalid, form textarea:focus:invalid {
-  background: #fff url(../images/invalid.png) no-repeat 98% center;
+  background: #fff url(../images/invalid.png) no-repeat 99% center;
   box-shadow: 0 0 5px #d45252;
   border-color: #b03535; }
 
@@ -240,9 +241,11 @@ footer, .push {
   .main .page-title {
     padding-bottom: 20px; }
     .main .page-title h1 {
-      font-family: 'Quattrocento Sans', sans-serif;
+      font-family: 'Quattrocento Sans',sans-serif;
       font-weight: normal;
-      color: #2F2F2F; }
+      color: #2F2F2F;
+      letter-spacing: 0.8px;
+      font-size: 19px; }
   .main .account-login .row-1 {
     height: 170px; }
     .main .account-login .row-1 .col-1 {
@@ -289,6 +292,133 @@ footer, .push {
         .main .account-login .row-2 .col-2 .buttons-set a {
           color: #19BDFA;
           margin-top: 6px; }
+
+.account-create {
+  margin-top: -20px; }
+  .account-create .row-1 {
+    height: 320px; }
+  .account-create .row-2 {
+    height: 110px; }
+  .account-create .row-3 {
+    height: 90px; }
+    .account-create .row-3 .buttons-set .required {
+      font-size: 10px;
+      text-transform: uppercase;
+      text-align: right;
+      color: #19BDFA;
+      padding-top: 10px;
+      margin-bottom: -6px; }
+
+fieldset {
+  border: 1px solid #ddd;
+  background: #fefefe;
+  padding: 22px 25px 12px 25px;
+  margin: 28px 0; }
+  fieldset legend {
+    float: left;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px solid #fefefe;
+    background: #dedede;
+    color: #333;
+    margin: -33px 0 0 -10px;
+    padding: 0 8px;
+    position: relative; }
+  fieldset ul {
+    list-style: none; }
+    fieldset ul li {
+      display: list-item; }
+
+.form-list li {
+  margin: 0 0 10px; }
+.form-list .fields {
+  height: 36px; }
+  .form-list .fields .field {
+    float: left; }
+    .form-list .fields .field em {
+      color: #19BDFA; }
+
+.input-text-one {
+  width: 848px; }
+
+.field-one {
+  width: 848px; }
+
+.field-two {
+  width: 424px; }
+
+.first-name .input-box {
+  padding-left: 0; }
+  .first-name .input-box input {
+    width: 407px; }
+
+.last-name label {
+  padding-left: 12px; }
+.last-name .input-box {
+  padding-left: 12px; }
+  .last-name .input-box input {
+    width: 407px; }
+
+.address input {
+  width: 843px; }
+
+.city label {
+  padding-left: 0; }
+.city .input-box {
+  padding-left: 0; }
+.city input {
+  width: 260px; }
+
+.state label {
+  padding-left: 10px; }
+.state .input-box {
+  padding-left: 8px; }
+.state input {
+  width: 260px; }
+
+.zipcode label {
+  padding-left: 18px; }
+.zipcode .input-box {
+  padding-left: 18px; }
+.zipcode input {
+  width: 260px; }
+
+.create-account-country {
+  width: 850px;
+  border: 1px solid #aaa;
+  height: 21px; }
+
+.email input {
+  width: 843px; }
+
+.field-three {
+  width: 282.6px; }
+
+.passwd .input-box {
+  padding-left: 0; }
+  .passwd .input-box input {
+    width: 407px; }
+
+.passwd-conf label {
+  padding-left: 12px; }
+.passwd-conf .input-box {
+  padding-left: 12px; }
+  .passwd-conf .input-box input {
+    width: 407px; }
+
+.back-btn {
+  color: #19BDFA;
+  text-decoration: underline;
+  padding-top: 5px; }
+  .back-btn:hover {
+    text-decoration: none; }
+
+.input-box {
+  display: block;
+  clear: both; }
+  .input-box input {
+    height: 13px;
+    padding: 3px; }
 
 * {
   border: none;
@@ -360,6 +490,9 @@ section {
 
 form input, form textarea {
   border: 1px solid #AAA; }
+
+small {
+  font-size: 1em; }
 
 a:focus, a:active, .btn:focus, .btn:active, button::-moz-focus-inner, input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, select::-moz-focus-inner, input[type="file"] > input[type="button"]::-moz-focus-inner {
   border: 0;

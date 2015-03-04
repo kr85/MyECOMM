@@ -140,10 +140,11 @@ class Form {
      * @param null $record
      * @param string $name
      * @param bool $selectOption
+     * @param null $class
      * @return null|string
      */
     public function getCountriesSelect(
-        $record = null, $name = 'country', $selectOption = false
+        $record = null, $name = 'country', $selectOption = false, $class = null
     ) {
 
         $objCountry = new Country();
@@ -151,7 +152,7 @@ class Form {
 
         if (!empty($countries)) {
 
-            $out = "<select name=\"{$name}\" id=\"{$name}\" class='sel'>";
+            $out = "<select name=\"{$name}\" id=\"{$name}\" class=\"{$class}\" required='required'>";
 
             if (empty($record) || $selectOption == true) {
                 $out .= "<option value=\"\">Select one&hellip;</option>";

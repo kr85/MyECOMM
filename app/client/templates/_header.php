@@ -49,7 +49,11 @@ use MyECOMM\Basket;
                             </a>
                         </li>
                         <li><a href="<?php echo $this->objUrl->href('checkout'); ?>" title="Checkout">Checkout</a></li>
-                        <li><a href="<?php echo $this->objUrl->href('login'); ?>" title="Log In">Log In</a></li>
+                        <?php if (Login::isLogged(Login::$loginFront)): ?>
+                            <li><a href="<?php echo $this->objUrl->href('logout'); ?>" title="Log Out">Log Out</a></li>
+                        <?php else: ?>
+                            <li><a href="<?php echo $this->objUrl->href('login'); ?>" title="Log In">Log In</a></li>
+                        <?php endif; ?>
                     </ul>
                     <div class="currencies">
                         <label for="currencies">Currencies:</label>

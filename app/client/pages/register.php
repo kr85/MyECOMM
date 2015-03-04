@@ -112,151 +112,221 @@ if ($objForm->isPost('first_name')) {
 require_once('_header.php');
 ?>
 
-<h1>Not registered yet?</h1>
-
-<form action="" method="POST">
-    <!-- Avoid remember me for sign up form -->
-    <div class="dn">
-        <input type="email" name="email"/>
-        <input type="password" name="password"/>
+<div class="main">
+    <div class="page-title">
+        <h1>Create an Account</h1>
     </div>
-    <table class="tbl_insert">
-        <tr>
-            <th>
-                <label for="first_name">First name: *</label>
-            </th>
-            <td>
-                <?php echo $objValidation->validate('first_name'); ?>
-                <input type="text" name="first_name" id="first_name"
-                       class="fld" value="<?php echo $objForm->stickyText(
-                    'first_name'
-                ); ?>"/>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label for="last_name">Last name: *</label>
-            </th>
-            <td>
-                <?php echo $objValidation->validate('last_name'); ?>
-                <input type="text" name="last_name" id="last_name"
-                       class="fld" value="<?php echo $objForm->stickyText(
-                    'last_name'
-                ); ?>"/>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label for="address_1">Address 1: *</label>
-            </th>
-            <td>
-                <?php echo $objValidation->validate('address_1'); ?>
-                <input type="text" name="address_1" id="address_1"
-                       class="fld" value="<?php echo $objForm->stickyText(
-                    'address_1'
-                ); ?>"/>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label for="address_2">Address 2: </label>
-            </th>
-            <td>
-                <?php echo $objValidation->validate('address_2'); ?>
-                <input type="text" name="address_2" id="address_2"
-                       class="fld" value="<?php echo $objForm->stickyText(
-                    'address_2'
-                ); ?>"/>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label for="city">City: *</label>
-            </th>
-            <td>
-                <?php echo $objValidation->validate('city'); ?>
-                <input type="text" name="city" id="city" class="fld"
-                       value="<?php echo $objForm->stickyText('city'); ?>"/>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label for="state">State: *</label>
-            </th>
-            <td>
-                <?php echo $objValidation->validate('state'); ?>
-                <input type="text" name="state" id="state" class="fld"
-                       value="<?php echo $objForm->stickyText(
-                           'state'
-                       ); ?>"/>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label for="zip_code">ZIP code: *</label>
-            </th>
-            <td>
-                <?php echo $objValidation->validate('zip_code'); ?>
-                <input type="text" name="zip_code" id="zip_code" class="fld"
-                       value="<?php echo $objForm->stickyText(
-                           'zip_code'
-                       ); ?>"/>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label for="country">Country: *</label>
-            </th>
-            <td>
-                <?php echo $objValidation->validate('country'); ?>
-                <?php echo $objForm->getCountriesSelect(); ?>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label for="email">Email address: *</label>
-            </th>
-            <td>
-                <?php echo $objValidation->validate('email'); ?>
-                <?php echo $objValidation->validate('email_duplicate'); ?>
-                <?php echo $objValidation->validate('email_inactive'); ?>
-                <input type="email" name="email" id="email" class="fld"
-                       value="<?php echo $objForm->stickyText(
-                           'email'
-                       ); ?>" autocomplete="off"/>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label for="password">Password: *</label>
-            </th>
-            <td>
-                <?php echo $objValidation->validate('password'); ?>
-                <?php echo $objValidation->validate('password_mismatch'); ?>
-                <input type="password" name="password" id="password"
-                       class="fld" value="" autocomplete="off"/>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label for="confirm_password">Password confirmation: *</label>
-            </th>
-            <td>
-                <?php echo $objValidation->validate('confirm_password'); ?>
-                <input type="password" name="confirm_password"
-                       id="confirm_password" class="fld" value=""
-                       autocomplete="off"/>
-            </td>
-        </tr>
-        <tr>
-            <th>&#160;</th>
-            <td>
-                <label for="btn" class="sbm sbm_blue fl_l"> <input
-                        type="submit" id="btn" class="btn" value="Sign Up"/>
-                </label>
-            </td>
-        </tr>
-    </table>
-</form>
+    <div class="account-create">
+        <form action="" method="POST" class="form-valid">
+            <!-- Avoid remember me for sign up form -->
+            <div class="dn">
+                <input type="email" name="email"/>
+                <input type="password" name="password"/>
+            </div>
+            <div class="row-1">
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    <ul class="form-list">
+                        <li class="fields">
+                            <div class="customer-name">
+                                <div class="field field-two first-name">
+                                    <label for="first_name" class="">First Name: <em>*</em></label>
+                                    <div class="input-box">
+                                        <?php echo $objValidation->validate('first_name'); ?>
+                                        <input
+                                            type="text"
+                                            name="first_name"
+                                            id="first_name"
+                                            class="input"
+                                            value="<?php echo $objForm->stickyText('first_name'); ?>"
+                                            required="required"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="field field-two last-name">
+                                    <label for="last_name">Last Name: <em>*</em></label>
+                                    <div class="input-box">
+                                        <?php echo $objValidation->validate('last_name'); ?>
+                                        <input
+                                            type="text"
+                                            name="last_name"
+                                            id="last_name"
+                                            class="input"
+                                            value="<?php echo $objForm->stickyText('last_name'); ?>"
+                                            required="required"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="fields">
+                            <div class="field field-one address">
+                                <label for="address_1">Address 1: <em>*</em></label>
+                                <div class="input-box">
+                                    <?php echo $objValidation->validate('address_1'); ?>
+                                    <input
+                                        type="text"
+                                        name="address_1"
+                                        id="address_1"
+                                        class="input"
+                                        value="<?php echo $objForm->stickyText('address_1'); ?>"
+                                        required="required"
+                                    />
+                                </div>
+                            </div>
+                        </li>
+                        <li class="fields">
+                            <div class="field field-one address">
+                                <label for="address_2">Address 2: </label>
+                                <div class="input-box">
+                                    <?php echo $objValidation->validate('address_2'); ?>
+                                    <input
+                                        type="text"
+                                        name="address_2"
+                                        id="address_2"
+                                        class=""
+                                        value="<?php echo $objForm->stickyText('address_2'); ?>"
+                                    />
+                                </div>
+                            </div>
+                        </li>
+                        <li class="fields">
+                            <div class="field field-three city">
+                                <label for="city">City: <em>*</em></label>
+                                <div class="input-box">
+                                    <?php echo $objValidation->validate('city'); ?>
+                                    <input
+                                        type="text"
+                                        name="city"
+                                        id="city"
+                                        class="input"
+                                        value="<?php echo $objForm->stickyText('city'); ?>"
+                                        required="required"
+                                    />
+                                </div>
+                            </div>
+                            <div class="field field-three state">
+                                <label for="state">State: <em>*</em></label>
+                                <div class="input-box">
+                                    <?php echo $objValidation->validate('state'); ?>
+                                    <input
+                                        type="text"
+                                        name="state"
+                                        id="state"
+                                        class="input"
+                                        value="<?php echo $objForm->stickyText('state'); ?>"
+                                        required="required"
+                                    />
+                                </div>
+                            </div>
+                            <div class="field field-three zipcode">
+                                <label for="zip_code">ZIP Code: <em>*</em></label>
+                                <div class="input-box">
+                                    <?php echo $objValidation->validate('zip_code'); ?>
+                                    <input
+                                        type="text"
+                                        name="zip_code"
+                                        id="zip_code"
+                                        class="input"
+                                        value="<?php echo $objForm->stickyText('zip_code'); ?>"
+                                        required="required"
+                                    />
+                                </div>
+                            </div>
+                        </li>
+                        <li class="fields">
+                            <div class="field field-one">
+                                <label for="country">Country: <em>*</em></label>
+                                <div class="input-box">
+                                    <?php echo $objValidation->validate('country'); ?>
+                                    <?php echo $objForm->getCountriesSelect(null, 'country', false, 'create-account-country'); ?>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="fields">
+                            <div class="field field-one email">
+                                <label for="email">Email Address: <em>*</em></label>
+                                <div class="input-box">
+                                    <?php echo $objValidation->validate('email'); ?>
+                                    <?php echo $objValidation->validate('email_duplicate'); ?>
+                                    <?php echo $objValidation->validate('email_inactive'); ?>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        id="email"
+                                        class="input"
+                                        value="<?php echo $objForm->stickyText('email'); ?>"
+                                        required="required"
+                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                        autocomplete="off"
+                                    />
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </fieldset>
+            </div>
+            <div class="row-2">
+                <fieldset>
+                    <legend>Login Information</legend>
+                    <ul class="form-list">
+                        <li class="fields">
+                            <div class="login-info">
+                                <div class="field field-two passwd">
+                                    <label for="password">Password: <em>*</em></label>
+                                    <div class="input-box">
+                                        <?php echo $objValidation->validate('password'); ?>
+                                        <?php echo $objValidation->validate('password_mismatch'); ?>
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            id="password"
+                                            class="input"
+                                            value=""
+                                            required="required"
+                                            autocomplete="off"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="field field-two passwd-conf">
+                                    <label for="confirm_password">Password Confirmation: <em>*</em></label>
+                                    <div class="input-box">
+                                        <?php echo $objValidation->validate('confirm_password'); ?>
+                                        <input
+                                            type="password"
+                                            name="confirm_password"
+                                            id="confirm_password"
+                                            class="input"
+                                            value=""
+                                            required="required"
+                                            autocomplete="off"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </fieldset>
+            </div>
+            <div class="row-3">
+                <div class="buttons-set">
+                    <p class="required">* Required Fields</p>
+                    <a
+                        href="<?php echo $this->objUrl->href('login'); ?>"
+                        class="left back-btn">
+                        <small>« </small>Back
+                    </a>
+                    <label for="btn_login" class="login-btn right">
+                        <input
+                            type="submit"
+                            id="btn_login"
+                            class="login-btn-reset"
+                            value="Submit"/>
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 <?php require_once('_footer.php'); ?>
