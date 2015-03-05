@@ -388,6 +388,11 @@ fieldset {
   border: 1px solid #aaa;
   height: 21px; }
 
+.create-account-state {
+  width: 269px;
+  border: 1px solid #aaa;
+  height: 21px; }
+
 .email input {
   width: 843px; }
 

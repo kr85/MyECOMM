@@ -8,5 +8,6 @@ $(document).ready(function () {
     basketObject.loadingPayPal('.paypal');
     systemObject.emailInactive('#email_inactive');
     basketObject.shipping('.shipping_radio');
+    systemObject.selectCountryState('.select_country_state');
 
 });

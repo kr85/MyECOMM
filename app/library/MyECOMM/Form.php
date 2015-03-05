@@ -152,10 +152,16 @@ class Form {
 
         if (!empty($countries)) {
 
-            $out = "<select name=\"{$name}\" id=\"{$name}\" class=\"{$class}\" required='required'>";
+            $out = "<select
+                        name='{$name}'
+                        id='{$name}'
+                        class='{$class} select_country_state'
+                        required='required'
+                        title='Please select a country.'
+                    >";
 
             if (empty($record) || $selectOption == true) {
-                $out .= "<option value=\"\">Select one&hellip;</option>";
+                $out .= "<option value=''>Select one&hellip;</option>";
             }
 
             foreach ($countries as $country) {
@@ -170,6 +176,60 @@ class Form {
                 );
                 $out .= ">";
                 $out .= $country['name'];
+                $out .= "</option>";
+            }
+
+            $out .= "</select>";
+
+            return $out;
+        }
+
+        return null;
+    }
+
+    /**
+     * Get states for the form select option
+     *
+     * @param int $countryId
+     * @param null $record
+     * @param string $name
+     * @param bool $selectOption
+     * @param null $class
+     * @return null|string
+     */
+    public function getCountryStatesSelect(
+        $countryId = 230, $record = null, $name = 'states', $selectOption = false, $class = null
+    ) {
+
+        $objCountry = new Country();
+        $states = $objCountry->getStates($countryId);
+
+        if (!empty($states)) {
+
+            $out = "<select
+                        name='{$name}'
+                        id='{$name}'
+                        class='{$class}'
+                        required='required'
+                        title='Please select your state.'
+                    >";
+
+            if (empty($record) || $selectOption == true) {
+                $out .= "<option value=''>Select one&hellip;</option>";
+            }
+
+            foreach ($states as $state) {
+
+                $out .= "<option value=\"";
+                $out .= $state['id'];
+                $out .= "\"";
+                $out .= $this->stickySelect(
+                    $name,
+                    $state['id'],
+                    $record
+                );
+                $out .= ">";
+                $out .= $state['name'];
                 $out .= "</option>";
             }
 

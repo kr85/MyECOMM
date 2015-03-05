@@ -55,5 +55,18 @@ var systemObject = {
                 }
             }, 'json');
         });
+    },
+    selectCountryState: function (thisIdentity) {
+        "use strict";
+        $(document).on('change', thisIdentity, function (e) {
+            var option = $(thisIdentity + ' option:selected').text();
+            if (option == 'United States') {
+                $('.state-input').hide();
+                $('.state-select').show();
+            } else {
+                $('.state-select').hide();
+                $('.state-input').show();
+            }
+        });
     }
 };

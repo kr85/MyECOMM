@@ -6,9 +6,14 @@
 class Country extends Application {
 
     /**
-     * @var string The table name
+     * @var string The Database country table name
      */
     protected $table = 'countries';
+
+    /**
+     * @var string TThe Database states table name
+     */
+    protected $tableStates = 'states';
 
     /**
      * Get all countries
@@ -21,6 +26,23 @@ class Country extends Application {
                 WHERE `include` = ?
                 ORDER BY `name` ASC";
         return $this->Db->fetchAll($sql, 1);
+    }
+
+    /**
+     * Get all states of a country
+     *
+     * @param null $countryId
+     * @return mixed|null
+     */
+    public function getStates($countryId = null) {
+        if (!empty($countryId)) {
+            $sql = "SELECT *
+                    FROM `{$this->tableStates}`
+                    WHERE `country` = ?
+                    ORDER BY `name` ASC";
+            return $this->Db->fetchAll($sql, $countryId);
+        }
+        return null;
     }
 
     /**
