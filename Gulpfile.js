@@ -30,11 +30,12 @@ gulp.task('scripts', function() {
         'assets/js/lib/jquery-1.11.2.min.js',
         'assets/js/lib/jquery.livequery.js',
         'assets/js/lib/jquery.tablednd.0.7.min.js',
-        'assets/js/object/adminObject.js',
-        'assets/js/object/basketObject.js',
         'assets/js/object/systemObject.js',
-        'assets/js/admin.js',
-        'assets/js/basket.js'
+        'assets/js/object/basketObject.js',
+        'assets/js/object/adminObject.js',
+        'assets/js/system.js',
+        'assets/js/basket.js',
+        'assets/js/admin.js'
     ])
         .pipe(concat('all.js'))
         .pipe(uglify())
