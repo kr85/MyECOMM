@@ -33,85 +33,89 @@ if ($objForm->isPost('login_email')) {
 
 require_once('_header.php');
 ?>
-<div class="main">
-    <div class="page-title">
-        <h1>Login or Create an Account</h1>
-    </div>
-    <div class="account-login">
-        <form action="" method="POST" class="form-valid">
-            <div class="row-1">
-                <div class="col-1">
-                    <div class="content">
-                        <h2>New Customers</h2>
-                        <p>
-                            By creating an account with our store, you will be able to
-                            move through the checkout process faster, store multiple
-                            shipping addresses, view and track your orders in your
-                            account and more.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="content">
-                        <h2>Registered Customers</h2>
-                        <p>If you have an account with us, please log in.</p>
-                        <div class="form-list">
-                            <ul>
-                                <li>
-                                    <label for="login_email">Email address: <em>*</em></label>
-                                    <?php echo $objValidation->validate('login'); ?>
-                                    <input
-                                        type="email"
-                                        name="login_email"
-                                        id="login_email"
-                                        class="login-input-field input"
-                                        value="<?php echo $objForm->stickyText('login_email'); ?>"
-                                        required="required"
-                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                                        placeholder="your@email.com"
-                                    />
-                                </li>
-                                <li>
-                                    <label for="login_password">Password: <em>*</em></label>
-                                    <input
-                                        type="password"
-                                        name="login_password"
-                                        id="login_password"
-                                        class="login-input-field input"
-                                        value=""
-                                        required="required"
-                                        placeholder="Your password"
-                                    />
-                                </li>
-                            </ul>
+<section>
+    <div class="container">
+        <div class="main">
+            <div class="page-title">
+                <h1>Login or Create an Account</h1>
+            </div>
+            <div class="account-login">
+                <form action="" method="POST" class="form-valid">
+                    <div class="row-1">
+                        <div class="col-1">
+                            <div class="content">
+                                <h2>New Customers</h2>
+                                <p>
+                                    By creating an account with our store, you will be able to
+                                    move through the checkout process faster, store multiple
+                                    shipping addresses, view and track your orders in your
+                                    account and more.
+                                </p>
+                            </div>
                         </div>
-                        <p class="required">* Required Fields</p>
+                        <div class="col-2">
+                            <div class="content">
+                                <h2>Registered Customers</h2>
+                                <p>If you have an account with us, please log in.</p>
+                                <div class="form-list">
+                                    <ul>
+                                        <li>
+                                            <label for="login_email">Email address: <em>*</em></label>
+                                            <?php echo $objValidation->validate('login'); ?>
+                                            <input
+                                                type="email"
+                                                name="login_email"
+                                                id="login_email"
+                                                class="login-input-field input"
+                                                value="<?php echo $objForm->stickyText('login_email'); ?>"
+                                                required="required"
+                                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                                placeholder="your@email.com"
+                                                />
+                                        </li>
+                                        <li>
+                                            <label for="login_password">Password: <em>*</em></label>
+                                            <input
+                                                type="password"
+                                                name="login_password"
+                                                id="login_password"
+                                                class="login-input-field input"
+                                                value=""
+                                                required="required"
+                                                placeholder="Your password"
+                                                />
+                                        </li>
+                                    </ul>
+                                </div>
+                                <p class="required">* Required Fields</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="row-2">
+                        <div class="col-1">
+                            <div class="buttons-set">
+                                <a class="login-btn right" href="<?php echo $this->objUrl->href('register'); ?>">
+                                    <span>Create an Account</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="buttons-set">
+                                <a href="" class="left">Forgot Your Password?</a>
+                                <label for="btn_login" class="login-btn right">
+                                    <input
+                                        type="submit"
+                                        id="btn_login"
+                                        class="login-btn-reset"
+                                        value="Log In"/>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="row-2">
-                <div class="col-1">
-                    <div class="buttons-set">
-                        <a class="login-btn right" href="<?php echo $this->objUrl->href('register'); ?>">
-                            <span>Create an Account</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="buttons-set">
-                        <a href="" class="left">Forgot Your Password?</a>
-                        <label for="btn_login" class="login-btn right">
-                            <input
-                                type="submit"
-                                id="btn_login"
-                                class="login-btn-reset"
-                                value="Log In"/>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+</section>
 
 <?php require_once('_footer.php'); ?>
