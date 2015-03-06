@@ -59,6 +59,28 @@ CREATE TABLE `business` (
 -- Dumping data for table `business`
 --
 
+-- --------------------------------------------------------
+
+CREATE TABLE `sections` (
+  `id`               INT(11)      NOT NULL AUTO_INCREMENT,
+  `name`             VARCHAR(150) NOT NULL,
+  `identity`         VARCHAR(200)          DEFAULT NULL,
+  `meta_title`       VARCHAR(255)          DEFAULT NULL,
+  `meta_description` VARCHAR(255)          DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `sections` (`id`, `name`, `identity`, `meta_title`, `meta_description`)
+  VALUES (1, "Books", "books", "Books", "This section has a variety books in various categories.");
+INSERT INTO `sections` (`id`, `name`, `identity`, `meta_title`, `meta_description`)
+  VALUES (1, "Textbooks", "textbooks", "Textbooks", "This section has a variety textbooks in various categories.");
+INSERT INTO `sections` (`id`, `name`, `identity`, `meta_title`, `meta_description`)
+  VALUES (1, "Audiobooks", "audiobooks", "Audiobooks", "This section has a variety audiobooks in various categories.");
+INSERT INTO `sections` (`id`, `name`, `identity`, `meta_title`, `meta_description`)
+  VALUES (1, "Children's", "children's", "Children's", "This section has a variety children's books in various categories.");
+INSERT INTO `sections` (`id`, `name`, `identity`, `meta_title`, `meta_description`)
+  VALUES (1, "Used & Out of Print", "used-out-of-print", "Used & Out of Print", "This section has a variety used & out of print books in various categories.");
+
 
 -- --------------------------------------------------------
 
@@ -72,7 +94,9 @@ CREATE TABLE `categories` (
   `identity`         VARCHAR(200)          DEFAULT NULL,
   `meta_title`       VARCHAR(255)          DEFAULT NULL,
   `meta_description` VARCHAR(255)          DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `section`          INT(11)      NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `section` (`section`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8
@@ -82,14 +106,12 @@ CREATE TABLE `categories` (
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`) VALUES (1, 'Biographies & Autobiographies');
-INSERT INTO `categories` (`id`, `name`) VALUES (2, 'Computers & IT');
-INSERT INTO `categories` (`id`, `name`) VALUES (3, 'Art & Architecture');
-
-UPDATE `categories` SET `meta_title`  = `name`, `meta_description` = `name`;
-UPDATE `categories` SET `identity` = 'biographies-autobiographies' WHERE `id` = 1;
-UPDATE `categories` SET `identity` = 'computers-it' WHERE `id` = 2;
-UPDATE `categories` SET `identity` = 'art-architecture' WHERE `id` = 3;
+INSERT INTO `categories` (`id`, `name`, `identity`, `meta_title`, `meta_description`, `section`)
+  VALUES (1, 'Biographies & Autobiographies', 'biographies-autobiographies', 'Biographies & Autobiographies', 'Biographies & Autobiographies', 1);
+INSERT INTO `categories` (`id`, `name`, `identity`, `meta_title`, `meta_description`, `section`)
+  VALUES (2, 'Computers & IT', 'computers-it', 'Computers & IT', 'Computers & IT', 1);
+INSERT INTO `categories` (`id`, `name`, `identity`, `meta_title`, `meta_description`, `section`)
+  VALUES (3, 'Art & Architecture', 'art-architecture', 'Art & Architecture', 'Art & Architecture', 1);
 
 -- --------------------------------------------------------
 
@@ -396,6 +418,73 @@ INSERT INTO `countries` VALUES (241, 'Yemen', 'YE', 1);
 INSERT INTO `countries` VALUES (242, 'Zambia', 'ZM', 1);
 INSERT INTO `countries` VALUES (243, 'Zimbabwe', 'ZW', 1);
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `states`
+--
+
+CREATE TABLE `states` (
+  `id`      INT(11)      NOT NULL  AUTO_INCREMENT,
+  `country` INT(11)      NOT NULL  DEFAULT '0',
+  `name`    VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `country` (`country`)
+);
+
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Alabama');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Alaska');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Arizona');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Arkansas');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'California');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Colorado');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Connecticut');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Delaware');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'District Of Columbia');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Florida');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Georgia');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Hawaii');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Idaho');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Illinois');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Indiana');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Iowa');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Kansas');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Kentucky');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Louisiana');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Maine');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Maryland');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Massachusetts');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Michigan');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Minnesota');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Mississippi');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Missouri');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Montana');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Nebraska');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Nevada');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'New Hampshire');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'New Jersey');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'New Mexico');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'New York');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'North Carolina');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'North Dakota');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Ohio');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Oklahoma');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Oregon');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Pennsylvania');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Rhode Island');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'South Carolina');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'South Dakota');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Tennessee');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Texas');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Utah');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Vermont');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Virginia');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Washington');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'West Virginia');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Wisconsin');
+INSERT INTO `states` (`country`, `name`) VALUES (230, 'Wyoming');
+
 -- --------------------------------------------------------
 
 --
@@ -486,6 +575,7 @@ CREATE TABLE `products` (
   `description`      TEXT          NOT NULL,
   `price`            DECIMAL(8, 2) NOT NULL,
   `date`             TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `section`          INT(11)       NOT NULL,
   `category`         INT(11)       NOT NULL,
   `weight`           DECIMAL(8, 2) NOT NULL DEFAULT '0.00',
   `image`            VARCHAR(100)           DEFAULT NULL,
@@ -493,15 +583,12 @@ CREATE TABLE `products` (
   `meta_title`       VARCHAR(255)           DEFAULT NULL,
   `meta_description` VARCHAR(255)           DEFAULT NULL,
   PRIMARY KEY (`id`),
+  KEY `section` (`section`),
   KEY `category` (`category`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8
   AUTO_INCREMENT = 1;
-
---
--- Dumping data for table `products`
---
 
 
 -- --------------------------------------------------------
@@ -621,16 +708,21 @@ ALTER TABLE `shipping`
 ADD CONSTRAINT `shipping_ibfk_1` FOREIGN KEY (`type`) REFERENCES `shipping_type` (`id`)
   ON DELETE RESTRICT
   ON UPDATE CASCADE,
-/*ADD CONSTRAINT `shipping_ibfk_2` FOREIGN KEY (`zone`) REFERENCES `zones` (`id`)
-  ON DELETE RESTRICT
-  ON UPDATE CASCADE,*/
-ADD CONSTRAINT `shipping_ibfk_3` FOREIGN KEY (`country`) REFERENCES `countries` (`id`)
+ADD CONSTRAINT `shipping_ibfk_2` FOREIGN KEY (`country`) REFERENCES `countries` (`id`)
   ON DELETE RESTRICT
   ON UPDATE CASCADE;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `states`
+--
+ALTER TABLE `states`
+ADD CONSTRAINT `states_ibfk_1` FOREIGN KEY (`country`) REFERENCES `countries` (`id`)
+  ON DELETE RESTRICT
+  ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders`
@@ -652,10 +744,21 @@ ADD CONSTRAINT `orders_items_ibfk_2` FOREIGN KEY (`product`) REFERENCES `product
   ON UPDATE CASCADE;
 
 --
+-- Constraints for table `categories`
+--
+ALTER TABLE `categories`
+ADD CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`section`) REFERENCES `sections` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+--
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
-ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category`) REFERENCES `categories` (`id`)
+ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`section`) REFERENCES `sections` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`category`) REFERENCES `categories` (`id`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
 
@@ -675,44 +778,30 @@ INSERT INTO `business` VALUES (1, 'MyECOMM', '123 Way Street\nSan Jose, CA 95192
 --
 -- Dumping data for table `products`
 --
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `date`, `category`, `image`)
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `weight`, `date`, `section`, `category`, `image`, `identity`, `meta_title`, `meta_description`)
 VALUES (1, 'Beginning PHP and MySQL',
         'Beginning PHP and MySQL: From Novice to Professional, Fourth Edition is a major update of W. Jason Gilmore''s authoritative book on PHP and MySQL. The fourth edition includes complete coverage of PHP 5.3 features, including namespacing, an update of AMP stack installation and configuration, updates to Zend Framework, coverage of MySQL Workbench, and much more.',
-        '25.99', NOW(), 2, 'beginning-php.jpg');
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `date`, `category`, `image`)
+        '25.99', 0.5, NOW(), 1, 2, 'beginning-php.jpg', 'begging-php-mysql', 'Beginning PHP and MySQL', 'Beginning PHP and MySQL');
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `weight`, `date`, `section`, `category`, `image`, `identity`, `meta_title`, `meta_description`)
 VALUES (2, 'jQuery Mobile Web Development Essentials',
         'jQuery Mobile is a unified, HTML5-based user interface system for all popular mobile device platforms. It is compatible with all major mobile, tablet, e-reader and desktop platforms like iOS, Android, Blackberry, Palm WebOS, Nokia/Symbian, and Windows Phone 7. jQuery Mobile Web Development Essentials will explain how to create mobile-optimized sites with the easiest, most practical HTML/JavaScript framework available and to add the framework to your HTML pages to create rich, mobile-optimized web pages with minimal effort. Throughout the book, you''ll learn details that help you become a pro at mobile web development. You begin with simple HTML and quickly enhance it using jQuery Mobile for incredible mobile-optimized sites. Start by learning the building blocks of jQuery Mobile''s component-driven design. Dig into forms, events, and styling, then finish by building native mobile applications. You will learn how to build websites and apps for touch devices such as iPhone, iPad, Android, and BlackBerry with the recently developed jQuery Mobile library through sample applications of increasing complexity.',
-        '21.99', NOW(), 2, 'jquery-mobile-web.jpg');
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `date`, `category`, `image`)
+        '21.99', 0.5, NOW(), 1, 2, 'jquery-mobile-web.jpg', 'jquery-mobile-web-dev-ess', 'jQuery Mobile Web Development Essentials', 'jQuery Mobile Web Development Essentials');
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `weight`, `date`, `section`, `category`, `image`, `identity`, `meta_title`, `meta_description`)
 VALUES (3, 'Spring Web Flow 2 Web Development',
         'This book is a tutorial, with plenty of step-by-step instructions beginning with ''getting started'' material, followed by advanced coverage of this technology. The book has a practical approach towards the Spring MVC framework and is packed with practical examples and code. This book is targeted at Java web application developers who want to work on Spring Web Flow. This book is a must-read for those who desire to bridge the gap between the popular web framework and the popular application framework. It requires prior knowledge of the Spring framework, but no prior knowledge of Spring Web Flow.',
-        '29.99', NOW(), 2, 'spring-web-dev.jpeg');
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `date`, `category`, `image`)
+        '29.99', 0.5, NOW(), 1, 2, 'spring-web-dev.jpeg', 'spring-web-flow-2-dev', 'Spring Web Flow 2 Web Development', 'Spring Web Flow 2 Web Development');
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `weight`, `date`, `section`, `category`, `image`, `identity`, `meta_title`, `meta_description`)
 VALUES (4, 'The Autobiography of Benjamin Franklin',
         'The Autobiography of Benjamin Franklin is the traditional name for the unfinished record of his own life written by Benjamin Franklin from 1771 to 1790; however, Franklin himself appears to have called the work his Memoirs. Although it had a tortuous publication history after Franklin''s death, this work has become one of the most famous and influential examples of an autobiography ever written.',
-        '15.99', NOW(), 1, 'ben-franklin_cover.jpg');
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `date`, `category`, `image`)
+        '15.99', 0.5, NOW(), 1, 1, 'ben-franklin_cover.jpg', 'autobiography-benjamin-franklin', 'The Autobiography of Benjamin Franklin', 'The Autobiography of Benjamin Franklin');
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `weight`, `date`, `section`, `category`, `image`, `identity`, `meta_title`, `meta_description`)
 VALUES (5, 'Rocky Marciano: Biography of a First Son',
         'Spirited, fast-paced, and rich in detail, Rocky Marciano: The Rock of His Times is the first book to tell the full story of the man, his sport, and his era. Emerging from obscurity to win the heavyweight crown in the early 1950s, Marciano fought until 1955, retiring with a perfect 49-0 record - a feat still unmatched today. Yet as much as he embodied the wholesome, rags-to-riches patriotism of a true American hero, Marciano also reflected the racial and ethnic tensions festering beneath the country''s benevolent facade. In this captivating portrait of a complex American sports legend, Russell Sullivan confirms Rocky Marciano''s place as a symbol and cultural icon of his era. Russell Sullivan lives in the Boston area and is senior vice president and general counsel of Linkage, Inc., a corporate education company headquartered in Burlington, Massachusetts. He is the author, coauthor, or editor of several books and articles on business-related topics. A volume in the series Sport and Society, edited by Benjamin G. Rader and Randy Roberts',
-        '17.99', NOW(), 1, 'rocky-marciano-bio.jpg');
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `date`, `category`, `image`)
+        '17.99', 0.5, NOW(), 1, 1, 'rocky-marciano-bio.jpg', 'rocky-marciano-biography', 'Rocky Marciano: Biography of a First Son', 'Rocky Marciano: Biography of a First Son');
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `weight`, `date`, `section`, `category`, `image`, `identity`, `meta_title`, `meta_description`)
 VALUES (6, 'The Greatest: Muhammad Ali',
         'Gr 7 Up-An introduction to Ali''s life from his childhood to the present day, focusing on his career and the controversies surrounding him. Both his talent in the boxing ring and his showmanship earned him international fame, while his refusal to accept the stereotypical role of a black athletic star in the 1960s and his membership in the Nation of Islam brought him notoriety. Myers interweaves fight sequences with the boxer''s life story and the political events and issues of the day. He doesn''t shy away from reporting on the brutality of the sport and documents the toll it has taken on its many stars. Ample black-and-white photographs of the subject in and out of the ring illustrate the book. Covering Ali is a daunting task, especially since dozens of books and hundreds of articles have been written about him in the last 40 years. Fortunately, young adults have their own award-winning author, one with the perspective of being a young African American in Harlem during the height of the boxer''s fame, to tell his story. Myers''s writing flows while describing the boxing action and the legend''s larger-than-life story.-Michael McCullough, Byron-Bergen Middle School, Bergen, NY',
-        '15.99', NOW(), 1, 'muhammad-ali-the-greatest.jpg');
-
-UPDATE `products` SET `meta_title`  = `name`, `meta_description` = `name`;
-UPDATE `products` SET `identity` = 'begging-php-mysql' WHERE `id` = 1;
-UPDATE `products` SET `identity` = 'jquery-mobile-web-dev-ess' WHERE `id` = 2;
-UPDATE `products` SET `identity` = 'spring-web-flow-2-dev' WHERE `id` = 3;
-UPDATE `products` SET `identity` = 'autobiography-benjamin-franklin' WHERE `id` = 4;
-UPDATE `products` SET `identity` = 'rocky-marciano-biography' WHERE `id` = 5;
-UPDATE `products` SET `identity` = 'greatest-muhammad-ali' WHERE `id` = 6;
-UPDATE `products` SET `weight` = 0.5 WHERE `id` = 1;
-UPDATE `products` SET `weight` = 0.5 WHERE `id` = 2;
-UPDATE `products` SET `weight` = 0.5 WHERE `id` = 3;
-UPDATE `products` SET `weight` = 0.5 WHERE `id` = 4;
-UPDATE `products` SET `weight` = 0.5 WHERE `id` = 5;
-UPDATE `products` SET `weight` = 0.5 WHERE `id` = 6;
+        '15.99', 0.5, NOW(), 1, 1, 'muhammad-ali-the-greatest.jpg', 'greatest-muhammad-ali', 'The Greatest: Muhammad Ali', 'The Greatest: Muhammad Ali');
 
 --
 -- Dumping data for table `zones_country_codes`
