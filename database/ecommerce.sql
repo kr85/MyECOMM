@@ -73,13 +73,13 @@ CREATE TABLE `sections` (
 INSERT INTO `sections` (`id`, `name`, `identity`, `meta_title`, `meta_description`)
   VALUES (1, "Books", "books", "Books", "This section has a variety books in various categories.");
 INSERT INTO `sections` (`id`, `name`, `identity`, `meta_title`, `meta_description`)
-  VALUES (1, "Textbooks", "textbooks", "Textbooks", "This section has a variety textbooks in various categories.");
+  VALUES (2, "Textbooks", "textbooks", "Textbooks", "This section has a variety textbooks in various categories.");
 INSERT INTO `sections` (`id`, `name`, `identity`, `meta_title`, `meta_description`)
-  VALUES (1, "Audiobooks", "audiobooks", "Audiobooks", "This section has a variety audiobooks in various categories.");
+  VALUES (3, "Audiobooks", "audiobooks", "Audiobooks", "This section has a variety audiobooks in various categories.");
 INSERT INTO `sections` (`id`, `name`, `identity`, `meta_title`, `meta_description`)
-  VALUES (1, "Children's", "children's", "Children's", "This section has a variety children's books in various categories.");
+  VALUES (4, "Children's", "children's", "Children's", "This section has a variety children's books in various categories.");
 INSERT INTO `sections` (`id`, `name`, `identity`, `meta_title`, `meta_description`)
-  VALUES (1, "Used & Out of Print", "used-out-of-print", "Used & Out of Print", "This section has a variety used & out of print books in various categories.");
+  VALUES (5, "Used & Out of Print", "used-out-of-print", "Used & Out of Print", "This section has a variety used & out of print books in various categories.");
 
 
 -- --------------------------------------------------------
