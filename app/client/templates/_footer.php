@@ -1,7 +1,4 @@
 <?php use MyECOMM\Login; ?>
-        </div>
-        <div class="cl">&#160;</div>
-    </section>
     <div class="push"></div>
     </div>
     <footer>
@@ -83,5 +80,12 @@
         </div>
     </footer>
     <script src="/assets/main/all.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            if ($(location).attr('pathname') == '/') {
+                $('.footer-container').css({"border-top": "none"});
+            }
+        });
+    </script>
 </body>
 </html>
