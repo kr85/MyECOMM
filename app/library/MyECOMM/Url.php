@@ -209,7 +209,7 @@ class Url {
                     $out[] = $value;
                 }
             }
-            return '/' . implode('/', $out) . PAGE_EXTENSION;
+            return trim('/'.implode('/', $out).PAGE_EXTENSION);
         }
         return false;
     }

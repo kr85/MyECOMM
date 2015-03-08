@@ -9,7 +9,7 @@ var uglify = require('gulp-uglify');
 gulp.task('css', function() {
     gulp.src('assets/sass/main.scss')
         .pipe(sass())
-        .pipe(autoprefixer('last 10 version'))
+        .pipe(autoprefixer('last 50 versions'))
         .pipe(gulp.dest('assets/css'))
 });
 

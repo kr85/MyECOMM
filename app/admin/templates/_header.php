@@ -53,16 +53,22 @@ use MyECOMM\Session;
                         <div class="dev br_td">&nbsp;</div>
                         <ul id="navigation">
                             <li>
-                                <a href="/panel/products"
+                                <a href="/panel/sections"
                                     <?php echo $this->objNavigation->active(
-                                        'products'
-                                    ); ?>> Products </a>
+                                        'sections'
+                                ); ?>> Sections </a>
                             </li>
                             <li>
                                 <a href="/panel/categories"
                                     <?php echo $this->objNavigation->active(
                                         'categories'
                                     ); ?>> Categories </a>
+                            </li>
+                            <li>
+                                <a href="/panel/products"
+                                    <?php echo $this->objNavigation->active(
+                                        'products'
+                                    ); ?>> Products </a>
                             </li>
                             <li>
                                 <a href="/panel/orders"

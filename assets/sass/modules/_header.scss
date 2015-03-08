@@ -107,6 +107,7 @@ header {
   width: 100%;
 
   .header-row-2-container {
+    position: relative;
     width: 900px;
     background: url("../images/header_wrapper.jpg") no-repeat scroll 50% 0 transparent;
     text-align: left;
@@ -118,11 +119,52 @@ header {
     .logo-container {
       padding: 45px;
       text-align: center;
+      margin-left: auto;
+      margin-right: auto;
 
       a {
 
         img {
 
+        }
+      }
+    }
+
+    .search-container {
+      position: absolute;
+      top: 53px;
+      right: 26px;
+
+      .form-search {
+        float: right;
+        background: #fff;
+        border: solid 1px #DAD7D7;
+        padding: 5px 8px 0 10px;
+        height: 25px;
+        border-radius: 25px;
+
+        .input-text {
+          width: 70px;
+          float: left;
+          border: 0;
+          color: #999;
+          margin-top: 3px;
+          transition: width 0.3s ease 0s;
+
+          &:focus {
+            transition: width 0.3s ease 0s;
+            width: 300px;
+          }
+        }
+
+        .btn-search {
+          float: right;
+          background: url("../images/btn_search.gif") no-repeat;
+          border: 0;
+          width: 11px;
+          height: 11px;
+          cursor: pointer;
+          margin: 5px 0 0 -10px;
         }
       }
     }
@@ -140,9 +182,48 @@ header {
             display: inline;
             padding: 5px 15px 5px 15px;
 
+            .sub-nav-wrapper {
+              position: absolute;
+              width: 900px;
+              top: 14px;
+              text-align: center;
+              padding: 31px 0 0 0;
+
+              li {
+                padding: 0 10px;
+
+                a {
+                  float: none;
+                  display: inline !important;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-size: 12px;
+                  font-weight: normal;
+                  color: #696969 !important;
+
+                  &:hover {
+                    color: #D96137 !important;
+                    text-decoration: none;
+                  }
+
+                  span {
+                    display: inline !important;
+                  }
+                }
+
+                .sub-nav-text {
+                  text-transform: capitalize;
+                  white-space: normal;
+
+                  span {
+                    white-space: normal;
+                  }
+                }
+              }
+            }
+
             a {
               font-family: 'Quattrocento Sans', sans-serif;
-              font-size: 14px;
+              font-size: 15px;
               text-transform: uppercase;
               color: #6A6A6A;
 
@@ -155,4 +236,13 @@ header {
       }
     }
   }
+}
+
+.sub-nav-wrapper-shown {
+  left: 0;
+  z-index: 999;
+}
+
+.sub-nav-wrapper-hidden {
+  left: -10000px;
 }

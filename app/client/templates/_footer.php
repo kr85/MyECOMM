@@ -83,7 +83,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             if ($(location).attr('pathname') == '/') {
-                $('.footer-container').css({"border-top": "none"});
+                $('.footer-row-1').find('.footer-container').css({"border-top": "none"});
             }
         });
     </script>

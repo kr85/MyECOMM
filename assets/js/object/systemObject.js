@@ -68,5 +68,36 @@ var systemObject = {
                 $('.state-input').show();
             }
         });
+    },
+    animateImage: function (thisIdentity) {
+        "use strict";
+        $(thisIdentity).hover(
+            function() {
+                var id = this.id;
+                $('#product-image-' + id).addClass('animate-image');
+                $('#product-name-' + id).css({'display': 'block'});
+            },
+            function() {
+                var id = this.id;
+                $('#product-image-' + id).removeClass('animate-image');
+                $('#product-name-' + id).css({'display': 'none'});
+            });
+    },
+    showSubNavMain: function (thisIdentity) {
+        "use strict";
+        $(thisIdentity).hover(
+            function () {
+                var id = this.id;
+                var thisTarget = '#sub-nav-' + id;
+                $(thisTarget).removeClass('sub-nav-wrapper-hidden');
+                $(thisTarget).addClass('sub-nav-wrapper-shown');
+            },
+            function () {
+                var id = this.id;
+                var thisTarget = '#sub-nav-' + id;
+                $(thisTarget).removeClass('sub-nav-wrapper-shown');
+                $(thisTarget).addClass('sub-nav-wrapper-hidden');
+            }
+        );
     }
 };

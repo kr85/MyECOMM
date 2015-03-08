@@ -4,6 +4,9 @@ use MyECOMM\Login;
 use MyECOMM\Session;
 use MyECOMM\Helper;
 use MyECOMM\Plugin;
+use MyECOMM\Catalog;
+
+$objCatalog = (is_object($data['objCatalog'])) ? $data['objCatalog'] : new Catalog();
 
 ?>
 
@@ -30,7 +33,7 @@ use MyECOMM\Plugin;
                 <?php endif; ?>
             </ul>
             <div class="logged_as">
-                Logged in as:
+                Browse as:
                 <strong>
                 <?php if (Login::isLogged(Login::$loginFront)): ?>
                     <?php echo Login::getFullNameFront(
@@ -51,18 +54,53 @@ use MyECOMM\Plugin;
                 <img src="/../assets/images/logo.gif" alt="Books eCommerce"/>
             </a>
         </div>
-        <?php if (!empty($data['categories'])): ?>
+        <div class="search-container">
+            <form action="">
+                <div class="form-search">
+                    <input
+                        type="text"
+                        class="input-text"
+                        placeholder="Search..."
+                    />
+                    <input
+                        type="submit"
+                        value=""
+                        title="Search"
+                        class="btn-search"
+                    />
+                </div>
+            </form>
+        </div>
+        <?php if (!empty($data['sections'])): ?>
         <div class="nav-container">
             <nav>
                 <ul>
-                    <?php foreach ($data['categories'] as $c):
-                        echo '<li><a href="';
-                        echo $data['objUrl']->href('catalog', ['category', $c['identity']]);
+                    <?php foreach ($data['sections'] as $section):
+                        echo '<li class="sub-nav" id="';
+                        echo $section['id'];
+                        echo '"><a href="';
+                        echo $data['objUrl']->href('catalog', ['section', $section['identity']]);
                         echo '"';
-                        echo $data['objNavigation']->active('catalog', ['category' => $c['identity']]);
+                        echo $data['objNavigation']->active('catalog', ['section' => $section['identity']]);
                         echo '>';
-                        echo Helper::encodeHTML($c['name']);
-                        echo '</a></li>';
+                        echo Helper::encodeHTML($section['name']);
+                        echo '</a>';
+                        echo '<ul id="';
+                        echo 'sub-nav-'.$section['id'];
+                        echo '" class="sub-nav-wrapper sub-nav-wrapper-hidden">';
+                        foreach ($objCatalog->getCategoriesBySection($section['id']) as $cat):
+                            echo '<li>';
+                            echo '<a class="sub-nav-text" href="';
+                            echo $data['objUrl']->href('catalog', ['category', $cat['identity']]);
+                            echo '">';
+                            echo '<span>';
+                            echo $cat['name'];
+                            echo '</span>';
+                            echo '</a>';
+                            echo '</li>';
+                        endforeach;
+                        echo '</ul>';
+                        echo '</li>';
                     endforeach; ?>
                 </ul>
             </nav>
@@ -72,7 +110,8 @@ use MyECOMM\Plugin;
             if ($data['objUrl']->currentPage == 'index'):
                 echo Plugin::get('front'.DS.'new_products', [
                     'objUrl' => $data['objUrl'],
-                    'products' => $data['products']
+                    'objCatalog' => $objCatalog,
+                    'latestProducts' => $data['latestProducts']
                 ]);
             endif;
         ?>

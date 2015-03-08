@@ -36,9 +36,9 @@ defined("CLASSES_DIR")
 defined("CLASSES_PATH")
     || define("CLASSES_PATH", APP_PATH.DS.CLASSES_DIR);
 
-// Plugin folder
+// Plugins folder
 defined("PLUGIN_DIR")
-    || define("PLUGIN_DIR", "plugin");
+    || define("PLUGIN_DIR", "plugins");
 
 // Plugin path
 defined("PLUGIN_PATH")

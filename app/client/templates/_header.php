@@ -8,7 +8,8 @@ use MyECOMM\Basket;
     // Instantiate catalog class
     $objCatalog = new Catalog();
     $categories = $objCatalog->getCategories();
-    $products = $objCatalog->getLatestProducts();
+    $sections = $objCatalog->getSections();
+    $latestProducts = $objCatalog->getLatestProducts();
 
     // Instantiate business class
     $objBusiness = new Business();
@@ -37,14 +38,9 @@ use MyECOMM\Basket;
                 'objCatalog' => $this->objCatalog,
                 'objNavigation' => $this->objNavigation,
                 'objCurrency' => $this->objCurrency,
+                'sections' => $sections,
                 'categories' => $categories,
-                'products' => $products
+                'latestProducts' => $latestProducts
             ]);
         ?>
     </header>
-    <?php if (($this->objUrl->currentPage != 'index') &&
-        ($this->objUrl->currentPage != 'login') &&
-        ($this->objUrl->currentPage != 'register')):
-        ?>
-
-    <?php endif; ?>

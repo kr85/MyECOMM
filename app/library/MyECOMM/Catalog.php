@@ -16,6 +16,11 @@ class Catalog extends Application {
     protected $tableProducts = 'products';
 
     /**
+     * @var string The name of the sections table
+     */
+    protected $tableSections = 'sections';
+
+    /**
      * @var Record id
      */
     public $id;
@@ -44,17 +49,61 @@ class Catalog extends Application {
     }
 
     /**
+     * Get categories by section
+     *
+     * @param null $section
+     * @return bool|mixed
+     */
+    public function getCategoriesBySection($section = null) {
+        if (!empty($section)) {
+            $sql = "SELECT *
+                    FROM `{$this->tableCategories}`
+                    WHERE `section` = ?";
+            return $this->Db->fetchAll($sql, $section);
+        }
+        return null;
+    }
+
+    /**
+     * Get a section by identity
+     *
+     * @param null $identity
+     * @return bool|mixed
+     */
+    public function getSectionByIdentity($identity = null) {
+        if (!empty($identity)) {
+            $sql = "SELECT *
+                    FROM `{$this->tableSections}`
+                    WHERE `identity` = ?";
+            return $this->Db->fetchOne($sql, $identity);
+        }
+        return null;
+    }
+
+    /**
      * Get all categories
      *
      * @return array
      */
     public function getCategories() {
-
         $sql = "SELECT *
                 FROM `{$this->tableCategories}`
+                WHERE `id` != ?
                 ORDER BY `name` ASC";
+        return $this->Db->fetchAll($sql, 0);
+    }
 
-        return $this->Db->fetchAll($sql);
+    /**
+     * Get all sections
+     *
+     * @return array
+     */
+    public function getSections() {
+        $sql = "SELECT *
+                FROM `{$this->tableSections}`
+                WHERE `id` != ?
+                ORDER BY `name` ASC";
+        return $this->Db->fetchAll($sql, 0);
     }
 
     /**
@@ -79,6 +128,27 @@ class Catalog extends Application {
     }
 
     /**
+     * Get a section by id
+     *
+     * @param null $id
+     * @return bool|mixed
+     */
+    public function getSection($id = null) {
+        if (!empty($id)) {
+            $sql = "SELECT `s`.*,
+                    (
+                        SELECT COUNT(`id`)
+                        FROM `{$this->tableCategories}`
+                        WHERE `category` = `s`.`id`
+                    ) AS `categories_count`
+                    FROM `{$this->tableSections}` `s`
+                    WHERE `s`.`id` = ?";
+            return $this->Db->fetchOne($sql, $id);
+        }
+        return null;
+    }
+
+    /**
      * Add a new category
      *
      * @param null $array
@@ -87,6 +157,24 @@ class Catalog extends Application {
     public function addCategory($array = null) {
         if (!Helper::isArrayEmpty($array)) {
             return $this->Db->insert($this->tableCategories, [
+                'name' => $array['name'],
+                'identity' => $array['identity'],
+                'meta_title' => $array['meta_title'],
+                'meta_description' => $array['meta_description']
+            ]);
+        }
+        return false;
+    }
+
+    /**
+     * Add a new category
+     *
+     * @param null $array
+     * @return bool|resource
+     */
+    public function addSection($array = null) {
+        if (!Helper::isArrayEmpty($array)) {
+            return $this->Db->insert($this->tableSections, [
                 'name' => $array['name'],
                 'identity' => $array['identity'],
                 'meta_title' => $array['meta_title'],
@@ -116,6 +204,25 @@ class Catalog extends Application {
     }
 
     /**
+     * Update an existing section
+     *
+     * @param null $array
+     * @param null $id
+     * @return bool|resource
+     */
+    public function updateSection($array = null, $id = null) {
+        if (!Helper::isArrayEmpty($array) && !empty($id)) {
+            return $this->Db->update($this->tableSections, [
+                'name' => $array['name'],
+                'identity' => $array['identity'],
+                'meta_title' => $array['meta_title'],
+                'meta_description' => $array['meta_description']
+            ], $id);
+        }
+        return false;
+    }
+
+    /**
      * Delete a category by id
      *
      * @param null $id
@@ -123,6 +230,16 @@ class Catalog extends Application {
      */
     public function removeCategory($id = null) {
         return $this->Db->delete($this->tableCategories, $id);
+    }
+
+    /**
+     * Delete a section by id
+     *
+     * @param null $id
+     * @return bool|resource
+     */
+    public function removeSection($id = null) {
+        return $this->Db->delete($this->tableSections, $id);
     }
 
     /**
@@ -138,6 +255,28 @@ class Catalog extends Application {
             $params[] = $name;
             $sql = "SELECT *
                     FROM `{$this->tableCategories}`
+                    WHERE `name` = ?";
+            if (!empty($id)) {
+                $params[] = $id;
+                $sql .= " AND `id` = ?";
+            }
+            return $this->Db->fetchOne($sql, $params);
+        }
+        return false;
+    }
+    /**
+     * Check if a section already exist
+     *
+     * @param null $name
+     * @param null $id
+     * @return bool|mixed
+     */
+    public function duplicateSection($name = null, $id = null) {
+        if (!empty($name)) {
+            $params = [];
+            $params[] = $name;
+            $sql = "SELECT *
+                    FROM `{$this->tableSections}`
                     WHERE `name` = ?";
             if (!empty($id)) {
                 $params[] = $id;
@@ -173,6 +312,30 @@ class Catalog extends Application {
     }
 
     /**
+     * Check if a section already exists by identity and id
+     *
+     * @param null $identity
+     * @param null $id
+     * @return bool
+     */
+    public function isDuplicateSection($identity = null, $id = null) {
+        if (!empty($identity)) {
+            $params = [];
+            $params[] = $identity;
+            $sql = "SELECT *
+                    FROM `{$this->tableSections}`
+                    WHERE `identity` = ?";
+            if (!empty($id)) {
+                $params[] = $id;
+                $sql .= " AND `id` = ?";
+            }
+            $result = $this->Db->fetchAll($sql, $params);
+            return (!empty($result)) ? true : false;
+        }
+        return false;
+    }
+
+    /**
      * Get a product by identity
      *
      * @param null $identity
@@ -194,13 +357,34 @@ class Catalog extends Application {
      * @param $category
      * @return array
      */
-    public function getProducts($category = null) {
-        $sql = "SELECT *
+    public function getProductsByCategory($category = null) {
+        if (!empty($category)) {
+            $sql = "SELECT *
                 FROM `{$this->tableProducts}`
                 WHERE `category` = ?
                 ORDER BY `date` DESC";
-        return $this->Db->fetchAll($sql, $category);
+            return $this->Db->fetchAll($sql, $category);
+        }
+        return null;
     }
+
+    /**
+     * Get all products of a section
+     *
+     * @param null $section
+     * @return mixed|null
+     */
+    public function getProductsBySection($section = null) {
+        if (!empty($section)) {
+            $sql = "SELECT *
+                FROM `{$this->tableProducts}`
+                WHERE `section` = ?
+                ORDER BY `date` DESC";
+            return $this->Db->fetchAll($sql, $section);
+        }
+        return null;
+    }
+
 
     /**
      * Get a product by id
@@ -210,6 +394,19 @@ class Catalog extends Application {
      */
     public function getProduct($id = null) {
         return $this->Db->selectOne($this->tableProducts, $id);
+    }
+
+    /**
+     * Get a set of the latest products
+     *
+     * @return mixed
+     */
+    public function getLatestProducts() {
+        $sql = "SELECT *
+                FROM `{$this->tableProducts}`
+                ORDER BY `id` DESC
+                LIMIT 18";
+        return $this->Db->fetchAll($sql);
     }
 
     /**
