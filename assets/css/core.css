@@ -227,17 +227,17 @@ th, td {
 }
 
 .paging {
-  list-style: none;
+  /*list-style: none;
   width: 600px;
   float: left;
   background: #efefef;
   margin-bottom: 14px;
-  padding: 3px 10px;
+  padding: 3px 10px;*/
 }
 
 .paging li {
-  float: left;
-  margin-right: 10px;
+  /*float: left;
+  margin-right: 10px;*/
 }
 
 .inactive {

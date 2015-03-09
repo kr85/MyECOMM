@@ -9,14 +9,21 @@ var basketObject = {
             $.post('/module/call/basket', { id: item[0], job: item[1] }, function(data) {
                 var newId = item[0] + '_' + data.job;
                 if (data.job != item[1]) {
+                    var thisTarget = '#' + item[0] + '.btn-cart span span';
                     if (data.job == 0) {
                         trigger.attr("rel", newId);
-                        trigger.text("Remove from basket");
-                        trigger.addClass("red");
+                        $(thisTarget).css({
+                            'background': '#E30000',
+                            'color': '#fff',
+                            'border': '1px solid #950000'
+                        });
+                        $(thisTarget).text("Remove from Cart");
+                        $(thisTarget).removeClass("btn-cart-add");
                     } else {
                         trigger.attr("rel", newId);
-                        trigger.text("Add to basket");
-                        trigger.removeClass("red");
+                        $(thisTarget).removeAttr("style");
+                        $(thisTarget).text("Add to Cart");
+                        $(thisTarget).addClass("btn-cart-add");
                     }
                     if (!systemObject.isEmpty(data.replace_values)) {
                         systemObject.replaceValues(data.replace_values);

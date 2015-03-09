@@ -169,16 +169,42 @@ class Basket {
     public static function activeButton($sessionId) {
         if (isset($_SESSION['basket'][$sessionId])) {
             $id = 0;
-            $label = "Remove from basket";
+            $label = "Remove from Cart";
         } else {
             $id = 1;
-            $label = "Add to basket";
+            $label = "Add to Cart";
         }
         $out = "<a href=\"\" class=\"add_to_basket";
         $out .= ($id == 0) ? " red" : null;
         $out .= "\" rel=\"";
         $out .= $sessionId . "_" . $id;
         $out .= "\">{$label}</a>";
+        return $out;
+    }
+
+    /**
+     * Add the add/remove to/from cart button
+     *
+     * @param $sessionId
+     * @return string
+     */
+    public static function addRemoveCartButton($sessionId) {
+        $style = null;
+        if (isset($_SESSION['basket'][$sessionId])) {
+            $id = 0;
+            $label = "Remove from Cart";
+            $style = 'background: #E30000; color: #ffffff; border: 1px solid #950000';
+        } else {
+            $id = 1;
+            $label = "Add to Cart";
+        }
+        $out = '<button class="add_to_basket button btn-cart"';
+        $out .= ' rel="'.$sessionId.'_'.$id.'"';
+        $out .= ' id="'.$sessionId.'">';
+        $out .= '<span><span style="'.$style.'">';
+        $out .= $label;
+        $out .= '</span></span>';
+        $out .= '</button>';
         return $out;
     }
 

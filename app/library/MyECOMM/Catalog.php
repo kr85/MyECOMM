@@ -139,7 +139,7 @@ class Catalog extends Application {
                     (
                         SELECT COUNT(`id`)
                         FROM `{$this->tableCategories}`
-                        WHERE `category` = `s`.`id`
+                        WHERE `section` = `s`.`id`
                     ) AS `categories_count`
                     FROM `{$this->tableSections}` `s`
                     WHERE `s`.`id` = ?";
