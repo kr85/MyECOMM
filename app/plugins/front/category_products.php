@@ -9,6 +9,7 @@ $productsPerPage = $data['perPage'];
 $products = $data['products'];
 $productsCount = count($products);
 $page = $data['page'];
+$listing = $data['listing'];
 
 $objPaging = new Paging($objUrl, $products, $productsPerPage);
 $rows = $objPaging->getRecords();
@@ -38,7 +39,8 @@ $rows = $objPaging->getRecords();
                     onfocus="this.blur()"
                     type="text"
                     value="<?php echo $page; ?>"
-                    readonly="readonly"/>
+                    readonly="readonly"
+                />
             </div>
         </div>
         <div class="clearfix"></div>
@@ -54,7 +56,7 @@ $rows = $objPaging->getRecords();
     <ol class="products-list">
         <?php foreach ($rows as $product): ?>
             <li class="item">
-                <?php
+            <?php
                 $image = (!empty($product['image'])) ?
                     $product['image'] :
                     'unavailable.png';
@@ -73,7 +75,7 @@ $rows = $objPaging->getRecords();
                     'item',
                     $product['identity']
                 ]);
-                ?>
+            ?>
                 <a
                     href="<?php echo $link; ?>"
                     class="product-image"
@@ -91,7 +93,9 @@ $rows = $objPaging->getRecords();
                         <h2 class="product-name">
                             <a
                                 href="<?php echo $link; ?>"
-                                title="<?php echo Helper::encodeHTML($product['name'], 1); ?>"
+                                title="<?php echo Helper::encodeHTML(
+                                    $product['name'], 1
+                                ); ?>"
                                 >
                                 <?php echo Helper::encodeHTML($product['name'], 1); ?>
                             </a>
@@ -99,7 +103,9 @@ $rows = $objPaging->getRecords();
                         <div class="price-box">
                             <span class="regular-price">
                                 <span class="price">
-                                    <?php echo $data['objCurrency']->display(number_format($product['price'], 2)); ?>
+                                    <?php echo $data['objCurrency']->display(
+                                        number_format($product['price'], 2)
+                                    ); ?>
                                 </span>
                             </span>
                         </div>
@@ -166,5 +172,9 @@ $rows = $objPaging->getRecords();
         </div>
     </ol>
 <?php else: ?>
-    <p>There are no products in this section.</p>
+    <?php if ($listing == 'section'): ?>
+        <p>There are no products in this section.</p>
+    <?php elseif ($listing == 'category'): ?>
+        <p>There are no products in this category.</p>
+    <?php endif; ?>
 <?php endif; ?>
