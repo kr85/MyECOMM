@@ -37,10 +37,15 @@ var basketObject = {
         $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var item = $(this).attr('rel');
+            var thisTarget = '#' + item + '.btn-cart span span';
             $.post('/module/call/basket-remove', { id: item }, function(data) {
                 if (!systemObject.isEmpty(data.replace_values)) {
                     systemObject.replaceValues(data.replace_values);
                 }
+                $('#' + item + '.btn-cart').attr('rel', item + '_1');
+                $(thisTarget).removeAttr("style");
+                $(thisTarget).text("Add to Cart");
+                $(thisTarget).addClass("btn-cart-add");
             }, 'json');
         });
     },

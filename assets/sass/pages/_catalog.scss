@@ -5,7 +5,7 @@
 .main {
   .col-main {
     float: left;
-    width: 690px;
+    width: 650px;
 
     .breadcrumbs {
       border-bottom: solid 1px #CFCFCF;
@@ -79,6 +79,7 @@
                 text-align: center;
                 padding-left: 2px;
                 color: #919191;
+                cursor: default;
               }
             }
           }
@@ -86,7 +87,7 @@
           .pages {
             position: absolute;
             top: 13px;
-            left: 299px;
+            left: 288px;
             width: 175px;
 
             strong {
@@ -140,6 +141,7 @@
             p {
               margin-top: -12px;
               padding-bottom: 0;
+              text-align: justify;
             }
 
             .product-name {
@@ -227,6 +229,129 @@
     float: right;
     width: 190px;
     border-left: 1px solid rgb(207, 207, 207);
+    padding-left: 28px;
+  }
+}
+
+.block {
+  border-bottom: solid 1px #CFCFCF;
+  margin: 0 0 25px;
+  padding-bottom: 25px;
+
+  .block-title {
+    padding: 0 0 12px 0;
+
+    strong {
+      font-family: 'Quattrocento Sans', sans-serif;
+      font-size: 21px;
+      font-weight: normal;
+      color: #2F2F2F;
+    }
+  }
+
+  .block-content {
+    color: #919191;
+
+    p {
+      padding-bottom: 0;
+    }
+
+    .summary {
+      .amount {
+        padding: 0 0 8px 0;
+
+        a {
+          font-weight: bold;
+          text-decoration: none;
+          color: #919191;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .subtotal {
+        text-align: center;
+        margin: 0 0 20px 0;
+        background: #E4E4E4;
+        padding: 6px 0;
+
+        .label {
+
+        }
+
+        .price {
+          color: #343434;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .block-subtitle {
+      padding-bottom: 8px;
+    }
+
+    .item {
+      padding: 0 0 15px 0;
+    }
+
+    .mini-products-list {
+      .product-image {
+        float: left;
+        width: 65px;
+      }
+
+      .product-details {
+        .btn-edit {
+          float: right;
+          margin-right: 5px;
+          margin-top: 2px;
+        }
+
+        .btn-remove {
+          float: right;
+          margin-top: 2px;
+        }
+
+        .price {
+          white-space: nowrap !important;
+        }
+      }
+
+      .product-name {
+        line-height: 18px;
+        margin: 0 0 13px 0;
+
+        a {
+          font-size: 12px;
+          color: #19BDFA;
+          text-decoration: underline;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+
+  .empty {
+    strong {
+      color: #19BDFA;
+    }
+  }
+}
+
+.sidebar {
+  .paypal-logo {
+    display: block;
+    margin: 10px 0;
+    text-align: center;
+
+    a {
+      float: none;
+    }
   }
 }
 

@@ -100,3 +100,25 @@ button.btn-cart {
     border: solid 1px #2096C2;
   }
 }
+
+.btn-remove {
+  display: block;
+  width: 11px;
+  height: 11px;
+  font-size: 0;
+  line-height: 0;
+  background: url(../images/btn_remove.gif) 0 0 no-repeat;
+  text-indent: -999em;
+  overflow: hidden;
+}
+
+.btn-edit {
+  display: block;
+  width: 11px;
+  height: 11px;
+  font-size: 0;
+  line-height: 0;
+  background: url(../images/btn_edit.gif) 0 0 no-repeat;
+  text-indent: -999em;
+  overflow: hidden;
+}

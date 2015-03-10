@@ -75,7 +75,8 @@ if (!empty($out)): ?>
 
     <div class="sbm sbm_blue fl_r">
         <a href="<?php echo $data['objUrl']->href('checkout'); ?>" class="btn">
-            Checkout </a>
+            Checkout
+        </a>
     </div>
 
     <div class="sbm sbm_blue fl_l update_basket">

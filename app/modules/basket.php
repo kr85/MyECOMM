@@ -4,6 +4,7 @@ use MyECOMM\Catalog;
 use MyECOMM\Session;
 use MyECOMM\Helper;
 use MyECOMM\Basket;
+use MyECOMM\Plugin;
 
 // Result array
 $out = [];
@@ -37,6 +38,27 @@ if (isset($_POST['job']) && isset($_POST['id'])) {
         $out['replace_values']['.bl_st'] = $this->objCurrency->display(
             number_format($objBasket->subTotal, 2)
         );
+
+        if ($objBasket->numberOfItems == 1) {
+            $summaryAmount = 'There is <a href="'.
+                $this->objUrl->href('basket').'">'.
+                $objBasket->numberOfItems.
+                ' item</a> in your cart';
+        } else {
+            $summaryAmount = 'There are <a href="'.
+                $this->objUrl->href('basket').'">'.
+                $objBasket->numberOfItems.
+                ' items</a> in your cart';
+        }
+
+        Session::setSession('summaryAmount', $summaryAmount);
+
+        $out['replace_values']['#my-cart-small'] = Plugin::get('front'.DS.'basket_left', [
+            'objUrl' => $this->objUrl,
+            'objCurrency' => $this->objCurrency,
+            'objCatalog' => $objCatalog,
+            'summaryAmount' => $summaryAmount
+        ]);
 
         $out['error'] = false;
         echo Helper::json($out);

@@ -345,6 +345,26 @@ button.btn-cart {
     color: #fff;
     border: solid 1px #2096C2; }
 
+.btn-remove {
+  display: block;
+  width: 11px;
+  height: 11px;
+  font-size: 0;
+  line-height: 0;
+  background: url(../images/btn_remove.gif) 0 0 no-repeat;
+  text-indent: -999em;
+  overflow: hidden; }
+
+.btn-edit {
+  display: block;
+  width: 11px;
+  height: 11px;
+  font-size: 0;
+  line-height: 0;
+  background: url(../images/btn_edit.gif) 0 0 no-repeat;
+  text-indent: -999em;
+  overflow: hidden; }
+
 .form-valid .input:focus:valid, form textarea:focus:valid {
   background: #fff url(../images/valid.png) no-repeat 99% center;
   box-shadow: 0 0 5px #5cd053;
@@ -586,7 +606,7 @@ fieldset {
 
 .main .col-main {
   float: left;
-  width: 690px; }
+  width: 650px; }
   .main .col-main .breadcrumbs {
     border-bottom: solid 1px #CFCFCF;
     margin: 0 0 25px 0;
@@ -637,11 +657,12 @@ fieldset {
             height: 8px;
             text-align: center;
             padding-left: 2px;
-            color: #919191; }
+            color: #919191;
+            cursor: default; }
       .main .col-main .category-products .toolbar .pager .pages {
         position: absolute;
         top: 13px;
-        left: 299px;
+        left: 288px;
         width: 175px; }
         .main .col-main .category-products .toolbar .pager .pages strong {
           float: left;
@@ -673,7 +694,8 @@ fieldset {
       width: 100%; }
       .main .col-main .category-products .products-list .product-info-wrapper .product-container p {
         margin-top: -12px;
-        padding-bottom: 0; }
+        padding-bottom: 0;
+        text-align: justify; }
       .main .col-main .category-products .products-list .product-info-wrapper .product-container .product-name {
         font-size: 1em;
         font-weight: normal;
@@ -723,7 +745,74 @@ fieldset {
 .main .col-right {
   float: right;
   width: 190px;
-  border-left: 1px solid #cfcfcf; }
+  border-left: 1px solid #cfcfcf;
+  padding-left: 28px; }
+
+.block {
+  border-bottom: solid 1px #CFCFCF;
+  margin: 0 0 25px;
+  padding-bottom: 25px; }
+  .block .block-title {
+    padding: 0 0 12px 0; }
+    .block .block-title strong {
+      font-family: 'Quattrocento Sans', sans-serif;
+      font-size: 21px;
+      font-weight: normal;
+      color: #2F2F2F; }
+  .block .block-content {
+    color: #919191; }
+    .block .block-content p {
+      padding-bottom: 0; }
+    .block .block-content .summary .amount {
+      padding: 0 0 8px 0; }
+      .block .block-content .summary .amount a {
+        font-weight: bold;
+        text-decoration: none;
+        color: #919191; }
+        .block .block-content .summary .amount a:hover {
+          text-decoration: underline; }
+    .block .block-content .summary .subtotal {
+      text-align: center;
+      margin: 0 0 20px 0;
+      background: #E4E4E4;
+      padding: 6px 0; }
+      .block .block-content .summary .subtotal .price {
+        color: #343434;
+        font-weight: bold; }
+    .block .block-content .block-subtitle {
+      padding-bottom: 8px; }
+    .block .block-content .item {
+      padding: 0 0 15px 0; }
+    .block .block-content .mini-products-list .product-image {
+      float: left;
+      width: 65px; }
+    .block .block-content .mini-products-list .product-details .btn-edit {
+      float: right;
+      margin-right: 5px;
+      margin-top: 2px; }
+    .block .block-content .mini-products-list .product-details .btn-remove {
+      float: right;
+      margin-top: 2px; }
+    .block .block-content .mini-products-list .product-details .price {
+      white-space: nowrap !important; }
+    .block .block-content .mini-products-list .product-name {
+      line-height: 18px;
+      margin: 0 0 13px 0; }
+      .block .block-content .mini-products-list .product-name a {
+        font-size: 12px;
+        color: #19BDFA;
+        text-decoration: underline; }
+        .block .block-content .mini-products-list .product-name a:hover {
+          text-decoration: none; }
+  .block .empty strong {
+    color: #19BDFA; }
+
+.sidebar .paypal-logo {
+  display: block;
+  margin: 10px 0;
+  text-align: center; }
+  .sidebar .paypal-logo a {
+    float: none; }
 
 * {
   border: none;

@@ -80,6 +80,8 @@ class Basket {
      */
     private $user;
 
+    public $productsInfo;
+
     /**
      * Constructor
      *
@@ -107,6 +109,7 @@ class Basket {
         $this->subTotal();
         $this->tax();
         $this->total();
+        $this->productsInfo();
         $this->process();
     }
 
@@ -140,6 +143,19 @@ class Basket {
         }
         $this->weight = array_sum($this->weightList);
         $this->subTotal = round($value, 2);
+    }
+
+    /**
+     * Get the info of the products in the basket
+     */
+    private function productsInfo() {
+        if (!$this->emptyBasket) {
+            foreach ($_SESSION['basket'] as $key => $basket) {
+                $product = $this->objCatalog->getProduct($key);
+                $product['quantity'] = $basket['quantity'];
+                $this->productsInfo[] = $product;
+            }
+        }
     }
 
     /**
@@ -233,6 +249,17 @@ class Basket {
             if (isset($_SESSION['basket'][$id])) {
                 $out = "<a href=\"\" class=\"remove_basket red";
                 $out .= "\" rel=\"{$id}\">Remove</a>";
+                return $out;
+            }
+        }
+        return false;
+    }
+
+    public static function removeButtonSmallCart($id = null) {
+        if (!empty($id)) {
+            if (isset($_SESSION['basket'][$id])) {
+                $out = "<a href=\"#\" class=\"btn-remove remove_basket";
+                $out .= "\" rel=\"{$id}\">Remove Item</a>";
                 return $out;
             }
         }

@@ -136,7 +136,36 @@ elseif (empty($category) && !empty($section)):
                 </div>
             </div>
             <div class="col-right sidebar">
-
+                <div id="my-cart-small">
+                    <?php echo Plugin::get('front'.DS.'basket_left', [
+                        'objUrl' => $this->objUrl,
+                        'objCurrency' => $this->objCurrency,
+                        'objCatalog' => $objCatalog,
+                    ]); ?>
+                </div>
+                <div class="paypal-logo">
+                    <a
+                        href="#"
+                        title="Additional Options"
+                        onclick="window.open('https://www.paypal.com/us/' +
+                           'cgi-bin/webscr?cmd=xpt/Marketing/popup/' +
+                           'OLCWhatIsPayPal-outside',
+                        'paypal', 'width=800,' +
+                                  'height=550,' +
+                                  'left=0,' +
+                                  'top=0,' +
+                                  'location=no,' +
+                                  'status=yes,' +
+                                  'scrollbars=yes,' +
+                                  'resizable=yes');
+                        return false;"
+                    >
+                        <img
+                            src="<?php echo DS.ASSETS_DIR.DS.IMAGES_DIR.DS.'paypal.gif'; ?>"
+                            alt="Additional Options"
+                            title="Additional Options"/>
+                    </a>
+                </div>
             </div>
             <div class="clearfix"></div>
         </div>

@@ -116,6 +116,14 @@ defined("CATALOG_DIR")
 defined("CATALOG_PATH")
     || define("CATALOG_PATH", ASSETS_PATH.DS.CATALOG_DIR);
 
+// Images folder
+defined("IMAGES_DIR")
+    || define("IMAGES_DIR", "images");
+
+// Images path
+defined("IMAGES_PATH")
+    || define("IMAGES_PATH", ASSETS_PATH.DS.IMAGES_DIR);
+
 // Logs folder
 defined("LOGS_DIR")
     || define("LOGS_DIR", "logs");
