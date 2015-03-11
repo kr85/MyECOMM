@@ -9,28 +9,27 @@ $section = $this->objUrl->get('section');
 $page = $this->objUrl->get('pg');
 $price = $this->objUrl->get('price');
 
-if (isset($_POST['search'])) {
-    if (!empty($_POST['search'])) {
+if (isset($_POST['search'])):
+    if (!empty($_POST['search'])):
         $url = $this->objUrl->getCurrent('search').'/search/'.urlencode(
                 stripslashes($_POST['search'])
             );
-    } else {
+    else:
         $url = $this->objUrl->getCurrent('search');
-    }
+    endif;
     Helper::redirect($url);
-} else {
+else:
     $search = stripslashes(urlencode($this->objUrl->get('search')));
+endif;
 
-}
-
-if (empty($category) && empty($section)):
+if (empty($category) && empty($section) && empty($search)):
     require_once("error.php");
-elseif (empty($section) && !empty($category)):
+elseif (empty($section) && !empty($category) || !empty($search)):
     // Instantiate catalog class
     $objCatalog = new Catalog();
     $category = $objCatalog->getCategoryByIdentity($category);
 
-    if (empty($category)):
+    if (empty($category) && empty($search)):
         require_once("error.php");
     else:
         $this->metaTitle = $category['meta_title'];
@@ -38,7 +37,9 @@ elseif (empty($section) && !empty($category)):
         // Get all products of a category
         if (!empty($price)) {
             $products = $objCatalog->getProductsByPrice($category['id'], $price, 'category');
-        } else {
+        } elseif (!empty($search)) {
+            $products = $objCatalog->getAllProducts($search);
+        }else {
             $products = $objCatalog->getProductsByCategory($category['id']);
         }
         $section = $objCatalog->getSection($category['section']);
@@ -54,6 +55,14 @@ elseif (empty($section) && !empty($category)):
                             <a href="/" title="Go to Home Page">Home</a>
                             <span>&nbsp;</span>
                         </li>
+                        <?php if (!empty($search)): ?>
+                        <li class="search">
+                            <strong>
+                                Search results for:
+                                <?php echo '\''.Helper::encodeHTML($search).'\''; ?>
+                            </strong>
+                        </li>
+                        <?php else: ?>
                         <li class="section">
                             <a
                                 href="<?php echo $this->objUrl->href('catalog', [
@@ -72,11 +81,18 @@ elseif (empty($section) && !empty($category)):
                                 <?php echo Helper::encodeHTML($category['name']); ?>
                             </strong>
                         </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
                 <div class="page-title category-title">
                     <h1>
-                        <?php echo Helper::encodeHTML($category['name']); ?>
+                        <?php
+                            if (!empty($search)):
+                                echo 'Search results for: \''.Helper::encodeHTML($search).'\'';
+                            else:
+                                echo Helper::encodeHTML($category['name']);
+                            endif;
+                        ?>
                     </h1>
                 </div>
                 <div class="category-products" id="category-products">
