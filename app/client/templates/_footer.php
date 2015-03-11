@@ -1,4 +1,10 @@
-<?php use MyECOMM\Login; ?>
+<?php
+use MyECOMM\Login;
+
+if ($this->objUrl->currentPage != 'index'): ?>
+            </div>
+    </section>
+<?php endif; ?>
     <div class="push"></div>
     </div>
     <footer>

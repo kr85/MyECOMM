@@ -32,67 +32,63 @@ elseif (empty($section) && !empty($category)):
         $perPage = 3;
         require_once("_header.php");
         ?>
-        <section>
-            <div class="container">
-                <div class="main pad-bottom">
-                    <div class="col-main">
-                        <div class="breadcrumbs">
-                            <ul>
-                                <li class="home">
-                                    <a href="/" title="Go to Home Page">Home</a>
-                                    <span>&nbsp;</span>
-                                </li>
-                                <li class="section">
-                                    <a
-                                        href="<?php echo $this->objUrl->href('catalog', [
-                                            'section',
-                                            $section['identity']
-                                        ]); ?>"
-                                        title="Go to <?php
-                                            echo Helper::encodeHTML($section['name']);
-                                    ?> Section">
-                                        <?php echo Helper::encodeHTML($section['name']); ?>
-                                    </a>
-                                    <span>&nbsp;</span>
-                                </li>
-                                <li>
-                                    <strong>
-                                        <?php echo Helper::encodeHTML($category['name']); ?>
-                                    </strong>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="page-title category-title">
-                            <h1>
+        <div class="main pad-bottom">
+            <div class="col-main">
+                <div class="breadcrumbs">
+                    <ul>
+                        <li class="home">
+                            <a href="/" title="Go to Home Page">Home</a>
+                            <span>&nbsp;</span>
+                        </li>
+                        <li class="section">
+                            <a
+                                href="<?php echo $this->objUrl->href('catalog', [
+                                    'section',
+                                    $section['identity']
+                                ]); ?>"
+                                title="Go to <?php
+                                    echo Helper::encodeHTML($section['name']);
+                            ?> Section">
+                                <?php echo Helper::encodeHTML($section['name']); ?>
+                            </a>
+                            <span>&nbsp;</span>
+                        </li>
+                        <li>
+                            <strong>
                                 <?php echo Helper::encodeHTML($category['name']); ?>
-                            </h1>
-                        </div>
-                        <div class="category-products" id="category-products">
-                            <?php echo Plugin::get('front'.DS.'category_products', [
-                                'products' => $products,
-                                'page' => $page,
-                                'objCurrency' => $this->objCurrency,
-                                'objCatalog' => $objCatalog,
-                                'perPage' => $perPage,
-                                'sectionId' => $category['id'],
-                                'objUrl' => $this->objUrl,
-                                'listing' => 'category'
-                            ]); ?>
-                        </div>
-                    </div>
-                    <div class="col-right sidebar">
-                        <?php echo Plugin::get('front'.DS.'catalog_sidebar', [
-                            'objUrl' => $this->objUrl,
-                            'objCurrency' => $this->objCurrency,
-                            'objCatalog' => $objCatalog,
-                            'listing' => 'category',
-                            'id' => $category['id']
-                        ]); ?>
-                    </div>
-                    <div class="clearfix"></div>
+                            </strong>
+                        </li>
+                    </ul>
+                </div>
+                <div class="page-title category-title">
+                    <h1>
+                        <?php echo Helper::encodeHTML($category['name']); ?>
+                    </h1>
+                </div>
+                <div class="category-products" id="category-products">
+                    <?php echo Plugin::get('front'.DS.'category_products', [
+                        'products' => $products,
+                        'page' => $page,
+                        'objCurrency' => $this->objCurrency,
+                        'objCatalog' => $objCatalog,
+                        'perPage' => $perPage,
+                        'sectionId' => $category['id'],
+                        'objUrl' => $this->objUrl,
+                        'listing' => 'category'
+                    ]); ?>
                 </div>
             </div>
-        </section>
+            <div class="col-right sidebar">
+                <?php echo Plugin::get('front'.DS.'catalog_sidebar', [
+                    'objUrl' => $this->objUrl,
+                    'objCurrency' => $this->objCurrency,
+                    'objCatalog' => $objCatalog,
+                    'listing' => 'category',
+                    'id' => $category['id']
+                ]); ?>
+            </div>
+            <div class="clearfix"></div>
+        </div>
         <?php require_once("_footer.php");
     endif;
 elseif (empty($category) && !empty($section)):
@@ -115,8 +111,6 @@ elseif (empty($category) && !empty($section)):
         $perPage = 3;
         require_once("_header.php");
         ?>
-<section>
-    <div class="container">
         <div class="main pad-bottom">
             <div class="col-main">
                 <div class="breadcrumbs">
@@ -161,8 +155,6 @@ elseif (empty($category) && !empty($section)):
             </div>
             <div class="clearfix"></div>
         </div>
-    </div>
-</section>
         <?php require_once("_footer.php");
     endif;
 endif;

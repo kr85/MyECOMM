@@ -45,3 +45,7 @@ use MyECOMM\Basket;
             ]);
         ?>
     </header>
+    <?php if ($this->objUrl->currentPage != 'index'): ?>
+    <section>
+        <div class="container">
+    <?php endif; ?>
