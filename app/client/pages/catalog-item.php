@@ -115,7 +115,14 @@ if (!empty($id)):
                                     maxlength="12"
                                     min="1"
                                     step="1"
-                                    value="1"
+                                    value="<?php
+                                        $qty = Basket::getItemQty($product['id']);
+                                        if (!empty($qty)):
+                                            echo $qty;
+                                        else:
+                                            echo 1;
+                                        endif;
+                                    ?>"
                                     required="required"
                                     pattern="[0-9+]"
                                 />

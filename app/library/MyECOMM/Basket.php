@@ -273,6 +273,18 @@ class Basket {
     }
 
     /**
+     * Get the quantity of an item
+     *
+     * @param null $id
+     * @return null
+     */
+    public static function getItemQty($id = null) {
+        return (isset($_SESSION['basket'][$id]['quantity'])) ?
+            $_SESSION['basket'][$id]['quantity'] :
+            null;
+    }
+
+    /**
      * Add shipping to the basket/session
      *
      * @param null $shipping

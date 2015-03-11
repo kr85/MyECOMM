@@ -1,7 +1,12 @@
 .main {
+  display: table;
+  padding-top: 30px;
+
   .col-main {
-    float: left;
+    float: none;
     width: 650px;
+    display: table-cell;
+    padding-right: 35px;
 
     .breadcrumbs {
       border-bottom: solid 1px #CFCFCF;
@@ -34,6 +39,12 @@
     }
 
     .category-products {
+      .toolbar-bottom {
+        .toolbar {
+          margin: 0;
+        }
+      }
+
       .toolbar {
         border: solid 1px #DFDFDF;
         background: #F3F3F3 url(../images/toolbar.gif) repeat-x;
@@ -222,10 +233,11 @@
   }
 
   .col-right {
-    float: right;
+    float: none;
     width: 190px;
     border-left: 1px solid rgb(207, 207, 207);
     padding-left: 28px;
+    display: table-cell;
   }
 }
 

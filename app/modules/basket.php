@@ -16,6 +16,12 @@ if (isset($_POST['job']) && isset($_POST['id'])) {
     $job = $_POST['job'];
     $id = $_POST['id'];
 
+    if (isset($_POST['qty'])) {
+        $qty = $_POST['qty'];
+    } else {
+        $qty = 1;
+    }
+
     // Instantiate catalog class
     $objCatalog = new Catalog();
     $product = $objCatalog->getProduct($id);
@@ -27,7 +33,7 @@ if (isset($_POST['job']) && isset($_POST['id'])) {
                 $out['job'] = 1;
                 break;
             case 1:
-                Session::setItem($id);
+                Session::setItem($id, $qty);
                 $out['job'] = 0;
                 break;
         }

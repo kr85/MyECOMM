@@ -4,9 +4,16 @@ var basketObject = {
         $(document).on('click', thisIdentity, function (e) {
             e.preventDefault();
             var trigger = $(this);
+            var form = trigger.closest('form');
+            var qty;
+            if (form.length > 0) {
+                qty = $("input[name='qty']", form).val();
+            } else {
+                qty = 1;
+            }
             var param = trigger.attr("rel");
             var item = param.split("_");
-            $.post('/module/call/basket', { id: item[0], job: item[1] }, function(data) {
+            $.post('/module/call/basket', { id: item[0], job: item[1], qty: qty }, function(data) {
                 var newId = item[0] + '_' + data.job;
                 if (data.job != item[1]) {
                     var thisTarget = '#' + item[0] + '.btn-cart span span';
