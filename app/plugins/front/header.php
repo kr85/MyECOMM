@@ -55,10 +55,13 @@ $objCatalog = (is_object($data['objCatalog'])) ? $data['objCatalog'] : new Catal
             </a>
         </div>
         <div class="search-container">
-            <form action="">
+            <form action="<?php echo $data['objUrl']->href('catalog'); ?>" method="post">
                 <div class="form-search">
                     <input
                         type="text"
+                        name="search"
+                        id="search"
+                        value=""
                         class="input-text"
                         placeholder="Search..."
                     />

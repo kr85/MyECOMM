@@ -9,6 +9,20 @@ $section = $this->objUrl->get('section');
 $page = $this->objUrl->get('pg');
 $price = $this->objUrl->get('price');
 
+if (isset($_POST['search'])) {
+    if (!empty($_POST['search'])) {
+        $url = $this->objUrl->getCurrent('search').'/search/'.urlencode(
+                stripslashes($_POST['search'])
+            );
+    } else {
+        $url = $this->objUrl->getCurrent('search');
+    }
+    Helper::redirect($url);
+} else {
+    $search = stripslashes(urlencode($this->objUrl->get('search')));
+
+}
+
 if (empty($category) && empty($section)):
     require_once("error.php");
 elseif (empty($section) && !empty($category)):

@@ -866,7 +866,7 @@ fieldset {
   margin-bottom: 30px; }
   .product-view .product-essential .product-info-wrapper {
     float: right;
-    width: 450px; }
+    width: 445px; }
     .product-view .product-essential .product-info-wrapper .product-name {
       font-size: 1em;
       font-weight: normal; }
@@ -975,6 +975,22 @@ fieldset {
   padding-top: 10px; }
   .sidebar .paypal-logo a {
     float: none; }
+
+.main-col-error {
+  width: 100%;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 50px; }
+  .main-col-error h1 {
+    font-family: "Quattrocento Sans",sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    color: #2F2F2F;
+    line-height: 45px;
+    padding: 0 0 30px; }
+  .main-col-error p {
+    font-size: 18px;
+    color: #999; }
 
 * {
   border: none;
