@@ -665,12 +665,12 @@ fieldset {
           font-weight: 500; }
         .main .col-main .category-products .toolbar .pager .page-number .input-box {
           background-color: #FFF;
-          border: 1px solid #DFDFDF;
           font-size: 11px;
           color: #919191;
           margin: 0 5px;
           display: inline; }
           .main .col-main .category-products .toolbar .pager .page-number .input-box input {
+            border: 1px solid #DFDFDF;
             width: 28px;
             height: 8px;
             text-align: center;
