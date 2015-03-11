@@ -94,6 +94,18 @@ class Catalog extends Application {
     }
 
     /**
+     * Get all categories including the default one
+     *
+     * @return mixed
+     */
+    public function getCategoriesIncludeDefault() {
+        $sql = "SELECT *
+                FROM `{$this->tableCategories}`
+                ORDER BY `name` ASC";
+        return $this->Db->fetchAll($sql);
+    }
+
+    /**
      * Get all sections
      *
      * @return array
@@ -104,6 +116,18 @@ class Catalog extends Application {
                 WHERE `id` != ?
                 ORDER BY `name` ASC";
         return $this->Db->fetchAll($sql, 0);
+    }
+
+    /**
+     * Get all sections including the default one
+     *
+     * @return mixed
+     */
+    public function getSectionsIncludeDefault() {
+        $sql = "SELECT *
+                FROM `{$this->tableSections}`
+                ORDER BY `name` ASC";
+        return $this->Db->fetchAll($sql);
     }
 
     /**

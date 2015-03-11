@@ -29,8 +29,6 @@ $objCatalog = new Catalog();
                         $category = $objCatalog->getCategory($product['category']);
 
                         $link = $data['objUrl']->href('catalog-item', [
-                            'category',
-                            $category['identity'],
                             'item',
                             $product['identity']
                         ]);

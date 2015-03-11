@@ -9,7 +9,7 @@ $objBasket = (is_object($objBasket)) ? $objBasket : new Basket();
 
 ?>
 
-<div class="block">
+<div class="block block-small-cart">
     <div class="block-title">
         <strong>
             <span>My Cart</span>
@@ -53,11 +53,7 @@ $objBasket = (is_object($objBasket)) ? $objBasket : new Basket();
                         $height = Helper::getImageSize(CATALOG_PATH.DS.$image, 1);
                         $height = ($height > 71) ? 71 : $height;
 
-                        $category = $data['objCatalog']->getCategory($product['category']);
-
                         $link = $data['objUrl']->href('catalog-item', [
-                            'category',
-                            $category['identity'],
                             'item',
                             $product['identity']
                         ]);

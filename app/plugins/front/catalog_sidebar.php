@@ -28,6 +28,7 @@ if (!empty($products)):
                 $categories = $data['objCatalog']->getCategoriesBySection(
                     $data['id']
                 );
+                if (!empty($categories)):
         ?>
         <dt>Category</dt>
         <dd>
@@ -47,6 +48,7 @@ if (!empty($products)):
             <?php endforeach; ?>
             </ol>
         </dd>
+                <?php endif; ?>
             <?php endif; ?>
         <?php
             $links = $data['objCatalog']->getProductsByPriceLinks(
@@ -85,10 +87,7 @@ if (!empty($products)):
         <ol id="recently-viewed-items">
             <?php
                 foreach (array_reverse($recentlyViewed) as $key => $array):
-                    $cat = $data['objCatalog']->getCategory($array['category']);
                     $link = $data['objUrl']->href('catalog-item', [
-                        'category',
-                        $cat['identity'],
                         'item',
                         $array['identity']
                     ]);

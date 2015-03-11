@@ -4,6 +4,7 @@ use MyECOMM\Catalog;
 use MyECOMM\Basket;
 use MyECOMM\Helper;
 use MyECOMM\Session;
+use MyECOMM\Plugin;
 
 $id = $this->objUrl->get('item');
 
@@ -17,43 +18,221 @@ if (!empty($id)):
         $this->metaTitle = $product['meta_title'];
         $this->metaDescription = $product['meta_description'];
 
-        // Get product's category
+        // Get product's category and section
         $category = $objCatalog->getCategory($product['category']);
+        $section = $objCatalog->getSection($product['section']);
+        if (!empty($section) && empty($category)) {
+            $pRand = $objCatalog->getProductsBySection($product['section']);
+            $pRandKeys = array_rand($pRand, 3);
+        } else {
+            $pRand = $objCatalog->getProductsByCategory($product['section']);
+            $pRandKeys = array_rand($pRand, 3);
+        }
+
         // Save the product as recently viewed
         Session::setRecentlyViewed($product['id'], $product);
 
         require_once('_header.php');
+?>
+<div class="main pad-bottom">
+    <div class="col-main">
+        <div class="breadcrumbs">
+            <ul>
+                <li class="home">
+                    <a href="/" title="Go to Home Page">Home</a>
+                    <span>&nbsp;</span>
+                </li>
+                <?php if (!empty($section)): ?>
+                <li class="section">
+                    <a
+                        href="<?php echo $this->objUrl->href('catalog', [
+                            'section',
+                            $section['identity']
+                        ]); ?>"
+                        title="Go to <?php
+                            echo Helper::encodeHTML($section['name']);
+                        ?> Section"
+                    >
+                        <?php echo Helper::encodeHTML($section['name']); ?>
+                    </a>
+                    <span>&nbsp;</span>
+                </li>
+                <?php endif; ?>
+                <?php if (!empty($category)): ?>
+                    <li class="category">
+                        <a
+                            href="<?php echo $this->objUrl->href('catalog', [
+                                'category',
+                                $category['identity']
+                            ]); ?>"
+                            title="Go to <?php
+                            echo Helper::encodeHTML($category['name']);
+                            ?> Category"
+                            >
+                            <?php echo Helper::encodeHTML($category['name']); ?>
+                        </a>
+                        <span>&nbsp;</span>
+                    </li>
+                <?php endif; ?>
+                <li>
+                    <strong>
+                        <?php echo Helper::encodeHTML($product['name']); ?>
+                    </strong>
+                </li>
+            </ul>
+        </div>
+        <div class="product-view">
+            <div class="product-essential">
+                <form action="">
+                    <div class="product-info-wrapper">
+                        <div class="product-name">
+                            <h1>
+                                <?php echo Helper::encodeHTML($product['name']); ?>
+                            </h1>
+                        </div>
+                        <div class="price-box">
+                            <span class="regular-price">
+                                <span class="price">
+                                    <?php echo $this->objCurrency->display(
+                                        $product['price']
+                                    ); ?>
+                                </span>
+                            </span>
+                        </div>
+                        <p class="availability in-stock">
+                            Availability:
+                            <span>In Stock</span>
+                        </p>
+                        <div class="add-to-box">
+                            <div class="add-to-cart">
+                                <label for="qty">Qty:</label>
+                                <input
+                                    type="number"
+                                    id="qty"
+                                    name="qty"
+                                    class="input-text qty"
+                                    title="Qty"
+                                    maxlength="12"
+                                    min="1"
+                                    step="1"
+                                    value="1"
+                                    required="required"
+                                    pattern="[0-9+]"
+                                />
+                                <div class="clearfix"></div>
+                                <p class="add-btn-wrapper">
+                                    <?php echo Basket::addRemoveCartButton($product['id']); ?>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-image-box">
+                        <p class="product-image">
+                        <?php
+                            $image = (!empty($product['image'])) ?
+                                $product['image'] :
+                                'unavailable.png';
 
-        echo "<h1>Catalog :: ".$category['name']."</h1>";
+                            $width = Helper::getImageSize(CATALOG_PATH.DS.$image, 0);
+                            $width = ($width > 130) ? 130 : $width;
 
-        $image = !empty($product['image']) ?
-            $product['image'] :
-            'unavailable.png';
+                            $height = Helper::getImageSize(CATALOG_PATH.DS.$image, 1);
+                            $height = ($height > 195) ? 195 : $height;
+                        ?>
+                            <img
+                                src="<?php echo DS.ASSETS_DIR.DS.CATALOG_DIR.DS.$image; ?>"
+                                alt="<?php echo Helper::encodeHTML($product['name'], 1); ?>"
+                                title="<?php echo Helper::encodeHTML($product['name'], 1); ?>"
+                                width="<?php echo $width; ?>"
+                                height="<?php echo $height; ?>"
+                            />
+                        </p>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+            <div class="product-collateral">
+                <div class="box-collateral box-description">
+                    <h2>Description</h2>
+                    <p class="product-details">
+                        <?php echo Helper::encodeHTML($product['description']); ?>
+                    </p>
+                </div>
+                <div class="box-collateral box-up-sell">
+                    <h2>You may also be interested in the following product(s)</h2>
+                    <ul class="products-grid-upsell">
+                        <?php
+                            foreach ($pRandKeys as $key):
+                                $image = (!empty($pRand[$key]['image'])) ?
+                                    $pRand[$key]['image'] :
+                                    'unavailable.png';
 
-        // Check if image is empty
-        if (!empty($image)):
-            $width = Helper::getImageSize(CATALOG_PATH.DS.$image, 0);
-            $width = ($width > 120) ? 120 : $width;
-            echo "<div class=\"fl_l\">";
-            echo "<div class=\"lft\"><img src=\"";
-            echo DS.ASSETS_DIR.DS.CATALOG_DIR.DS.$image;
-            echo "\" alt=\"";
-            echo Helper::encodeHTML($product['name'], 1);
-            echo "\" width=\"{$width}\" /></div>";
-        endif;
+                                $width = Helper::getImageSize(CATALOG_PATH.DS.$image, 0);
+                                $width = ($width > 95) ? 95 : $width;
 
-        echo "<div class=\"rgt\"><h3>".$product['name']."</h3>";
-        echo "<h4><strong>";
-        echo $this->objCurrency->display($product['price']);
-        echo "</strong></h4>";
-        echo Basket::activeButton($product['id']);
-        echo "</div></div>";
-        echo "<div class=\"dev\">&#160;</div>";
-        echo "<p>".Helper::encodeHTML($product['description'])."</p>";
-        echo "<div class=\"dev br_td\">&#160;</div>";
-        echo "<p><a href=\"javascript:history.go(-1)\">Go back</a></p>";
+                                $height = Helper::getImageSize(CATALOG_PATH.DS.$image, 1);
+                                $height = ($height > 142) ? 142 : $height;
 
-        require_once('_footer.php');
+                                $link = $this->objUrl->href('catalog-item', [
+                                    'item',
+                                    $pRand[$key]['identity']
+                                ]);
+                        ?>
+                        <li class="item">
+                            <a
+                                href="<?php echo $link; ?>"
+                                class="product-image"
+                                title="<?php echo Helper::encodeHTML($pRand[$key]['name'], 1); ?>"
+                            >
+                                <img
+                                    src="<?php echo DS.ASSETS_DIR.DS.CATALOG_DIR.DS.$image; ?>"
+                                    alt="<?php echo Helper::encodeHTML($pRand[$key]['name'], 1); ?>"
+                                    title="<?php echo Helper::encodeHTML($pRand[$key]['name'], 1); ?>"
+                                    width="<?php echo $width; ?>"
+                                    height="<?php echo $height; ?>"
+                                />
+                            </a>
+                            <div class="up-holder">
+                                <h3 class="product-name">
+                                    <a
+                                        href="<?php echo $link; ?>"
+                                        title="<?php echo Helper::encodeHTML($pRand[$key]['name'], 1); ?>"
+                                    >
+                                            <?php echo Helper::shortenString(
+                                                Helper::encodeHTML(
+                                                    $pRand[$key]['name'], 1), 30
+                                            ); ?>
+                                    </a>
+                                </h3>
+                                <div class="price-box">
+                                    <span class="regular-price">
+                                        <span class="price">
+                                            <?php echo $this->objCurrency->display(
+                                                $pRand[$key]['price']
+                                            ); ?>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-right sidebar">
+        <?php echo Plugin::get('front'.DS.'catalog_sidebar', [
+            'objUrl' => $this->objUrl,
+            'objCurrency' => $this->objCurrency,
+            'objCatalog' => $objCatalog,
+            'listing' => 'category',
+            'id' => $category['id']
+        ]); ?>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<?php require_once('_footer.php');
     else:
         require_once('error.php');
     endif;

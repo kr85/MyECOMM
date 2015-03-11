@@ -67,11 +67,7 @@ $rows = $objPaging->getRecords();
                 $height = Helper::getImageSize(CATALOG_PATH.DS.$image, 1);
                 $height = ($height > 160) ? 160 : $height;
 
-                $category = $data['objCatalog']->getCategory($product['category']);
-
                 $link = $objUrl->href('catalog-item', [
-                    'category',
-                    $category['identity'],
                     'item',
                     $product['identity']
                 ]);
