@@ -345,7 +345,7 @@ require_once('_header.php');
                         <div class="buttons-set">
                             <p class="required">* Required Fields</p>
                             <a
-                                href="<?php echo $this->objUrl->href('login'); ?>"
+                                href="javascript:history.go(-1)"
                                 class="left back-btn">
                                 <small>« </small>Back
                             </a>

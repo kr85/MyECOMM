@@ -496,4 +496,106 @@ class Catalog extends Application {
         }
         return false;
     }
+
+    /**
+     * Get a list of the products sorted by price
+     *
+     * @param null $id
+     * @param null $listing
+     * @return array|null
+     */
+    public function getProductPriceRanges($id = null, $listing = null) {
+        if (!empty($id)) {
+            if ($listing == 'section') {
+                $products = $this->getProductsBySection($id);
+            } elseif ($listing == 'category') {
+                $products = $this->getProductsByCategory($id);
+            } else {
+                return null;
+            }
+            $priceList = [];
+            foreach ($products as $product) {
+                if (floatval($product['price']) < 10) {
+                    $priceList[10][] = $product;
+                } elseif (floatval($product['price']) < 20) {
+                    $priceList[20][] = $product;
+                } elseif (floatval($product['price']) < 30) {
+                    $priceList[30][] = $product;
+                } elseif (floatval($product['price']) < 40) {
+                    $priceList[40][] = $product;
+                } elseif (floatval($product['price']) < 50) {
+                    $priceList[50][] = $product;
+                } elseif (floatval($product['price']) < 60) {
+                    $priceList[60][] = $product;
+                } elseif (floatval($product['price']) < 70) {
+                    $priceList[70][] = $product;
+                } elseif (floatval($product['price']) < 80) {
+                    $priceList[80][] = $product;
+                } elseif (floatval($product['price']) < 90) {
+                    $priceList[90][] = $product;
+                } else {
+                    $priceList['more'][] = $product;
+                }
+            }
+            return $priceList;
+        }
+        return null;
+    }
+
+    /**
+     * Get all products of a price range
+     *
+     * @param $id
+     * @param $price
+     * @param $listing
+     * @return mixed
+     */
+    public function getProductsByPrice($id, $price, $listing) {
+        $products = $this->getProductPriceRanges($id, $listing);
+        return $products[$price];
+    }
+
+    /**
+     * Get a list of html links for price ranges
+     *
+     * @param $id
+     * @param $listing
+     * @return array
+     */
+    public function getProductsByPriceLinks($id, $listing) {
+        $products = $this->getProductPriceRanges($id, $listing);
+        if ($listing == 'section') {
+            $row = $this->getSection($id);
+        } else {
+            $row = $this->getCategory($id);
+        }
+
+        $objUrl = new Url();
+        $objCurrency = new Currency();
+
+        $out = [];
+        foreach ($products as $key => $array) {
+            $link = $objUrl->href('catalog', [$listing, $row['identity'], 'price', $key]);
+            if ($key != 'more') {
+                $fromPrice = floatval($key) - 10;
+                $fromPrice = $fromPrice.'.00';
+                $toPrice = floatval($key).'.00';
+                $name = $objCurrency->display($fromPrice).' - '.$objCurrency->display($toPrice);
+            } else {
+                $name = 'More';
+            }
+
+            $out[$key]  = '<li>';
+            $out[$key] .= '<a href="';
+            $out[$key] .= $link;
+            $out[$key] .= '" title="';
+            $out[$key] .= $name;
+            $out[$key] .= '">';
+            $out[$key] .= Helper::encodeHTML($name).' ('.count($array).')';
+            $out[$key] .= '</a>';
+            $out[$key] .= '</li>';
+        }
+        sort($out);
+        return $out;
+    }
 }

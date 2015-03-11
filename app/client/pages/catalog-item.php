@@ -3,6 +3,7 @@
 use MyECOMM\Catalog;
 use MyECOMM\Basket;
 use MyECOMM\Helper;
+use MyECOMM\Session;
 
 $id = $this->objUrl->get('item');
 
@@ -18,6 +19,8 @@ if (!empty($id)):
 
         // Get product's category
         $category = $objCatalog->getCategory($product['category']);
+        // Save the product as recently viewed
+        Session::setRecentlyViewed($product['id'], $product);
 
         require_once('_header.php');
 

@@ -7,6 +7,7 @@ use MyECOMM\Plugin;
 $category = $this->objUrl->get('category');
 $section = $this->objUrl->get('section');
 $page = $this->objUrl->get('pg');
+$price = $this->objUrl->get('price');
 
 if (empty($category) && empty($section)):
     require_once("error.php");
@@ -21,15 +22,19 @@ elseif (empty($section) && !empty($category)):
         $this->metaTitle = $category['meta_title'];
         $this->metaDescription = $category['meta_description'];
         // Get all products of a category
-        $products = $objCatalog->getProductsByCategory($category['id']);
+        if (!empty($price)) {
+            $products = $objCatalog->getProductsByPrice($category['id'], $price, 'category');
+        } else {
+            $products = $objCatalog->getProductsByCategory($category['id']);
+        }
         $section = $objCatalog->getSection($category['section']);
         $page = (empty($page)) ? 1 : intval($page);
-        $perPage = 5;
+        $perPage = 3;
         require_once("_header.php");
         ?>
         <section>
-            <div class="container col-separator">
-                <div class="main">
+            <div class="container">
+                <div class="main pad-bottom">
                     <div class="col-main">
                         <div class="breadcrumbs">
                             <ul>
@@ -76,7 +81,13 @@ elseif (empty($section) && !empty($category)):
                         </div>
                     </div>
                     <div class="col-right sidebar">
-
+                        <?php echo Plugin::get('front'.DS.'catalog_sidebar', [
+                            'objUrl' => $this->objUrl,
+                            'objCurrency' => $this->objCurrency,
+                            'objCatalog' => $objCatalog,
+                            'listing' => 'category',
+                            'id' => $category['id']
+                        ]); ?>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -94,15 +105,19 @@ elseif (empty($category) && !empty($section)):
     else:
         $this->metaTitle = $section['meta_title'];
         $this->metaDescription = $section['meta_description'];
-        // Get all products of a category
-        $products = $objCatalog->getProductsBySection($section['id']);
+        // Get all products of a section
+        if (!empty($price)) {
+            $products = $objCatalog->getProductsByPrice($section['id'], $price, 'section');
+        } else {
+            $products = $objCatalog->getProductsBySection($section['id']);
+        }
         $page = (empty($page)) ? 1 : intval($page);
-        $perPage = 5;
+        $perPage = 3;
         require_once("_header.php");
         ?>
 <section>
-    <div class="container col-separator">
-        <div class="main">
+    <div class="container">
+        <div class="main pad-bottom">
             <div class="col-main">
                 <div class="breadcrumbs">
                     <ul>
@@ -136,36 +151,13 @@ elseif (empty($category) && !empty($section)):
                 </div>
             </div>
             <div class="col-right sidebar">
-                <div id="my-cart-small">
-                    <?php echo Plugin::get('front'.DS.'basket_left', [
-                        'objUrl' => $this->objUrl,
-                        'objCurrency' => $this->objCurrency,
-                        'objCatalog' => $objCatalog,
-                    ]); ?>
-                </div>
-                <div class="paypal-logo">
-                    <a
-                        href="#"
-                        title="Additional Options"
-                        onclick="window.open('https://www.paypal.com/us/' +
-                           'cgi-bin/webscr?cmd=xpt/Marketing/popup/' +
-                           'OLCWhatIsPayPal-outside',
-                        'paypal', 'width=800,' +
-                                  'height=550,' +
-                                  'left=0,' +
-                                  'top=0,' +
-                                  'location=no,' +
-                                  'status=yes,' +
-                                  'scrollbars=yes,' +
-                                  'resizable=yes');
-                        return false;"
-                    >
-                        <img
-                            src="<?php echo DS.ASSETS_DIR.DS.IMAGES_DIR.DS.'paypal.gif'; ?>"
-                            alt="Additional Options"
-                            title="Additional Options"/>
-                    </a>
-                </div>
+                <?php echo Plugin::get('front'.DS.'catalog_sidebar', [
+                    'objUrl' => $this->objUrl,
+                    'objCurrency' => $this->objCurrency,
+                    'objCatalog' => $objCatalog,
+                    'listing' => 'section',
+                    'id' => $section['id']
+                ]); ?>
             </div>
             <div class="clearfix"></div>
         </div>

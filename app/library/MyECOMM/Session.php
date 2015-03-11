@@ -58,6 +58,16 @@ class Session {
     }
 
     /**
+     * Set recently viewed products for the session
+     *
+     * @param null $id
+     * @param null $value
+     */
+    public static function setRecentlyViewed($id = null, $value = null) {
+        $_SESSION['recentlyViewed'][$id] = $value;
+    }
+
+    /**
      * Clear the session
      *
      * @param null $id

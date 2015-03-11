@@ -255,11 +255,17 @@ class Basket {
         return false;
     }
 
+    /**
+     * Get the remove item button for the small cart
+     *
+     * @param null $id
+     * @return bool|string
+     */
     public static function removeButtonSmallCart($id = null) {
         if (!empty($id)) {
             if (isset($_SESSION['basket'][$id])) {
                 $out = "<a href=\"#\" class=\"btn-remove remove_basket";
-                $out .= "\" rel=\"{$id}\">Remove Item</a>";
+                $out .= "\" rel=\"{$id}\" title=\"Remove Item\">Remove Item</a>";
                 return $out;
             }
         }

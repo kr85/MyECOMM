@@ -280,6 +280,8 @@ footer, .push {
   .login-btn:hover {
     border: solid 1px #676767;
     background: url(../images/button.gif) repeat-x 0 -24px; }
+  .login-btn:active, .login-btn:focus {
+    border: solid 1px #959595; }
   .login-btn input {
     background-color: transparent;
     text-transform: uppercase;
@@ -364,6 +366,22 @@ button.btn-cart {
   background: url(../images/btn_edit.gif) 0 0 no-repeat;
   text-indent: -999em;
   overflow: hidden; }
+
+.btn-small-cart {
+  border: 1px solid #959595;
+  border-radius: 3px;
+  box-shadow: 2px 2px 5px #ddd;
+  background: url(../images/button.gif) repeat-x;
+  background-size: 30px auto;
+  color: #fff;
+  padding: 2px 8px 2px;
+  text-transform: uppercase;
+  font-size: 11px; }
+  .btn-small-cart:hover {
+    border: solid 1px #676767;
+    background: url(../images/button.gif) repeat-x 0 -24px; }
+  .btn-small-cart:active, .btn-small-cart:focus {
+    border: 1px solid #959595; }
 
 .form-valid .input:focus:valid, form textarea:focus:valid {
   background: #fff url(../images/valid.png) no-repeat 99% center;
@@ -733,7 +751,7 @@ fieldset {
     float: left;
     padding-left: 15px; }
     .main .col-main .category-products .products-list .add-to-links li .add-wishlist {
-      color: #19BDFA;
+      color: #D96137;
       text-decoration: underline; }
       .main .col-main .category-products .products-list .add-to-links li .add-wishlist:hover {
         text-decoration: none; }
@@ -756,9 +774,10 @@ fieldset {
     padding: 0 0 12px 0; }
     .block .block-title strong {
       font-family: 'Quattrocento Sans', sans-serif;
-      font-size: 21px;
+      font-size: 18px;
       font-weight: normal;
-      color: #2F2F2F; }
+      color: #2F2F2F;
+      line-height: 1.65; }
   .block .block-content {
     color: #919191; }
     .block .block-content p {
@@ -806,6 +825,27 @@ fieldset {
           text-decoration: none; }
   .block .empty strong {
     color: #19BDFA; }
+
+.block-layered-nav dt {
+  color: #19BDFA;
+  padding: 0 0 5px 22px;
+  font-size: 12px; }
+.block-layered-nav dd {
+  padding: 0 0 13px 35px; }
+  .block-layered-nav dd a {
+    color: #919191;
+    text-decoration: underline; }
+    .block-layered-nav dd a:hover {
+      text-decoration: none; }
+
+.block-viewed .block-content li.item {
+  padding: 0 0 5px 8px;
+  background: url(../images/mark.gif) no-repeat 0 7px; }
+.block-viewed .product-name a {
+  color: #919191;
+  text-decoration: none; }
+  .block-viewed .product-name a:hover {
+    text-decoration: underline; }
 
 .sidebar .paypal-logo {
   display: block;
@@ -884,6 +924,9 @@ ul, ol {
 
 .right {
   float: right; }
+
+.pad-bottom {
+  padding-bottom: 25px; }
 
 form input, form textarea {
   border: 1px solid #AAA; }

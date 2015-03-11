@@ -2,7 +2,7 @@
 
 use MyECOMM\Basket;
 use MyECOMM\Session;
-USE MyECOMM\Helper;
+use MyECOMM\Helper;
 
 // Instantiate basket class
 $objBasket = (is_object($objBasket)) ? $objBasket : new Basket();
@@ -74,7 +74,11 @@ $objBasket = (is_object($objBasket)) ? $objBasket : new Basket();
                         </a>
                         <div class="product-details">
                             <?php echo Basket::removeButtonSmallCart($product['id']); ?>
-                            <a href="<?php echo $data['objUrl']->href('basket'); ?>" class="btn-edit">
+                            <a
+                                href="<?php echo $data['objUrl']->href('basket'); ?>"
+                                class="btn-edit"
+                                title="Edit Item"
+                            >
                                 Edit Item
                             </a>
                             <p class="product-name">
@@ -96,7 +100,13 @@ $objBasket = (is_object($objBasket)) ? $objBasket : new Basket();
                 <?php endforeach; ?>
             </ol>
             <div class="actions">
-
+                <a
+                    href="<?php echo $data['objUrl']->href('checkout'); ?>"
+                    class="btn-small-cart right"
+                >
+                    <span>Checkout</span>
+                </a>
+                <div class="clearfix"></div>
             </div>
         <?php else: ?>
             <p class="empty">You have <strong>no items</strong> in your shopping cart.</p>

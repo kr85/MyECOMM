@@ -126,7 +126,6 @@ $rows = $objPaging->getRecords();
                         </div>
                         <ul class="add-to-links">
                             <li><a href="" class="add-wishlist">Add to Wishlist</a></li>
-                            <li><a href="" class="add-compare">Add to Compare</a></li>
                         </ul>
                     </div>
                 </div>
