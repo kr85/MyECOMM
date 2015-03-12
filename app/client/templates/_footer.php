@@ -17,8 +17,6 @@ if ($this->objUrl->currentPage != 'index'): ?>
                             <li><a href="">About Us</a></li>
                             <li><a href="">Customer Service</a></li>
                             <li><a href="">Site Map</a></li>
-                            <li><a href="">Search Terms</a></li>
-                            <li><a href="">Advanced Search</a></li>
                             <li><a href="">Orders and Returns</a></li>
                             <li><a href="">Contact</a></li>
                         </ul>
