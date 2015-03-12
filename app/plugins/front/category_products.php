@@ -13,23 +13,15 @@ $listing = $data['listing'];
 
 $objPaging = new Paging($objUrl, $products, $productsPerPage);
 $rows = $objPaging->getRecords();
+$productsOnPage = count($rows);
 
 ?>
 <div class="toolbar">
     <div class="pager">
         <p class="amount">
-            <?php if ($productsCount <= $productsPerPage): ?>
-                <?php echo $productsCount; ?> Item(s)
-            <?php else: ?>
-                Items
-                <?php
-                echo ($page * count($rows)) - $productsPerPage + 1;
-                ?> to <?php
-                echo ($page * count($rows));
-                ?> of <?php
-                echo $productsCount;
-                ?> total
-            <?php endif; ?>
+            <?php echo $data['objCatalog']->getPagerAmountText(
+                $page, $productsCount, $productsPerPage, $productsOnPage
+            ); ?>
         </p>
         <div class="page-number">
             <label for="page-num"><strong>Page: </strong></label>
@@ -61,11 +53,7 @@ $rows = $objPaging->getRecords();
                     $product['image'] :
                     'unavailable.png';
 
-                $width = Helper::getImageSize(CATALOG_PATH.DS.$image, 0);
-                $width = ($width > 107) ? 107 : $width;
-
-                $height = Helper::getImageSize(CATALOG_PATH.DS.$image, 1);
-                $height = ($height > 160) ? 160 : $height;
+                $imageSize = Helper::setImageSize(CATALOG_PATH.DS.$image, 107, 160);
 
                 $link = $objUrl->href('catalog-item', [
                     'item',
@@ -80,8 +68,8 @@ $rows = $objPaging->getRecords();
                     <img
                         src="<?php echo DS.ASSETS_DIR.DS.CATALOG_DIR.DS.$image; ?>"
                         alt="<?php echo Helper::encodeHTML($product['name'], 1); ?>"
-                        width="<?php echo $width; ?>"
-                        height="<?php echo $height; ?>"
+                        width="<?php echo $imageSize['width']; ?>"
+                        height="<?php echo $imageSize['height']; ?>"
                         />
                 </a>
                 <div class="product-info-wrapper">
@@ -131,18 +119,9 @@ $rows = $objPaging->getRecords();
             <div class="toolbar">
                 <div class="pager">
                     <p class="amount">
-                        <?php if ($productsCount <= $productsPerPage): ?>
-                            <?php echo $productsCount; ?> Item(s)
-                        <?php else: ?>
-                            Items
-                            <?php
-                            echo (($page * count($rows)) - $productsPerPage) + 1;
-                            ?> to <?php
-                            echo ($page * count($rows));
-                            ?> of <?php
-                            echo $productsCount;
-                            ?> total
-                        <?php endif; ?>
+                        <?php echo $data['objCatalog']->getPagerAmountText(
+                            $page, $productsCount, $productsPerPage, $productsOnPage
+                        ); ?>
                     </p>
                     <div class="page-number">
                         <label for="page-num"><strong>Page: </strong></label>

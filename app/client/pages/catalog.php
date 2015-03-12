@@ -114,7 +114,8 @@ elseif (empty($section) && !empty($category) || !empty($search)):
                     'objCurrency' => $this->objCurrency,
                     'objCatalog' => $objCatalog,
                     'listing' => 'category',
-                    'id' => $category['id']
+                    'id' => $category['id'],
+                    'productId' => 0
                 ]); ?>
             </div>
             <div class="clearfix"></div>
@@ -180,7 +181,8 @@ elseif (empty($category) && !empty($section)):
                     'objCurrency' => $this->objCurrency,
                     'objCatalog' => $objCatalog,
                     'listing' => 'section',
-                    'id' => $section['id']
+                    'id' => $section['id'],
+                    'productId' => 0
                 ]); ?>
             </div>
             <div class="clearfix"></div>

@@ -622,4 +622,28 @@ class Catalog extends Application {
         sort($out);
         return $out;
     }
+
+    /**
+     * Get the pager amount text
+     *
+     * @param $page
+     * @param $productsCount
+     * @param $productsPerPage
+     * @param $productsOnPage
+     * @return string
+     */
+    public function getPagerAmountText(
+        $page, $productsCount, $productsPerPage, $productsOnPage
+    ) {
+        if ($productsCount <= $productsPerPage) {
+            return $productsCount.' Item(s)';
+        } elseif ($productsOnPage < $productsPerPage) {
+            return 'Items '.(($page * $productsOnPage) + 1).' to '.
+                $productsCount.' of '.$productsCount.' total';
+        } else {
+            return 'Items '.((($page * $productsOnPage) - $productsPerPage) + 1).
+                ' to '.($page * $productsOnPage).
+                ' of '.$productsCount.' total';
+        }
+    }
 }

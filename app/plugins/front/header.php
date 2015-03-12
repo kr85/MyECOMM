@@ -51,11 +51,15 @@ $objCatalog = (is_object($data['objCatalog'])) ? $data['objCatalog'] : new Catal
     <div class="header-row-2-container">
         <div class="logo-container">
             <a href="/" title="Books eCommerce">
-                <img src="/../assets/images/logo.gif" alt="Books eCommerce"/>
+                <img src="<?php echo DS.ASSETS_DIR.DS.IMAGES_DIR.DS.'logo.gif'; ?>" alt="Books eCommerce"/>
             </a>
         </div>
         <div class="search-container">
-            <form action="<?php echo $data['objUrl']->href('catalog'); ?>" method="post">
+            <form
+                action="<?php echo $data['objUrl']->href('catalog'); ?>"
+                method="post"
+                id="form-search"
+            >
                 <div class="form-search">
                     <input
                         type="text"

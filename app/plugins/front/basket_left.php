@@ -47,11 +47,7 @@ $objBasket = (is_object($objBasket)) ? $objBasket : new Basket();
                             $product['image'] :
                             'unavailable.png';
 
-                        $width = Helper::getImageSize(CATALOG_PATH.DS.$image, 0);
-                        $width = ($width > 50) ? 50 : $width;
-
-                        $height = Helper::getImageSize(CATALOG_PATH.DS.$image, 1);
-                        $height = ($height > 71) ? 71 : $height;
+                        $imageSize = Helper::setImageSize(CATALOG_PATH.DS.$image, 50, 71);
 
                         $link = $data['objUrl']->href('catalog-item', [
                             'item',
@@ -63,8 +59,8 @@ $objBasket = (is_object($objBasket)) ? $objBasket : new Basket();
                             <img
                                 src="<?php echo DS.ASSETS_DIR.DS.CATALOG_DIR.DS.$image; ?>"
                                 alt="<?php echo Helper::encodeHTML($product['name'], 1); ?>"
-                                width="<?php echo $width; ?>"
-                                height="<?php echo $height; ?>"
+                                width="<?php echo $imageSize['width']; ?>"
+                                height="<?php echo $imageSize['height']; ?>"
                                 title="<?php echo Helper::encodeHTML($product['name'], 1); ?>"
                             />
                         </a>

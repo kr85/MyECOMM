@@ -5,4 +5,5 @@ $(document).ready(function () {
     systemObject.selectCountryState('.select_country_state');
     systemObject.animateImage('.product');
     systemObject.showSubNavMain('.sub-nav');
+    systemObject.formSearchEmptyValid('#form-search');
 });

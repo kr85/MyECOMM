@@ -68,6 +68,28 @@ class Helper {
     }
 
     /**
+     * Sets the size of a image
+     *
+     * @param $image
+     * @param $wSize
+     * @param $hSize
+     * @return array|null
+     */
+    public static function setImageSize($image, $wSize, $hSize) {
+        if (!empty($image) && !empty($wSize) && !empty($hSize)) {
+            $out = [];
+            $width = Helper::getImageSize($image, 0);
+            $width = ($width > $wSize) ? $wSize : $width;
+            $out['width'] = $width;
+            $height = Helper::getImageSize($image, 1);
+            $height = ($height > $hSize) ? $hSize : $height;
+            $out['height'] = $height;
+            return $out;
+        }
+        return null;
+    }
+
+    /**
      * Shorten the description of a product
      *
      * @param $string

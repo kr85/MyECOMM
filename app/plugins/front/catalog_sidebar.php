@@ -8,12 +8,84 @@ $recentlyViewed = Session::getSession('recentlyViewed');
 $listing = $data['listing'];
 if ($listing == 'section') {
     $products = $data['objCatalog']->getProductsBySection($data['id']);
+    $pRandKeys = array_rand($products, 3);
 } else {
     $products = $data['objCatalog']->getProductsByCategory($data['id']);
+    $pRandKeys = array_rand($products, 3);
 }
 if (!empty($products)):
 ?>
 
+<?php if ($data['productId'] != 0): ?>
+<div class="block block-related">
+    <div class="block-title">
+        <strong>
+            <span>Related Products</span>
+        </strong>
+    </div>
+    <div class="block-content">
+        <p class="block-subtitle">
+            Check items to add to the cart
+        </p>
+        <ol class="mini-products-list">
+            <?php
+                foreach ($pRandKeys as $key):
+                    $image = (!empty($products[$key]['image'])) ?
+                        $products[$key]['image'] :
+                        'unavailable.png';
+
+                    $imageSize = Helper::setImageSize(CATALOG_PATH.DS.$image, 85, 127);
+
+                    $link = $data['objUrl']->href('catalog-item', [
+                        'item',
+                        $products[$key]['identity']
+                    ]);
+            ?>
+            <li class="item">
+                <div class="product">
+                    <a
+                        href="<?php echo $link; ?>"
+                        class="product-image"
+                        title="<?php echo Helper::encodeHTML($products[$key]['name'], 1); ?>"
+                    >
+                        <img
+                            src="<?php echo DS.ASSETS_DIR.DS.CATALOG_DIR.DS.$image; ?>"
+                            alt="<?php echo Helper::encodeHTML($products[$key]['name'], 1); ?>"
+                            title="<?php echo Helper::encodeHTML($products[$key]['name'], 1); ?>"
+                            width="<?php echo $imageSize['width']; ?>"
+                            height="<?php echo $imageSize['height']; ?>"
+                        />
+                    </a>
+                    <div class="product-details">
+                        <p class="product-name">
+                            <a
+                                href="<?php echo $link; ?>"
+                                title="<?php echo Helper::encodeHTML($products[$key]['name'], 1); ?>"
+                            >
+                                <?php echo Helper::shortenString(
+                                    Helper::encodeHTML($products[$key]['name'], 1),
+                                    45
+                                ); ?>
+                            </a>
+                        </p>
+                        <div class="price-box">
+                            <span class="regular-price">
+                                <span class="price">
+                                    <?php echo $data['objCurrency']->display(
+                                        $products[$key]['price']
+                                    ); ?>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <div class="clearfix"></div>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+</div>
+<?php endif; ?>
 <div class="block block-layered-nav">
     <div class="block-title">
         <strong>

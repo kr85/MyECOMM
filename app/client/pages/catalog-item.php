@@ -23,10 +23,10 @@ if (!empty($id)):
         $section = $objCatalog->getSection($product['section']);
         if (!empty($section) && empty($category)) {
             $pRand = $objCatalog->getProductsBySection($product['section']);
-            $pRandKeys = array_rand($pRand, 3);
+            $pRandKeys = array_rand($pRand, 6);
         } else {
             $pRand = $objCatalog->getProductsByCategory($product['section']);
-            $pRandKeys = array_rand($pRand, 3);
+            $pRandKeys = array_rand($pRand, 6);
         }
 
         // Save the product as recently viewed
@@ -140,18 +140,15 @@ if (!empty($id)):
                                 $product['image'] :
                                 'unavailable.png';
 
-                            $width = Helper::getImageSize(CATALOG_PATH.DS.$image, 0);
-                            $width = ($width > 130) ? 130 : $width;
+                            $imageSize = Helper::setImageSize(CATALOG_PATH.DS.$image, 130, 195);
 
-                            $height = Helper::getImageSize(CATALOG_PATH.DS.$image, 1);
-                            $height = ($height > 195) ? 195 : $height;
                         ?>
                             <img
                                 src="<?php echo DS.ASSETS_DIR.DS.CATALOG_DIR.DS.$image; ?>"
                                 alt="<?php echo Helper::encodeHTML($product['name'], 1); ?>"
                                 title="<?php echo Helper::encodeHTML($product['name'], 1); ?>"
-                                width="<?php echo $width; ?>"
-                                height="<?php echo $height; ?>"
+                                width="<?php echo $imageSize['width']; ?>"
+                                height="<?php echo $imageSize['height']; ?>"
                             />
                         </p>
                     </div>
@@ -174,11 +171,7 @@ if (!empty($id)):
                                     $pRand[$key]['image'] :
                                     'unavailable.png';
 
-                                $width = Helper::getImageSize(CATALOG_PATH.DS.$image, 0);
-                                $width = ($width > 95) ? 95 : $width;
-
-                                $height = Helper::getImageSize(CATALOG_PATH.DS.$image, 1);
-                                $height = ($height > 142) ? 142 : $height;
+                                $imageSize = Helper::setImageSize(CATALOG_PATH.DS.$image, 95, 142);
 
                                 $link = $this->objUrl->href('catalog-item', [
                                     'item',
@@ -195,8 +188,8 @@ if (!empty($id)):
                                     src="<?php echo DS.ASSETS_DIR.DS.CATALOG_DIR.DS.$image; ?>"
                                     alt="<?php echo Helper::encodeHTML($pRand[$key]['name'], 1); ?>"
                                     title="<?php echo Helper::encodeHTML($pRand[$key]['name'], 1); ?>"
-                                    width="<?php echo $width; ?>"
-                                    height="<?php echo $height; ?>"
+                                    width="<?php echo $imageSize['width']; ?>"
+                                    height="<?php echo $imageSize['height']; ?>"
                                 />
                             </a>
                             <div class="up-holder">
@@ -234,7 +227,8 @@ if (!empty($id)):
             'objCurrency' => $this->objCurrency,
             'objCatalog' => $objCatalog,
             'listing' => 'category',
-            'id' => $category['id']
+            'id' => $category['id'],
+            'productId' => $product['id']
         ]); ?>
     </div>
     <div class="clearfix"></div>

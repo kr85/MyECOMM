@@ -20,11 +20,7 @@ $objCatalog = new Catalog();
                             $product['image'] :
                             'unavailable.png';
 
-                        $width = Helper::getImageSize(CATALOG_PATH.DS.$image, 0);
-                        $width = ($width > 107) ? 107 : $width;
-
-                        $height = Helper::getImageSize(CATALOG_PATH.DS.$image, 1);
-                        $height = ($height > 160) ? 160 : $height;
+                        $imageSize = Helper::setImageSize(CATALOG_PATH.DS.$image, 107, 160);
 
                         $category = $objCatalog->getCategory($product['category']);
 
@@ -42,8 +38,8 @@ $objCatalog = new Catalog();
                                 id="product-image-<?php echo $product['id']; ?>"
                                 src="<?php echo DS.ASSETS_DIR.DS.CATALOG_DIR.DS.$image; ?>"
                                 alt="<?php echo Helper::encodeHTML($product['name'], 1); ?>"
-                                width="<?php echo $width; ?>"
-                                height="<?php echo $height; ?>"/>
+                                width="<?php echo $imageSize['width']; ?>"
+                                height="<?php echo $imageSize['height']; ?>"/>
                         </a>
                         <h3 id="product-name-<?php echo $product['id']; ?>">
                             <a

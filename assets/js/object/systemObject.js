@@ -99,5 +99,15 @@ var systemObject = {
                 $(thisTarget).addClass('sub-nav-wrapper-hidden');
             }
         );
+    },
+    formSearchEmptyValid: function (thisIdentity) {
+        "use strict";
+        $(document).on('submit', thisIdentity, function (e) {
+            var trigger = $(this);
+            var input = trigger.find('#search').val();
+            if (systemObject.isEmpty(input)) {
+                e.preventDefault();
+            }
+        });
     }
 };

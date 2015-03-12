@@ -6,7 +6,7 @@
     float: none;
     width: 650px;
     display: table-cell;
-    padding-right: 35px;
+    padding-right: 30px;
 
     .breadcrumbs {
       border-bottom: solid 1px #CFCFCF;
@@ -576,6 +576,36 @@
     a {
       float: none;
     }
+  }
+}
+
+.block-related {
+  .product {
+    position: relative;
+    height: 127px;
+    padding-top: 10px;
+  }
+
+  .product-image {
+    width: 85px;
+  }
+
+  .product-details {
+    float: right;
+    width: 90px;
+  }
+
+  .price-box {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .price {
+    font-family: 'Quattrocento Sans', sans-serif;
+    font-weight: normal !important;
+    font-size: 23px !important;
+    color: #2F2F2F !important;
   }
 }
 
