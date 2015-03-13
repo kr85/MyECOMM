@@ -506,10 +506,6 @@ button.btn-cart {
 
 .account-create {
   margin-top: -20px; }
-  .account-create .row-1 {
-    height: 320px; }
-  .account-create .row-2 {
-    height: 110px; }
   .account-create .row-3 {
     height: 90px; }
     .account-create .row-3 .buttons-set .required {
@@ -561,7 +557,8 @@ fieldset {
   width: 424px; }
 
 .first-name .input-box {
-  padding-left: 0; }
+  padding-left: 0;
+  padding-right: 9px; }
   .first-name .input-box input {
     width: 407px; }
 
@@ -570,22 +567,24 @@ fieldset {
 .last-name .input-box {
   padding-left: 12px; }
   .last-name .input-box input {
-    width: 407px; }
+    width: 405px; }
 
 .address input {
-  width: 843px; }
+  width: 840px; }
 
 .city label {
   padding-left: 0; }
 .city .input-box {
-  padding-left: 0; }
+  padding-left: 0;
+  padding-right: 15px; }
 .city input {
   width: 260px; }
 
 .state label {
   padding-left: 10px; }
 .state .input-box {
-  padding-left: 8px; }
+  padding-left: 8px;
+  padding-right: 6px; }
 .state input {
   width: 260px; }
 
@@ -594,7 +593,7 @@ fieldset {
 .zipcode .input-box {
   padding-left: 18px; }
 .zipcode input {
-  width: 260px; }
+  width: 257px; }
 
 .create-account-country {
   width: 850px;
@@ -609,13 +608,14 @@ fieldset {
   background-color: #F3F3F3; }
 
 .email input {
-  width: 843px; }
+  width: 840px; }
 
 .field-three {
   width: 282.6px; }
 
 .passwd .input-box {
-  padding-left: 0; }
+  padding-left: 0;
+  padding-right: 9px; }
   .passwd .input-box input {
     width: 407px; }
 
@@ -624,7 +624,7 @@ fieldset {
 .passwd-conf .input-box {
   padding-left: 12px; }
   .passwd-conf .input-box input {
-    width: 407px; }
+    width: 404px; }
 
 .back-btn {
   color: #19BDFA;
@@ -1068,36 +1068,6 @@ fieldset {
     font-size: 18px;
     color: #999; }
 
-.description-wrapper .error-msg {
-  border-color: #F16048;
-  background-color: #FAEBE7;
-  border-style: solid !important;
-  border-width: 1px !important;
-  padding: 8px 8px 8px 32px !important;
-  background-image: url(../images/i_msg-error.gif);
-  background-position: 10px 9px !important;
-  background-repeat: no-repeat !important;
-  margin-top: 5px;
-  margin-bottom: 5px; }
-  .description-wrapper .error-msg span {
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    color: #DF280A; }
-.description-wrapper .success-msg {
-  border-style: solid !important;
-  border-width: 1px !important;
-  padding: 8px 8px 8px 32px !important;
-  background-position: 10px 9px !important;
-  background-repeat: no-repeat !important;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  border-color: #446423;
-  background-color: #eff5ea;
-  background-image: url(../images/i_msg-success.gif); }
-  .description-wrapper .success-msg span {
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    color: #3d6611; }
 .description-wrapper .form-returns, .description-wrapper .form-contact-us {
   margin-top: -20px; }
   .description-wrapper .form-returns ul, .description-wrapper .form-contact-us ul {
@@ -1123,6 +1093,38 @@ fieldset {
   text-align: right;
   color: #19BDFA;
   padding-top: 10px; }
+
+.error-msg {
+  border-color: #F16048;
+  background-color: #FAEBE7;
+  border-style: solid !important;
+  border-width: 1px !important;
+  padding: 8px 8px 8px 32px !important;
+  background-image: url(../images/i_msg-error.gif);
+  background-position: 10px 9px !important;
+  background-repeat: no-repeat !important;
+  margin-top: 5px;
+  margin-bottom: 5px; }
+  .error-msg span {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #DF280A; }
+
+.success-msg {
+  border-style: solid !important;
+  border-width: 1px !important;
+  padding: 8px 8px 8px 32px !important;
+  background-position: 10px 9px !important;
+  background-repeat: no-repeat !important;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-color: #446423;
+  background-color: #eff5ea;
+  background-image: url(../images/i_msg-success.gif); }
+  .success-msg span {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #3d6611; }
 
 * {
   border: none;

@@ -139,9 +139,9 @@ require_once('_header.php');
                                             id="first_name"
                                             class="input"
                                             value="<?php echo $objForm->stickyText('first_name'); ?>"
-                                            required="required"
                                             pattern="^([ \u00c0-\u01ff\p{L}'\-]){2,50}$"
                                             title="Please enter your first name."
+                                            required="required"
                                         />
                                     </div>
                                 </div>
@@ -155,9 +155,9 @@ require_once('_header.php');
                                             id="last_name"
                                             class="input"
                                             value="<?php echo $objForm->stickyText('last_name'); ?>"
-                                            required="required"
                                             pattern="^([ \u00c0-\u01ff\p{L}'\-]){2,50}$"
                                             title="Please enter your last name."
+                                            required="required"
                                         />
                                     </div>
                                 </div>
@@ -174,8 +174,8 @@ require_once('_header.php');
                                         id="address_1"
                                         class="input"
                                         value="<?php echo $objForm->stickyText('address_1'); ?>"
-                                        required="required"
                                         title="Please enter the first line of your address."
+                                        required="required"
                                     />
                                 </div>
                             </div>
@@ -207,8 +207,8 @@ require_once('_header.php');
                                         id="city"
                                         class="input"
                                         value="<?php echo $objForm->stickyText('city'); ?>"
-                                        required="required"
                                         title="Please enter your city."
+                                        required="required"
                                     />
                                 </div>
                             </div>
@@ -229,9 +229,9 @@ require_once('_header.php');
                                         id="state"
                                         class="input state-input"
                                         value="<?php echo $objForm->stickyText('state'); ?>"
-                                        required="required"
                                         title="Please enter your state."
                                         style="display: none;"
+                                        required="required"
                                     />
                                 </div>
                             </div>
@@ -245,8 +245,8 @@ require_once('_header.php');
                                         id="zip_code"
                                         class="input"
                                         value="<?php echo $objForm->stickyText('zip_code'); ?>"
-                                        required="required"
                                         title="Please enter your zipcode."
+                                        required="required"
                                     />
                                 </div>
                             </div>
@@ -278,10 +278,10 @@ require_once('_header.php');
                                         id="email"
                                         class="input"
                                         value="<?php echo $objForm->stickyText('email'); ?>"
-                                        required="required"
                                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                                         autocomplete="off"
                                         title="Please enter a valid email address."
+                                        required="required"
                                     />
                                 </div>
                             </div>
@@ -305,13 +305,13 @@ require_once('_header.php');
                                             name="password"
                                             id="password"
                                             class="input"
-                                            required="required"
                                             autocomplete="off"
                                             pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                                             title="Must contain at least one
                                             UpperCase letter, LowerCase letter,
                                             Number/Special Character and be minimum of 8 characters."
                                             maxlength="16"
+                                            required="required"
                                         />
                                     </div>
                                 </div>
@@ -324,13 +324,13 @@ require_once('_header.php');
                                             name="confirm_password"
                                             id="confirm_password"
                                             class="input"
-                                            required="required"
                                             autocomplete="off"
                                             pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                                             title="Must contain at least one
                                             UpperCase letter, LowerCase letter,
                                             Number/Special Character and be minimum of 8 characters."
                                             maxlength="16"
+                                            required="required"
                                         />
                                     </div>
                                 </div>

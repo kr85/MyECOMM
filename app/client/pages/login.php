@@ -57,17 +57,17 @@ require_once('_header.php');
                         <h2>Registered Customers</h2>
                         <p>If you have an account with us, please log in.</p>
                         <div class="form-list">
+                            <?php echo $objValidation->validate('login'); ?>
                             <ul>
                                 <li>
                                     <label for="login_email">Email address: <em>*</em></label>
-                                    <?php echo $objValidation->validate('login'); ?>
                                     <input
                                         type="email"
                                         name="login_email"
                                         id="login_email"
+                                        required="required"
                                         class="login-input-field input"
                                         value="<?php echo $objForm->stickyText('login_email'); ?>"
-                                        required="required"
                                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                                         placeholder="your@email.com"
                                         />
@@ -79,8 +79,8 @@ require_once('_header.php');
                                         name="login_password"
                                         id="login_password"
                                         class="login-input-field input"
-                                        value=""
                                         required="required"
+                                        value=""
                                         placeholder="Your password"
                                         />
                                 </li>
