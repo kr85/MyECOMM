@@ -180,6 +180,44 @@ class Order extends Application {
     }
 
     /**
+     * Get order by id and last name
+     *
+     * @param null $id
+     * @param null $lastName
+     * @return mixed
+     */
+    public function getOrderByIdLastName($id = null, $lastName = null) {
+        $id = (!empty($id)) ? $id : $this->id;
+        $sql = "SELECT `o`.*,
+                DATE_FORMAT(`o`.`date`, '%D %M %Y %r') AS `date_formatted`,
+                CONCAT_WS(' ', `o`.`first_name`, `o`.`last_name`) AS `full_name`,
+                IF (
+                  `o`.`address_2` != '',
+                  CONCAT_WS(', ', `o`.`address_1`, `o`.`address_2`),
+                  `o`.`address_1`
+                ) AS `address`,
+                IF (
+                  `o`.`shipping_address_2` != '',
+                  CONCAT_WS(', ', `o`.`shipping_address_1`, `o`.`shipping_address_2`),
+                  `o`.`shipping_address_1`
+                ) AS `shipping_address`,
+                (
+                  SELECT `name`
+                  FROM `{$this->tableCountries}`
+                  WHERE `id` = `o`.`country`
+                ) AS `country_name`,
+                (
+                  SELECT `name`
+                  FROM `{$this->tableCountries}`
+                  WHERE `id` = `o`.`shipping_country`
+                ) AS `shipping_country_name`
+                FROM `{$this->tableOrders}` `o`
+                WHERE `o`.`id` = ?
+                AND `o`.`last_name` = ?";
+        return $this->Db->fetchOne($sql, [$id, $lastName]);
+    }
+
+    /**
      * Get a specific order by token
      *
      * @param null $token

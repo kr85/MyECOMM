@@ -1,0 +1,87 @@
+.description-wrapper {
+
+  .error-msg {
+    border-color: #F16048;
+    background-color: #FAEBE7;
+    border-style: solid !important;
+    border-width: 1px !important;
+    padding: 8px 8px 8px 32px !important;
+    background-image: url(../images/i_msg-error.gif);
+    background-position: 10px 9px !important;
+    background-repeat: no-repeat !important;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    span {
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      color: #DF280A;
+    }
+  }
+
+  .success-msg {
+    border-style: solid !important;
+    border-width: 1px !important;
+    padding: 8px 8px 8px 32px !important;
+    background-position: 10px 9px !important;
+    background-repeat: no-repeat !important;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-color: #446423;
+    background-color: #eff5ea;
+    background-image: url(../images/i_msg-success.gif);
+
+    span {
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      color: #3d6611;
+    }
+  }
+
+  .form-returns, .form-contact-us {
+    margin-top: -20px;
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .fields-textarea {
+      .field {
+        em {
+          color: #19BDFA;
+        }
+      }
+    }
+
+    .name, .billing-last-name, .order-id, .find-by, .zip, .email {
+      input, select {
+        width: 590px;
+      }
+
+      select {
+        width: 598px;
+        border: 1px solid #AAA;
+        height: 21px;
+        background-color: #F3F3F3;
+      }
+    }
+
+    .comment {
+      textarea {
+        resize: none;
+        width: 589px;
+        height: 175px;
+        padding: 3px;
+      }
+    }
+  }
+
+  .required {
+    font-size: 10px;
+    text-transform: uppercase;
+    text-align: right;
+    color: #19BDFA;
+    padding-top: 10px;
+  }
+}

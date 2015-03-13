@@ -636,14 +636,15 @@ class Catalog extends Application {
         $page, $productsCount, $productsPerPage, $productsOnPage
     ) {
         if ($productsCount <= $productsPerPage) {
-            return $productsCount.' Item(s)';
-        } elseif ($productsOnPage < $productsPerPage) {
-            return 'Items '.(($page * $productsOnPage) + 1).' to '.
-                $productsCount.' of '.$productsCount.' total';
+            $out = $productsCount.' Item(s)';
         } else {
-            return 'Items '.((($page * $productsOnPage) - $productsPerPage) + 1).
-                ' to '.($page * $productsOnPage).
-                ' of '.$productsCount.' total';
+            $from = (((($page * $productsPerPage)) - $productsPerPage) + 1);
+            $to = $page * $productsPerPage;
+            if ($to > $productsCount) {
+                $to = $productsCount;
+            }
+            $out = 'Items '.$from.' to '.$to.' of '.$productsCount.' total';
         }
+        return $out;
     }
 }

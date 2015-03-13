@@ -58,7 +58,7 @@ var systemObject = {
     },
     selectCountryState: function (thisIdentity) {
         "use strict";
-        $(document).on('change', thisIdentity, function (e) {
+        $(document).on('change', thisIdentity, function () {
             var option = $(thisIdentity + ' option:selected').text();
             if (option == 'United States') {
                 $('.state-input').hide();
@@ -105,8 +105,37 @@ var systemObject = {
         $(document).on('submit', thisIdentity, function (e) {
             var trigger = $(this);
             var input = trigger.find('#search').val();
-            if (systemObject.isEmpty(input)) {
+            if (systemObject.isEmpty(input) || input == 0) {
                 e.preventDefault();
+            }
+        });
+    },
+    hideShowSiteMapSections: function (thisIdentity) {
+        "use strict";
+        $(document).on('click', thisIdentity, function (e) {
+            e.preventDefault();
+            var trigger = $(this);
+            var thisTarget = trigger.attr('id');
+            var catLink = 'site-map-cat';
+            if (thisTarget == catLink) {
+                $('#categories').show();
+                $('#products').hide();
+            } else {
+                $('#products').show();
+                $('#categories').hide();
+            }
+        });
+    },
+    selectOrderFindBy: function (thisIdentity) {
+        "use strict";
+        $(document).on('change', thisIdentity, function () {
+            var option = $(thisIdentity + ' option:selected').val();
+            if (option == 'zipcode') {
+                $('#email-address').hide();
+                $('#zip-code').show();
+            } else {
+                $('#zip-code').hide();
+                $('#email-address').show();
             }
         });
     }

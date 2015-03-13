@@ -14,34 +14,146 @@ if ($this->objUrl->currentPage != 'index'): ?>
                     <div class="footer-cols footer-col-1">
                         <h3>About Us</h3>
                         <ul>
-                            <li><a href="">About Us</a></li>
-                            <li><a href="">Customer Service</a></li>
-                            <li><a href="">Site Map</a></li>
-                            <li><a href="">Orders and Returns</a></li>
-                            <li><a href="">Contact</a></li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('about'); ?>"
+                                    title="Go to About Us"
+                                >
+                                    About Us
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('customer-service'); ?>"
+                                    title="Go to Customer Service"
+                                >
+                                    Customer Service
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('site-map'); ?>"
+                                    title="Go to Site Map"
+                                >
+                                    Site Map
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('sales'); ?>"
+                                    title="Go to Orders and Returns"
+                                >
+                                    Orders and Returns
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('contact'); ?>"
+                                    title="Go to Contact"
+                                >
+                                    Contact
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="footer-cols footer-col-2">
                         <h3>Why Buy From Us</h3>
                         <ul>
-                            <li><a href="">Shipping and Returns</a></li>
-                            <li><a href="">Secure Shopping</a></li>
-                            <li><a href="">International Shipping</a></li>
-                            <li><a href="">Affiliates</a></li>
-                            <li><a href="">Group Sales</a></li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('shipping'); ?>"
+                                    title="Go to Shipping and Returns"
+                                >
+                                    Shipping and Returns
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('secure-shopping'); ?>"
+                                    title="Go to Secure Shopping"
+                                >
+                                    Secure Shopping
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('international'); ?>"
+                                    title="Go to International Shipping"
+                                >
+                                    International Shipping
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('affiliates'); ?>"
+                                    title="Go to Affiliates"
+                                >
+                                    Affiliates
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('group-sales'); ?>"
+                                    title="Go to Group Sales"
+                                >
+                                    Group Sales
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="footer-cols footer-col-3">
                         <h3>My Account</h3>
                         <ul>
-                            <li><a href="<?php echo $this->objUrl->href('orders'); ?>" title="My Account">My Account</a></li>
-                            <li><a href="">My Wishlist</a></li>
-                            <li><a href="<?php echo $this->objUrl->href('basket'); ?>" title="My Cart">My Cart</a></li>
-                            <li><a href="<?php echo $this->objUrl->href('checkout'); ?>" title="Checkout">Checkout</a></li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('orders'); ?>"
+                                    title="Go to My Account"
+                                >
+                                    My Account
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('wishlist'); ?>"
+                                    title="Go to My Wishlist"
+                                >
+                                    My Wishlist
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('basket'); ?>"
+                                    title="Go to My Cart"
+                                >
+                                    My Cart
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('checkout'); ?>"
+                                    title="Go to Checkout"
+                                >
+                                    Checkout
+                                </a>
+                            </li>
                             <?php if (Login::isLogged(Login::$loginFront)): ?>
-                                <li><a href="<?php echo $this->objUrl->href('logout'); ?>" title="Log Out">Log Out</a></li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('logout'); ?>"
+                                    title="Log Out"
+                                >
+                                    Log Out
+                                </a>
+                            </li>
                             <?php else: ?>
-                                <li><a href="<?php echo $this->objUrl->href('login'); ?>" title="Log In">Log In</a></li>
+                            <li>
+                                <a
+                                    href="<?php echo $this->objUrl->href('login'); ?>"
+                                    title="Go to Log In"
+                                >
+                                    Log In
+                                </a>
+                            </li>
                             <?php endif; ?>
                         </ul>
                     </div>

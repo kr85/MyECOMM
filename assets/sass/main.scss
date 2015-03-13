@@ -2,11 +2,13 @@
 @import "modules/footer";
 @import "modules/button";
 @import "modules/validation";
+@import "modules/toolbar";
 @import "pages/login";
 @import "pages/register";
 @import "pages/index";
 @import "pages/catalog";
 @import "pages/error";
+@import "pages/pages";
 
 * {
   border: none;
@@ -104,6 +106,114 @@ form input, form textarea {
 }
 small {
   font-size: 1em;
+}
+
+.col-one {
+  width: 100%;
+  padding-bottom: 15px;
+
+  .col-main {
+    width: 100%;
+  }
+}
+
+.description-wrapper {
+  .nav-links {
+    padding-bottom: 15px;
+  }
+
+  ul {
+    list-style: disc outside;
+    padding-left: 18px;
+    margin: 0 0 10px;
+
+    li {
+      padding-bottom: 3px;
+
+      a {
+        color: #19BDFA;
+        text-decoration: underline;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+
+      ul {
+        margin: 0;
+
+        li {
+          list-style: circle;
+        }
+      }
+    }
+  }
+
+  dl {
+    font: 12px/1.35 Arial,Helvetica,sans-serif;
+    color: #999;
+
+    dt {
+      font-weight: bold;
+    }
+
+    dd {
+      margin: 0 0 10px;
+      text-align: justify;
+    }
+  }
+
+  .page-title {
+    h2 {
+      font-family: 'Quattrocento Sans', sans-serif;
+      font-size: 19px;
+      font-weight: normal;
+      color: #2F2F2F;
+
+      a {
+        color: #19BDFA;
+        font-weight: 700;
+        text-decoration: underline;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .col-3-set {
+    .col-one {
+      float: left;
+      width: 32%;
+    }
+
+    .col-two {
+      float: left;
+      width: 32%;
+      margin-left: 2%;
+    }
+
+    .col-three {
+      float: right;
+      width: 32%;
+    }
+  }
+
+  p {
+    font: 12px/1.35 Arial,Helvetica,sans-serif;
+    color: #999;
+    text-align: justify;
+  }
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.pad-top-bottom-30 {
+  padding-bottom: 30px;
+  padding-top: 30px;
 }
 
 a:focus, a:active,

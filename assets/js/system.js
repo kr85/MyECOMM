@@ -6,4 +6,6 @@ $(document).ready(function () {
     systemObject.animateImage('.product');
     systemObject.showSubNavMain('.sub-nav');
     systemObject.formSearchEmptyValid('#form-search');
+    systemObject.hideShowSiteMapSections('.site-map-title');
+    systemObject.selectOrderFindBy('#find-by');
 });

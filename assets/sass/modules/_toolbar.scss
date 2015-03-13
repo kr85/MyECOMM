@@ -1,0 +1,78 @@
+.toolbar {
+  border: solid 1px #DFDFDF;
+  background: #F3F3F3 url(../images/toolbar.gif) repeat-x;
+  padding: 5px 18px;
+  margin: 0;
+  border-radius: 0 0 2px 2px;
+  position: relative;
+
+  .pager {
+    padding: 7px 0;
+    text-align: center;
+    color: #919191;
+
+    .amount {
+      float: left;
+      padding-bottom: 0;
+      margin-top: 1px;
+    }
+
+    .page-number {
+      float: right;
+
+      strong {
+        display: inline;
+        font-weight: 500;
+      }
+
+      .input-box {
+        background-color: #FFF;
+        font-size: 11px;
+        color: #919191;
+        margin: 0 5px;
+        display: inline;
+
+        input {
+          border: 1px solid #DFDFDF;
+          width: 28px;
+          height: 8px;
+          text-align: center;
+          padding-left: 2px;
+          color: #919191;
+          cursor: default;
+        }
+      }
+    }
+
+    .pages {
+      position: absolute;
+      top: 13px;
+      left: 260px;
+      width: 175px;
+
+      strong {
+        float: left;
+        font-weight: 500;
+        padding-right: 7px;
+      }
+
+      .paging {
+        list-style: none;
+
+        li {
+          float: left;
+          margin-right: 5px;
+
+          a {
+            color: #19BDFA;
+            text-decoration: underline;
+
+            &:hover {
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

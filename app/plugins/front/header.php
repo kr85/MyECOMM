@@ -17,19 +17,56 @@ $objCatalog = (is_object($data['objCatalog'])) ? $data['objCatalog'] : new Catal
                 <li class="msg-nav-padding">
                     <span class="welcome-msg">Welcome to our online store!</span>
                 </li>
-                <li><a href="<?php echo $data['objUrl']->href('orders'); ?>" title="My Account">My Account</a></li>
-                <li><a href="" title="My Wishlist">My Wishlist</a></li>
-                <li class="my-cart-items">
-                    <a href="<?php echo $data['objUrl']->href('basket'); ?>" title="My Cart">My Cart
-                                <span class="h_ti">
-                                </span>
+                <li>
+                    <a
+                        href="<?php echo $data['objUrl']->href('orders'); ?>"
+                        title="My Account"
+                    >
+                        My Account
                     </a>
                 </li>
-                <li><a href="<?php echo $data['objUrl']->href('checkout'); ?>" title="Checkout">Checkout</a></li>
+                <li>
+                    <a
+                        href="<?php echo $data['objUrl']->href('wishlist'); ?>"
+                        title="My Wishlist"
+                    >
+                        My Wishlist
+                    </a>
+                </li>
+                <li class="my-cart-items">
+                    <a
+                        href="<?php echo $data['objUrl']->href('basket'); ?>"
+                        title="My Cart"
+                    >
+                        My Cart
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="<?php echo $data['objUrl']->href('checkout'); ?>"
+                        title="Checkout"
+                    >
+                        Checkout
+                    </a>
+                </li>
                 <?php if (Login::isLogged(Login::$loginFront)): ?>
-                    <li><a href="<?php echo $data['objUrl']->href('logout'); ?>" title="Log Out">Log Out</a></li>
+                <li>
+                    <a
+                        href="<?php echo $data['objUrl']->href('logout'); ?>"
+                        title="Log Out"
+                    >
+                        Log Out
+                    </a>
+                </li>
                 <?php else: ?>
-                    <li><a href="<?php echo $data['objUrl']->href('login'); ?>" title="Log In">Log In</a></li>
+                <li>
+                    <a
+                        href="<?php echo $data['objUrl']->href('login'); ?>"
+                        title="Log In"
+                    >
+                        Log In
+                    </a>
+                </li>
                 <?php endif; ?>
             </ul>
             <div class="logged_as">

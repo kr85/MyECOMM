@@ -263,7 +263,7 @@ footer {
         color: #dd4b39; }
 
 footer, .push {
-  height: 326px; }
+  height: 327px; }
 
 .footer-text {
   display: inline; }
@@ -393,6 +393,60 @@ button.btn-cart {
   box-shadow: 0 0 5px #d45252;
   border-color: #b03535; }
 
+.toolbar {
+  border: solid 1px #DFDFDF;
+  background: #F3F3F3 url(../images/toolbar.gif) repeat-x;
+  padding: 5px 18px;
+  margin: 0;
+  border-radius: 0 0 2px 2px;
+  position: relative; }
+  .toolbar .pager {
+    padding: 7px 0;
+    text-align: center;
+    color: #919191; }
+    .toolbar .pager .amount {
+      float: left;
+      padding-bottom: 0;
+      margin-top: 1px; }
+    .toolbar .pager .page-number {
+      float: right; }
+      .toolbar .pager .page-number strong {
+        display: inline;
+        font-weight: 500; }
+      .toolbar .pager .page-number .input-box {
+        background-color: #FFF;
+        font-size: 11px;
+        color: #919191;
+        margin: 0 5px;
+        display: inline; }
+        .toolbar .pager .page-number .input-box input {
+          border: 1px solid #DFDFDF;
+          width: 28px;
+          height: 8px;
+          text-align: center;
+          padding-left: 2px;
+          color: #919191;
+          cursor: default; }
+    .toolbar .pager .pages {
+      position: absolute;
+      top: 13px;
+      left: 260px;
+      width: 175px; }
+      .toolbar .pager .pages strong {
+        float: left;
+        font-weight: 500;
+        padding-right: 7px; }
+      .toolbar .pager .pages .paging {
+        list-style: none; }
+        .toolbar .pager .pages .paging li {
+          float: left;
+          margin-right: 5px; }
+          .toolbar .pager .pages .paging li a {
+            color: #19BDFA;
+            text-decoration: underline; }
+            .toolbar .pager .pages .paging li a:hover {
+              text-decoration: none; }
+
 .main {
   padding-top: 30px; }
   .main .page-title {
@@ -491,7 +545,9 @@ fieldset {
 .form-list .fields {
   height: 36px; }
   .form-list .fields .field {
-    float: left; }
+    float: left;
+    margin-bottom: 5px;
+    margin-top: 5px; }
     .form-list .fields .field em {
       color: #19BDFA; }
 
@@ -933,7 +989,8 @@ fieldset {
     color: #D96137; }
   .product-view .product-collateral .box-collateral .product-details {
     font-size: 12px;
-    color: #999; }
+    color: #999;
+    text-align: justify; }
 .product-view .product-collateral .box-up-sell .products-grid-upsell {
   overflow: hidden;
   padding-bottom: 5px; }
@@ -1010,6 +1067,62 @@ fieldset {
   .main-col-error p {
     font-size: 18px;
     color: #999; }
+
+.description-wrapper .error-msg {
+  border-color: #F16048;
+  background-color: #FAEBE7;
+  border-style: solid !important;
+  border-width: 1px !important;
+  padding: 8px 8px 8px 32px !important;
+  background-image: url(../images/i_msg-error.gif);
+  background-position: 10px 9px !important;
+  background-repeat: no-repeat !important;
+  margin-top: 5px;
+  margin-bottom: 5px; }
+  .description-wrapper .error-msg span {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #DF280A; }
+.description-wrapper .success-msg {
+  border-style: solid !important;
+  border-width: 1px !important;
+  padding: 8px 8px 8px 32px !important;
+  background-position: 10px 9px !important;
+  background-repeat: no-repeat !important;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-color: #446423;
+  background-color: #eff5ea;
+  background-image: url(../images/i_msg-success.gif); }
+  .description-wrapper .success-msg span {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #3d6611; }
+.description-wrapper .form-returns, .description-wrapper .form-contact-us {
+  margin-top: -20px; }
+  .description-wrapper .form-returns ul, .description-wrapper .form-contact-us ul {
+    list-style: none;
+    padding-left: 0; }
+  .description-wrapper .form-returns .fields-textarea .field em, .description-wrapper .form-contact-us .fields-textarea .field em {
+    color: #19BDFA; }
+  .description-wrapper .form-returns .name input, .description-wrapper .form-returns .name select, .description-wrapper .form-returns .billing-last-name input, .description-wrapper .form-returns .billing-last-name select, .description-wrapper .form-returns .order-id input, .description-wrapper .form-returns .order-id select, .description-wrapper .form-returns .find-by input, .description-wrapper .form-returns .find-by select, .description-wrapper .form-returns .zip input, .description-wrapper .form-returns .zip select, .description-wrapper .form-returns .email input, .description-wrapper .form-returns .email select, .description-wrapper .form-contact-us .name input, .description-wrapper .form-contact-us .name select, .description-wrapper .form-contact-us .billing-last-name input, .description-wrapper .form-contact-us .billing-last-name select, .description-wrapper .form-contact-us .order-id input, .description-wrapper .form-contact-us .order-id select, .description-wrapper .form-contact-us .find-by input, .description-wrapper .form-contact-us .find-by select, .description-wrapper .form-contact-us .zip input, .description-wrapper .form-contact-us .zip select, .description-wrapper .form-contact-us .email input, .description-wrapper .form-contact-us .email select {
+    width: 590px; }
+  .description-wrapper .form-returns .name select, .description-wrapper .form-returns .billing-last-name select, .description-wrapper .form-returns .order-id select, .description-wrapper .form-returns .find-by select, .description-wrapper .form-returns .zip select, .description-wrapper .form-returns .email select, .description-wrapper .form-contact-us .name select, .description-wrapper .form-contact-us .billing-last-name select, .description-wrapper .form-contact-us .order-id select, .description-wrapper .form-contact-us .find-by select, .description-wrapper .form-contact-us .zip select, .description-wrapper .form-contact-us .email select {
+    width: 598px;
+    border: 1px solid #AAA;
+    height: 21px;
+    background-color: #F3F3F3; }
+  .description-wrapper .form-returns .comment textarea, .description-wrapper .form-contact-us .comment textarea {
+    resize: none;
+    width: 589px;
+    height: 175px;
+    padding: 3px; }
+.description-wrapper .required {
+  font-size: 10px;
+  text-transform: uppercase;
+  text-align: right;
+  color: #19BDFA;
+  padding-top: 10px; }
 
 * {
   border: none;
@@ -1090,6 +1203,70 @@ form input, form textarea {
 
 small {
   font-size: 1em; }
+
+.col-one {
+  width: 100%;
+  padding-bottom: 15px; }
+  .col-one .col-main {
+    width: 100%; }
+
+.description-wrapper .nav-links {
+  padding-bottom: 15px; }
+.description-wrapper ul {
+  list-style: disc outside;
+  padding-left: 18px;
+  margin: 0 0 10px; }
+  .description-wrapper ul li {
+    padding-bottom: 3px; }
+    .description-wrapper ul li a {
+      color: #19BDFA;
+      text-decoration: underline; }
+      .description-wrapper ul li a:hover {
+        text-decoration: none; }
+    .description-wrapper ul li ul {
+      margin: 0; }
+      .description-wrapper ul li ul li {
+        list-style: circle; }
+.description-wrapper dl {
+  font: 12px/1.35 Arial, Helvetica, sans-serif;
+  color: #999; }
+  .description-wrapper dl dt {
+    font-weight: bold; }
+  .description-wrapper dl dd {
+    margin: 0 0 10px;
+    text-align: justify; }
+.description-wrapper .page-title h2 {
+  font-family: 'Quattrocento Sans', sans-serif;
+  font-size: 19px;
+  font-weight: normal;
+  color: #2F2F2F; }
+  .description-wrapper .page-title h2 a {
+    color: #19BDFA;
+    font-weight: 700;
+    text-decoration: underline; }
+    .description-wrapper .page-title h2 a:hover {
+      text-decoration: none; }
+.description-wrapper .col-3-set .col-one {
+  float: left;
+  width: 32%; }
+.description-wrapper .col-3-set .col-two {
+  float: left;
+  width: 32%;
+  margin-left: 2%; }
+.description-wrapper .col-3-set .col-three {
+  float: right;
+  width: 32%; }
+.description-wrapper p {
+  font: 12px/1.35 Arial, Helvetica, sans-serif;
+  color: #999;
+  text-align: justify; }
+
+.bold {
+  font-weight: 700; }
+
+.pad-top-bottom-30 {
+  padding-bottom: 30px;
+  padding-top: 30px; }
 
 a:focus, a:active, .btn:focus, .btn:active, button::-moz-focus-inner, input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, select::-moz-focus-inner, input[type="file"] > input[type="button"]::-moz-focus-inner {
   border: 0;

@@ -105,6 +105,14 @@ class Email {
                         $this->fetchEmail($case, $parameters)
                     ));
                     break;
+                case 2:
+                    $this->objMessage->addTo(self::EMAIL_ADMIN, self::NAME_ADMIN);
+                    $this->objMessage->addFrom($parameters['email'], $parameters['name']);
+                    $this->objMessage->setSubject('New Comment');
+                    $this->objMessage->setBody($this->setHtmlBody(
+                        $this->fetchEmail($case, $parameters)
+                    ));
+                    break;
             }
             // Send email
             $this->objTransport->send($this->objMessage);

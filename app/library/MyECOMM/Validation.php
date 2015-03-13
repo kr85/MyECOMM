@@ -16,9 +16,19 @@ class Validation {
     private $errors = [];
 
     /**
+     * @var array List of validation successes
+     */
+    private $success = [];
+
+    /**
      * @var array List of error messages
      */
     public $errorMessages = [];
+
+    /**
+     * @var array List of success messages
+     */
+    public $successMessages = [];
 
     /**
      * @var array List of validation error messages
@@ -63,7 +73,13 @@ class Validation {
         'meta_keywords'      => 'Please provide the meta keywords.',
 
         'weight'             => 'Please provide the weight.',
-        'cost'               => 'Please provide the cost.'
+        'cost'               => 'Please provide the cost.',
+
+        'order_id'           => 'Please provide the order id.',
+        'order_not_found'    => 'The order was not found. Please try again.',
+        'comment'            => 'Please write a comment.',
+        'email_not_sent'     => 'There was a problem sending the email. Please try again.',
+        'email_sent'         => 'Your comment was successfully sent.'
     ];
 
     /**
@@ -172,6 +188,24 @@ class Validation {
     }
 
     /**
+     * Add to success messages list
+     *
+     * @param null $key
+     * @param null $value
+     */
+    public function addToSuccess($key = null, $value = null) {
+        if (!empty($key)) {
+            $this->success[] = $key;
+            if (!empty($value)) {
+                $this->successMessages['valid_'.$key] = $this->wrapMessage($value);
+            } else if (array_key_exists($key, $this->messages)) {
+                $this->successMessages['valid_'.$key] =
+                    $this->wrapMessage($this->messages[$key]);
+            }
+        }
+    }
+
+    /**
      * Check if it is a valid email
      *
      * @param null $email
@@ -239,9 +273,13 @@ class Validation {
     public function validate($key = null) {
         if (!empty($this->errors) && in_array($key, $this->errors)) {
             return $this->wrapWarning($this->messages[$key]);
+        } elseif (!empty($this->success) && in_array($key, $this->success)) {
+            return $this->wrapMessage($this->messages[$key]);
         }
         return false;
     }
+
+
 
     /**
      * Wrap validation error in html
@@ -251,7 +289,20 @@ class Validation {
      */
     public function wrapWarning($message = null) {
         if (!empty($message)) {
-            return "<span class=\"warn\">{$message}</span>";
+            return "<div class='error-msg'><span class=\"warn\">{$message}</span></div>";
+        }
+        return false;
+    }
+
+    /**
+     * Wrap the success message in html
+     *
+     * @param null $message
+     * @return bool|string
+     */
+    public function wrapMessage($message = null) {
+        if (!empty($message)) {
+            return "<div class='success-msg'><span class=\"success\">{$message}</span></div>";
         }
         return false;
     }
