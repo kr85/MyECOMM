@@ -80,8 +80,9 @@ if ($objForm->isPost('first_name')) {
             $emailInactive = '<a href="" id="email_inactive"';
             $emailInactive .= ' data-id="';
             $emailInactive .= $user['id'];
-            $emailInactive .= '">Email address is already taken.';
-            $emailInactive .= ' Resend activation email.</a>';
+            $emailInactive .= '">Email address is already taken. ';
+            $emailInactive .= '<span style="font-weight: 700;'.
+                ' text-decoration: underline;">Resend activation email.</span></a>';
             $objValidation->messages['email_inactive'] = $emailInactive;
             $objValidation->addToErrors('email_inactive');
         } else {
@@ -139,7 +140,6 @@ require_once('_header.php');
                                             id="first_name"
                                             class="input"
                                             value="<?php echo $objForm->stickyText('first_name'); ?>"
-                                            pattern="^([ \u00c0-\u01ff\p{L}'\-]){2,50}$"
                                             title="Please enter your first name."
                                             required="required"
                                         />
@@ -155,7 +155,6 @@ require_once('_header.php');
                                             id="last_name"
                                             class="input"
                                             value="<?php echo $objForm->stickyText('last_name'); ?>"
-                                            pattern="^([ \u00c0-\u01ff\p{L}'\-]){2,50}$"
                                             title="Please enter your last name."
                                             required="required"
                                         />
@@ -219,19 +218,18 @@ require_once('_header.php');
                                     <?php echo $objForm->getCountryStatesSelect(
                                         230,
                                         null,
-                                        'states',
+                                        'state',
                                         false,
                                         'create-account-state state-select'
                                     ); ?>
                                     <input
                                         type="text"
-                                        name="state"
-                                        id="state"
+                                        name=""
+                                        id=""
                                         class="input state-input"
                                         value="<?php echo $objForm->stickyText('state'); ?>"
                                         title="Please enter your state."
                                         style="display: none;"
-                                        required="required"
                                     />
                                 </div>
                             </div>
@@ -319,6 +317,7 @@ require_once('_header.php');
                                     <label for="confirm_password">Password Confirmation: <em>*</em></label>
                                     <div class="input-box">
                                         <?php echo $objValidation->validate('confirm_password'); ?>
+                                        <?php echo $objValidation->validate('password_mismatch'); ?>
                                         <input
                                             type="password"
                                             name="confirm_password"

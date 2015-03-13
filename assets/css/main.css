@@ -1068,6 +1068,18 @@ fieldset {
     font-size: 18px;
     color: #999; }
 
+.main {
+  width: 100%; }
+  .main p {
+    color: #919191; }
+  .main .empty strong {
+    color: #19BDFA; }
+  .main .empty a {
+    color: #19BDFA;
+    text-decoration: underline; }
+    .main .empty a:hover {
+      text-decoration: none; }
+
 .description-wrapper .form-returns, .description-wrapper .form-contact-us {
   margin-top: -20px; }
   .description-wrapper .form-returns ul, .description-wrapper .form-contact-us ul {
@@ -1108,6 +1120,8 @@ fieldset {
   .error-msg span {
     font-size: 11px !important;
     font-weight: 700 !important;
+    color: #DF280A; }
+  .error-msg a {
     color: #DF280A; }
 
 .success-msg {

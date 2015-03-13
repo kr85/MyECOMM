@@ -1,3 +1,26 @@
+.main {
+  width: 100%;
+
+  p {
+    color: #919191;
+  }
+
+  .empty {
+    strong {
+      color: #19BDFA;
+    }
+
+    a {
+      color: #19BDFA;
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
 .description-wrapper {
   .form-returns, .form-contact-us {
     margin-top: -20px;
@@ -62,6 +85,10 @@
   span {
     font-size: 11px !important;
     font-weight: 700 !important;
+    color: #DF280A;
+  }
+
+  a {
     color: #DF280A;
   }
 }

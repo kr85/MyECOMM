@@ -13,17 +13,29 @@ if (!empty($code)) {
     if (!empty($user)) {
         if ($user['active'] == 0) {
             if ($objUser->activate($user['id'])) {
-                $message = "<h1>Thank you</h1>";
-                $message .= "<p>Your account has been successfully activated.<br />";
-                $message .= "You can log in and continue your order.</p>";
+                $message  = '<div class="main" style="text-align: center">';
+                $message .= '<div class="page-title">';
+                $message .= '<h1>Thank you</h1>';
+                $message .= '</div>';
+                $message .= '<p>Your account has been successfully activated.<br />';
+                $message .= 'You can log in and continue your order.</p>';
+                $message .= '</div>';
             } else {
-                $message = "<h1>Activation was unsuccessful</h1>";
-                $message .= "<p>There has been a problem activating your account.<br />";
-                $message .= "Please contact the administrator.</p>";
+                $message  = '<div class="main" style="text-align: center">';
+                $message .= '<div class="page-title">';
+                $message .= '<h1>Activation was unsuccessful</h1>';
+                $message .= '</div>';
+                $message .= '<p>There has been a problem activating your account.<br />';
+                $message .= 'Please contact the administrator.</p>';
+                $message .= '</div>';
             }
         } else {
-            $message = "<h1>Account already activated</h1>";
-            $message .= "<p>This account has already been activated.</p>";
+            $message  = '<div class="main" style="text-align: center">';
+            $message .= '<div class="page-title">';
+            $message .= '<h1>Account already activated</h1>';
+            $message .= '</div>';
+            $message .= '<p>This account has already been activated.</p>';
+            $message .= '</div>';
         }
     } else {
         Helper::redirect($this->objUrl->href('error'));

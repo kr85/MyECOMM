@@ -198,7 +198,7 @@ class Form {
      * @return null|string
      */
     public function getCountryStatesSelect(
-        $countryId = 230, $record = null, $name = 'states', $selectOption = false, $class = null
+        $countryId = 230, $record = null, $name = 'state', $selectOption = false, $class = null
     ) {
 
         $objCountry = new Country();
