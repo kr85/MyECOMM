@@ -7,17 +7,17 @@ $call = $this->objUrl->get('call');
 
 try {
     switch ($call) {
-        case 'basket':
-            require_once(MODULES_PATH.DS.'basket.php');
+        case 'cart':
+            require_once(MODULES_PATH.DS.'cart.php');
             break;
-        case 'basket-left':
-            require_once(MODULES_PATH.DS.'basket-left.php');
+        case 'cart-left':
+            require_once(MODULES_PATH.DS.'cart-left.php');
             break;
-        case 'basket-qty':
-            require_once(MODULES_PATH.DS.'basket-qty.php');
+        case 'cart-qty':
+            require_once(MODULES_PATH.DS.'cart-qty.php');
             break;
-        case 'basket-remove':
-            require_once(MODULES_PATH.DS.'basket-remove.php');
+        case 'cart-remove':
+            require_once(MODULES_PATH.DS.'cart-remove.php');
             break;
         case 'paypal':
             require_once(MODULES_PATH.DS.'paypal.php');

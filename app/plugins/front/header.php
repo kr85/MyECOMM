@@ -35,7 +35,7 @@ $objCatalog = (is_object($data['objCatalog'])) ? $data['objCatalog'] : new Catal
                 </li>
                 <li class="my-cart-items">
                     <a
-                        href="<?php echo $data['objUrl']->href('basket'); ?>"
+                        href="<?php echo $data['objUrl']->href('cart'); ?>"
                         title="My Cart"
                     >
                         My Cart

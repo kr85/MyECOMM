@@ -122,7 +122,7 @@ if ($this->objUrl->currentPage != 'index'): ?>
                             </li>
                             <li>
                                 <a
-                                    href="<?php echo $this->objUrl->href('basket'); ?>"
+                                    href="<?php echo $this->objUrl->href('cart'); ?>"
                                     title="Go to My Cart"
                                 >
                                     My Cart

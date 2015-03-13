@@ -42,7 +42,7 @@ if (!empty($array)) {
         number_format($objBasket->subTotal, 2)
     );
 
-    $out['replace_values']['#main_basket'] = Plugin::get('front'.DS.'basket_view', [
+    $out['replace_values']['#main_basket'] = Plugin::get('front'.DS.'cart_view', [
         'objUrl' => $this->objUrl,
         'objCurrency' => $this->objCurrency
     ]);

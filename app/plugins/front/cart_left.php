@@ -67,7 +67,7 @@ $objBasket = (is_object($objBasket)) ? $objBasket : new Basket();
                         <div class="product-details">
                             <?php echo Basket::removeButtonSmallCart($product['id']); ?>
                             <a
-                                href="<?php echo $data['objUrl']->href('basket'); ?>"
+                                href="<?php echo $data['objUrl']->href('cart'); ?>"
                                 class="btn-edit"
                                 title="Edit Item"
                             >

@@ -142,7 +142,7 @@ if (!empty($products)):
 </div>
 <?php endif; ?>
 <div id="my-cart-small">
-    <?php echo Plugin::get('front'.DS.'basket_left', [
+    <?php echo Plugin::get('front'.DS.'cart_left', [
         'objUrl' => $data['objUrl'],
         'objCurrency' => $data['objCurrency'],
         'objCatalog' => $data['objCatalog'],

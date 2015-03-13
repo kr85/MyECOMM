@@ -15,7 +15,7 @@ var basketObject = {
             var item = param.split("_");
 
             if (!systemObject.isEmpty(qty) && qty > 0) {
-                $.post('/module/call/basket', { id: item[0], job: item[1], qty: qty }, function(data) {
+                $.post('/module/call/cart', { id: item[0], job: item[1], qty: qty }, function(data) {
                     var newId = item[0] + '_' + data.job;
                     if (data.job != item[1]) {
                         var thisTarget = '#' + item[0] + '.btn-cart span span';
@@ -48,7 +48,7 @@ var basketObject = {
             e.preventDefault();
             var item = $(this).attr('rel');
             var thisTarget = '#' + item + '.btn-cart span span';
-            $.post('/module/call/basket-remove', { id: item }, function(data) {
+            $.post('/module/call/cart-remove', { id: item }, function(data) {
                 if (!systemObject.isEmpty(data.replace_values)) {
                     systemObject.replaceValues(data.replace_values);
                 }
@@ -62,7 +62,7 @@ var basketObject = {
     updateBasket: function () {
         "use strict";
         var thisArray = $('#frm_basket').serializeArray();
-        $.post('/module/call/basket-qty', thisArray, function(data) {
+        $.post('/module/call/cart-qty', thisArray, function(data) {
             if (!systemObject.isEmpty(data.replace_values)) {
                 systemObject.replaceValues(data.replace_values);
             }

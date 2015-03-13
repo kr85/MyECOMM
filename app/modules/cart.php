@@ -47,19 +47,19 @@ if (isset($_POST['job']) && isset($_POST['id'])) {
 
         if ($objBasket->numberOfItems == 1) {
             $summaryAmount = 'There is <a href="'.
-                $this->objUrl->href('basket').'">'.
+                $this->objUrl->href('cart').'">'.
                 $objBasket->numberOfItems.
                 ' item</a> in your cart';
         } else {
             $summaryAmount = 'There are <a href="'.
-                $this->objUrl->href('basket').'">'.
+                $this->objUrl->href('cart').'">'.
                 $objBasket->numberOfItems.
                 ' items</a> in your cart';
         }
 
         Session::setSession('summaryAmount', $summaryAmount);
 
-        $out['replace_values']['#my-cart-small'] = Plugin::get('front'.DS.'basket_left', [
+        $out['replace_values']['#my-cart-small'] = Plugin::get('front'.DS.'cart_left', [
             'objUrl' => $this->objUrl,
             'objCurrency' => $this->objCurrency,
             'objCatalog' => $objCatalog,

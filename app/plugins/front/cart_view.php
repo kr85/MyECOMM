@@ -85,5 +85,11 @@ if (!empty($out)): ?>
 </form>
 <div class="dev">&#160;</div>
 <?php else: ?>
-    <p>Your basket is currently empty.</p>
+    <div class="page-title">
+        <h1>Shopping Cart is Empty</h1>
+    </div>
+    <p class="empty">
+        You have <strong>no items</strong> in your shopping cart.<br/>
+        Click <a href="/">here</a> to continue shopping.
+    </p>
 <?php endif; ?>
