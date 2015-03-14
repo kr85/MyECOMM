@@ -106,7 +106,7 @@ if ($this->objUrl->currentPage != 'index'): ?>
                         <ul>
                             <li>
                                 <a
-                                    href="<?php echo $this->objUrl->href('orders'); ?>"
+                                    href="<?php echo $this->objUrl->href('dashboard'); ?>"
                                     title="Go to My Account"
                                 >
                                     My Account
@@ -177,17 +177,29 @@ if ($this->objUrl->currentPage != 'index'): ?>
                         </a>
                     </li>
                     <li class="footer-github">
-                        <a href="https://github.com/kr85" class="pull-right">
+                        <a
+                            href="https://github.com/kr85"
+                            class="pull-right"
+                            title="Go to GitHub"
+                        >
                             <i class="fa fa-github fa-2x"></i>
                         </a>
                     </li>
                     <li class="footer-linkin">
-                        <a href="https://www.linkedin.com/in/kostarashev" class="pull-right">
+                        <a
+                            href="https://www.linkedin.com/in/kostarashev"
+                            class="pull-right"
+                            title="Go to LinkedIn"
+                        >
                             <i class="fa fa-linkedin-square fa-2x"></i>
                         </a>
                     </li>
                     <li class="footer-google-plus">
-                        <a href="https://plus.google.com/116911418217949761063/posts" class="pull-right">
+                        <a
+                            href="https://plus.google.com/116911418217949761063/posts"
+                            class="pull-right"
+                            title="Go to Google+"
+                        >
                             <i class="fa fa-google-plus-square fa-2x"></i>
                         </a>
                     </li>

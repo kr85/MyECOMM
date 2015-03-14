@@ -19,7 +19,7 @@ $objCatalog = (is_object($data['objCatalog'])) ? $data['objCatalog'] : new Catal
                 </li>
                 <li>
                     <a
-                        href="<?php echo $data['objUrl']->href('orders'); ?>"
+                        href="<?php echo $data['objUrl']->href('dashboard'); ?>"
                         title="My Account"
                     >
                         My Account

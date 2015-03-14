@@ -247,8 +247,8 @@ class Basket {
     public static function removeButton($id = null) {
         if (!empty($id)) {
             if (isset($_SESSION['basket'][$id])) {
-                $out = "<a href=\"\" class=\"remove_basket red";
-                $out .= "\" rel=\"{$id}\">Remove</a>";
+                $out = "<a href=\"\" class=\"remove_basket btn-remove-2";
+                $out .= "\" rel=\"{$id}\" title=\"Remove Product\">Remove</a>";
                 return $out;
             }
         }

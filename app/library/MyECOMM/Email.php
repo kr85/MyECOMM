@@ -40,7 +40,7 @@ class Email {
     /**
      * Constants
      */
-    const EMAIL_ADMIN = 'kosta.rashev@gmail.com';
+    const EMAIL_ADMIN = 'support@kostarashev.com';
     const NAME_ADMIN = 'MyECOMM';
 
     /**

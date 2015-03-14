@@ -199,6 +199,7 @@ header {
                   font-size: 12px;
                   font-weight: normal;
                   color: #696969 !important;
+                  text-decoration: none;
 
                   &:hover {
                     color: #D96137 !important;
@@ -226,9 +227,11 @@ header {
               font-size: 15px;
               text-transform: uppercase;
               color: #6A6A6A;
+              text-decoration: none;
 
               &:hover {
                 color: #333;
+                text-decoration: none;
               }
             }
           }

@@ -1,94 +1,5 @@
-#header {
-  height: 70px;
-}
-
-#header, #outer, #footer, .cl, .dev, #basket_left, .tbl_repeat {
-  width: 100%;
-  clear: both;
-}
-
-#header_in {
-  position: relative;
-}
-
-#outer {
-  background: #fff;
-}
-
-#header_in h5, #header_in h5 a {
-  font-size: 18px;
-  color: #fff;
-  text-decoration: none;
-}
-
-#header_in h5 {
-  position: absolute;
-  top: 23px;
-  left: 0;
-  font-style: italic;
-}
-
-#logged_as {
-  position: absolute;
-  top: 23px;
-  right: 0;
-  color: #fff;
-}
-
-#logged_as strong, #logged_as a {
-  color: #fff;
-}
-
-#footer {
-  padding: 14px 0;
-}
-
-#left {
-  width: 250px;
-}
-
-#right {
-  padding-left: 30px;
-  width: 620px;
-}
-
-#navigation, #basket_left {
-  list-style: none;
-  margin-bottom: 14px;
-}
-
-#navigation, #navigation li, #navigation li a {
-  float: left;
-  width: 250px;
-}
-
-#navigation li a.active {
-  text-decoration: none;
-  font-weight: 700;
-}
-
-.cl, .dev {
-  height: 0;
-  font-size: 0;
-  line-height: 0;
-}
-
-.dev {
-  height: 14px;
-}
-
 .br_td {
   border-top: dashed 1px #aaa;
-}
-
-#basket_left dt {
-  clear: left;
-  width: 40%;
-}
-
-#basket_left dd {
-  text-align: right;
-  width: 30%;
 }
 
 .catalog_wrapper {
@@ -189,12 +100,6 @@ th, td {
 .tar_fixed {
   width: 500px;
   height: 100px;
-}
-
-.fld_qty {
-  width: 30px;
-  text-align: right;
-  padding: 0;
 }
 
 .sbm, .btn {

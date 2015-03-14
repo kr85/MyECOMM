@@ -1,0 +1,132 @@
+.cart {
+  .totals {
+    float: right;
+    width: 264px;
+    border: solid 1px #DBDBDB;
+    background: #F1F1F1;
+
+    .checkout-types {
+      padding: 17px;
+    }
+
+    fieldset {
+      margin: 0;
+      padding: 1px;
+    }
+
+    table {
+      width: 100%;
+
+      td {
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #2F2F2F;
+      }
+    }
+
+    .price {
+      font-size: 15px;
+      font-weight: bold;
+      color: #19BDFA;
+    }
+  }
+
+  .checkout-types {
+    text-align: right;
+    margin: 0 0 11px 0;
+    height: 25px;
+
+    li {
+
+    }
+  }
+}
+
+.cart-table {
+  input {
+    border: 1px solid #DBDBDB;
+  }
+
+  .price {
+    font-family: 'Quattrocento Sans', sans-serif;
+    font-size: 29px;
+    font-weight: normal;
+    color: #19BDFA;
+  }
+
+  th {
+    padding: 8px 10px;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+
+  tfoot {
+    td {
+      overflow: hidden;
+      padding: 7px;
+
+      button {
+
+      }
+    }
+  }
+}
+
+button.btn-continue {
+  span {
+    font: 11px/25px 'Quattrocento Sans', Helvetica, sans-serif;
+
+    span {
+      padding: 5px 7px 4px;
+    }
+  }
+}
+
+button.btn-update {
+  span {
+    font: 11px/25px 'Quattrocento Sans', Helvetica, sans-serif;
+
+    span {
+      padding: 5px 7px 4px;
+    }
+  }
+}
+
+.form-cart-big {
+  margin-top: -15px;
+  margin-bottom: -15px;
+
+  fieldset {
+    background: #FEFEFE none repeat scroll 0 0;
+    padding: 1px 1px 1px;
+    margin: 28px 0;
+    border: 1px solid #DBDBDB;
+  }
+
+  .btn-remove-2 {
+    display: block;
+    width: 16px;
+    height: 16px;
+    font-size: 0;
+    line-height: 0;
+    background: url(../images/btn_trash.gif) 0 0 no-repeat;
+    text-indent: -999em;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+}
+
+.product-name {
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.fld_qty {
+  width: 34px;
+  padding: 11px 10px;
+  text-align: center;
+  margin-top: -6px;
+  font-size: 12px;
+}

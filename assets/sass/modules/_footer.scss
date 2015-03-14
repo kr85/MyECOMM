@@ -86,10 +86,16 @@ footer {
 
           li {
             a {
+              text-decoration: none;
+
               address {
                 font-style: normal;
                 color: #696969;
                 display: inline;
+
+                &:hover {
+                  color: #19BDFA;
+                }
               }
             }
           }

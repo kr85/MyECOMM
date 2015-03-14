@@ -7,6 +7,7 @@
   color: #fff;
   padding: 3.5px 20px;
   text-transform: uppercase;
+  text-decoration: none;
 
   &:hover {
     border: solid 1px #676767;
@@ -59,6 +60,31 @@ button.button {
   margin: 0;
   background: transparent;
   cursor: pointer;
+
+  span {
+    font: 12px/25px 'Quattrocento Sans', Helvetica, sans-serif;
+    text-align: center;
+    white-space: nowrap;
+    color: #fff;
+    text-transform: uppercase;
+
+    span {
+      border: solid 1px #959595;
+      background: url(../images/button.gif) repeat-x;
+      padding: 0 8px;
+      border-radius: 3px;
+      box-shadow: 2px 2px 5px #ddd;
+    }
+  }
+
+  &:hover {
+    span {
+      span {
+        border: solid 1px #676767;
+        background: url(../images/button.gif) repeat-x 0 -24px;
+      }
+    }
+  }
 }
 
 button.btn-cart {
@@ -116,6 +142,18 @@ button.btn-cart {
   overflow: hidden;
 }
 
+.btn-remove-2 {
+  display: block;
+  width: 16px;
+  height: 16px;
+  font-size: 0;
+  line-height: 0;
+  background: url(../images/btn_trash.gif) 0 0 no-repeat;
+  text-indent: -999em;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
 .btn-edit {
   display: block;
   width: 11px;
@@ -137,6 +175,7 @@ button.btn-cart {
   padding: 2px 8px 2px;
   text-transform: uppercase;
   font-size: 11px;
+  text-decoration: none;
 
   &:hover {
     border: solid 1px #676767;
@@ -145,5 +184,32 @@ button.btn-cart {
 
   &:active, &:focus {
     border: 1px solid #959595;
+  }
+}
+
+.btn-cart-checkout {
+  height: 35px;
+  text-decoration: none;
+
+  &:hover {
+    span {
+      span {
+        background: transparent url(../images/proceed.gif) repeat-x scroll 0 0;
+      }
+    }
+  }
+
+  span {
+    font: 13px/17px "Quattrocento Sans",Helvetica,sans-serif;
+
+    span {
+      border: 1px solid #676767;
+      background: transparent url(../images/proceed.gif) repeat-x scroll 0 0;
+      padding: 8px 13px;
+      text-transform: uppercase;
+      color: rgb(255, 255, 255);
+      border-radius: 3px;
+      box-shadow: 2px 2px 5px #DDD;
+    }
   }
 }
