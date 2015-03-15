@@ -75,7 +75,6 @@ require_once('_header.php'); ?>
                                     <div class="field name">
                                         <label for="name">Name: <em>*</em></label>
                                         <div class="input-box">
-                                            <?php echo $objValidation->validate('name'); ?>
                                             <input
                                                 type="text"
                                                 name="name"
@@ -84,6 +83,7 @@ require_once('_header.php'); ?>
                                                 required="required"
                                                 title="Please enter your name."
                                                 />
+                                            <?php echo $objValidation->validate('name'); ?>
                                         </div>
                                     </div>
                                 </li>
@@ -91,7 +91,6 @@ require_once('_header.php'); ?>
                                     <div class="field email">
                                         <label for="email">Email Address: <em>*</em></label>
                                         <div class="input-box">
-                                            <?php echo $objValidation->validate('email'); ?>
                                             <input
                                                 type="email"
                                                 name="email"
@@ -101,6 +100,7 @@ require_once('_header.php'); ?>
                                                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                                                 title="Please enter your email address."
                                                 />
+                                            <?php echo $objValidation->validate('email'); ?>
                                         </div>
                                     </div>
                                 </li>
@@ -108,13 +108,13 @@ require_once('_header.php'); ?>
                                     <div class="field comment">
                                         <label for="comment">Comment: <em>*</em></label>
                                         <div class="input-box">
-                                            <?php echo $objValidation->validate('comment'); ?>
                                             <textarea
                                                 name="comment"
                                                 id="comment"
                                                 required="required"
                                                 cols=""
                                                 rows=""></textarea>
+                                            <?php echo $objValidation->validate('comment'); ?>
                                         </div>
                                     </div>
                                 </li>

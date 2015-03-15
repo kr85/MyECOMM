@@ -143,7 +143,6 @@ require_once('_header.php');
                                 <div class="field field-two first-name">
                                     <label for="first_name" class="">First Name: <em>*</em></label>
                                     <div class="input-box">
-                                        <?php echo $objValidation->validate('first_name'); ?>
                                         <input
                                             type="text"
                                             name="first_name"
@@ -153,12 +152,12 @@ require_once('_header.php');
                                             title="Please enter your first name."
                                             required="required"
                                         />
+                                        <?php echo $objValidation->validate('first_name'); ?>
                                     </div>
                                 </div>
                                 <div class="field field-two last-name">
                                     <label for="last_name">Last Name: <em>*</em></label>
                                     <div class="input-box">
-                                        <?php echo $objValidation->validate('last_name'); ?>
                                         <input
                                             type="text"
                                             name="last_name"
@@ -168,6 +167,7 @@ require_once('_header.php');
                                             title="Please enter your last name."
                                             required="required"
                                         />
+                                        <?php echo $objValidation->validate('last_name'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -176,7 +176,6 @@ require_once('_header.php');
                             <div class="field field-one address">
                                 <label for="address_1">Address 1: <em>*</em></label>
                                 <div class="input-box">
-                                    <?php echo $objValidation->validate('address_1'); ?>
                                     <input
                                         type="text"
                                         name="address_1"
@@ -186,6 +185,7 @@ require_once('_header.php');
                                         title="Please enter the first line of your address."
                                         required="required"
                                     />
+                                    <?php echo $objValidation->validate('address_1'); ?>
                                 </div>
                             </div>
                         </li>
@@ -193,7 +193,6 @@ require_once('_header.php');
                             <div class="field field-one address">
                                 <label for="address_2">Address 2: </label>
                                 <div class="input-box">
-                                    <?php echo $objValidation->validate('address_2'); ?>
                                     <input
                                         type="text"
                                         name="address_2"
@@ -202,6 +201,7 @@ require_once('_header.php');
                                         value="<?php echo $objForm->stickyText('address_2'); ?>"
                                         title="Please enter the second line of your address."
                                     />
+                                    <?php echo $objValidation->validate('address_2'); ?>
                                 </div>
                             </div>
                         </li>
@@ -209,7 +209,6 @@ require_once('_header.php');
                             <div class="field field-three city">
                                 <label for="city">City: <em>*</em></label>
                                 <div class="input-box">
-                                    <?php echo $objValidation->validate('city'); ?>
                                     <input
                                         type="text"
                                         name="city"
@@ -219,12 +218,12 @@ require_once('_header.php');
                                         title="Please enter your city."
                                         required="required"
                                     />
+                                    <?php echo $objValidation->validate('city'); ?>
                                 </div>
                             </div>
                             <div class="field field-three state">
                                 <label for="state">State/Province: <em>*</em></label>
                                 <div class="input-box">
-                                    <?php echo $objValidation->validate('state'); ?>
                                     <?php echo $objForm->getCountryStatesSelect(
                                         230,
                                         null,
@@ -241,12 +240,12 @@ require_once('_header.php');
                                         title="Please enter your state."
                                         style="display: none;"
                                     />
+                                    <?php echo $objValidation->validate('state'); ?>
                                 </div>
                             </div>
                             <div class="field field-three zipcode">
                                 <label for="zip_code">ZIP Code: <em>*</em></label>
                                 <div class="input-box">
-                                    <?php echo $objValidation->validate('zip_code'); ?>
                                     <input
                                         type="text"
                                         name="zip_code"
@@ -256,20 +255,21 @@ require_once('_header.php');
                                         title="Please enter your zipcode."
                                         required="required"
                                     />
+                                    <?php echo $objValidation->validate('zip_code'); ?>
                                 </div>
                             </div>
                         </li>
                         <li class="fields">
-                            <div class="field field-one">
+                            <div class="field field-one country">
                                 <label for="country">Country: <em>*</em></label>
                                 <div class="input-box">
-                                    <?php echo $objValidation->validate('country'); ?>
                                     <?php echo $objForm->getCountriesSelect(
                                         230,
                                         'country',
                                         false,
                                         'create-account-country select_country_state'
                                     ); ?>
+                                    <?php echo $objValidation->validate('country'); ?>
                                 </div>
                             </div>
                         </li>
@@ -277,9 +277,6 @@ require_once('_header.php');
                             <div class="field field-one email">
                                 <label for="email">Email Address: <em>*</em></label>
                                 <div class="input-box">
-                                    <?php echo $objValidation->validate('email'); ?>
-                                    <?php echo $objValidation->validate('email_duplicate'); ?>
-                                    <?php echo $objValidation->validate('email_inactive'); ?>
                                     <input
                                         type="email"
                                         name="email"
@@ -291,6 +288,9 @@ require_once('_header.php');
                                         title="Please enter a valid email address."
                                         required="required"
                                     />
+                                    <?php echo $objValidation->validate('email'); ?>
+                                    <?php echo $objValidation->validate('email_duplicate'); ?>
+                                    <?php echo $objValidation->validate('email_inactive'); ?>
                                 </div>
                             </div>
                         </li>

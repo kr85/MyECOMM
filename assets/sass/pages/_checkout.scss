@@ -264,6 +264,24 @@
     #shipping_types {
       tr {
         position: relative;
+
+        &:hover, &:active, &:focus {
+          td {
+            background-color: darken(#ffffff, 5%);
+
+            &:hover, &:active, &:focus {
+              background-color: darken(#ffffff, 5%);
+
+              input {
+                background-color: darken(#ffffff, 5%);
+
+                &:hover, &:active, &:focus {
+                  background-color: darken(#ffffff, 5%);
+                }
+              }
+            }
+          }
+        }
       }
 
       td {
@@ -271,10 +289,12 @@
 
         input {
           position: absolute;
+          top: 12px;
         }
 
         label {
-          padding-left: 20px
+          padding-left: 20px;
+          text-transform: none;
         }
       }
     }

@@ -71,7 +71,6 @@ require_once('_header.php'); ?>
                                 <div class="field order-id">
                                     <label for="order_id">Order ID: <em>*</em></label>
                                     <div class="input-box">
-                                        <?php echo $objValidation->validate('order_id'); ?>
                                         <input
                                             type="text"
                                             name="order_id"
@@ -80,6 +79,7 @@ require_once('_header.php'); ?>
                                             required="required"
                                             title="Please enter the order id."
                                             />
+                                        <?php echo $objValidation->validate('order_id'); ?>
                                     </div>
                                 </div>
                             </li>
@@ -90,7 +90,6 @@ require_once('_header.php'); ?>
                                 <div class="field billing-last-name">
                                     <label for="last_name">Billing Last Name: <em>*</em></label>
                                     <div class="input-box">
-                                        <?php echo $objValidation->validate('last_name'); ?>
                                         <input
                                             type="text"
                                             name="last_name"
@@ -99,6 +98,7 @@ require_once('_header.php'); ?>
                                             required="required"
                                             title="Please enter the billing last name."
                                             />
+                                        <?php echo $objValidation->validate('last_name'); ?>
                                     </div>
                                 </div>
                             </li>

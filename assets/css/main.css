@@ -1180,7 +1180,8 @@ fieldset {
     font-weight: 700 !important;
     color: #DF280A; }
   .error-msg a {
-    color: #DF280A; }
+    color: #DF280A;
+    text-decoration: none; }
 
 .success-msg {
   border-style: solid !important;
@@ -1228,6 +1229,9 @@ p.required {
   color: #19BDFA;
   padding-top: 10px;
   padding-bottom: 10px; }
+
+.first-name label, .last-name label, .address label, .city label, .state label, .zipcode label, .country label, .email label, .passwd label, .passwd-conf label, .login-email label, .login-passwd label, .order-id label, .billing-last-name label, .find-by label, .name label, .comment label {
+  text-transform: uppercase; }
 
 .cart .totals {
   float: right;
@@ -1450,12 +1454,22 @@ button.btn-update span {
     background-color: #fafafa; }
   #checkout-step-order-review .data-table #shipping_types tr {
     position: relative; }
+    #checkout-step-order-review .data-table #shipping_types tr:hover td, #checkout-step-order-review .data-table #shipping_types tr:active td, #checkout-step-order-review .data-table #shipping_types tr:focus td {
+      background-color: #f2f2f2; }
+      #checkout-step-order-review .data-table #shipping_types tr:hover td:hover, #checkout-step-order-review .data-table #shipping_types tr:hover td:active, #checkout-step-order-review .data-table #shipping_types tr:hover td:focus, #checkout-step-order-review .data-table #shipping_types tr:active td:hover, #checkout-step-order-review .data-table #shipping_types tr:active td:active, #checkout-step-order-review .data-table #shipping_types tr:active td:focus, #checkout-step-order-review .data-table #shipping_types tr:focus td:hover, #checkout-step-order-review .data-table #shipping_types tr:focus td:active, #checkout-step-order-review .data-table #shipping_types tr:focus td:focus {
+        background-color: #f2f2f2; }
+        #checkout-step-order-review .data-table #shipping_types tr:hover td:hover input, #checkout-step-order-review .data-table #shipping_types tr:hover td:active input, #checkout-step-order-review .data-table #shipping_types tr:hover td:focus input, #checkout-step-order-review .data-table #shipping_types tr:active td:hover input, #checkout-step-order-review .data-table #shipping_types tr:active td:active input, #checkout-step-order-review .data-table #shipping_types tr:active td:focus input, #checkout-step-order-review .data-table #shipping_types tr:focus td:hover input, #checkout-step-order-review .data-table #shipping_types tr:focus td:active input, #checkout-step-order-review .data-table #shipping_types tr:focus td:focus input {
+          background-color: #f2f2f2; }
+          #checkout-step-order-review .data-table #shipping_types tr:hover td:hover input:hover, #checkout-step-order-review .data-table #shipping_types tr:hover td:hover input:active, #checkout-step-order-review .data-table #shipping_types tr:hover td:hover input:focus, #checkout-step-order-review .data-table #shipping_types tr:hover td:active input:hover, #checkout-step-order-review .data-table #shipping_types tr:hover td:active input:active, #checkout-step-order-review .data-table #shipping_types tr:hover td:active input:focus, #checkout-step-order-review .data-table #shipping_types tr:hover td:focus input:hover, #checkout-step-order-review .data-table #shipping_types tr:hover td:focus input:active, #checkout-step-order-review .data-table #shipping_types tr:hover td:focus input:focus, #checkout-step-order-review .data-table #shipping_types tr:active td:hover input:hover, #checkout-step-order-review .data-table #shipping_types tr:active td:hover input:active, #checkout-step-order-review .data-table #shipping_types tr:active td:hover input:focus, #checkout-step-order-review .data-table #shipping_types tr:active td:active input:hover, #checkout-step-order-review .data-table #shipping_types tr:active td:active input:active, #checkout-step-order-review .data-table #shipping_types tr:active td:active input:focus, #checkout-step-order-review .data-table #shipping_types tr:active td:focus input:hover, #checkout-step-order-review .data-table #shipping_types tr:active td:focus input:active, #checkout-step-order-review .data-table #shipping_types tr:active td:focus input:focus, #checkout-step-order-review .data-table #shipping_types tr:focus td:hover input:hover, #checkout-step-order-review .data-table #shipping_types tr:focus td:hover input:active, #checkout-step-order-review .data-table #shipping_types tr:focus td:hover input:focus, #checkout-step-order-review .data-table #shipping_types tr:focus td:active input:hover, #checkout-step-order-review .data-table #shipping_types tr:focus td:active input:active, #checkout-step-order-review .data-table #shipping_types tr:focus td:active input:focus, #checkout-step-order-review .data-table #shipping_types tr:focus td:focus input:hover, #checkout-step-order-review .data-table #shipping_types tr:focus td:focus input:active, #checkout-step-order-review .data-table #shipping_types tr:focus td:focus input:focus {
+            background-color: #f2f2f2; }
   #checkout-step-order-review .data-table #shipping_types td {
     background-color: #f6f6f6; }
     #checkout-step-order-review .data-table #shipping_types td input {
-      position: absolute; }
+      position: absolute;
+      top: 12px; }
     #checkout-step-order-review .data-table #shipping_types td label {
-      padding-left: 20px; }
+      padding-left: 20px;
+      text-transform: none; }
   #checkout-step-order-review .data-table tfoot td {
     background-color: #F1F1F1; }
   #checkout-step-order-review .data-table tfoot strong {

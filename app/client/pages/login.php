@@ -59,7 +59,7 @@ require_once('_header.php');
                         <div class="form-list">
                             <?php echo $objValidation->validate('login'); ?>
                             <ul>
-                                <li>
+                                <li class="login-email">
                                     <label for="login_email">Email address: <em>*</em></label>
                                     <input
                                         type="email"
@@ -72,7 +72,7 @@ require_once('_header.php');
                                         placeholder="your@email.com"
                                         />
                                 </li>
-                                <li>
+                                <li class="login-passwd">
                                     <label for="login_password">Password: <em>*</em></label>
                                     <input
                                         type="password"

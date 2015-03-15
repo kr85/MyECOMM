@@ -90,6 +90,7 @@
 
   a {
     color: #DF280A;
+    text-decoration: none;
   }
 }
 
@@ -152,4 +153,12 @@ p.required {
   color: #19BDFA;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.first-name, .last-name, .address, .city, .state, .zipcode, .country,
+.email, .passwd, .passwd-conf, .login-email, .login-passwd, .order-id,
+.billing-last-name, .find-by, .name, .comment {
+  label {
+    text-transform: uppercase;
+  }
 }
