@@ -8,4 +8,3 @@ node_modules
 /vendor/
 composer.lock
 includes/private.php
-assets/media/
