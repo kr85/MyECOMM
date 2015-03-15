@@ -185,6 +185,10 @@ button.btn-cart {
   &:active, &:focus {
     border: 1px solid #959595;
   }
+
+  span {
+    vertical-align: middle;
+  }
 }
 
 .btn-cart-checkout {

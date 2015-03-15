@@ -10,6 +10,7 @@
 @import "pages/error";
 @import "pages/pages";
 @import "pages/cart";
+@import "pages/checkout";
 
 * {
   border: none;
@@ -30,7 +31,7 @@ body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 16px;
-  color: #666;
+  color: #999;
   background-color: #F3F3F3;
 }
 

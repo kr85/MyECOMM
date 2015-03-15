@@ -46,6 +46,22 @@ class Country extends Application {
     }
 
     /**
+     * Get state record by name
+     *
+     * @param null $name
+     * @return mixed|null
+     */
+    public function getStateByName($name = null) {
+        if (!empty($name)) {
+            $sql = "SELECT *
+                    FROM `{$this->tableStates}`
+                    WHERE `name` = ?";
+            return $this->Db->fetchOne($sql, $name);
+        }
+        return null;
+    }
+
+    /**
      * Get a list of all countries except the local ones
      *
      * @return array

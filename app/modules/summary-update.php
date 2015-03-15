@@ -27,15 +27,18 @@ if (!empty($shipping)) {
             if ($objBasket->addShipping($shippingSelected)) {
 
                 $out = [];
-                $out['basketSubtotal'] = $this->objCurrency->display(
+                $out['basketSubtotal'] = '<i>'.$this->objCurrency->display(
                     number_format($objBasket->finalSubtotal, 2)
-                );
-                $out['basketTax'] = $this->objCurrency->display(
+                ).'</i>';
+                $out['basketShippingCost'] = '<i>'.$this->objCurrency->display(
+                    number_format($shippingSelected['cost'], 2)
+                ).'</i>';
+                $out['basketTax'] = '<i>'.$this->objCurrency->display(
                     number_format($objBasket->finalTax, 2)
-                );
-                $out['basketTotal'] = $this->objCurrency->display(
+                ).'</i>';
+                $out['basketTotal'] = '<strong>'.$this->objCurrency->display(
                     number_format($objBasket->finalTotal, 2)
-                );
+                ).'</strong>';
 
                 echo Helper::json(['error' => false, 'totals' => $out]);
 

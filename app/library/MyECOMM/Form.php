@@ -141,10 +141,11 @@ class Form {
      * @param string $name
      * @param bool $selectOption
      * @param null $class
+     * @param bool $required
      * @return null|string
      */
     public function getCountriesSelect(
-        $record = null, $name = 'country', $selectOption = false, $class = null
+        $record = null, $name = 'country', $selectOption = false, $class = null, $required = true
     ) {
 
         $objCountry = new Country();
@@ -155,9 +156,11 @@ class Form {
             $out = "<select
                         name='{$name}'
                         id='{$name}'
-                        class='{$class} select_country_state'
-                        required='required'
-                        title='Please select a country.'
+                        class='{$class}'";
+            if ($required) {
+                $out .= " required='required' ";
+            }
+            $out .=           "title='Please select a country.'
                     >";
 
             if (empty($record) || $selectOption == true) {
@@ -198,46 +201,52 @@ class Form {
      * @return null|string
      */
     public function getCountryStatesSelect(
-        $countryId = 230, $record = null, $name = 'state', $selectOption = false, $class = null
+        $countryId = 230, $record = null, $name = 'state', $selectOption = false,
+        $class = null
     ) {
+        if (!empty($record) && !is_numeric($record)) {
+            $out = '<input
+                   type="text"
+                   name="state"
+                   id="state"
+                   class="input "';
+            $out .= $class;
+            $out .= ' title="Please enter a state."
+                   value="';
+            $out .= $this->stickyText('state', $record);
+            $out .= '"/>';
+            return $out;
+        } else {
+            $objCountry = new Country();
+            $states = $objCountry->getStates($countryId);
 
-        $objCountry = new Country();
-        $states = $objCountry->getStates($countryId);
-
-        if (!empty($states)) {
-
-            $out = "<select
+            if (!empty($states)) {
+                $out = "<select
                         name='{$name}'
                         id='{$name}'
-                        class='{$class}'
-                        required='required'
-                        title='Please select your state.'
+                        class='{$class}'";
+                $out .= "title='Please select your state.'
                     >";
-
-            if (empty($record) || $selectOption == true) {
-                $out .= "<option value=''>Select one&hellip;</option>";
+                if (empty($record) || $selectOption == true) {
+                    $out .= "<option value=''>Select one&hellip;</option>";
+                }
+                foreach ($states as $state) {
+                    $out .= "<option value=\"";
+                    $out .= $state['id'];
+                    $out .= "\"";
+                    $out .= $this->stickySelect(
+                        $name,
+                        $state['id'],
+                        $record['id']
+                    );
+                    $out .= ">";
+                    $out .= $state['name'];
+                    $out .= "</option>";
+                }
+                $out .= "</select>";
+                return $out;
             }
-
-            foreach ($states as $state) {
-
-                $out .= "<option value=\"";
-                $out .= $state['id'];
-                $out .= "\"";
-                $out .= $this->stickySelect(
-                    $name,
-                    $state['id'],
-                    $record
-                );
-                $out .= ">";
-                $out .= $state['name'];
-                $out .= "</option>";
-            }
-
-            $out .= "</select>";
-
-            return $out;
         }
-
         return null;
     }
 

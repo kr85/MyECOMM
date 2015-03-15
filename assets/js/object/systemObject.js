@@ -60,12 +60,15 @@ var systemObject = {
         "use strict";
         $(document).on('change', thisIdentity, function () {
             var option = $(thisIdentity + ' option:selected').text();
+            var stateSelect = '.state-select';
+            var stateInput = '.state-input';
             if (option == 'United States') {
-                $('.state-input').hide();
-                $('.state-select').show();
+                $(stateInput).hide();
+                $(stateSelect).show();
             } else {
-                $('.state-select').hide();
-                $('.state-input').show();
+                $(stateSelect).hide();
+                $(stateInput).show();
+                $(stateInput).val("")
             }
         });
     },
@@ -136,6 +139,33 @@ var systemObject = {
             } else {
                 $('#zip-code').hide();
                 $('#email-address').show();
+            }
+        });
+    },
+    useBillingInfoChecked: function (thisIdentity) {
+        "use strict";
+        $(document).on('change', thisIdentity, function () {
+            var trigger = $(this);
+            if (trigger.is(':checked')) {
+                $('#shipping_first_name').val($('#first_name').val());
+                $('#shipping_last_name').val($('#last_name').val());
+                $('#shipping_address_1').val($('#address_1').val());
+                $('#shipping_address_2').val($('#address_2').val());
+                $('#shipping_city').val($('#city').val());
+                $('#shipping_state').val($('#state').val())
+                $('#shipping_zip_code').val($('#zip_code').val());
+                $('#shipping_country').val($('#country').val());
+                $('#shipping_email').val($('#email').val());
+            } else {
+                $('#shipping_first_name').val('');
+                $('#shipping_last_name').val('');
+                $('#shipping_address_1').val('');
+                $('#shipping_address_2').val('');
+                $('#shipping_city').val('');
+                $('#shipping_state').val('');
+                $('#shipping_zip_code').val('');
+                $('#shipping_country').val('');
+                $('#shipping_email').val('');
             }
         });
     }

@@ -8,4 +8,5 @@ $(document).ready(function () {
     systemObject.formSearchEmptyValid('#form-search');
     systemObject.hideShowSiteMapSections('.site-map-title');
     systemObject.selectOrderFindBy('#find-by');
+    systemObject.useBillingInfoChecked('#same_address_check');
 });

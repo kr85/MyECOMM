@@ -27,6 +27,7 @@ if ($objForm->isPost('first_name')) {
         'address_2',
         'city',
         'state',
+        'state_input',
         'zip_code',
         'country',
         'email',
@@ -90,8 +91,17 @@ if ($objForm->isPost('first_name')) {
         }
     }
 
+    $array = $objForm->getPostArray();
+
+    if (!empty($array['state_input'])) {
+        $array['state'] = $array['state_input'];
+        unset($array['state_input']);
+    } else {
+        unset($array['state_input']);
+    }
+
     // Check if validation is valid
-    if ($objValidation->isValid()) {
+    if ($objValidation->isValid($array)) {
 
         // Add hash for activation account
         $objValidation->post['hash'] = mt_rand().date('YmdHis').mt_rand();
@@ -224,8 +234,8 @@ require_once('_header.php');
                                     ); ?>
                                     <input
                                         type="text"
-                                        name=""
-                                        id=""
+                                        name="state_input"
+                                        id="state_input"
                                         class="input state-input"
                                         value="<?php echo $objForm->stickyText('state'); ?>"
                                         title="Please enter your state."
@@ -258,7 +268,7 @@ require_once('_header.php');
                                         230,
                                         'country',
                                         false,
-                                        'create-account-country'
+                                        'create-account-country select_country_state'
                                     ); ?>
                                 </div>
                             </div>

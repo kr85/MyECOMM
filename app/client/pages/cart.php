@@ -4,7 +4,7 @@ use MyECOMM\Plugin;
 
 require_once('_header.php'); ?>
 
-<div class="main">
+<div class="main pad-bottom">
     <div id="main_basket">
         <?php echo Plugin::get('front'.DS.'cart_view', [
             'objUrl' => $this->objUrl,

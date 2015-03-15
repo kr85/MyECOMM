@@ -144,3 +144,12 @@
 fieldset {
   border: 0;
 }
+
+p.required {
+  font-size: 10px;
+  text-transform: uppercase;
+  text-align: right;
+  color: #19BDFA;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

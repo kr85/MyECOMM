@@ -36,9 +36,19 @@ class Basket {
     private $tax;
 
     /**
+     * @var double Tax amount of items in cart
+     */
+    public $cartTax;
+
+    /**
      * @var double Total amount variable
      */
     private $total;
+
+    /**
+     * @var double Total amount of items in cart
+     */
+    public $cartTotal;
 
     /**
      * @var double The total weight of all products in the basket
@@ -80,6 +90,9 @@ class Basket {
      */
     private $user;
 
+    /**
+     * @var List of cart products info
+     */
     public $productsInfo;
 
     /**
@@ -96,6 +109,9 @@ class Basket {
         $this->objCatalog = new Catalog();
         $this->emptyBasket = empty($_SESSION['basket']) ? true : false;
 
+        /*
+         * Use in other cases of tax rate
+         *
         if (!empty($this->user) &&
             ($this->user['country'] == COUNTRY_LOCAL || INTERNATIONAL_VAT)) {
             // Instantiate business class and get the tax rate
@@ -104,6 +120,12 @@ class Basket {
         } else {
             $this->taxRate = 0;
         }
+        */
+
+        // Instantiate business class and get the tax rate
+        $objBusiness = new Business();
+        $this->taxRate = $objBusiness->getTaxRate();
+
         // Call helper functions
         $this->noItems();
         $this->subTotal();
@@ -324,6 +346,8 @@ class Basket {
     private function process() {
         $this->finalShippingType = Session::getSession('shipping_type');
         $this->finalShippingCost = Session::getSession('shipping_cost');
+        $this->cartTax = $this->tax;
+        $this->cartTotal = round($this->total, 2);
         $this->finalSubtotal = round(($this->subTotal + $this->finalShippingCost), 2);
         $this->finalTax = round(($this->taxRate * ($this->finalSubtotal / 100)), 2);
         $this->finalTotal = round(($this->finalSubtotal + $this->finalTax), 2);

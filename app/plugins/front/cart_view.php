@@ -181,6 +181,26 @@ if (!empty($out)): ?>
                             </span>
                         </td>
                     </tr>
+                    <tr>
+                        <td class="center">Tax</td>
+                        <td class="center">
+                            <span class="price">
+                                <?php echo $data['objCurrency']->display(
+                                    number_format($objBasket->cartTax, 2)
+                                ); ?>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="center">Total</td>
+                        <td class="center">
+                            <span class="price">
+                                <?php echo $data['objCurrency']->display(
+                                    number_format($objBasket->cartTotal, 2)
+                                ); ?>
+                            </span>
+                        </td>
+                    </tr>
                 </tbody>
                 <tfoot>
                     <tr>

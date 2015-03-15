@@ -417,6 +417,8 @@ button.btn-cart {
     background: url(../images/button.gif) repeat-x 0 -24px; }
   .btn-small-cart:active, .btn-small-cart:focus {
     border: 1px solid #959595; }
+  .btn-small-cart span {
+    vertical-align: middle; }
 
 .btn-cart-checkout {
   height: 35px;
@@ -513,11 +515,15 @@ button.btn-cart {
     .main .account-login .row-1 .col-1 {
       float: left;
       width: 500px; }
+      .main .account-login .row-1 .col-1 .content h2 {
+        font-weight: 500; }
     .main .account-login .row-1 .col-2 {
       float: left;
       width: 400px; }
       .main .account-login .row-1 .col-2 .content {
         padding-left: 40px; }
+        .main .account-login .row-1 .col-2 .content h2 {
+          font-weight: 500; }
         .main .account-login .row-1 .col-2 .content p {
           padding-bottom: 6px; }
         .main .account-login .row-1 .col-2 .content .required {
@@ -714,7 +720,8 @@ fieldset {
       .new-products ul li h3 a {
         color: #19BDFA;
         text-decoration: none;
-        font-size: 11px; }
+        font-size: 11px;
+        font-weight: normal; }
     .new-products ul li .product-image {
       display: block;
       width: 107px;
@@ -1214,6 +1221,14 @@ fieldset {
 fieldset {
   border: 0; }
 
+p.required {
+  font-size: 10px;
+  text-transform: uppercase;
+  text-align: right;
+  color: #19BDFA;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
 .cart .totals {
   float: right;
   width: 264px;
@@ -1294,6 +1309,158 @@ button.btn-update span {
   margin-top: -6px;
   font-size: 12px; }
 
+.checkout .form-list li.control {
+  float: left;
+  padding: 0 20px 0 0;
+  margin-top: 8px; }
+  .checkout .form-list li.control input {
+    float: left;
+    margin-right: 5px; }
+  .checkout .form-list li.control label {
+    float: right; }
+.checkout button.btn-continue span span {
+  padding: 4px 10px 3px; }
+.checkout fieldset {
+  padding: 0;
+  margin: 0;
+  background: none; }
+.checkout .form-list .fields {
+  height: 41px;
+  margin-bottom: 7px; }
+.checkout .form-list li {
+  margin: 0; }
+.checkout label {
+  text-transform: uppercase;
+  font-size: 12px; }
+.checkout .field-one, .checkout .input-text-one {
+  width: 830px; }
+.checkout .field-two {
+  width: 402px; }
+.checkout .field-three {
+  width: 259px; }
+.checkout .first-name .input-box {
+  padding-left: 0;
+  padding-right: 0; }
+  .checkout .first-name .input-box input {
+    width: 394px; }
+.checkout .last-name {
+  padding-left: 25px; }
+  .checkout .last-name .input-box input {
+    width: 394px; }
+  .checkout .last-name .input-box, .checkout .last-name label {
+    padding-left: 0; }
+.checkout .address .input-box input {
+  width: 822px; }
+.checkout .city {
+  padding-right: 26px; }
+  .checkout .city .input-box {
+    padding-left: 0;
+    padding-right: 0; }
+    .checkout .city .input-box input {
+      width: 252px; }
+.checkout .state {
+  padding-right: 25px;
+  width: 261px; }
+  .checkout .state label {
+    padding-left: 0; }
+  .checkout .state .input-box {
+    padding-left: 0;
+    padding-right: 0; }
+    .checkout .state .input-box input {
+      width: 252px; }
+  .checkout .state .create-account-state {
+    width: 261px; }
+.checkout .zipcode .input-box input {
+  width: 251px; }
+.checkout .zipcode .input-box, .checkout .zipcode label {
+  padding-left: 0; }
+.checkout .country .create-account-country {
+  width: 831px; }
+.checkout .email .input-box input {
+  width: 822px; }
+.checkout .col-right {
+  padding: 49px 0 0 0;
+  width: 212px;
+  border-left: 0; }
+.checkout .checkout-steps {
+  border-bottom: 1px solid #B6B6B6;
+  position: relative; }
+  .checkout .checkout-steps li.section {
+    border: 1px solid #B6B6B6;
+    border-bottom: 0; }
+  .checkout .checkout-steps li.section-buttons {
+    border: 1px solid #B6B6B6;
+    border-bottom: 0;
+    border-top: none; }
+  .checkout .checkout-steps .step-title {
+    background: #fff;
+    text-align: right;
+    padding: 9px 34px 9px 34px;
+    height: 20px; }
+    .checkout .checkout-steps .step-title .number {
+      float: left;
+      border: solid 1px #B8B2B2;
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+      font-size: 11px;
+      font-weight: bold;
+      text-align: center;
+      color: #929292;
+      margin-right: 10px; }
+    .checkout .checkout-steps .step-title h2 {
+      float: left;
+      font-size: 11px;
+      font-weight: bold;
+      color: #929292;
+      text-transform: uppercase;
+      padding: 4px 0 0 0; }
+  .checkout .checkout-steps .active .step-title {
+    background: #F6F6F6;
+    cursor: default; }
+    .checkout .checkout-steps .active .step-title .number {
+      background: #19BDFA;
+      border: solid 1px #19BDFA;
+      color: #fff; }
+    .checkout .checkout-steps .active .step-title h2 {
+      color: #19BDFA; }
+  .checkout .checkout-steps .step {
+    background: #F6F6F6;
+    border-top: 1px solid #B6B6B6;
+    padding: 20px 34px;
+    position: relative; }
+  .checkout .checkout-steps .step-buttons {
+    padding-top: 0;
+    padding-bottom: 25px;
+    position: relative;
+    border-top: none; }
+
+.forgot-item-position {
+  position: absolute;
+  top: 5px;
+  left: 277px; }
+
+.data-table td h2 {
+  padding-bottom: 5px; }
+
+#checkout-step-order-review {
+  padding-bottom: 25px;
+  padding-top: 30px; }
+  #checkout-step-order-review .data-table tbody td {
+    background-color: #fafafa; }
+  #checkout-step-order-review .data-table #shipping_types tr {
+    position: relative; }
+  #checkout-step-order-review .data-table #shipping_types td {
+    background-color: #f6f6f6; }
+    #checkout-step-order-review .data-table #shipping_types td input {
+      position: absolute; }
+    #checkout-step-order-review .data-table #shipping_types td label {
+      padding-left: 20px; }
+  #checkout-step-order-review .data-table tfoot td {
+    background-color: #F1F1F1; }
+  #checkout-step-order-review .data-table tfoot strong {
+    color: #19BDFA; }
+
 * {
   border: none;
   outline: none;
@@ -1311,7 +1478,7 @@ body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 16px;
-  color: #666;
+  color: #999;
   background-color: #F3F3F3; }
 
 header, section, footer, aside, nav, main, article, figure {

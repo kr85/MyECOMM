@@ -1,0 +1,292 @@
+.checkout {
+  .form-list {
+    li.control {
+      float: left;
+      padding: 0 20px 0 0;
+      margin-top: 8px;
+
+      input {
+        float: left;
+        margin-right: 5px;
+      }
+
+      label {
+        float: right;
+      }
+    }
+  }
+
+  button.btn-continue {
+    span {
+      span {
+        padding: 4px 10px 3px;
+      }
+    }
+  }
+
+  #checkout-section-billing {
+  }
+
+  fieldset {
+    padding: 0;
+    margin: 0;
+    background: none;
+  }
+
+  .form-list .fields {
+    height: 41px;
+    margin-bottom: 7px;
+  }
+
+  .form-list {
+    li {
+      margin: 0;
+    }
+  }
+
+  label {
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+
+  .field-one, .input-text-one {
+    width: 830px;
+  }
+
+  .field-two {
+    width: 402px;
+  }
+
+  .field-three {
+    width: 259px;
+  }
+
+  .first-name {
+    .input-box {
+      padding-left: 0;
+      padding-right: 0;
+
+      input {
+        width: 394px;
+      }
+    }
+  }
+
+  .last-name {
+    padding-left: 25px;
+
+    .input-box {
+      input {
+        width: 394px;
+      }
+    }
+
+    .input-box, label {
+      padding-left: 0;
+    }
+  }
+
+  .address {
+    .input-box {
+      input {
+        width: 822px;
+      }
+    }
+  }
+
+  .city {
+    padding-right: 26px;
+
+    .input-box {
+      padding-left: 0;
+      padding-right: 0;
+
+      input {
+        width: 252px;
+      }
+    }
+  }
+
+  .state {
+    padding-right: 25px;
+    width: 261px;
+
+    label {
+      padding-left: 0;
+    }
+
+    .input-box {
+      padding-left: 0;
+      padding-right: 0;
+
+      input {
+        width: 252px;
+      }
+    }
+
+    .create-account-state {
+      width: 261px;
+    }
+  }
+
+  .zipcode {
+    .input-box {
+      input {
+        width: 251px;
+      }
+    }
+
+    .input-box, label {
+      padding-left: 0;
+    }
+  }
+
+  .country {
+    .create-account-country {
+      width: 831px;
+    }
+  }
+
+  .email {
+    .input-box {
+      input {
+        width: 822px;
+      }
+    }
+  }
+
+  .col-right {
+    padding: 49px 0 0 0;
+    width: 212px;
+    border-left: 0;
+  }
+
+  .checkout-steps {
+    border-bottom: 1px solid #B6B6B6;
+    position: relative;
+
+    li.section {
+      border: 1px solid #B6B6B6;
+      border-bottom: 0;
+    }
+
+    li.section-buttons {
+      border: 1px solid #B6B6B6;
+      border-bottom: 0;
+      border-top: none;
+    }
+
+    .step-title {
+      background: #fff;
+      text-align: right;
+      padding: 9px 34px 9px 34px;
+      height: 20px;
+
+      .number {
+        float: left;
+        border: solid 1px #B8B2B2;
+        width: 18px;
+        height: 18px;
+        line-height: 18px;
+        font-size: 11px;
+        font-weight: bold;
+        text-align: center;
+        color: #929292;
+        margin-right: 10px;
+      }
+
+      h2 {
+        float: left;
+        font-size: 11px;
+        font-weight: bold;
+        color: #929292;
+        text-transform: uppercase;
+        padding: 4px 0 0 0;
+      }
+    }
+
+    .active .step-title {
+      background: #F6F6F6;
+      cursor: default;
+
+      .number {
+        background: #19BDFA;
+        border: solid 1px #19BDFA;
+        color: #fff;
+      }
+
+      h2 {
+        color: #19BDFA;
+      }
+    }
+
+    .step {
+      background: #F6F6F6;
+      border-top: 1px solid #B6B6B6;
+      padding: 20px 34px;
+      position: relative;
+    }
+
+    .step-buttons {
+      padding-top: 0;
+      padding-bottom: 25px;
+      position: relative;
+      border-top: none;
+    }
+  }
+}
+
+.forgot-item-position {
+  position: absolute;
+  top: 5px;
+  left: 277px;
+}
+
+.data-table {
+  td {
+    h2 {
+      padding-bottom: 5px;
+    }
+  }
+}
+
+#checkout-step-order-review {
+  padding-bottom: 25px;
+  padding-top: 30px;
+
+  .data-table {
+    tbody {
+      td {
+        background-color: darken(#ffffff, 2%);
+      }
+    }
+
+    #shipping_types {
+      tr {
+        position: relative;
+      }
+
+      td {
+        background-color: darken(#ffffff, 3.5%);
+
+        input {
+          position: absolute;
+        }
+
+        label {
+          padding-left: 20px
+        }
+      }
+    }
+
+    tfoot {
+      td {
+        background-color: #F1F1F1;
+      }
+
+      strong {
+        color: #19BDFA;
+      }
+    }
+  }
+}

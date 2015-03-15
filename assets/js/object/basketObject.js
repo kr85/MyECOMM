@@ -95,8 +95,9 @@ var basketObject = {
             if (thisShippingOption.length > 0) {
                 var token = $(this).attr('id');
                 var image = "<div style=\"text-align: center;\">";
-                image = image + "<p><img src=\"/images/loading.gif\"";
-                image = image + " alt=\"Proceeding to PayPal\" />";
+                image = image + "<p style='font-size: 12px; font-weight: 700; color: #2F2F2F;'>";
+                image = image + "<img src=\"/assets/images/loading.gif\"";
+                image = image + " alt=\"Proceeding to PayPal\" style=\"padding-bottom: 30px;\" />";
                 image = image + "<br />Please wait while we are redirecting you to PayPal...</p>";
                 image = image + "</div><div id=\"frm_pp\"></div>";
                 $('#main_basket').fadeOut(200, function () {
@@ -130,6 +131,7 @@ var basketObject = {
             $.getJSON('/module/call/summary-update/shipping/' + thisOption, function (data) {
                 if (data && !data.error) {
                     $('#basketSubTotal').html(data.totals.basketSubtotal);
+                    $('#basketShippingCost').html(data.totals.basketShippingCost);
                     $('#basketTax').html(data.totals.basketTax);
                     $('#basketTotal').html(data.totals.basketTotal);
                 }
