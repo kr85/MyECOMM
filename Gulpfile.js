@@ -30,10 +30,8 @@ gulp.task('scripts-client', function() {
         'assets/js/lib/jquery-1.11.2.min.js',
         'assets/js/object/systemObject.js',
         'assets/js/object/basketObject.js',
-        'assets/js/object/adminObject.js',
         'assets/js/system.js',
-        'assets/js/basket.js',
-        'assets/js/admin.js'
+        'assets/js/basket.js'
     ])
         .pipe(concat('all-client.js'))
         .pipe(uglify())
