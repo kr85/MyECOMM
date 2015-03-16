@@ -207,7 +207,7 @@ if ($this->objUrl->currentPage != 'index'): ?>
             </div>
         </div>
     </footer>
-    <script src="/assets/main/all.js" type="text/javascript"></script>
+    <script src="/assets/main/all-client.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             if ($(location).attr('pathname') == '/') {

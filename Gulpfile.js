@@ -25,7 +25,22 @@ gulp.task('css-concat', function() {
         .pipe(gulp.dest('assets/main'))
 });
 
-gulp.task('scripts', function() {
+gulp.task('scripts-client', function() {
+    gulp.src([
+        'assets/js/lib/jquery-1.11.2.min.js',
+        'assets/js/object/systemObject.js',
+        'assets/js/object/basketObject.js',
+        'assets/js/object/adminObject.js',
+        'assets/js/system.js',
+        'assets/js/basket.js',
+        'assets/js/admin.js'
+    ])
+        .pipe(concat('all-client.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('assets/main'))
+});
+
+gulp.task('scripts-admin', function() {
     gulp.src([
         'assets/js/lib/jquery-1.11.2.min.js',
         'assets/js/lib/jquery.livequery.js',
@@ -37,14 +52,14 @@ gulp.task('scripts', function() {
         'assets/js/basket.js',
         'assets/js/admin.js'
     ])
-        .pipe(concat('all.js'))
+        .pipe(concat('all-admin.js'))
         .pipe(uglify())
         .pipe(gulp.dest('assets/main'))
 });
 
 gulp.task('watch', function() {
-    gulp.watch('assets/sass/**/*.scss', ['css'])
-    gulp.watch('assets/js/**/*.js', ['scripts'])
+    gulp.watch('assets/sass/**/*.scss', ['css']);
+    gulp.watch('assets/js/**/*.js', ['scripts-client', 'scripts-admin']);
 });
 
-gulp.task('default', ['css-concat', 'scripts']);
+gulp.task('default', ['css-concat', 'scripts-client', 'scripts-admin']);
