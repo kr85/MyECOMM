@@ -27,7 +27,6 @@ html, body {
 }
 
 body {
-  margin: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 16px;
@@ -268,16 +267,4 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 .center {
   text-align: center !important;
   vertical-align: middle !important;
-}
-
-@media
-  only screen and (-webkit-min-device-pixel-ratio: 1.5),
-  only screen and (-o-min-device-pixel-ratio: 3/2),
-  only screen and (min--moz-device-pixel-ratio: 1.5),
-  only screen and (min-device-pixel-ratio: 1.5) {
-  html,
-  body{
-    width: 100%;
-    overflow-x: hidden;
-  }
 }
