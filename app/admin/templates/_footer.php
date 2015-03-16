@@ -8,6 +8,6 @@
                   target="_blank">Kosta Rashev </a>
     </div>
 </div>
-<script src="/assets/main/all.js" type="text/javascript"></script>
+<script src="/assets/main/all-admin.js" type="text/javascript"></script>
 </body>
 </html>

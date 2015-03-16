@@ -13,6 +13,7 @@ use MyECOMM\Session;
         <meta name="description" content="E-Commerce Website Project"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="/assets/main/all.css" rel="stylesheet" type="text/css"/>
+        <script src="/assets/js/lib/modernizr.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="header">
