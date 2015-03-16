@@ -201,10 +201,17 @@ class Form {
      * @return null|string
      */
     public function getCountryStatesSelect(
-        $countryId = 230, $record = null, $name = 'state', $selectOption = false,
+        $use = null, $countryId = 230, $record = null, $name = 'state', $selectOption = false,
         $class = null
     ) {
-        if (!empty($record) && !is_numeric($record)) {
+        $objCountry = new Country();
+
+        if (!empty($record) && !empty($use) && $use == 'checkout') {
+            if (is_numeric($record)) {
+                $record = $objCountry->getStateById($record);
+                $record = $record['name'];
+            }
+
             $out = '<input
                    type="text"
                    name="state"
@@ -217,7 +224,6 @@ class Form {
             $out .= '"/>';
             return $out;
         } else {
-            $objCountry = new Country();
             $states = $objCountry->getStates($countryId);
 
             if (!empty($states)) {

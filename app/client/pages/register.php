@@ -225,6 +225,7 @@ require_once('_header.php');
                                 <label for="state">State/Province: <em>*</em></label>
                                 <div class="input-box">
                                     <?php echo $objForm->getCountryStatesSelect(
+                                        null,
                                         230,
                                         null,
                                         'state',
@@ -235,7 +236,7 @@ require_once('_header.php');
                                         type="text"
                                         name="state_input"
                                         id="state_input"
-                                        class="input state-input"
+                                        class="state-input"
                                         value="<?php echo $objForm->stickyText('state'); ?>"
                                         title="Please enter your state."
                                         style="display: none;"

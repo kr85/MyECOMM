@@ -206,7 +206,7 @@ if (!empty($user)) {
                                 <div class="field field-three state">
                                     <label for="state">State/Province: <em>*</em></label>
                                     <div class="input-box">
-                                        <?php echo $objForm->getCountryStatesSelect($user['country'], $user['state']); ?>
+                                        <?php echo $objForm->getCountryStatesSelect('checkout', $user['country'], $user['state']); ?>
                                         <?php echo $objValidation->validate('state'); ?>
                                     </div>
                                 </div>
