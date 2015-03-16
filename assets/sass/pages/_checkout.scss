@@ -263,7 +263,6 @@
 
     #shipping_types {
       tr {
-        position: relative;
 
         &:hover, &:active, &:focus {
           td {
@@ -286,6 +285,7 @@
 
       td {
         background-color: darken(#ffffff, 3.5%);
+        position: relative;
 
         input {
           position: absolute;
