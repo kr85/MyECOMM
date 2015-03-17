@@ -25,7 +25,7 @@ use MyECOMM\Basket;
     <meta charset="UTF-8"/>
     <title><?php echo $this->metaTitle; ?></title>
     <meta name="description" content="<?php echo $this->metaDescription; ?>"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width">
     <meta name="author" content="Kosta Rashev">
     <link href="/assets/main/all.css" rel="stylesheet" type="text/css"/>
     <script src="/assets/js/lib/modernizr.js" type="text/javascript"></script>
