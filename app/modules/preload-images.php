@@ -21,7 +21,7 @@ $handle = opendir($path[0]);
 
 while ($file = readdir($handle)) {
     if ($file !== '.' && $file !== '..') {
-        array_push($filenames, $file);
+        array_push($filenames, DS.ASSETS_DIR.DS.IMAGES_DIR.DS.$file);
     }
 }
 
@@ -29,7 +29,7 @@ $handle = opendir($path[1]);
 
 while ($file = readdir($handle)) {
     if ($file !== '.' && $file !== '..') {
-        array_push($filenames, $file);
+        array_push($filenames, DS.ASSETS_DIR.DS.CATALOG_DIR.DS.$file);
     }
 }
 
