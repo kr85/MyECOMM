@@ -28,6 +28,7 @@ gulp.task('css-concat', function() {
 gulp.task('scripts-client', function() {
     gulp.src([
         'assets/js/lib/jquery-1.11.2.min.js',
+        'assets/js/lib/jquery.imgpreload.min.js',
         'assets/js/object/systemObject.js',
         'assets/js/object/basketObject.js',
         'assets/js/system.js',

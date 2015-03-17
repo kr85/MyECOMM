@@ -168,5 +168,10 @@ var systemObject = {
                 $('#shipping_email').val('');
             }
         });
+    },
+    loadingGif: function (thisIdentity) {
+        $(window).load(function() {
+            $(thisIdentity).fadeOut('slow');
+        });
     }
 };

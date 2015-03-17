@@ -126,7 +126,7 @@ var basketObject = {
     },
     shipping: function (thisIdentity) {
         "use strict";
-        $(document).on('change', thisIdentity, function (e) {
+        $(document).on('change', thisIdentity, function () {
             var thisOption = $(this).val();
             $.getJSON('/module/call/summary-update/shipping/' + thisOption, function (data) {
                 if (data && !data.error) {

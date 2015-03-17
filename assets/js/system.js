@@ -9,4 +9,5 @@ $(document).ready(function () {
     systemObject.hideShowSiteMapSections('.site-map-title');
     systemObject.selectOrderFindBy('#find-by');
     systemObject.useBillingInfoChecked('#same_address_check');
+    systemObject.loadingGif('.loader');
 });

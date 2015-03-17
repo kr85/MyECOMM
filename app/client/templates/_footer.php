@@ -215,5 +215,8 @@ if ($this->objUrl->currentPage != 'index'): ?>
             }
         });
     </script>
+    <?php if ($this->objUrl->currentPage == 'index'): ?>
+        <script src="../assets/js/preload.js"></script>
+    <?php endif; ?>
 </body>
 </html>

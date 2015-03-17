@@ -28,6 +28,9 @@ try {
         case 'summary-update':
             require_once(MODULES_PATH.DS.'summary-update.php');
             break;
+        case 'preload-images':
+            require_once(MODULES_PATH.DS.'preload-images.php');
+            break;
         default:
             throw new Exception('Invalid request.');
     }

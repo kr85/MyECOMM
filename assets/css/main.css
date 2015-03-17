@@ -1648,3 +1648,13 @@ a:focus, a:active, .btn:focus, .btn:active, button::-moz-focus-inner, input[type
 .center {
   text-align: center !important;
   vertical-align: middle !important; }
+
+.loader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url(../images/loading.gif) 50% 45% no-repeat #F9F9F9;
+  opacity: 1; }
