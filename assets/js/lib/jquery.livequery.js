@@ -1,11 +1,4 @@
-/*! Copyright (c) 2010 Brandon Aaron (http://brandonaaron.net)
- * Dual licensed under the MIT (MIT_LICENSE.txt)
- * and GPL Version 2 (GPL_LICENSE.txt) licenses.
- *
- * Version: 1.1.1
- * Requires jQuery 1.3+
- * Docs: http://docs.jquery.com/Plugins/livequery
- */
+/* Version: 1.1.1 */
 (function ($) {
     $.extend($.fn, {
         livequery: function (type, fn, fn2) {
