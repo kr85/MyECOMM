@@ -817,9 +817,9 @@ fieldset {
                   text-decoration: none; }
     .main .col-main .category-products .products-list .item {
       border-bottom: 1px solid #CFCFCF;
-      padding: 0 0 38px 0;
+      padding: 0;
       margin: 0 0 39px 0;
-      height: 240px; }
+      height: 295px; }
     .main .col-main .category-products .products-list .product-image {
       float: left;
       width: 107px;

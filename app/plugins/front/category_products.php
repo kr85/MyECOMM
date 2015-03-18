@@ -113,6 +113,7 @@ $productsOnPage = count($rows);
                         </ul>
                     </div>
                 </div>
+                <div class="clearfix"></div>
             </li>
         <?php endforeach; ?>
         <div class="toolbar-bottom">
