@@ -19,6 +19,10 @@
   margin: 0;
 }
 
+html {
+  min-height: 100%;
+}
+
 html, body {
   height: 100%;
   width: 100%;
@@ -75,11 +79,6 @@ section {
 
 ul, ol {
   list-style: none;
-}
-
-.wrapper {
-  position: relative;
-  width: 100%;
 }
 
 .wrapper {

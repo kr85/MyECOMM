@@ -173,11 +173,6 @@ header {
   left: -10000px; }
 
 footer {
-  position: relative;
-  margin: 0 auto;
-  width: 100%;
-  min-width: 960px;
-  bottom: 0;
   z-index: 0;
   background-color: #F3F3F3; }
   footer .footer-row-1 {
@@ -270,7 +265,8 @@ footer {
         color: #dd4b39; }
 
 footer, .push {
-  height: 327px; }
+  height: 327px;
+  clear: both; }
 
 .footer-text {
   display: inline; }
@@ -1480,6 +1476,9 @@ button.btn-update span {
   padding: 0;
   margin: 0; }
 
+html {
+  min-height: 100%; }
+
 html, body {
   height: 100%;
   width: 100%;
@@ -1524,10 +1523,6 @@ section {
 
 ul, ol {
   list-style: none; }
-
-.wrapper {
-  position: relative;
-  width: 100%; }
 
 .wrapper {
   min-height: 100%;

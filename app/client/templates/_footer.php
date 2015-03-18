@@ -157,6 +157,7 @@ if ($this->objUrl->currentPage != 'index'): ?>
                             <?php endif; ?>
                         </ul>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
@@ -203,6 +204,7 @@ if ($this->objUrl->currentPage != 'index'): ?>
                             <i class="fa fa-google-plus-square fa-2x"></i>
                         </a>
                     </li>
+                    <li class="clearfix"></li>
                 </ul>
             </div>
         </div>

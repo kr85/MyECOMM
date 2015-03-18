@@ -1,9 +1,4 @@
 footer {
-  position: relative;
-  margin: 0 auto;
-  width: 100%;
-  min-width: 960px;
-  bottom: 0;
   z-index: 0;
   background-color: #F3F3F3;
 
@@ -158,6 +153,7 @@ footer {
 
 footer, .push {
   height: 327px;
+  clear: both;
 }
 
 .footer-text {
