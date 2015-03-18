@@ -264,8 +264,14 @@ footer {
       .footer-google-plus a i:hover {
         color: #dd4b39; }
 
-footer, .push {
+.push {
+  overflow: auto;
+  padding-bottom: 326px; }
+
+footer {
+  position: relative;
   height: 327px;
+  margin-top: -326px;
   clear: both; }
 
 .footer-text {
@@ -1492,6 +1498,13 @@ body {
   color: #999;
   background-color: #F3F3F3; }
 
+body:before {
+  content: "";
+  height: 100%;
+  float: left;
+  width: 0;
+  margin-top: -32767px; }
+
 header, section, footer, aside, nav, main, article, figure {
   display: block; }
 
@@ -1529,7 +1542,6 @@ ul, ol {
   height: auto !important;
   height: 100%;
   min-width: 960px;
-  margin: 0 auto -326px;
   overflow-x: hidden; }
 
 .container {

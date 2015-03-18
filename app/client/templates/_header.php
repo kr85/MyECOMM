@@ -28,6 +28,11 @@ use MyECOMM\Basket;
     <meta name="viewport" content="width=device-width">
     <meta name="author" content="Kosta Rashev">
     <link href="/assets/main/all.css" rel="stylesheet" type="text/css"/>
+    <!--[if !IE 7]>
+        <style type="text/css">
+            .wrapper {display:table;height:100%}
+        </style>
+    <![endif]-->
     <script src="/assets/js/lib/modernizr.js" type="text/javascript"></script>
 </head>
 <body>

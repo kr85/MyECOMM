@@ -151,8 +151,15 @@ footer {
   }
 }
 
-footer, .push {
+.push {
+  overflow: auto;
+  padding-bottom: 326px;
+}
+
+footer {
+  position: relative;
   height: 327px;
+  margin-top: -326px;
   clear: both;
 }
 
