@@ -1,4 +1,6 @@
 footer {
+  position: relative;
+  width: 100%;
   z-index: 0;
   background-color: #F3F3F3;
 
@@ -151,13 +153,7 @@ footer {
   }
 }
 
-.push {
-  overflow: auto;
-  padding-bottom: 326px;
-}
-
-footer {
-  width: 100%;
+footer, .push {
   height: 327px;
   clear: both;
 }

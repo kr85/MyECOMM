@@ -35,18 +35,17 @@ body {
 }
 
 .wrapper {
+  position: relative;
   width: 100%;
+}
+
+.wrapper {
   min-width: 960px;
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin: 0 0 -326px 0;
+  margin: 0 auto -326px;
   overflow-x: hidden;
-}
-
-.content-wrapper {
-  width: 100%;
-  padding: 0 0 326px 0;
 }
 
 header, section, footer, aside, nav, main, article, figure {

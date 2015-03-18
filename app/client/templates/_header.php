@@ -31,21 +31,20 @@ use MyECOMM\Basket;
 </head>
 <body>
     <div class="wrapper">
-        <div class="content-wrapper">
-            <header>
-                <?php
-                    echo Plugin::get('front'.DS.'header', [
-                        'objUrl' => $this->objUrl,
-                        'objCatalog' => $this->objCatalog,
-                        'objNavigation' => $this->objNavigation,
-                        'objCurrency' => $this->objCurrency,
-                        'sections' => $sections,
-                        'categories' => $categories,
-                        'latestProducts' => $latestProducts
-                    ]);
-                ?>
-            </header>
-            <?php if ($this->objUrl->currentPage != 'index'): ?>
-            <section>
-                <div class="container">
-            <?php endif; ?>
+        <header>
+            <?php
+                echo Plugin::get('front'.DS.'header', [
+                    'objUrl' => $this->objUrl,
+                    'objCatalog' => $this->objCatalog,
+                    'objNavigation' => $this->objNavigation,
+                    'objCurrency' => $this->objCurrency,
+                    'sections' => $sections,
+                    'categories' => $categories,
+                    'latestProducts' => $latestProducts
+                ]);
+            ?>
+        </header>
+        <?php if ($this->objUrl->currentPage != 'index'): ?>
+        <section>
+            <div class="container">
+        <?php endif; ?>
