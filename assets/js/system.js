@@ -10,4 +10,5 @@ $(document).ready(function () {
     systemObject.selectOrderFindBy('#find-by');
     systemObject.useBillingInfoChecked('#same_address_check');
     systemObject.loadingGif('.loader');
+    systemObject.preload();
 });

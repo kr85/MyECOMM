@@ -1,8 +1,8 @@
 {
   "name": "MyECOMM",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "More Info Coming Soon",
-  "main": "index.js",
+  "main": "Gulpfile.js",
   "devDependencies": {
     "gulp": "~3.8.11",
     "gulp-autoprefixer": "^2.0.0",
@@ -22,7 +22,10 @@
     "type": "git",
     "url": "https://github.com/kr85/MyECOMM.git"
   },
-  "author": "",
+  "author": {
+    "name": "Kosta Rashev",
+    "email": "kosta.rashev@gmail.com"
+  },
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/kr85/MyECOMM/issues"

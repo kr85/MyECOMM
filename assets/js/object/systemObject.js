@@ -9,12 +9,13 @@ var systemObject = {
     topValidation: function (thisMessage) {
         "use strict";
         if (thisMessage !== '' && typeof thisMessage !== 'undefined') {
-            if ($('#top_message').length > 0) {
-                $('#top_message').remove();
+            var topMessageId = '#top_message';
+            if ($(topMessageId).length > 0) {
+                $(topMessageId).remove();
             }
             $('body').prepend($(systemObject.topValidationTemplate(thisMessage)).fadeIn(200));
             setTimeout(function () {
-                $('#top_message').fadeOut(function () {
+                $(topMessageId).fadeOut(function () {
                     $(this).remove();
                 });
             }, 5000);
@@ -170,8 +171,37 @@ var systemObject = {
         });
     },
     loadingGif: function (thisIdentity) {
+        "use strict";
         $(window).load(function() {
             $(thisIdentity).fadeOut('slow');
         });
+    },
+    preload: function () {
+        "use strict";
+        systemObject.preloadImages('/module/call/preload-images', ['images', 'catalog']);
+    },
+    preloadImages: function (url, type) {
+        "use strict";
+        var currentUrl = window.location.pathname;
+        if (currentUrl == '/') {
+            $.ajax({
+                url: url,
+                type: 'post',
+                dataType: 'json',
+                data: { type: type },
+                success: function (data) {
+                    if (data && !data.error) {
+                        $.imgpreload(data.filenames, {
+                            all: function () {
+                                console.log('All loaded.');
+                            }
+                        });
+                    }
+                },
+                error: function () {
+                    console.log('Not preloaded.');
+                }
+            });
+        }
     }
 };
