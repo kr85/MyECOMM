@@ -129,6 +129,7 @@ if (!empty($id)):
                                 <div class="clearfix"></div>
                                 <p class="add-btn-wrapper">
                                     <?php echo Basket::addRemoveCartButton($product['id']); ?>
+                                    <?php echo Basket::addButtonWishlist($product['id']); ?>
                                 </p>
                             </div>
                         </div>
@@ -200,7 +201,7 @@ if (!empty($id)):
                                     >
                                             <?php echo Helper::shortenString(
                                                 Helper::encodeHTML(
-                                                    $pRand[$key]['name'], 1), 30
+                                                    $pRand[$key]['name'], 1), 35
                                             ); ?>
                                     </a>
                                 </h3>
@@ -212,6 +213,9 @@ if (!empty($id)):
                                             ); ?>
                                         </span>
                                     </span>
+                                </div>
+                                <div class="add-to-wishlist-box">
+                                    <?php echo Basket::addButtonWishlist($pRand[$key]['id']); ?>
                                 </div>
                             </div>
                         </li>

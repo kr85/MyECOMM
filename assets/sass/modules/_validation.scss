@@ -9,3 +9,26 @@
   box-shadow: 0 0 5px #d45252;
   border-color: #b03535
 }
+
+.top_message_wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 900px;
+  z-index: 9999;
+
+  #top_message {
+    background-color: #ffffff;
+    padding: 15px;
+    font-size: 15px;
+    font-family: "Quattrocento Sans",sans-serif;
+    font-weight: 600;
+    color: #19BDFA;
+    border: 1px solid rgb(207, 207, 207);
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    box-shadow: 0 0 10px rgb(99, 99, 99);
+  }
+}

@@ -47,5 +47,6 @@ if (!empty($array)) {
         'objCurrency' => $this->objCurrency
     ]);
 
+    $out['message'] = 'Shopping cart was successfully updated.';
     echo Helper::json($out);
 }

@@ -31,6 +31,12 @@ try {
         case 'preload-images':
             require_once(MODULES_PATH.DS.'preload-images.php');
             break;
+        case 'wishlist-remove':
+            require_once(MODULES_PATH.DS.'wishlist-remove.php');
+            break;
+        case 'wishlist-add':
+            require_once(MODULES_PATH.DS.'wishlist-add.php');
+            break;
         default:
             throw new Exception('Invalid request.');
     }

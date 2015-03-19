@@ -269,10 +269,41 @@ class Basket {
     public static function removeButton($id = null) {
         if (!empty($id)) {
             if (isset($_SESSION['basket'][$id])) {
-                $out = "<a href=\"\" class=\"remove_basket btn-remove-2";
+                $out = "<a href=\"#\" class=\"remove_basket btn-remove-2";
                 $out .= "\" rel=\"{$id}\" title=\"Remove Product\">Remove</a>";
                 return $out;
             }
+        }
+        return false;
+    }
+
+    /**
+     * Get the remove item button for the wishlist
+     *
+     * @param null $id
+     * @return bool|string
+     */
+    public static function removeButtonWishlist($id = null) {
+        if (!empty($id)) {
+            $out = "<a href=\"#\" class=\"remove_wishlist btn-remove-2";
+            $out .= "\" rel=\"{$id}\" title=\"Remove Product\">Remove</a>";
+            return $out;
+        }
+        return false;
+    }
+
+    /**
+     * Add product to client's wishlist
+     *
+     * @param null $productId
+     * @return bool|string
+     */
+    public static function addButtonWishlist($productId = null) {
+        if (!empty($productId)) {
+            $out  = '<a href="#" class="add-to-wishlist" rel="';
+            $out .= $productId;
+            $out .= '" title="Add Product">Add to Wishlist</a>';
+            return $out;
         }
         return false;
     }

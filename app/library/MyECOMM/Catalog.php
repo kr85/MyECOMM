@@ -21,6 +21,11 @@ class Catalog extends Application {
     protected $tableSections = 'sections';
 
     /**
+     * @var string The name of the wishlist table
+     */
+    protected $tableWishlist = 'wishlist';
+
+    /**
      * @var Record id
      */
     public $id;
@@ -131,6 +136,23 @@ class Catalog extends Application {
     }
 
     /**
+     * Get client's wishlist
+     *
+     * @param null $clientId
+     * @return mixed|null
+     */
+    public function getClientWishlist($clientId = null) {
+        if (!empty($clientId)) {
+            $sql = "SELECT *
+                    FROM `{$this->tableWishlist}`
+                    WHERE `client` = ?
+                    ORDER BY `date` DESC";
+            return $this->Db->fetchAll($sql, $clientId);
+        }
+        return null;
+    }
+
+    /**
      * Get a category by id
      *
      * @param null $id
@@ -209,6 +231,42 @@ class Catalog extends Application {
     }
 
     /**
+     * Add a product to client's wishlist
+     *
+     * @param null $array
+     * @return bool
+     */
+    public function addProductToWishlist($array = null) {
+        if (!Helper::isArrayEmpty($array)) {
+            return $this->Db->insert($this->tableWishlist, [
+                'client' => $array['client'],
+                'product' => $array['product'],
+                'date' => Helper::setDate()
+            ]);
+        }
+        return false;
+    }
+
+    /**
+     * Check if a product is in client's wishlist
+     *
+     * @param null $productId
+     * @param null $clientId
+     * @return bool
+     */
+    public function isProductInWishlist($productId = null, $clientId = null) {
+        if (!empty($productId) && !empty($clientId)) {
+            $sql = "SELECT *
+                    FROM `{$this->tableWishlist}`
+                    WHERE `client` = ?
+                    AND `product` = ?";
+            $result = $this->Db->fetchOne($sql, [$clientId, $productId]);
+            return (!empty($result)) ? true : false;
+        }
+        return true;
+    }
+
+    /**
      * Update an existing category
      *
      * @param null $array
@@ -264,6 +322,19 @@ class Catalog extends Application {
      */
     public function removeSection($id = null) {
         return $this->Db->delete($this->tableSections, $id);
+    }
+
+    /**
+     * Remove a product from client's wishlist
+     *
+     * @param null $id
+     * @return bool|mixed
+     */
+    public function removeProductFromWishlist($id = null) {
+        if (!empty($id)) {
+            return $this->Db->delete($this->tableWishlist, $id);
+        }
+        return false;
     }
 
     /**

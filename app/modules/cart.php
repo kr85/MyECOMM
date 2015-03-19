@@ -31,10 +31,12 @@ if (isset($_POST['job']) && isset($_POST['id'])) {
             case 0:
                 Session::removeItem($id);
                 $out['job'] = 1;
+                $out['message'] = 'Product was successfully removed from your shopping cart.';
                 break;
             case 1:
                 Session::setItem($id, $qty);
                 $out['job'] = 0;
+                $out['message'] = 'Product was successfully added to your shopping cart.';
                 break;
         }
 

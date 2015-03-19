@@ -1,24 +1,25 @@
 var systemObject = {
     topValidationTemplate: function (thisMessage) {
         "use strict";
-        var thisTemplate = '<div id="top_message">';
+        var thisTemplate = '<div class="top_message_wrapper">';
+        thisTemplate += '<div id="top_message">';
         thisTemplate += thisMessage;
-        thisTemplate += '</div>';
+        thisTemplate += '</div></div>';
         return thisTemplate;
     },
     topValidation: function (thisMessage) {
         "use strict";
         if (thisMessage !== '' && typeof thisMessage !== 'undefined') {
-            var topMessageId = '#top_message';
-            if ($(topMessageId).length > 0) {
-                $(topMessageId).remove();
+            var topMessageElement = '.top_message_wrapper';
+            if ($(topMessageElement).length > 0) {
+                $(topMessageElement).remove();
             }
-            $('body').prepend($(systemObject.topValidationTemplate(thisMessage)).fadeIn(200));
+            $('.wrapper').prepend($(systemObject.topValidationTemplate(thisMessage)).fadeIn(500));
             setTimeout(function () {
-                $(topMessageId).fadeOut(function () {
+                $(topMessageElement).fadeOut(500, function () {
                     $(this).remove();
                 });
-            }, 5000);
+            }, 2500);
         }
     },
     showHideRadio: function (thisIdentity) {

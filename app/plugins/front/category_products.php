@@ -109,7 +109,9 @@ $productsOnPage = count($rows);
                                 >more</a>
                         </div>
                         <ul class="add-to-links">
-                            <li><a href="" class="add-wishlist">Add to Wishlist</a></li>
+                            <li>
+                                <?php echo Basket::addButtonWishlist($product['id']); ?>
+                            </li>
                         </ul>
                     </div>
                 </div>

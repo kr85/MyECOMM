@@ -1,0 +1,20 @@
+.wishlist {
+  .toolbar {
+    .pager {
+      .pages {
+        left: 390px;
+      }
+    }
+  }
+
+  fieldset {
+    padding: 1px;
+  }
+
+  .price, .date-added {
+    font-family: "Quattrocento Sans",sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #19BDFA;
+  }
+}

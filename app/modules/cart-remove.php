@@ -47,4 +47,5 @@ $out['replace_values']['#my-cart-small'] = Plugin::get('front'.DS.'cart_left', [
     'summaryAmount' => $summaryAmount
 ]);
 
+$out['message'] = 'Product was successfully removed from your shopping cart.';
 echo Helper::json($out);

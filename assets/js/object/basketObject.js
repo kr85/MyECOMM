@@ -37,9 +37,28 @@ var basketObject = {
                         if (!systemObject.isEmpty(data.replace_values)) {
                             systemObject.replaceValues(data.replace_values);
                         }
+                        if (data.message) {
+                            systemObject.topValidation(data.message);
+                        }
                     }
                 }, 'json');
             }
+        });
+    },
+    addToWishlist: function (thisIdentity) {
+        "use strict";
+        $(document).on('click', thisIdentity, function (e) {
+            e.preventDefault();
+            var item = $(this).attr('rel');
+            $.post('/module/call/wishlist-add', { id: item }, function(data) {
+                if (data && !data.error) {
+                    systemObject.topValidation(data.message);
+                } else {
+                    if (data.message) {
+                        systemObject.topValidation(data.message);
+                    }
+                }
+            }, 'json');
         });
     },
     removeFromBasket: function (thisIdentity) {
@@ -56,6 +75,24 @@ var basketObject = {
                 $(thisTarget).removeAttr("style");
                 $(thisTarget).text("Add to Cart");
                 $(thisTarget).addClass("btn-cart-add");
+                if (data.message) {
+                    systemObject.topValidation(data.message);
+                }
+            }, 'json');
+        });
+    },
+    removeFromWishlist: function (thisIdentity) {
+        "use strict";
+        $(document).on('click', thisIdentity, function (e) {
+            e.preventDefault();
+            var item = $(this).attr('rel');
+            $.post('/module/call/wishlist-remove', { id: item }, function(data) {
+                if (!systemObject.isEmpty(data.replace_values)) {
+                    systemObject.replaceValues(data.replace_values);
+                }
+                if (data.message) {
+                    systemObject.topValidation(data.message);
+                }
             }, 'json');
         });
     },
@@ -65,6 +102,9 @@ var basketObject = {
         $.post('/module/call/cart-qty', thisArray, function(data) {
             if (!systemObject.isEmpty(data.replace_values)) {
                 systemObject.replaceValues(data.replace_values);
+            }
+            if (data.message) {
+                systemObject.topValidation(data.message);
             }
         }, 'json');
     },

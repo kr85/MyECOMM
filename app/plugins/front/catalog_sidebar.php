@@ -3,6 +3,7 @@
 use MyECOMM\Plugin;
 use MyECOMM\Helper;
 use MyECOMM\Session;
+use MyECOMM\Basket;
 
 $recentlyViewed = Session::getSession('recentlyViewed');
 $listing = $data['listing'];
@@ -64,7 +65,7 @@ if (!empty($products)):
                             >
                                 <?php echo Helper::shortenString(
                                     Helper::encodeHTML($products[$key]['name'], 1),
-                                    45
+                                    35
                                 ); ?>
                             </a>
                         </p>
@@ -76,6 +77,9 @@ if (!empty($products)):
                                     ); ?>
                                 </span>
                             </span>
+                        </div>
+                        <div class="add-to-wishlist-box">
+                            <?php echo Basket::addButtonWishlist($products[$key]['id']); ?>
                         </div>
                     </div>
                 </div>

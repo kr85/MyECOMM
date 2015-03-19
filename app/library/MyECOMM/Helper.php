@@ -144,6 +144,10 @@ class Helper {
                 // 2015-01-23-10-25-57
                 return date('Y-m-d-H-i-s', $date);
                 break;
+            case 4:
+                // 01/23/2015
+                return date('m/d/Y', $date);
+                break;
             default:
                 // 2015-01-23 10:25:57
                 return date('Y-m-d H:i:s', $date);
