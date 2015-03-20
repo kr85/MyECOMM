@@ -300,4 +300,20 @@ class Helper {
     public static function isArrayEmpty($array = null) {
         return (empty($array) || !is_array($array));
     }
+
+    /**
+     * Get a hash for resetting a password
+     *
+     * @param null $id
+     * @param null $time
+     * @return null|string
+     */
+    public static function getResetPasswordHash($id = null, $time = null) {
+        if (!empty($id) && !empty($time)) {
+            $salt = 'a)P6U2KNZ%&EХEmj-348_O2xmЗSdQbimhлnhкOyXh7o-pmKpc782cynvd6oTIHZ9';
+            $string = $id.$time.$salt;
+            return hash('sha512', $string);
+        }
+        return null;
+    }
 }

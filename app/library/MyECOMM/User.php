@@ -16,6 +16,11 @@ class User extends Application {
     protected $table = "clients";
 
     /**
+     * @var string The name of the reset password table
+     */
+    protected $tableResetPassword = "reset_password";
+
+    /**
      * Constructor
      *
      * @param null $objUrl
@@ -87,6 +92,121 @@ class User extends Application {
             return false;
         }
         return false;
+    }
+
+    /**
+     * Reset password
+     *
+     * @param null $email
+     * @param null $hash
+     * @param null $date
+     * @return bool
+     */
+    public function resetPassword($email = null, $hash = null, $date = null) {
+        if ($this->areSetResetPasswordParamsValid($email, $hash, $date)) {
+            if ($this->setResetPasswordParams($email, $hash, $date)) {
+                $objEmail = new Email();
+                $email = [
+                    'email' => $email,
+                    'hash'  => $hash,
+                    'time'  => $date
+                ];
+                if ($objEmail->process(3, $email)) {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * Set reset password parameters
+     *
+     * @param null $email
+     * @param null $hash
+     * @param null $date
+     * @return bool
+     */
+    public function setResetPasswordParams($email = null, $hash = null, $date = null) {
+        if ($this->areSetResetPasswordParamsValid($email, $hash, $date)) {
+            if ($this->isResetPasswordCountValid($email)) {
+                $reset = $this->getResetPasswordByEmail($email);
+                $count = intval($reset['count']);
+                if ($count == 0) {
+                    $result = $this->Db->insert($this->tableResetPassword, [
+                        'email' => $email,
+                        'hash'  => $hash,
+                        'date'  => $date,
+                        'count' => $count + 1
+                    ]);
+                    if ($result) {
+                        return true;
+                    }
+                    return false;
+                } else {
+                    $result = $this->Db->update($this->tableResetPassword, [
+                        'email' => $email,
+                        'hash'  => $hash,
+                        'date'  => $date,
+                        'count' => $count + 1
+                    ], $reset['id']);
+                    if ($result) {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * Check if set reset password params are valid
+     *
+     * @param null $email
+     * @param null $hash
+     * @param null $date
+     * @return bool
+     */
+    public function areSetResetPasswordParamsValid(
+        $email = null, $hash = null, $date = null
+    ) {
+        return (!empty($email) && !empty($hash) && !empty($date));
+    }
+
+    /**
+     * Check how many times the user has changed his/hers password
+     *
+     * @param null $email
+     * @return bool
+     */
+    private function isResetPasswordCountValid($email = null) {
+        if (!empty($email)) {
+            $result = $this->getResetPasswordByEmail($email);
+            $currentCount = (empty($result)) ? 0 : intval($result['count']);
+            $newCount = $currentCount + 1;
+            if ($newCount <= 10) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * Get how many times the user has changed his/hers password
+     *
+     * @param null $email
+     * @return mixed
+     */
+    public function getResetPasswordByEmail($email = null) {
+        $sql = "SELECT *
+                FROM `{$this->tableResetPassword}`
+                WHERE `email` = ?";
+        return $this->Db->fetchOne($sql, $email);
     }
 
     /**

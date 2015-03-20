@@ -9,20 +9,12 @@
         <meta name="author" content="Kosta Rashev">
     </head>
     <body>
-        <h1>New Email!</h1>
-
-        <p>
-            Name: <?php echo $name; ?>
-            <br />
-            Email: <?php echo $email; ?>
-        </p>
-        <p>
-            Comment: <br />
-            <?php echo $comment; ?>
-            <br />
-        </p>
-        <p>
-            Date: <?php echo $date; ?>
-        </p>
+        <h2>Password Reset</h2>
+        <div>
+            <p>
+                To reset your password, complete this form: <?php echo $link; ?>.<br/><br/>
+                This link will expire in 60 minutes.
+            </p>
+        </div>
     </body>
 </html>

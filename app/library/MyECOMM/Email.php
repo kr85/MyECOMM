@@ -40,7 +40,7 @@ class Email {
     /**
      * Constants
      */
-    const EMAIL_ADMIN = 'support@kostarashev.com';
+    const EMAIL_ADMIN = MAILER_USERNAME;
     const NAME_ADMIN = 'MyECOMM';
 
     /**
@@ -109,6 +109,29 @@ class Email {
                     $this->objMessage->addTo(self::EMAIL_ADMIN, self::NAME_ADMIN);
                     $this->objMessage->addFrom($parameters['email'], $parameters['name']);
                     $this->objMessage->setSubject('New Comment');
+                    $this->objMessage->setBody($this->setHtmlBody(
+                        $this->fetchEmail($case, $parameters)
+                    ));
+                    break;
+                case 3:
+                    $objUser = new User();
+                    $user = $objUser->getByEmail($parameters['email']);
+                    $link = "<a href=\"";
+                    $link .= SITE_URL.$this->objUrl->href('password-reset', [
+                            'token',
+                            $parameters['hash'],
+                            'id',
+                            $user['id'],
+                        ]);
+                    $link .= "\">";
+                    $link .= "Reset Password Link";
+                    $link .= "</a>";
+                    $parameters['link'] = $link;
+                    $this->objMessage->addTo($user['email'],
+                                             $user['first_name'].' '.$user['last_name']
+                    );
+                    $this->objMessage->addFrom(self::EMAIL_ADMIN, self::NAME_ADMIN);
+                    $this->objMessage->setSubject('Reset Your Password');
                     $this->objMessage->setBody($this->setHtmlBody(
                         $this->fetchEmail($case, $parameters)
                     ));

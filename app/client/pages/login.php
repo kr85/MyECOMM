@@ -100,7 +100,12 @@ require_once('_header.php');
                 </div>
                 <div class="col-2">
                     <div class="buttons-set">
-                        <a href="" class="left">Forgot Your Password?</a>
+                        <a
+                            href="<?php echo $this->objUrl->href('password-remind'); ?>"
+                            class="left"
+                        >
+                            Forgot Your Password?
+                        </a>
                         <label for="btn_login" class="login-btn right">
                             <input
                                 type="submit"

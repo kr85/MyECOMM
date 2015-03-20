@@ -82,7 +82,12 @@ class Validation {
         'order_not_found'     => 'The order was not found. Please try again.',
         'comment'             => 'Please write a comment.',
         'email_not_sent'      => 'There was a problem sending the email. Please try again.',
-        'email_sent'          => 'Your comment was successfully sent.'
+        'email_sent'          => 'Your comment was successfully sent.',
+
+        'remind_success'      => 'Email with instructions has been sent to you.',
+        'remind_fail'         => 'There was a problem resetting your password. Please try again.',
+        'reset_success'       => 'Your password was successfully reset.',
+        'reset_fail'          => 'There was a problem resetting your password. Please try again.'
     ];
 
     /**

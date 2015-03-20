@@ -316,9 +316,7 @@ require_once('_header.php');
                                             class="input"
                                             autocomplete="off"
                                             pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-                                            title="Must contain at least one
-                                            UpperCase letter, LowerCase letter,
-                                            Number/Special Character and be minimum of 8 characters."
+                                            title="Must contain at least one UpperCase letter, LowerCase letter, Number/Special Character and be minimum of 8 characters."
                                             maxlength="16"
                                             required="required"
                                         />
@@ -336,9 +334,7 @@ require_once('_header.php');
                                             class="input"
                                             autocomplete="off"
                                             pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-                                            title="Must contain at least one
-                                            UpperCase letter, LowerCase letter,
-                                            Number/Special Character and be minimum of 8 characters."
+                                            title="Must contain at least one UpperCase letter, LowerCase letter, Number/Special Character and be minimum of 8 characters."
                                             maxlength="16"
                                             required="required"
                                         />

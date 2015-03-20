@@ -1254,7 +1254,7 @@ fieldset {
     background-color: #f3f3f3; }
 
 fieldset {
-  border: 0; }
+  border: 1px solid #CFCFCF; }
 
 p.required {
   font-size: 10px;
