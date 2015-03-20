@@ -145,7 +145,7 @@ class Form {
      * @return null|string
      */
     public function getCountriesSelect(
-        $record = null, $name = 'country', $selectOption = false, $class = null, $required = true
+        $record = null, $name = 'country', $selectOption = false, $class = null
     ) {
 
         $objCountry = new Country();
@@ -157,10 +157,7 @@ class Form {
                         name='{$name}'
                         id='{$name}'
                         class='{$class}'";
-            if ($required) {
-                $out .= " required='required' ";
-            }
-            $out .=           "title='Please select a country.'
+            $out .= "title='Please select a country.'
                     >";
 
             if (empty($record) || $selectOption == true) {
@@ -193,6 +190,7 @@ class Form {
     /**
      * Get states for the form select option
      *
+     * @param null $use
      * @param int $countryId
      * @param null $record
      * @param string $name
@@ -206,21 +204,21 @@ class Form {
     ) {
         $objCountry = new Country();
 
-        if (!empty($record) && !empty($use) && $use == 'checkout') {
+        if (!empty($record) && !empty($use) && $use == 'input') {
             if (is_numeric($record)) {
                 $record = $objCountry->getStateById($record);
                 $record = $record['name'];
             }
 
-            $out = '<input
-                   type="text"
-                   name="state"
-                   id="state"
-                   class="input "';
+            $out = "<input
+                   type='text'
+                   name='{$name}'
+                   id='{$name}''
+                   class='input'";
             $out .= $class;
             $out .= ' title="Please enter a state."
                    value="';
-            $out .= $this->stickyText('state', $record);
+            $out .= $this->stickyText($name, $record);
             $out .= '"/>';
             return $out;
         } else {

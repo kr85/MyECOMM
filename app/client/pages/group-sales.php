@@ -73,7 +73,8 @@ require_once('_header.php'); ?>
                 'objCatalog' => $objCatalog,
                 'listing' => 'category',
                 'id' => 0,
-                'productId' => 0
+                'productId' => 0,
+                'dashboard' => false
             ]); ?>
         </div>
     </div>

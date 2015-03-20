@@ -4,6 +4,7 @@ use MyECOMM\Login;
 use MyECOMM\Order;
 use MyECOMM\Session;
 use MyECOMM\Business;
+use MyECOMM\Helper;
 
 // Restrict access only for logged in users
 Login::restrictFront($this->objUrl);

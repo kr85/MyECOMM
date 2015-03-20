@@ -232,7 +232,8 @@ if (!empty($id)):
             'objCatalog' => $objCatalog,
             'listing' => 'category',
             'id' => $category['id'],
-            'productId' => $product['id']
+            'productId' => $product['id'],
+            'dashboard' => false
         ]); ?>
     </div>
     <div class="clearfix"></div>

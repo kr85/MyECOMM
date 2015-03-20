@@ -13,7 +13,7 @@ class Login {
     /**
      * @var string Client's landing dashboard page
      */
-    public static $dashboardFront = "/orders";
+    public static $dashboardFront = "/dashboard";
 
     /**
      * @var string Client id

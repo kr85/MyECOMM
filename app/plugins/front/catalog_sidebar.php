@@ -145,11 +145,80 @@ if (!empty($products)):
     </div>
 </div>
 <?php endif; ?>
+<?php if ($data['dashboard']): ?>
+<div class="block block-dashboard">
+    <div class="block-title">
+        <strong>
+            <span>My Account</span>
+        </strong>
+    </div>
+    <div class="block-content">
+        <ul>
+            <li>
+                <a href="<?php echo $data['objUrl']->href('dashboard'); ?>"
+                    <?php echo $data['objNavigation']->active(
+                        'dashboard'
+                    ); ?>>
+                    Account Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo $data['objUrl']->href('login-information'); ?>"
+                    <?php echo $data['objNavigation']->active(
+                        'login-information'
+                    ); ?>>
+                    Login Information
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo $data['objUrl']->href('billing-information'); ?>"
+                    <?php echo $data['objNavigation']->active(
+                        'billing-information'
+                    ); ?>>
+                    Billing Information
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo $data['objUrl']->href('shipping-information'); ?>"
+                    <?php echo $data['objNavigation']->active(
+                        'shipping-information'
+                    ); ?>>
+                    Shipping Information
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo $data['objUrl']->href('orders'); ?>"
+                    <?php echo $data['objNavigation']->active(
+                        'orders'
+                    ); ?>>
+                    My Orders
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo $data['objUrl']->href('wishlist'); ?>"
+                    <?php echo $data['objNavigation']->active(
+                        'wishlist'
+                    ); ?>>
+                    My Wishlist
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo $data['objUrl']->href('cart'); ?>"
+                    <?php echo $data['objNavigation']->active(
+                        'cart'
+                    ); ?>>
+                    My Cart
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<?php endif; ?>
 <div id="my-cart-small">
     <?php echo Plugin::get('front'.DS.'cart_left', [
-        'objUrl' => $data['objUrl'],
+        'objUrl'      => $data['objUrl'],
         'objCurrency' => $data['objCurrency'],
-        'objCatalog' => $data['objCatalog'],
+        'objCatalog'  => $data['objCatalog'],
     ]); ?>
 </div>
 <?php if (!empty($recentlyViewed)): ?>

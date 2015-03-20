@@ -75,12 +75,13 @@ require_once('_header.php'); ?>
         </div>
         <div class="col-right sidebar">
             <?php echo Plugin::get('front'.DS.'catalog_sidebar', [
-                'objUrl' => $this->objUrl,
-                'objCurrency' => $this->objCurrency,
-                'objCatalog' => $objCatalog,
-                'listing' => 'category',
-                'id' => 0,
-                'productId' => 0
+                'objUrl'        => $this->objUrl,
+                'objCurrency'   => $this->objCurrency,
+                'objCatalog'    => $objCatalog,
+                'listing'       => 'category',
+                'id'            => 0,
+                'productId'     => 0,
+                'dashboard'     => false
             ]); ?>
         </div>
     </div>

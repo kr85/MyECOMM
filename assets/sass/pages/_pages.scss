@@ -157,8 +157,180 @@ p.required {
 
 .first-name, .last-name, .address, .city, .state, .zipcode, .country,
 .email, .passwd, .passwd-conf, .login-email, .login-passwd, .order-id,
-.billing-last-name, .find-by, .name, .comment {
+.billing-last-name, .find-by, .name, .comment, .password {
   label {
     text-transform: uppercase;
+  }
+}
+
+.block-dashboard {
+  a.active {
+    font-weight: 700;
+    text-decoration: none;
+    color: #919191;
+  }
+}
+
+.orders {
+  fieldset {
+    padding: 1px;
+  }
+}
+
+.form-billing-information, .form-shipping-information, .form-login-information {
+  fieldset {
+    padding-bottom: 20px;
+  }
+}
+
+.billing-information, .shipping-information, .login-information {
+  .form-wrapper {
+    margin-top: -20px;
+  }
+
+  .form-list {
+    .fields {
+
+    }
+  }
+
+  .field-one, .input-text-one {
+    width: 598px;
+  }
+  .field-two {
+    width: 298px;
+  }
+
+  .field-three {
+    width: 198px;
+  }
+
+  .first-name {
+    .input-box {
+      padding-left: 0;
+      padding-right: 11px;
+
+      input {
+        width: 278px;
+      }
+    }
+  }
+
+  .last-name {
+    .input-box {
+      input {
+        width: 278px;
+      }
+
+      .input-box, label {
+        padding-left: 11px;
+      }
+    }
+  }
+
+  .passwd {
+    .input-box {
+      padding-right: 12px;
+
+      input {
+        width: 278px;
+      }
+    }
+  }
+
+  .passwd-conf {
+    .input-box {
+      input {
+        width: 278px;
+      }
+    }
+  }
+
+  .address {
+    input {
+      width: 590px;
+    }
+  }
+
+  .city {
+    input {
+      width: 175px;
+    }
+
+    .input-box {
+      padding-right: 16px;
+    }
+  }
+
+  .state {
+    input {
+      width: 175px;
+    }
+
+    .input-box {
+      padding-right: 9px;
+      padding-left: 7px;
+    }
+
+    label {
+      padding-left: 8px;
+    }
+  }
+
+  .zipcode {
+    input {
+      width: 175px;
+    }
+
+    .input-box, label {
+      padding-left: 15px;
+      padding-right: 1px;
+    }
+  }
+
+  .create-account-country {
+    width: 598px;
+  }
+
+  .email, .password {
+    input {
+      width: 590px;
+    }
+  }
+}
+
+.dashboard {
+  address {
+    font-style: normal;
+  }
+
+  .welcome-msg {
+    .hello {
+
+    }
+  }
+
+  .box-title, .box-head {
+    width: 100%;
+    overflow: hidden;
+    margin: 10px 0;
+
+    h2, h3 {
+      float: left;
+    }
+  }
+
+  .col-2-set {
+    padding-bottom: 13px;
+
+    .col-1 {
+      float: left;
+      width: 49%;
+    }
+
+    .col-2 {
+      float: right;
+      width: 49%;
+    }
   }
 }

@@ -1264,8 +1264,82 @@ p.required {
   padding-top: 10px;
   padding-bottom: 10px; }
 
-.first-name label, .last-name label, .address label, .city label, .state label, .zipcode label, .country label, .email label, .passwd label, .passwd-conf label, .login-email label, .login-passwd label, .order-id label, .billing-last-name label, .find-by label, .name label, .comment label {
+.first-name label, .last-name label, .address label, .city label, .state label, .zipcode label, .country label, .email label, .passwd label, .passwd-conf label, .login-email label, .login-passwd label, .order-id label, .billing-last-name label, .find-by label, .name label, .comment label, .password label {
   text-transform: uppercase; }
+
+.block-dashboard a.active {
+  font-weight: 700;
+  text-decoration: none;
+  color: #919191; }
+
+.orders fieldset {
+  padding: 1px; }
+
+.form-billing-information fieldset, .form-shipping-information fieldset, .form-login-information fieldset {
+  padding-bottom: 20px; }
+
+.billing-information .form-wrapper, .shipping-information .form-wrapper, .login-information .form-wrapper {
+  margin-top: -20px; }
+.billing-information .field-one, .billing-information .input-text-one, .shipping-information .field-one, .shipping-information .input-text-one, .login-information .field-one, .login-information .input-text-one {
+  width: 598px; }
+.billing-information .field-two, .shipping-information .field-two, .login-information .field-two {
+  width: 298px; }
+.billing-information .field-three, .shipping-information .field-three, .login-information .field-three {
+  width: 198px; }
+.billing-information .first-name .input-box, .shipping-information .first-name .input-box, .login-information .first-name .input-box {
+  padding-left: 0;
+  padding-right: 11px; }
+  .billing-information .first-name .input-box input, .shipping-information .first-name .input-box input, .login-information .first-name .input-box input {
+    width: 278px; }
+.billing-information .last-name .input-box input, .shipping-information .last-name .input-box input, .login-information .last-name .input-box input {
+  width: 278px; }
+.billing-information .last-name .input-box .input-box, .billing-information .last-name .input-box label, .shipping-information .last-name .input-box .input-box, .shipping-information .last-name .input-box label, .login-information .last-name .input-box .input-box, .login-information .last-name .input-box label {
+  padding-left: 11px; }
+.billing-information .passwd .input-box, .shipping-information .passwd .input-box, .login-information .passwd .input-box {
+  padding-right: 12px; }
+  .billing-information .passwd .input-box input, .shipping-information .passwd .input-box input, .login-information .passwd .input-box input {
+    width: 278px; }
+.billing-information .passwd-conf .input-box input, .shipping-information .passwd-conf .input-box input, .login-information .passwd-conf .input-box input {
+  width: 278px; }
+.billing-information .address input, .shipping-information .address input, .login-information .address input {
+  width: 590px; }
+.billing-information .city input, .shipping-information .city input, .login-information .city input {
+  width: 175px; }
+.billing-information .city .input-box, .shipping-information .city .input-box, .login-information .city .input-box {
+  padding-right: 16px; }
+.billing-information .state input, .shipping-information .state input, .login-information .state input {
+  width: 175px; }
+.billing-information .state .input-box, .shipping-information .state .input-box, .login-information .state .input-box {
+  padding-right: 9px;
+  padding-left: 7px; }
+.billing-information .state label, .shipping-information .state label, .login-information .state label {
+  padding-left: 8px; }
+.billing-information .zipcode input, .shipping-information .zipcode input, .login-information .zipcode input {
+  width: 175px; }
+.billing-information .zipcode .input-box, .billing-information .zipcode label, .shipping-information .zipcode .input-box, .shipping-information .zipcode label, .login-information .zipcode .input-box, .login-information .zipcode label {
+  padding-left: 15px;
+  padding-right: 1px; }
+.billing-information .create-account-country, .shipping-information .create-account-country, .login-information .create-account-country {
+  width: 598px; }
+.billing-information .email input, .billing-information .password input, .shipping-information .email input, .shipping-information .password input, .login-information .email input, .login-information .password input {
+  width: 590px; }
+
+.dashboard address {
+  font-style: normal; }
+.dashboard .box-title, .dashboard .box-head {
+  width: 100%;
+  overflow: hidden;
+  margin: 10px 0; }
+  .dashboard .box-title h2, .dashboard .box-title h3, .dashboard .box-head h2, .dashboard .box-head h3 {
+    float: left; }
+.dashboard .col-2-set {
+  padding-bottom: 13px; }
+  .dashboard .col-2-set .col-1 {
+    float: left;
+    width: 49%; }
+  .dashboard .col-2-set .col-2 {
+    float: right;
+    width: 49%; }
 
 .cart .totals {
   float: right;
@@ -1361,7 +1435,8 @@ button.btn-update span {
 .checkout fieldset {
   padding: 0;
   margin: 0;
-  background: none; }
+  background: none;
+  border: none; }
 .checkout .form-list .fields {
   height: 41px;
   margin-bottom: 7px; }

@@ -87,7 +87,14 @@ class Validation {
         'remind_success'      => 'Email with instructions has been sent to you.',
         'remind_fail'         => 'There was a problem resetting your password. Please try again.',
         'reset_success'       => 'Your password was successfully reset.',
-        'reset_fail'          => 'There was a problem resetting your password. Please try again.'
+        'reset_fail'          => 'There was a problem resetting your password. Please try again.',
+
+        'update_success'      => 'Your details were updated successfully.',
+        'update_fail'         => 'There was a problem updating your details. Please try again.',
+
+        'current_password_mismatch' => 'Password is not correct.',
+        'new_password'              => 'Please choose a new password.',
+        'confirm_new_password'      => 'Please confirm your new password.'
     ];
 
     /**

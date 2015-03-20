@@ -76,7 +76,6 @@ require_once('_header.php'); ?>
                                             name="order_id"
                                             id="order_id"
                                             class="input"
-                                            required="required"
                                             title="Please enter the order id."
                                             />
                                         <?php echo $objValidation->validate('order_id'); ?>
@@ -95,7 +94,6 @@ require_once('_header.php'); ?>
                                             name="last_name"
                                             id="last_name"
                                             class="input"
-                                            required="required"
                                             title="Please enter the billing last name."
                                             />
                                         <?php echo $objValidation->validate('last_name'); ?>
@@ -168,7 +166,8 @@ require_once('_header.php'); ?>
             'objCatalog' => $objCatalog,
             'listing' => 'category',
             'id' => 0,
-            'productId' => 0
+            'productId' => 0,
+            'dashboard' => false
         ]); ?>
     </div>
 </div>

@@ -97,25 +97,26 @@ elseif (empty($section) && !empty($category) || !empty($search)):
                 </div>
                 <div class="category-products" id="category-products">
                     <?php echo Plugin::get('front'.DS.'category_products', [
-                        'products' => $products,
-                        'page' => $page,
+                        'products'    => $products,
+                        'page'        => $page,
                         'objCurrency' => $this->objCurrency,
-                        'objCatalog' => $objCatalog,
-                        'perPage' => $perPage,
-                        'sectionId' => $category['id'],
-                        'objUrl' => $this->objUrl,
-                        'listing' => 'category'
+                        'objCatalog'  => $objCatalog,
+                        'perPage'     => $perPage,
+                        'sectionId'   => $category['id'],
+                        'objUrl'      => $this->objUrl,
+                        'listing'     => 'category'
                     ]); ?>
                 </div>
             </div>
             <div class="col-right sidebar">
                 <?php echo Plugin::get('front'.DS.'catalog_sidebar', [
-                    'objUrl' => $this->objUrl,
+                    'objUrl'      => $this->objUrl,
                     'objCurrency' => $this->objCurrency,
-                    'objCatalog' => $objCatalog,
-                    'listing' => 'category',
-                    'id' => $category['id'],
-                    'productId' => 0
+                    'objCatalog'  => $objCatalog,
+                    'listing'     => 'category',
+                    'id'          => $category['id'],
+                    'productId'   => 0,
+                    'dashboard'   => false
                 ]); ?>
             </div>
             <div class="clearfix"></div>
@@ -164,25 +165,26 @@ elseif (empty($category) && !empty($section)):
                 </div>
                 <div class="category-products" id="category-products">
                     <?php echo Plugin::get('front'.DS.'category_products', [
-                        'products' => $products,
-                        'page' => $page,
+                        'products'    => $products,
+                        'page'        => $page,
                         'objCurrency' => $this->objCurrency,
-                        'objCatalog' => $objCatalog,
-                        'perPage' => $perPage,
-                        'sectionId' => $section['id'],
-                        'objUrl' => $this->objUrl,
-                        'listing' => 'section'
+                        'objCatalog'  => $objCatalog,
+                        'perPage'     => $perPage,
+                        'sectionId'   => $section['id'],
+                        'objUrl'      => $this->objUrl,
+                        'listing'     => 'section'
                     ]); ?>
                 </div>
             </div>
             <div class="col-right sidebar">
                 <?php echo Plugin::get('front'.DS.'catalog_sidebar', [
-                    'objUrl' => $this->objUrl,
+                    'objUrl'      => $this->objUrl,
                     'objCurrency' => $this->objCurrency,
-                    'objCatalog' => $objCatalog,
-                    'listing' => 'section',
-                    'id' => $section['id'],
-                    'productId' => 0
+                    'objCatalog'  => $objCatalog,
+                    'listing'     => 'section',
+                    'id'          => $section['id'],
+                    'productId'   => 0,
+                    'dashboard'   => false
                 ]); ?>
             </div>
             <div class="clearfix"></div>

@@ -29,7 +29,7 @@ if (!empty($user)):
     if (!empty($rows)): ?>
         <div class="wishlist">
             <div class="page-title">
-                <h1>Wishlist</h1>
+                <h1>My Wishlist</h1>
             </div>
             <div>
                 <div class="toolbar">
@@ -186,7 +186,6 @@ if (!empty($user)):
             Click <a href="/">here</a> to continue shopping.
         </p>
     </div>
-</div>
 <?php endif;
 else:
     Helper::redirect($data['objUrl']->href('error'));

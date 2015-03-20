@@ -150,7 +150,6 @@ require_once('_header.php');
                                             class="input"
                                             value="<?php echo $objForm->stickyText('first_name'); ?>"
                                             title="Please enter your first name."
-                                            required="required"
                                         />
                                         <?php echo $objValidation->validate('first_name'); ?>
                                     </div>
@@ -165,7 +164,6 @@ require_once('_header.php');
                                             class="input"
                                             value="<?php echo $objForm->stickyText('last_name'); ?>"
                                             title="Please enter your last name."
-                                            required="required"
                                         />
                                         <?php echo $objValidation->validate('last_name'); ?>
                                     </div>
@@ -183,7 +181,6 @@ require_once('_header.php');
                                         class="input"
                                         value="<?php echo $objForm->stickyText('address_1'); ?>"
                                         title="Please enter the first line of your address."
-                                        required="required"
                                     />
                                     <?php echo $objValidation->validate('address_1'); ?>
                                 </div>
@@ -216,7 +213,6 @@ require_once('_header.php');
                                         class="input"
                                         value="<?php echo $objForm->stickyText('city'); ?>"
                                         title="Please enter your city."
-                                        required="required"
                                     />
                                     <?php echo $objValidation->validate('city'); ?>
                                 </div>
@@ -254,7 +250,6 @@ require_once('_header.php');
                                         class="input"
                                         value="<?php echo $objForm->stickyText('zip_code'); ?>"
                                         title="Please enter your zipcode."
-                                        required="required"
                                     />
                                     <?php echo $objValidation->validate('zip_code'); ?>
                                 </div>
@@ -287,7 +282,6 @@ require_once('_header.php');
                                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                                         autocomplete="off"
                                         title="Please enter a valid email address."
-                                        required="required"
                                     />
                                     <?php echo $objValidation->validate('email'); ?>
                                     <?php echo $objValidation->validate('email_duplicate'); ?>
@@ -307,8 +301,6 @@ require_once('_header.php');
                                 <div class="field field-two passwd">
                                     <label for="password">Password: <em>*</em></label>
                                     <div class="input-box">
-                                        <?php echo $objValidation->validate('password'); ?>
-                                        <?php echo $objValidation->validate('password_mismatch'); ?>
                                         <input
                                             type="password"
                                             name="password"
@@ -318,15 +310,14 @@ require_once('_header.php');
                                             pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                                             title="Must contain at least one UpperCase letter, LowerCase letter, Number/Special Character and be minimum of 8 characters."
                                             maxlength="16"
-                                            required="required"
                                         />
+                                        <?php echo $objValidation->validate('password'); ?>
+                                        <?php echo $objValidation->validate('password_mismatch'); ?>
                                     </div>
                                 </div>
                                 <div class="field field-two passwd-conf">
                                     <label for="confirm_password">Password Confirmation: <em>*</em></label>
                                     <div class="input-box">
-                                        <?php echo $objValidation->validate('confirm_password'); ?>
-                                        <?php echo $objValidation->validate('password_mismatch'); ?>
                                         <input
                                             type="password"
                                             name="confirm_password"
@@ -336,8 +327,9 @@ require_once('_header.php');
                                             pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                                             title="Must contain at least one UpperCase letter, LowerCase letter, Number/Special Character and be minimum of 8 characters."
                                             maxlength="16"
-                                            required="required"
                                         />
+                                        <?php echo $objValidation->validate('confirm_password'); ?>
+                                        <?php echo $objValidation->validate('password_mismatch'); ?>
                                     </div>
                                 </div>
                             </div>

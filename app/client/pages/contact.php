@@ -80,7 +80,6 @@ require_once('_header.php'); ?>
                                                 name="name"
                                                 id="name"
                                                 class="input"
-                                                required="required"
                                                 title="Please enter your name."
                                                 />
                                             <?php echo $objValidation->validate('name'); ?>
@@ -96,7 +95,6 @@ require_once('_header.php'); ?>
                                                 name="email"
                                                 id="email"
                                                 class="input"
-                                                required="required"
                                                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                                                 title="Please enter your email address."
                                                 />
@@ -111,7 +109,6 @@ require_once('_header.php'); ?>
                                             <textarea
                                                 name="comment"
                                                 id="comment"
-                                                required="required"
                                                 cols=""
                                                 rows=""></textarea>
                                             <?php echo $objValidation->validate('comment'); ?>
@@ -148,7 +145,8 @@ require_once('_header.php'); ?>
                 'objCatalog' => $objCatalog,
                 'listing' => 'category',
                 'id' => 0,
-                'productId' => 0
+                'productId' => 0,
+                'dashboard' => false
             ]); ?>
         </div>
     </div>
