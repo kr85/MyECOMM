@@ -8,7 +8,7 @@ if ($this->objUrl->currentPage != 'index'): ?>
         <div class="push"></div>
     </div>
     <footer>
-        <div class="container">
+        <div class="container-footer">
             <div class="footer-row-1">
                 <div class="footer-container">
                     <div class="footer-block">
