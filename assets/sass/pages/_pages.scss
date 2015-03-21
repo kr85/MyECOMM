@@ -334,3 +334,42 @@ p.required {
     }
   }
 }
+
+.return {
+  p.break {
+    border-bottom: 1px solid #CFCFCF;
+    padding-bottom: 30px;
+  }
+
+  .shipping-information {
+    text-align: left;
+    padding-top: 20px;
+
+    strong {
+      line-height: 30px;
+    }
+
+    fieldset {
+      padding: 1px;
+      margin-top: 10px;
+    }
+
+    .data-table {
+      tbody {
+        td {
+          background-color: #FAFAFA;
+        }
+      }
+
+      tfoot {
+        td {
+          background-color: #F1F1F1;
+        }
+
+        strong {
+          color: #19BDFA;
+        }
+      }
+    }
+  }
+}

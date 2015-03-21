@@ -1341,6 +1341,24 @@ p.required {
     float: right;
     width: 49%; }
 
+.return p.break {
+  border-bottom: 1px solid #CFCFCF;
+  padding-bottom: 30px; }
+.return .shipping-information {
+  text-align: left;
+  padding-top: 20px; }
+  .return .shipping-information strong {
+    line-height: 30px; }
+  .return .shipping-information fieldset {
+    padding: 1px;
+    margin-top: 10px; }
+  .return .shipping-information .data-table tbody td {
+    background-color: #FAFAFA; }
+  .return .shipping-information .data-table tfoot td {
+    background-color: #F1F1F1; }
+  .return .shipping-information .data-table tfoot strong {
+    color: #19BDFA; }
+
 .cart .totals {
   float: right;
   width: 264px;

@@ -19,7 +19,11 @@ h1, h2, h3, h4, h5, p {
   padding-bottom: 14px
 }
 
-#wrapper {
+section {
+  display: block;
+}
+
+.container {
   width: 800px;
   text-align: left;
   margin: 0 auto
@@ -41,6 +45,64 @@ th, td {
 .tbl_repeat th {
   background: #eee;
   font-weight: 700
+}
+
+.fieldset {
+  border: 1px solid #cfcfcf;
+}
+
+.data-table {
+  width: 100%;
+}
+
+.data-table tfoot, .data-table thead {
+  background-color: #F1F1F1;
+}
+
+.data-table th {
+  padding: 10px;
+  border: 1px solid #BCBCBC;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #2F2F2F;
+  white-space: nowrap;
+  background-color: #DDDBDB;
+}
+
+.data-table tbody td {
+  background-color: #FAFAFA;
+}
+
+.data-table td {
+  padding: 10px;
+  border: 1px solid #DBDBDB;
+  background-color: #F3F3F3;
+}
+
+.data-table tfoot strong {
+  color: #19BDFA;
+}
+
+.data-table td h2 {
+  padding-bottom: 5px;
+}
+.product-name {
+  font-size: 1em;
+  font-weight: 400;
+}
+
+.center {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.nobr {
+  white-space: nowrap !important;
+}
+
+.a-right {
+  text-align: right !important;
 }
 
 .ta_r, th.ta_r, .td.ta_r {
