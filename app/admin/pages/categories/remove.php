@@ -32,15 +32,33 @@ if (!empty($id)) {
         }
 
         require_once('_header.php'); ?>
-
+<div class="listing category-list">
+    <div class="breadcrumbs">
+        <ul>
+            <li class="dashboard">
+                <a href="/panel/dashboard" title="Go to Dashboard">Dashboard</a>
+                <span>&nbsp;</span>
+            </li>
+            <li class="categories">
+                <a href="/panel/categories" title="Go to Categories">Categories</a>
+                <span>&nbsp;</span>
+            </li>
+            <li>
+                <strong>
+                    Remove
+                </strong>
+            </li>
+        </ul>
+    </div>
+    <div class="page-title">
         <h1>Categories :: Remove</h1>
-
-        <p>
-            Are you sure you want to remove this category?<br/>
-            <a href="<?php echo $yes; ?>">Yes</a> |
-            <a href="<?php echo $no; ?>">No</a>
-        </p>
-
+    </div>
+    <p class="remove-yes-no">
+        Are you sure you want to remove this category?
+        <a href="<?php echo $yes; ?>">Yes</a> |
+        <a href="<?php echo $no; ?>">No</a>
+    </p>
+</div>
         <?php
         require_once('_footer.php');
     }

@@ -60,7 +60,7 @@ class Catalog extends Application {
      * @return bool|mixed
      */
     public function getCategoriesBySection($section = null) {
-        if (!empty($section)) {
+        if (!Helper::isEmpty($section)) {
             $sql = "SELECT *
                     FROM `{$this->tableCategories}`
                     WHERE `section` = ?";
@@ -159,7 +159,7 @@ class Catalog extends Application {
      * @return bool|mixed
      */
     public function getCategory($id = null) {
-        if (!empty($id)) {
+        if (!Helper::isEmpty($id)) {
             $sql = "SELECT `c`.*,
                     (
                         SELECT COUNT(`id`)
@@ -180,7 +180,7 @@ class Catalog extends Application {
      * @return bool|mixed
      */
     public function getSection($id = null) {
-        if (!empty($id)) {
+        if (!Helper::isEmpty($id)) {
             $sql = "SELECT `s`.*,
                     (
                         SELECT COUNT(`id`)
@@ -274,7 +274,7 @@ class Catalog extends Application {
      * @return bool|resource
      */
     public function updateCategory($array = null, $id = null) {
-        if (!Helper::isArrayEmpty($array) && !empty($id)) {
+        if (!Helper::isArrayEmpty($array) && !Helper::isEmpty($id)) {
             return $this->Db->update($this->tableCategories, [
                 'name' => $array['name'],
                 'identity' => $array['identity'],
@@ -293,7 +293,7 @@ class Catalog extends Application {
      * @return bool|resource
      */
     public function updateSection($array = null, $id = null) {
-        if (!Helper::isArrayEmpty($array) && !empty($id)) {
+        if (!Helper::isArrayEmpty($array) && !Helper::isEmpty($id)) {
             return $this->Db->update($this->tableSections, [
                 'name' => $array['name'],
                 'identity' => $array['identity'],
@@ -351,7 +351,7 @@ class Catalog extends Application {
             $sql = "SELECT *
                     FROM `{$this->tableCategories}`
                     WHERE `name` = ?";
-            if (!empty($id)) {
+            if (!Helper::isEmpty($id)) {
                 $params[] = $id;
                 $sql .= " AND `id` = ?";
             }
@@ -373,7 +373,7 @@ class Catalog extends Application {
             $sql = "SELECT *
                     FROM `{$this->tableSections}`
                     WHERE `name` = ?";
-            if (!empty($id)) {
+            if (!Helper::isEmpty($id)) {
                 $params[] = $id;
                 $sql .= " AND `id` = ?";
             }
@@ -396,7 +396,7 @@ class Catalog extends Application {
             $sql = "SELECT *
                     FROM `{$this->tableCategories}`
                     WHERE `identity` = ?";
-            if (!empty($id)) {
+            if (!Helper::isEmpty($id)) {
                 $params[] = $id;
                 $sql .= " AND `id` = ?";
             }
@@ -420,7 +420,7 @@ class Catalog extends Application {
             $sql = "SELECT *
                     FROM `{$this->tableSections}`
                     WHERE `identity` = ?";
-            if (!empty($id)) {
+            if (!Helper::isEmpty($id)) {
                 $params[] = $id;
                 $sql .= " AND `id` = ?";
             }
@@ -453,7 +453,7 @@ class Catalog extends Application {
      * @return array
      */
     public function getProductsByCategory($category = null) {
-        if (!empty($category)) {
+        if (!Helper::isEmpty($category)) {
             $sql = "SELECT *
                 FROM `{$this->tableProducts}`
                 WHERE `category` = ?
@@ -470,7 +470,7 @@ class Catalog extends Application {
      * @return mixed|null
      */
     public function getProductsBySection($section = null) {
-        if (!empty($section)) {
+        if (!Helper::isEmpty($section)) {
             $sql = "SELECT *
                 FROM `{$this->tableProducts}`
                 WHERE `section` = ?
@@ -539,7 +539,8 @@ class Catalog extends Application {
         $sql = "SELECT *
                 FROM `{$this->tableProducts}`";
         if (!empty($search)) {
-            $sql .= " WHERE `name` LIKE ? || `id` = ?";
+            $sql .= " WHERE `name` LIKE ? || `id` = ? || `description` LIKE ?";
+            $params[] = "%{$search}%";
             $params[] = "%{$search}%";
             $params[] = "%{$search}%";
         }
@@ -698,23 +699,23 @@ class Catalog extends Application {
      * Get the pager amount text
      *
      * @param $page
-     * @param $productsCount
-     * @param $productsPerPage
-     * @param $productsOnPage
+     * @param $itemsCount
+     * @param $itemsPerPage
+     * @param $itemsOnPage
      * @return string
      */
     public function getPagerAmountText(
-        $page, $productsCount, $productsPerPage, $productsOnPage
+        $page, $itemsCount, $itemsPerPage, $itemsOnPage
     ) {
-        if ($productsCount <= $productsPerPage) {
-            $out = $productsCount.' Item(s)';
+        if ($itemsCount <= $itemsPerPage) {
+            $out = $itemsCount.' Item(s)';
         } else {
-            $from = (((($page * $productsPerPage)) - $productsPerPage) + 1);
-            $to = $page * $productsPerPage;
-            if ($to > $productsCount) {
-                $to = $productsCount;
+            $from = (((($page * $itemsPerPage)) - $itemsPerPage) + 1);
+            $to = $page * $itemsPerPage;
+            if ($to > $itemsCount) {
+                $to = $itemsCount;
             }
-            $out = 'Items '.$from.' to '.$to.' of '.$productsCount.' total';
+            $out = 'Items '.$from.' to '.$to.' of '.$itemsCount.' total';
         }
         return $out;
     }

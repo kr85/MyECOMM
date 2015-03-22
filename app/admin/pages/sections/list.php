@@ -6,11 +6,11 @@ use MyECOMM\Helper;
 
 $objCatalog = new Catalog();
 $sections = $objCatalog->getSectionsIncludeDefault();
-$productsCount = count($sections);
-$productsPerPage = 10;
-$objPaging = new Paging($this->objUrl, $sections, $productsPerPage);
+$sectionsCount = count($sections);
+$sectionsPerPage = 10;
+$objPaging = new Paging($this->objUrl, $sections, $sectionsPerPage);
 $rows = $objPaging->getRecords();
-$productsOnPage = count($rows);
+$sectionsOnPage = count($rows);
 $page = $this->objUrl->get('pg');
 $page = (empty($page)) ? 1 : intval($page);
 
@@ -68,10 +68,10 @@ require_once('_header.php'); ?>
                     </td>
                     <td class="center">
                         <a
-                            href="<?php echo $this->objUrl->getCurrent([
-                                'action',
-                                'id'
-                            ]).'/action/edit/id/'.$section['id']; ?>"
+                            href="<?php echo $this->objUrl->getCurrent(
+                                ['action', 'id'],
+                                false,
+                                ['action', 'edit', 'id', $section['id']]); ?>"
                             class="btn-edit-2"
                             title="Edit Section"
                             >
@@ -80,10 +80,10 @@ require_once('_header.php'); ?>
                     </td>
                     <td class="center">
                         <a
-                            href="<?php echo $this->objUrl->getCurrent([
-                                'action',
-                                'id'
-                            ]).'/action/remove/id/'.$section['id']; ?>"
+                            href="<?php echo $this->objUrl->getCurrent(
+                                ['action', 'id'],
+                                false,
+                                ['action', 'remove', 'id', $section['id']]); ?>"
                             class="btn-remove-2"
                             title="Remove Section"
                             >
@@ -99,7 +99,7 @@ require_once('_header.php'); ?>
             <p class="amount">
                 <?php
                 echo $objCatalog->getPagerAmountText(
-                    $page, $productsCount, $productsPerPage, $productsOnPage
+                    $page, $sectionsCount, $sectionsPerPage, $sectionsOnPage
                 );
                 ?>
             </p>
@@ -117,7 +117,7 @@ require_once('_header.php'); ?>
             </div>
             <div class="clearfix"></div>
             <div class="pages">
-                <?php if ($productsCount != 0): ?>
+                <?php if ($sectionsCount != 0): ?>
                     <?php echo $objPaging->getPaging(); ?>
                 <?php endif; ?>
                 <div class="clearfix"></div>

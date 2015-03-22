@@ -58,7 +58,7 @@ class Form {
         if ($this->isPost($field) && $this->getPost($field) == $value) {
             return " selected=\"selected\"";
         } else {
-            return !empty($default) && $default == $value ?
+            return !Helper::isEmpty($default) && $default == $value ?
                 " selected=\"selected\"" :
                 null;
         }
@@ -141,7 +141,6 @@ class Form {
      * @param string $name
      * @param bool $selectOption
      * @param null $class
-     * @param bool $required
      * @return null|string
      */
     public function getCountriesSelect(
@@ -181,6 +180,56 @@ class Form {
 
             $out .= "</select>";
 
+            return $out;
+        }
+
+        return null;
+    }
+
+    /**
+     * Get sections for select option for the form
+     *
+     * @param null $record
+     * @param string $name
+     * @param bool $selectOption
+     * @param null $class
+     * @return null|string
+     */
+    public function getSectionsSelect(
+        $record = null, $name = 'section', $selectOption = false, $class = null
+    ) {
+
+        $objCatalog = new Catalog();
+        $sections = $objCatalog->getSectionsIncludeDefault();
+
+        if (!empty($sections)) {
+
+            $out = "<select
+                        name='{$name}'
+                        id='{$name}'
+                        class='{$class}'";
+            $out .= "title='Please select a section.'>";
+
+            if (Helper::isEmpty($record) || $selectOption == true) {
+                $out .= "<option value=''>Select one&hellip;</option>";
+            }
+
+            foreach ($sections as $section) {
+
+                $out .= "<option value=\"";
+                $out .= $section['id'];
+                $out .= "\"";
+                $out .= $this->stickySelect(
+                    $name,
+                    $section['id'],
+                    $record
+                );
+                $out .= ">";
+                $out .= $section['name'];
+                $out .= "</option>";
+            }
+
+            $out .= "</select>";
             return $out;
         }
 

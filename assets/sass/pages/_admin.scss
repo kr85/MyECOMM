@@ -177,6 +177,16 @@
         }
       }
     }
+
+    select {
+      border: 1px solid #AAA;
+      width: 100%;
+      padding: 2px;
+
+      option {
+        padding-left: 5px;
+      }
+    }
   }
 
   .section-add, .section-edit {
@@ -184,4 +194,6 @@
       padding: 22px 25px;
     }
   }
+
+
 }

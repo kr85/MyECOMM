@@ -1759,6 +1759,12 @@ button.btn-update span {
     padding: 3px; }
   .admin .form-list .fields .field label {
     text-transform: uppercase; }
+.admin .form-list select {
+  border: 1px solid #AAA;
+  width: 100%;
+  padding: 2px; }
+  .admin .form-list select option {
+    padding-left: 5px; }
 .admin .section-add fieldset, .admin .section-edit fieldset {
   padding: 22px 25px; }
 

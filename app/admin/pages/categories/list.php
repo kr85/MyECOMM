@@ -6,11 +6,11 @@ use MyECOMM\Helper;
 
 $objCatalog = new Catalog();
 $categories = $objCatalog->getCategories();
-$productsCount = count($categories);
-$productsPerPage = 10;
-$objPaging = new Paging($this->objUrl, $categories, $productsPerPage);
+$categoriesCount = count($categories);
+$categoriesPerPage = 10;
+$objPaging = new Paging($this->objUrl, $categories, $categoriesPerPage);
 $rows = $objPaging->getRecords();
-$productsOnPage = count($rows);
+$categoriesOnPage = count($rows);
 $page = $this->objUrl->get('pg');
 $page = (empty($page)) ? 1 : intval($page);
 
@@ -23,7 +23,7 @@ require_once('_header.php'); ?>
                 <a href="/panel/dashboard" title="Go to Dashboard">Dashboard</a>
                 <span>&nbsp;</span>
             </li>
-            <li>
+            <li class="categories">
                 <strong>
                     Categories
                 </strong>
@@ -98,7 +98,7 @@ require_once('_header.php'); ?>
             <p class="amount">
                 <?php
                 echo $objCatalog->getPagerAmountText(
-                    $page, $productsCount, $productsPerPage, $productsOnPage
+                    $page, $categoriesCount, $categoriesPerPage, $categoriesOnPage
                 );
                 ?>
             </p>
@@ -116,7 +116,7 @@ require_once('_header.php'); ?>
             </div>
             <div class="clearfix"></div>
             <div class="pages">
-                <?php if ($productsCount != 0): ?>
+                <?php if ($categoriesCount != 0): ?>
                     <?php echo $objPaging->getPaging(); ?>
                 <?php endif; ?>
                 <div class="clearfix"></div>

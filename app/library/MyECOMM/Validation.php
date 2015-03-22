@@ -70,6 +70,7 @@ class Validation {
         'website'             => 'Please provide a website.',
         'tax_rate'            => 'Please provide a tax rate.',
 
+        'section'             => 'Please select a section.',
         'identity'            => 'Please provide the identity.',
         'duplicate_identity'  => 'This identity already exists.',
         'meta_title'          => 'Please provide the meta title.',
