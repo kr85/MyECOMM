@@ -28,7 +28,7 @@ class Login {
     /**
      * @var string Admin's landing dashboard page
      */
-    public static $dashboardAdmin = "/panel/products";
+    public static $dashboardAdmin = "/panel/dashboard";
 
     /**
      * @var string Admin id

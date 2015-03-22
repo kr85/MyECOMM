@@ -9,107 +9,45 @@ use MyECOMM\Session;
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>E-Commerce Website Project</title>
-        <meta name="description" content="E-Commerce Website Project"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Books - Online Store</title>
+        <meta name="description" content="Books - Online Store"/>
+        <meta name="viewport" content="width=device-width">
         <link href="/assets/main/all.css" rel="stylesheet" type="text/css"/>
         <script src="/assets/js/lib/modernizr.js" type="text/javascript"></script>
     </head>
-    <body>
-        <div id="header">
-            <div id="header_in">
-                <h5>
-                    <a href="<?php echo Login::isLogged(Login::$loginAdmin) ?
-                        "/panel/products" :
-                        "/panel/" ?>"> Content Management System </a>
-                </h5>
-                <?php
-                    if (Login::isLogged(Login::$loginAdmin)) {
-                        ?>
-                        <div id="logged_as">
-                            Logged in as: <strong>
-                                <?php
-                                    echo Login::getFullNameAdmin(
-                                        Session::getSession(Login::$loginAdmin)
-                                    );
-                                ?>
-                            </strong> | <a href="/panel/logout">Log Out</a>
-                        </div>
-                    <?php
-                    } else {
-                        ?>
-                        <div id="logged_as">
-                            <a href="/panel/"> Log In </a>
-                        </div>;
-                    <?php
-                    }
-                ?>
-            </div>
-        </div>
-        <div id="outer">
-            <div id="wrapper">
-                <div id="left">
-                    <?php if (Login::isLogged(Login::$loginAdmin)) { ?>
-                        <h2>Navigation</h2>
-                        <div class="dev br_td">&nbsp;</div>
-                        <ul id="navigation">
-                            <li>
-                                <a href="/panel/sections"
-                                    <?php echo $this->objNavigation->active(
-                                        'sections'
-                                ); ?>> Sections </a>
-                            </li>
-                            <li>
-                                <a href="/panel/categories"
-                                    <?php echo $this->objNavigation->active(
-                                        'categories'
-                                    ); ?>> Categories </a>
-                            </li>
-                            <li>
-                                <a href="/panel/products"
-                                    <?php echo $this->objNavigation->active(
-                                        'products'
-                                    ); ?>> Products </a>
-                            </li>
-                            <li>
-                                <a href="/panel/orders"
-                                    <?php echo $this->objNavigation->active(
-                                        'orders'
-                                    ); ?>> Orders </a>
-                            </li>
-                            <li>
-                                <a href="/panel/clients"
-                                    <?php echo $this->objNavigation->active(
-                                        'clients'
-                                    ); ?>> Clients </a>
-                            </li>
-                            <li>
-                                <a href="/panel/business"
-                                    <?php echo $this->objNavigation->active(
-                                        'business'
-                                    ); ?>> Business </a>
-                            </li>
-                            <li>
-                                <a href="/panel/shipping"
-                                    <?php echo $this->objNavigation->active(
-                                        'shipping'
-                                    ); ?>> Shipping </a>
-                            </li>
-                            <li>
-                                <a href="/panel/zone"
-                                    <?php echo $this->objNavigation->active(
-                                        'zone'
-                                    ); ?>> Zones </a>
-                            </li>
-                            <li>
-                                <a href="/panel/country"
-                                    <?php echo $this->objNavigation->active(
-                                        'country'
-                                    ); ?>> Countries </a>
-                            </li>
-                        </ul>
-                    <?php } else { ?>
-                        &nbsp;
-                    <?php } ?>
+    <body class="admin">
+        <div class="wrapper">
+            <header>
+                <div class="header-row-1">
+                    <div class="header-row-1-container">
+                        <nav>
+                            <ul>
+                                <li class="logo-wrapper">
+                                    <span>Content Management System</span>
+                                </li>
+                            </ul>
+                            <div class="logged_as">
+                                <span>
+                                    <?php if (Login::isLogged(Login::$loginAdmin)): ?>
+                                        Logged in as:
+                                        <strong>
+                                        <?php
+                                            echo Login::getFullNameAdmin(
+                                                Session::getSession(Login::$loginAdmin)
+                                            );
+                                        ?>
+                                        </strong>
+                                        <span class="logout">
+                                            <a href="/panel/logout">Log Out</a>
+                                        </span>
+                                    <?php endif; ?>
+                                </span>
+                            </div>
+                        </nav>
+                    </div>
                 </div>
-                <div id="right">
+            </header>
+            <section>
+                <div class="container">
+                    <div class="main pad-bottom">
+                        <div class="col-main">

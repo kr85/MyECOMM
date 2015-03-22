@@ -6,55 +6,130 @@ use MyECOMM\Helper;
 
 $objCatalog = new Catalog();
 $categories = $objCatalog->getCategories();
-
-$objPaging = new Paging($this->objUrl, $categories, 5);
+$productsCount = count($categories);
+$productsPerPage = 10;
+$objPaging = new Paging($this->objUrl, $categories, $productsPerPage);
 $rows = $objPaging->getRecords();
+$productsOnPage = count($rows);
+$page = $this->objUrl->get('pg');
+$page = (empty($page)) ? 1 : intval($page);
 
 require_once('_header.php'); ?>
 
-<h1>Categories</h1>
-
-<p>
-    <a href="<?php echo $this->objUrl->getCurrent(['action','id']).'/action/add'; ?>">
-        New Category
-    </a>
-</p>
-
-<?php if (!empty($rows)): ?>
-
-<table class="tbl_repeat">
-    <tr>
-        <th>Category</th>
-        <th class="ta_r col_15">Remove</th>
-        <th class="ta_r col_15">Edit</th>
-    </tr>
-    <?php foreach ($rows as $category): ?>
-        <tr>
-            <td><?php echo Helper::encodeHTML($category['name']); ?></td>
-            <td class="ta_r">
-                <a href="<?php echo $this->objUrl->getCurrent([
-                            'action',
-                            'id'
-                        ]).'/action/remove/id/'.$category['id']; ?>">
-                    Remove
-                </a>
-            </td>
-            <td class="ta_r">
-                <a href="<?php echo $this->objUrl->getCurrent([
-                            'action',
-                            'id'
-                        ]).'/action/edit/id/'.$category['id']; ?>">
-                    Edit
-                </a>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-</table>
-
-<?php echo $objPaging->getPaging(); ?>
-
-<?php else: ?>
-<p>There are currently no categories created.</p>
-<?php endif; ?>
+<div class="listing category-list">
+    <div class="breadcrumbs">
+        <ul>
+            <li class="dashboard">
+                <a href="/panel/dashboard" title="Go to Dashboard">Dashboard</a>
+                <span>&nbsp;</span>
+            </li>
+            <li>
+                <strong>
+                    Categories
+                </strong>
+            </li>
+        </ul>
+    </div>
+    <div class="page-title">
+        <h1>Categories</h1>
+    </div>
+    <p class="btn-1-new-wrapper">
+        <a
+            href="<?php echo $this->objUrl->getCurrent(
+                ['action','id'],
+                false,
+                ['action', 'add']); ?>"
+            class="btn-1"
+        >
+            <span>
+                <span>New Category</span>
+            </span>
+        </a>
+    </p>
+    <?php if (!empty($rows)): ?>
+    <fieldset>
+        <table class="data-table">
+            <tr>
+                <th class="center" rowspan="1">
+                    <span class="nobr">Category Name</span>
+                </th>
+                <th class="center" rowspan="1">
+                    <span class="nobr">Edit Category</span>
+                </th>
+                <th class="center" rowspan="1">
+                    <span class="nobr">Remove Category</span>
+                </th>
+            </tr>
+            <?php foreach ($rows as $category): ?>
+                <tr>
+                    <td class="center">
+                        <?php echo Helper::encodeHTML($category['name']); ?>
+                    </td>
+                    <td class="center">
+                        <a
+                            href="<?php echo $this->objUrl->getCurrent(
+                                ['action', 'id'],
+                                false,
+                                ['action', 'edit', 'id', $category['id']]); ?>"
+                            class="btn-edit-2"
+                            title="Edit Category"
+                        >
+                            Edit
+                        </a>
+                    </td>
+                    <td class="center">
+                        <a
+                            href="<?php echo $this->objUrl->getCurrent(
+                                ['action', 'id'],
+                                false,
+                                ['action', 'remove', 'id', $category['id']]); ?>"
+                            class="btn-remove-2"
+                            title="Remove Category"
+                        >
+                            Remove
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </fieldset>
+    <div class="toolbar">
+        <div class="pager">
+            <p class="amount">
+                <?php
+                echo $objCatalog->getPagerAmountText(
+                    $page, $productsCount, $productsPerPage, $productsOnPage
+                );
+                ?>
+            </p>
+            <div class="page-number">
+                <label for="page-num"><strong>Page: </strong></label>
+                <div class="input-box">
+                    <input
+                        id="page-num"
+                        onfocus="this.blur()"
+                        type="text"
+                        value="<?php echo $page; ?>"
+                        readonly="readonly"
+                        />
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="pages">
+                <?php if ($productsCount != 0): ?>
+                    <?php echo $objPaging->getPaging(); ?>
+                <?php endif; ?>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <?php else: ?>
+        <div class="center pad-top-bottom-30">
+            <p class="empty">
+                There are currently <strong>no categories</strong> created.
+            </p>
+        </div>
+    <?php endif; ?>
+</div>
 
 <?php require_once('_footer.php'); ?>

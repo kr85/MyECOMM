@@ -94,7 +94,13 @@ class Validation {
 
         'current_password_mismatch' => 'Password is not correct.',
         'new_password'              => 'Please choose a new password.',
-        'confirm_new_password'      => 'Please confirm your new password.'
+        'confirm_new_password'      => 'Please confirm your new password.',
+
+        'added_success' => 'The new record has been added successfully.',
+        'added_failed'  => 'There was a problem adding this record. Please contact the administrator.',
+
+        'updated_success' => 'The new record has been updated successfully.',
+        'updated_failed'  => 'There was a problem updating this record. Please contact the administrator.'
     ];
 
     /**

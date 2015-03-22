@@ -1,0 +1,187 @@
+.admin {
+  .push, footer {
+    height: 95px;
+  }
+
+  .wrapper {
+    margin: 0 auto -95px;
+  }
+
+  .login {
+    margin: auto;
+    width: 500px;
+    padding: 50px 25px 25px;
+
+    fieldset {
+      border-radius: 10px;
+      padding: 22px 25px;
+    }
+  }
+
+  .logo-wrapper {
+    padding-top: 2px;
+    float: left;
+
+    span {
+      font-weight: 700;
+      font-size: 12px;
+      color: #FFF;
+      text-transform: uppercase;
+    }
+  }
+
+  .form-list {
+    .fields {
+      clear: both;
+    }
+  }
+
+  .field-one, .input-text-one {
+    width: 448px;
+  }
+
+  .email, .password {
+    input {
+      width: 440px;
+    }
+  }
+
+  .logout {
+    border: 1px solid rgb(255, 255, 255);
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgb(255, 255, 255);
+
+    a {
+      padding: 10px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    &:hover {
+      background-color: #19BDFA;
+      border: 1px solid rgb(255, 255, 255);
+      box-shadow: 0 0 5px darken(#19BDFA, 50%);
+    }
+  }
+
+  nav {
+    padding-top: 4px;
+  }
+
+  .header-row-1-container {
+    height: 39px;
+  }
+
+  .active {
+    font-weight: 700;
+    text-decoration: none;
+    color: #919191;
+  }
+
+  .listing {
+    fieldset {
+      padding: 1px;
+      margin: 15px 0 28px 0;
+    }
+  }
+
+  .search-form-box {
+    margin-top: -6px;
+    float: left;
+  }
+
+  .btn-new-box {
+    float: right;
+  }
+
+  button.button {
+    padding-left: 3px;
+
+    span {
+      span {
+        padding: 4px 8px;
+      }
+    }
+  }
+
+  .fld {
+    width: 425px;
+    padding: 5px;
+    border: 1px solid rgb(218, 215, 215);
+  }
+
+  .order-list, .user-list {
+    .search-form-box {
+      float: none;
+      padding-bottom: 10px;
+
+      tbody {
+        th {
+          vertical-align: middle;
+
+          label {
+            padding-right: 5px;
+            font-size: 15px;
+          }
+        }
+      }
+    }
+
+    table {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .block {
+    border-bottom: none;
+
+    .block-content {
+      font-size: 15px;
+      line-height: 1.3;
+
+      li {
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .remove-yes-no {
+    a {
+      margin-right: 5px;
+      margin-left: 5px;
+    }
+  }
+
+  .form-list {
+    .fields {
+      .field {
+        width: 100%;
+
+        input {
+          width: 98.7%;
+        }
+
+        textarea {
+          width: 98.7%;
+          resize: none;
+          height: 100px;
+          padding: 3px;
+        }
+
+        label {
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  .section-add, .section-edit {
+    fieldset {
+      padding: 22px 25px;
+    }
+  }
+}

@@ -22,13 +22,13 @@ try {
             if (!empty($zone)) {
                 switch ($action) {
                     case 'update':
-                        require_once('zone' . DS . 'update.php');
+                        require_once('zone'.DS.'update.php');
                         break;
                     case 'remove':
-                        require_once('zone' . DS . 'remove.php');
+                        require_once('zone'.DS.'remove.php');
                         break;
                     case 'codes':
-                        require_once('zone' . DS . 'codes.php');
+                        require_once('zone'.DS.'codes.php');
                         break;
                 }
             } else {
@@ -39,10 +39,10 @@ try {
         }
             break;
         case 'add':
-            require_once('zone' . DS . 'add.php');
+            require_once('zone'.DS.'add.php');
             break;
         default:
-            require_once('zone' . DS . 'list.php');
+            require_once('zone'.DS.'list.php');
     }
 } catch (Exception $e) {
     echo Helper::json([

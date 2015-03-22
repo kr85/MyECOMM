@@ -9,22 +9,10 @@ $action = $this->objUrl->get('action');
 
 switch ($action) {
     case 'add':
-        require_once('categories' . DS . 'add.php');
-        break;
-    case 'added':
-        require_once('sections'.DS.'added.php');
-        break;
-    case 'added-failed':
-        require_once('sections'.DS.'added-failed.php');
+        require_once('sections'.DS.'add.php');
         break;
     case 'edit':
         require_once('sections'.DS.'edit.php');
-        break;
-    case 'edited':
-        require_once('sections'.DS.'edited.php');
-        break;
-    case 'edited-failed':
-        require_once('sections'.DS.'edited-failed.php');
         break;
     case 'remove':
         require_once('sections'.DS.'remove.php');

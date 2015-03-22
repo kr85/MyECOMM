@@ -31,22 +31,22 @@ try {
             if (!empty($type)) {
                 switch ($action) {
                     case 'default':
-                        require_once('shipping' . DS . 'default.php');
+                        require_once('shipping'.DS.'default.php');
                         break;
                     case 'active':
-                        require_once('shipping' . DS . 'active.php');
+                        require_once('shipping'.DS.'active.php');
                         break;
                     case 'remove':
-                        require_once('shipping' . DS . 'remove.php');
+                        require_once('shipping'.DS.'remove.php');
                         break;
                     case 'update':
-                        require_once('shipping' . DS . 'update.php');
+                        require_once('shipping'.DS.'update.php');
                         break;
                     case 'duplicate':
-                        require_once('shipping' . DS . 'duplicate.php');
+                        require_once('shipping'.DS.'duplicate.php');
                         break;
                     case 'rates':
-                        require_once('shipping' . DS . 'rates.php');
+                        require_once('shipping'.DS.'rates.php');
                         break;
                 }
             } else {
@@ -58,13 +58,13 @@ try {
         break;
         // Cases that do not need the id parameter
         case 'sort':
-            require_once('shipping' . DS . 'sort.php');
+            require_once('shipping'.DS.'sort.php');
             break;
         case 'add':
-            require_once('shipping' . DS . 'add.php');
+            require_once('shipping'.DS.'add.php');
             break;
         default:
-            require_once('shipping' . DS . 'list.php');
+            require_once('shipping'.DS.'list.php');
     }
 } catch (Exception $e) {
     echo Helper::json([

@@ -12,6 +12,7 @@
 @import "pages/cart";
 @import "pages/checkout";
 @import "pages/wishlist";
+@import "pages/admin";
 
 * {
   border: none;
@@ -97,6 +98,13 @@ ul, ol {
   text-align: left;
   margin: 0 auto;
   padding: 15px 25px 15px 25px;
+}
+
+.container-footer {
+  width: 900px;
+  text-align: left;
+  margin: 0 auto;
+  padding: 0 25px 0 25px;
 }
 
 .left {

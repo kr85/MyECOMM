@@ -33,8 +33,8 @@ switch ($action) {
         require_once('products' . DS . 'edited-no-upload.php');
         break;
     case 'remove':
-        require_once('products' . DS . 'remove.php');
+        require_once('products'.DS.'remove.php');
         break;
     default:
-        require_once('products' . DS . 'list.php');
+        require_once('products'.DS.'list.php');
 }

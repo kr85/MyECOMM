@@ -399,6 +399,39 @@ button.btn-cart {
   text-indent: -999em;
   overflow: hidden; }
 
+.btn-edit-2 {
+  display: block;
+  width: 16px;
+  height: 16px;
+  font-size: 0;
+  line-height: 0;
+  background: url(../images/ico_edit.gif) 0 0 no-repeat;
+  text-indent: -999em;
+  overflow: hidden;
+  margin: 0 auto; }
+
+.btn-view {
+  display: block;
+  width: 16px;
+  height: 16px;
+  font-size: 0;
+  line-height: 0;
+  background: url(../images/view_btn.gif) 0 0 no-repeat;
+  text-indent: -999em;
+  overflow: hidden;
+  margin: 0 auto; }
+
+.btn-duplicate {
+  display: block;
+  width: 16px;
+  height: 16px;
+  font-size: 0;
+  line-height: 0;
+  background: url(../images/duplicate-btn.png) 0 0 no-repeat;
+  text-indent: -999em;
+  overflow: hidden;
+  margin: 0 auto; }
+
 .btn-small-cart {
   border: 1px solid #959595;
   border-radius: 3px;
@@ -433,6 +466,25 @@ button.btn-cart {
       color: white;
       border-radius: 3px;
       box-shadow: 2px 2px 5px #DDD; }
+
+.btn-1 {
+  height: 35px;
+  text-decoration: none; }
+  .btn-1:hover span span {
+    background: transparent url(../images/proceed.gif) repeat-x scroll 0 0; }
+  .btn-1 span {
+    font: 13px/17px "Quattrocento Sans", Helvetica, sans-serif; }
+    .btn-1 span span {
+      border: 1px solid #676767;
+      background: transparent url(../images/proceed.gif) repeat-x scroll 0 0;
+      padding: 8px 13px;
+      text-transform: uppercase;
+      color: white;
+      border-radius: 3px;
+      box-shadow: 2px 2px 5px #DDD; }
+
+.btn-1-new-wrapper {
+  text-align: right; }
 
 .form-valid .input:focus:valid, form textarea:focus:valid {
   background: #fff url(../images/valid.png) no-repeat 99% center;
@@ -1611,6 +1663,105 @@ button.btn-update span {
   font-weight: 400;
   color: #19BDFA; }
 
+.admin .push, .admin footer {
+  height: 95px; }
+.admin .wrapper {
+  margin: 0 auto -95px; }
+.admin .login {
+  margin: auto;
+  width: 500px;
+  padding: 50px 25px 25px; }
+  .admin .login fieldset {
+    border-radius: 10px;
+    padding: 22px 25px; }
+.admin .logo-wrapper {
+  padding-top: 2px;
+  float: left; }
+  .admin .logo-wrapper span {
+    font-weight: 700;
+    font-size: 12px;
+    color: #FFF;
+    text-transform: uppercase; }
+.admin .form-list .fields {
+  clear: both; }
+.admin .field-one, .admin .input-text-one {
+  width: 448px; }
+.admin .email input, .admin .password input {
+  width: 440px; }
+.admin .logout {
+  border: 1px solid white;
+  padding: 5px;
+  margin-left: 10px;
+  border-radius: 6px;
+  box-shadow: 0 0 5px white; }
+  .admin .logout a {
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700; }
+  .admin .logout:hover {
+    background-color: #19BDFA;
+    border: 1px solid white;
+    box-shadow: 0 0 5px #000e14; }
+.admin nav {
+  padding-top: 4px; }
+.admin .header-row-1-container {
+  height: 39px; }
+.admin .active {
+  font-weight: 700;
+  text-decoration: none;
+  color: #919191; }
+.admin .listing fieldset {
+  padding: 1px;
+  margin: 15px 0 28px 0; }
+.admin .search-form-box {
+  margin-top: -6px;
+  float: left; }
+.admin .btn-new-box {
+  float: right; }
+.admin button.button {
+  padding-left: 3px; }
+  .admin button.button span span {
+    padding: 4px 8px; }
+.admin .fld {
+  width: 425px;
+  padding: 5px;
+  border: 1px solid #dad7d7; }
+.admin .order-list .search-form-box, .admin .user-list .search-form-box {
+  float: none;
+  padding-bottom: 10px; }
+  .admin .order-list .search-form-box tbody th, .admin .user-list .search-form-box tbody th {
+    vertical-align: middle; }
+    .admin .order-list .search-form-box tbody th label, .admin .user-list .search-form-box tbody th label {
+      padding-right: 5px;
+      font-size: 15px; }
+.admin .order-list table, .admin .user-list table {
+  margin-left: auto;
+  margin-right: auto; }
+.admin .block {
+  border-bottom: none; }
+  .admin .block .block-content {
+    font-size: 15px;
+    line-height: 1.3; }
+    .admin .block .block-content li {
+      padding-left: 10px; }
+.admin .remove-yes-no a {
+  margin-right: 5px;
+  margin-left: 5px; }
+.admin .form-list .fields .field {
+  width: 100%; }
+  .admin .form-list .fields .field input {
+    width: 98.7%; }
+  .admin .form-list .fields .field textarea {
+    width: 98.7%;
+    resize: none;
+    height: 100px;
+    padding: 3px; }
+  .admin .form-list .fields .field label {
+    text-transform: uppercase; }
+.admin .section-add fieldset, .admin .section-edit fieldset {
+  padding: 22px 25px; }
+
 * {
   border: none;
   outline: none;
@@ -1679,6 +1830,12 @@ ul, ol {
   text-align: left;
   margin: 0 auto;
   padding: 15px 25px 15px 25px; }
+
+.container-footer {
+  width: 900px;
+  text-align: left;
+  margin: 0 auto;
+  padding: 0 25px 0 25px; }
 
 .left {
   float: left; }
