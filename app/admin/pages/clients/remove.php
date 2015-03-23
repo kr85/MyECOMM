@@ -39,17 +39,37 @@ if (!empty($id)) {
 
             require_once('_header.php'); ?>
 
-            <h1>Clients :: Remove</h1>
+            <div class="listing client-list">
+                <div class="breadcrumbs">
+                    <ul>
+                        <li class="dashboard">
+                            <a href="/panel/dashboard" title="Go to Dashboard">Dashboard</a>
+                            <span>&nbsp;</span>
+                        </li>
+                        <li class="clients">
+                            <a href="/panel/clients" title="Go to Clients">Clients</a>
+                            <span>&nbsp;</span>
+                        </li>
+                        <li>
+                            <strong>
+                                Remove
+                            </strong>
+                        </li>
+                    </ul>
+                </div>
+                <div class="page-title">
+                    <h1>Clients :: Remove</h1>
+                </div>
+                <p class="remove-yes-no">
+                    Are you sure you want to remove this client (<?php
+                        echo $user['first_name']." ".$user['last_name'];
+                    ?>)?
+                    <a href="<?php echo $yes; ?>">Yes</a> |
+                    <a href="<?php echo $no; ?>">No</a>
+                </p>
+            </div>
 
-            <p>
-                Are you sure you want to remove this client (<?php
-                    echo $user['first_name']." ".$user['last_name'];
-                ?>)?<br/> <a href="<?php echo $yes; ?>">Yes</a> |
-                <a href="<?php echo $no; ?>">No</a>
-            </p>
-
-            <?php
-            require_once('_footer.php');
+            <?php require_once('_footer.php');
         }
     }
 }
