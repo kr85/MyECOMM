@@ -48,139 +48,167 @@ if (!empty($business)) {
 
         if ($objValidation->isValid()) {
             if ($objBusiness->update($variables, Business::BUSINESS_ID)) {
-                Helper::redirect(
-                    $this->objUrl->getCurrent(
-                        ['action', 'id'], false, ['action', 'edited']
-                    )
-                );
+                $objValidation->addToSuccess('updated_success');
             } else {
-                Helper::redirect(
-                    $this->objUrl->getCurrent(
-                        ['action', 'id'], false, ['action', 'edited-failed']
-                    )
-                );
+                $objValidation->addToErrors('updated_failed');
             }
         }
     }
 
-    require_once('_header.php');
+    require_once('_header.php'); ?>
 
-    ?>
-
-    <h1>Business :: Edit</h1>
-
+<div class="business-edit">
+    <div class="breadcrumbs">
+        <ul>
+            <li class="dashboard">
+                <a href="/panel/dashboard" title="Go to Dashboard">Dashboard</a>
+                <span>&nbsp;</span>
+            </li>
+            <li class="business">
+                <a href="/panel/business" title="Go to Business">Business</a>
+                <span>&nbsp;</span>
+            </li>
+            <li>
+                <strong>
+                    Edit
+                </strong>
+            </li>
+        </ul>
+    </div>
+    <div class="page-title">
+        <h1>Business :: Edit</h1>
+    </div>
     <form action="" method="POST">
-        <table class="tbl_insert">
-            <tr>
-                <th><label for="name">Name: *</label></th>
-                <td>
-                    <?php echo $objValidation->validate('name'); ?>
-                    <input type="text" name="name" id="name" class="fld"
-                           value="<?php echo $objForm->stickyText(
-                               'name',
-                               $business['name']
-                           ); ?>"/>
-                </td>
-            </tr>
-            <tr>
-                <th><label for="address">Address: *</label></th>
-                <td>
-                    <?php echo $objValidation->validate('address'); ?>
-                    <textarea name="address" id="address"
-                              class="tar"><?php echo $objForm->stickyText(
-                            'address',
-                            $business['address']
-                        );
-                        ?></textarea>
-                </td>
-            </tr>
-            <?php if (!empty($countries)): ?>
-                <tr>
-                    <th><label for="country">Country: *</label></th>
-                    <td>
+        <?php echo $objValidation->validate('updated_success'); ?>
+        <?php echo $objValidation->validate('updated_failed'); ?>
+        <fieldset>
+            <legend>Edit Business Information</legend>
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="field">
+                        <label for="name">Name: <em>*</em></label>
+                        <div class="input-box">
+                            <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                value="<?php echo $objForm->stickyText('name', $business['name']); ?>"
+                                />
+                            <?php echo $objValidation->validate('name'); ?>
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="address">Address: <em>*</em></label>
+                        <div class="input-box">
+                            <textarea
+                            name="address"
+                            id="address"
+                            ><?php
+                            echo $objForm->stickyText('address', $business['address']);
+                            ?></textarea>
+                                <?php echo $objValidation->validate('address'); ?>
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="country">Country: </label>
+                        <?php echo $objForm->getCountriesSelect($business['country'], 'country', true); ?>
                         <?php echo $objValidation->validate('country'); ?>
-                        <select name="country" id="country" class="sel">
-                            <?php foreach($countries as $c) { ?>
-                                <option value="<?php echo $c['id']; ?>"
-                                    <?php echo $objForm->stickySelect(
-                                        'country',
-                                        $c['id'],
-                                        $business['country']
-                                    ); ?>>
-                                    <?php echo $c['name']; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                    </td>
-                </tr>
-            <?php endif; ?>
-            <tr>
-                <th><label for="telephone">Phone: *</label></th>
-                <td>
-                    <?php echo $objValidation->validate('telephone'); ?>
-                    <input type="text" name="telephone" id="telephone" class="fld"
-                           value="<?php echo $objForm->stickyText(
-                               'telephone',
-                               $business['telephone']
-                           ); ?>"/>
-                </td>
-            </tr>
-            <tr>
-                <th><label for="email">Email Address: *</label></th>
-                <td>
-                    <?php echo $objValidation->validate('email'); ?>
-                    <input type="email" name="email" id="email" class="fld"
-                           value="<?php echo $objForm->stickyText(
-                               'email',
-                               $business['email']
-                           ); ?>"/>
-                </td>
-            </tr>
-            <tr>
-                <th><label for="website">Website: </label></th>
-                <td>
-                    <?php echo $objValidation->validate('website'); ?>
-                    <input type="text" name="website" id="website" class="fld"
-                           value="<?php echo $objForm->stickyText(
-                               'website',
-                               $business['website']
-                           ); ?>"/>
-                </td>
-            </tr>
-            <tr>
-                <th><label for="tax_rate">Tax Rate: *</label></th>
-                <td>
-                    <?php echo $objValidation->validate('tax_rate'); ?>
-                    <input type="text" name="tax_rate" id="tax_rate" class="fld"
-                           value="<?php echo $objForm->stickyText(
-                               'tax_rate',
-                               $business['tax_rate']
-                           ); ?>"/>
-                </td>
-            </tr>
-            <tr>
-                <th><label for="tax_number">Tax Number: </label></th>
-                <td>
-                    <?php echo $objValidation->validate('tax_number'); ?>
-                    <input type="text" name="tax_number" id="tax_number" class="fld"
-                        value="<?php echo $objForm->stickyText(
-                            'tax_number',
-                            $business['tax_number']
-                        ); ?>"/>
-                </td>
-            </tr>
-            <tr>
-                <th>&nbsp;</th>
-                <td>
-                    <label for="btn" class="sbm sbm_blue fl_l"> <input
-                            type="submit" id="btn" class="btn"
-                            value="Update"/> </label>
-                </td>
-            </tr>
-        </table>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="telephone">Phone: <em>*</em></label>
+                        <div class="input-box">
+                            <input
+                                type="text"
+                                name="telephone"
+                                id="telephone"
+                                value="<?php echo $objForm->stickyText('telephone', $business['telephone']); ?>"
+                                />
+                            <?php echo $objValidation->validate('telephone'); ?>
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="email">Email Address: <em>*</em></label>
+                        <div class="input-box">
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                value="<?php echo $objForm->stickyText('email', $business['email']); ?>"
+                                />
+                            <?php echo $objValidation->validate('email'); ?>
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="website">Website: </label>
+                        <div class="input-box">
+                            <input
+                                type="text"
+                                name="website"
+                                id="website"
+                                value="<?php echo $objForm->stickyText('website', $business['website']); ?>"
+                                />
+                            <?php echo $objValidation->validate('website'); ?>
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="tax_rate">Tax Rate: <em>*</em></label>
+                        <div class="input-box">
+                            <input
+                                type="text"
+                                name="tax_rate"
+                                id="tax_rate"
+                                value="<?php echo $objForm->stickyText('tax_rate', $business['tax_rate']); ?>"
+                                />
+                            <?php echo $objValidation->validate('tax_rate'); ?>
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="tax_number">Tax Number: </label>
+                        <div class="input-box">
+                            <input
+                                type="text"
+                                name="tax_number"
+                                id="tax_number"
+                                value="<?php echo $objForm->stickyText('tax_number', $business['tax_number']); ?>"
+                                />
+                            <?php echo $objValidation->validate('tax_number'); ?>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </fieldset>
+        <div class="buttons-set">
+            <p class="required">* Required Fields</p>
+            <a
+                href="javascript:history.go(-1)"
+                class="left back-btn">
+                <small>« </small>Back
+            </a>
+            <label for="btn_submit" class="login-btn right">
+                <input
+                    type="submit"
+                    id="btn_submit"
+                    class="login-btn-reset"
+                    value="Update"/>
+            </label>
+        </div>
     </form>
+</div>
 
-    <?php
-    require_once('_footer.php');
+    <?php require_once('_footer.php');
 }
 ?>
