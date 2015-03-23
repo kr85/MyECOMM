@@ -61,7 +61,7 @@ require_once('_header.php'); ?>
                 <span>&nbsp;</span>
             </li>
             <li class="categories">
-                <a href="/panel/sections" title="Go to Sections">Categories</a>
+                <a href="/panel/categories" title="Go to Categories">Categories</a>
                 <span>&nbsp;</span>
             </li>
             <li>
@@ -98,7 +98,7 @@ require_once('_header.php'); ?>
                                 name="name"
                                 id="name"
                                 value="<?php echo $objForm->stickyText('name'); ?>"
-                                class=""/>
+                            />
                             <?php
                             echo $objValidation->validate('name');
                             echo $objValidation->validate('name_duplicate');
@@ -115,7 +115,7 @@ require_once('_header.php'); ?>
                                 name="identity"
                                 id="identity"
                                 value="<?php echo $objForm->stickyText('identity'); ?>"
-                                class=""/>
+                            />
                             <?php
                             echo $objValidation->validate('identity');
                             echo $objValidation->validate('duplicate_identity');
@@ -132,8 +132,8 @@ require_once('_header.php'); ?>
                                 name="meta_title"
                                 id="meta_title"
                                 value="<?php echo $objForm->stickyText('meta_title'); ?>"
-                                class=""/>
-                            <?php echo $objValidation->validate('identity'); ?>
+                            />
+                            <?php echo $objValidation->validate('meta_title'); ?>
                         </div>
                     </div>
                 </li>
@@ -144,9 +144,6 @@ require_once('_header.php'); ?>
                         <textarea
                             name="meta_description"
                             id="meta_description"
-                            cols=""
-                            rows=""
-                            class=""
                             ><?php
                             echo $objForm->stickyText('meta_description');
                             ?></textarea>

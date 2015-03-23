@@ -122,7 +122,7 @@ require_once('_header.php'); ?>
                                 id="meta_title"
                                 value="<?php echo $objForm->stickyText('meta_title'); ?>"
                             />
-                            <?php echo $objValidation->validate('identity'); ?>
+                            <?php echo $objValidation->validate('meta_title'); ?>
                         </div>
                     </div>
                 </li>

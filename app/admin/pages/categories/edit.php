@@ -88,7 +88,7 @@ if (!Helper::isEmpty($id)) {
         <?php echo $objValidation->validate('updated_success'); ?>
         <?php echo $objValidation->validate('updated_failed'); ?>
         <fieldset>
-            <legend>Add New Category</legend>
+            <legend>Edit Category</legend>
             <ul class="form-list">
                 <li class="fields">
                     <div class="field">
@@ -143,7 +143,7 @@ if (!Helper::isEmpty($id)) {
                                 id="meta_title"
                                 value="<?php echo $objForm->stickyText('meta_title', $category['meta_title']); ?>"
                                 />
-                            <?php echo $objValidation->validate('identity'); ?>
+                            <?php echo $objValidation->validate('meta_title'); ?>
                         </div>
                     </div>
                 </li>

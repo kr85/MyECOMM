@@ -11,4 +11,7 @@ $(document).ready(function () {
     systemObject.useBillingInfoChecked('#same_address_check');
     systemObject.loadingGif('.loader');
     systemObject.preload();
+    systemObject.getSectionsSelect('.sections-select');
+    //systemObject.getCategoriesSelect('.categories-select');
+    //systemObject.postCategoriesSelect();
 });

@@ -207,7 +207,7 @@ class Form {
             $out = "<select
                         name='{$name}'
                         id='{$name}'
-                        class='{$class}'";
+                        class='{$class} sections-select'";
             $out .= "title='Please select a section.'>";
 
             if (Helper::isEmpty($record) || $selectOption == true) {
@@ -234,6 +234,113 @@ class Form {
         }
 
         return null;
+    }
+
+    /**
+     * Get categories for select option for the form
+     *
+     * @param null $record
+     * @param string $name
+     * @param bool $selectOption
+     * @param null $class
+     * @return null|string
+     */
+    public function getCategoriesSelect(
+        $record = null, $name = 'category', $selectOption = false, $class = null
+    ) {
+
+        $objCatalog = new Catalog();
+        $categories = $objCatalog->getCategoriesIncludeDefault();
+
+        if (!empty($categories)) {
+
+            $out = "<select
+                        name='{$name}'
+                        id='{$name}'
+                        class='{$class}'";
+            $out .= "title='Please select a category.'>";
+
+            if (Helper::isEmpty($record) || $selectOption == true) {
+                $out .= "<option value=''>Select one&hellip;</option>";
+            }
+
+            foreach ($categories as $category) {
+
+                $out .= "<option value=\"";
+                $out .= $category['id'];
+                $out .= "\"";
+                $out .= $this->stickySelect(
+                    $name,
+                    $category['id'],
+                    $record
+                );
+                $out .= ">";
+                $out .= $category['name'];
+                $out .= "</option>";
+            }
+
+            $out .= "</select>";
+            return $out;
+        }
+
+        return null;
+    }
+
+    /**
+     * Get section's categories for select option for the form
+     *
+     * @param null $sectionId
+     * @param null $record
+     * @param string $name
+     * @return string
+     */
+    public function getSectionCategoriesSelect(
+        $sectionId = null, $record = null, $name = 'category'
+    ) {
+
+        $objCatalog = new Catalog();
+        $categories = $objCatalog->getCategoriesBySection($sectionId);
+
+        if (!empty($categories)) {
+
+            $out = "<select
+                        name='{$name}'
+                        id='{$name}'
+                        class='categories-select'";
+            $out .= "title='Please select a category.'>";
+
+            foreach ($categories as $category) {
+
+                $out .= "<option value=\"";
+                $out .= $category['id'];
+                $out .= "\"";
+                $out .= $this->stickySelect(
+                    $name,
+                    $category['id'],
+                    $record
+                );
+                $out .= ">";
+                $out .= $category['name'];
+                $out .= "</option>";
+            }
+
+            $out .= "</select>";
+            return $out;
+        } else {
+            $category = $objCatalog->getCategory(0);
+            $out = "<select
+                        name='{$name}'
+                        id='{$name}'";
+            $out .= "title='Please select a category.'>";
+            $out .= "<option value=\"";
+            $out .= $category['id'];
+            $out .= "\"";
+            $out .= ">";
+            $out .= $category['name'];
+            $out .= "</option>";
+            $out .= "</select>";
+            return $out;
+        }
     }
 
     /**

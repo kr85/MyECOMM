@@ -204,5 +204,45 @@ var systemObject = {
                 }
             });
         }
+    },
+    getSectionsSelect: function (thisIdentity) {
+        "use strict";
+        $(document).on('change', thisIdentity, function () {
+            var option = $(thisIdentity + ' option:selected').val();
+            $.post('/module/call/categories-select', { sectionId: option }, function (data) {
+                if (data && !data.error) {
+                    if (!systemObject.isEmpty(data.replace_values)) {
+                        systemObject.replaceValues(data.replace_values);
+                    }
+                }
+            }, 'json');
+        });
+    },
+    getCategoriesSelect: function (thisIdentity) {
+        "use strict";
+        $(document).on('change', thisIdentity, function () {
+            var option = $(thisIdentity + ' option:selected').val();
+            $.post('/module/call/categories-select', { categoryId: option }, function (data) {
+                if (data && !data.error) {
+                    if (!systemObject.isEmpty(data.replace_values)) {
+                        systemObject.replaceValues(data.replace_values);
+                    }
+                }
+            }, 'json');
+        });
+    },
+    postCategoriesSelect: function () {
+        var sectionId = systemObject.getSectionsSelect('.sections-select');
+        var categoryId = systemObject.getCategoriesSelect('.categories-select');
+
+        if (!systemObject.isEmpty(sectionId) && !systemObject.isEmpty(categoryId)) {
+            $.post('/module/call/categories-select', { sectionId: sectionId, categoryId: categoryId }, function (data) {
+                if (data && !data.error) {
+                    if (!systemObject.isEmpty(data.replace_values)) {
+                        systemObject.replaceValues(data.replace_values);
+                    }
+                }
+            }, 'json');
+        }
     }
 };

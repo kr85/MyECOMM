@@ -97,11 +97,13 @@ class Validation {
         'new_password'              => 'Please choose a new password.',
         'confirm_new_password'      => 'Please confirm your new password.',
 
-        'added_success' => 'The new record has been added successfully.',
-        'added_failed'  => 'There was a problem adding this record. Please contact the administrator.',
+        'added_success'           => 'The new record has been added successfully.',
+        'added_no_upload_success' => 'The new record has been added successfully without the image.',
+        'added_failed'            => 'There was a problem adding this record. Please contact the administrator.',
 
-        'updated_success' => 'The new record has been updated successfully.',
-        'updated_failed'  => 'There was a problem updating this record. Please contact the administrator.'
+        'updated_success'           => 'The new record has been updated successfully.',
+        'updated_no_upload_success' => 'The record has been updated successfully but without changing the image.',
+        'updated_failed'            => 'There was a problem updating this record. Please contact the administrator.'
     ];
 
     /**
