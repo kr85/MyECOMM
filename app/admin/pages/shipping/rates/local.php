@@ -2,11 +2,11 @@
 
 switch ($call) {
     case 'add':
-        require_once('local' . DS . 'add.php');
+        require_once('local'.DS.'add.php');
         break;
     case 'remove':
-        require_once('local' . DS . 'remove.php');
+        require_once('local'.DS.'remove.php');
         break;
     default:
-        require_once('local' . DS . 'list.php');
+        require_once('local'.DS.'list.php');
 }

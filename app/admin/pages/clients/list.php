@@ -138,7 +138,12 @@ else:
                             Remove
                         </a>
                     <?php else: ?>
-                        <span class="btn-remove-2">Remove</span>
+                        <span
+                            class="btn-remove-2"
+                            title="Can't Remove Active Client"
+                        >
+                            Remove
+                        </span>
                     <?php endif; ?>
                 </td>
             </tr>

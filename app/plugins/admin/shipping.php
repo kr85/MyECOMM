@@ -3,16 +3,30 @@
 use MyECOMM\Helper;
 
 if (!empty($data['rows'])): ?>
-<table class="tbl_repeat">
+<table class="data-table">
     <thead>
         <tr>
-            <th class="col_1">+</th>
-            <th>Type</th>
-            <th class="col_1">Rates</th>
-            <th class="col_1">Active</th>
-            <th class="col_1">Default</th>
-            <th class="col_1">Duplicate</th>
-            <th class="col_1 ta_r">Remove</th>
+            <th class="center" rowspan="1">
+                <span>&nbsp;</span>
+            </th>
+            <th class="center" rowspan="1">
+                <span class="nobr">Type</span>
+            </th>
+            <th class="center" rowspan="1">
+                <span class="nobr">Rates</span>
+            </th>
+            <th class="center" rowspan="1">
+                <span class="nobr">Active</span>
+            </th>
+            <th class="center" rowspan="1">
+                <span class="nobr">Default</span>
+            </th>
+            <th class="center" rowspan="1">
+                <span class="nobr">Duplicate</span>
+            </th>
+            <th class="center" rowspan="1">
+                <span class="nobr">Remove</span>
+            </th>
         </tr>
     </thead>
     <tbody id="rowsLocal" class="sort_rows" data-url="<?php
@@ -20,8 +34,8 @@ if (!empty($data['rows'])): ?>
     ?>">
         <?php foreach($data['rows'] as $item): ?>
             <tr id="row-<?php echo $item['id']; ?>">
-                <td>+</td>
-                <td>
+                <td class="center">+</td>
+                <td class="">
                     <span class="click_hide_show"
                           data-show="#name-<?php echo $item['id']; ?>">
                         <?php echo Helper::encodeHTML($item['name']); ?>
@@ -30,15 +44,15 @@ if (!empty($data['rows'])): ?>
                         type="text"
                         name="name-<?php echo $item['id']; ?>"
                         id="name-<?php echo $item['id']; ?>"
-                        class="fld fld_list blur_update_hide_show dn"
+                        class="fld_list blur_update_hide_show dn"
                         data-id="<?php echo $item['id']; ?>"
                         value="<?php echo $item['name']; ?>"
                     />
                 </td>
-                <td>
+                <td class="center">
                     <select name="rate-<?php echo $item['id']; ?>"
                             id="rate-<?php echo $item['id']; ?>"
-                            class="fld fld_small select_redirect">
+                            class="fld_small select_redirect">
                         <option value="">Edit Rates</option>
                         <?php if (!empty($data['countries'])): ?>
                             <?php foreach ($data['countries'] as $crow): ?>
@@ -67,7 +81,7 @@ if (!empty($data['rows'])): ?>
                         <?php endif; ?>
                     </select>
                 </td>
-                <td>
+                <td class="center">
                     <a
                         href="#"
                         data-url="<?php
@@ -80,7 +94,7 @@ if (!empty($data['rows'])): ?>
                         <?php echo $item['active'] == 1 ? 'Yes' : 'No'; ?>
                     </a>
                 </td>
-                <td>
+                <td class="center">
                     <a
                         href="#"
                         data-url="<?php
@@ -95,7 +109,7 @@ if (!empty($data['rows'])): ?>
                         <?php echo $item['default'] == 1 ? 'Yes' : 'No'; ?>
                     </a>
                 </td>
-                <td>
+                <td class="center">
                     <a
                         href="#"
                         data-url="<?php
@@ -104,11 +118,11 @@ if (!empty($data['rows'])): ?>
                                 false,
                                 ['action', 'duplicate', 'id', $item['id']]);
                         ?>"
-                        class="click_call_reload">
+                        class="click_call_reload btn-duplicate">
                         Duplicate
                     </a>
                 </td>
-                <td>
+                <td class="center">
                     <a
                         href="#"
                         data-url="<?php
@@ -117,7 +131,7 @@ if (!empty($data['rows'])): ?>
                                 false,
                                 ['action', 'remove', 'id', $item['id']]);
                         ?>"
-                        class="click_add_row_confirm"
+                        class="click_add_row_confirm btn-remove-2"
                         data-span="7">
                         Remove
                     </a>

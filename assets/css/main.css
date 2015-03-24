@@ -1770,6 +1770,42 @@ button.btn-update span {
     padding-left: 5px; }
 .admin .section-add fieldset, .admin .section-edit fieldset, .admin .category-add fieldset, .admin .category-edit fieldset, .admin .product-add fieldset, .admin .product-edit fieldset, .admin .client-edit fieldset, .admin .business-edit fieldset {
   padding: 22px 25px; }
+.admin .shipping-type-add, .admin .shipping-rate-add {
+  width: 100%;
+  margin-bottom: 40px; }
+  .admin .shipping-type-add .fld, .admin .shipping-rate-add .fld {
+    width: 400px; }
+  .admin .shipping-type-add .fld_small, .admin .shipping-rate-add .fld_small {
+    padding: 5px; }
+  .admin .shipping-type-add em, .admin .shipping-rate-add em {
+    color: #19BDFA; }
+  .admin .shipping-type-add table, .admin .shipping-rate-add table {
+    margin-left: auto;
+    margin-right: auto; }
+    .admin .shipping-type-add table .local label, .admin .shipping-rate-add table .local label {
+      font-weight: 700; }
+    .admin .shipping-type-add table label, .admin .shipping-rate-add table label {
+      font-weight: 700; }
+    .admin .shipping-type-add table td, .admin .shipping-rate-add table td {
+      padding-left: 3px;
+      padding-right: 3px;
+      vertical-align: middle; }
+      .admin .shipping-type-add table td .valid_name, .admin .shipping-rate-add table td .valid_name {
+        font-size: 15px;
+        font-weight: 700; }
+.admin .form-shipping-types fieldset {
+  padding-bottom: 22px; }
+.admin #typesLocal .fld_list, .admin #typesInternational .fld_list {
+  width: 130px;
+  padding: 3px; }
+.admin #typesLocal select, .admin #typesInternational select {
+  padding: 3px;
+  background-color: white;
+  border: 1px solid #CFCFCF; }
+.admin #typesLocal option, .admin #typesInternational option {
+  padding-left: 5px; }
+.admin #shippingList fieldset {
+  padding: 1px; }
 
 * {
   border: none;
