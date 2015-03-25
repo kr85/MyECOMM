@@ -6,6 +6,7 @@ use MyECOMM\Session;
 use MyECOMM\Business;
 use MyECOMM\Helper;
 use MyECOMM\Catalog;
+use MyECOMM\Country;
 
 // Restrict access only for logged in users
 Login::restrictFront($this->objUrl);
@@ -27,11 +28,13 @@ if (!empty($token)):
             $items = $objOrder->getOrderItems($order['id']);
             $objBusiness = new Business();
             $business = $objBusiness->getOne(Business::BUSINESS_ID);
+
             $objCatalog = new Catalog();
 
-        endif; ?>
+            $objCountry = new Country();
+            $countryBusiness = $objCountry->getOne($business['country']); ?>
 
-        <!DOCTYPE html>
+            <!DOCTYPE html>
         <html lang="en">
             <head>
                 <meta charset="UTF-8">
@@ -67,6 +70,7 @@ if (!empty($token)):
                             <p>
                                 <strong><?php echo $business['name']; ?></strong><br/>
                                 <?php echo nl2br($business['address']); ?><br/>
+                                <?php echo $countryBusiness['name']; ?>
                                 <?php echo $business['telephone']; ?><br/>
                                 <?php echo $business['email']; ?><br/>
                                 <?php echo $business['website']; ?>
@@ -110,7 +114,7 @@ if (!empty($token)):
                                             $product['image'] :
                                             'unavailable.png';
                                         $imageSize = Helper::setImageSize(CATALOG_PATH.DS.$image, 60, 90);
-                                    ?>
+                                        ?>
                                         <tr>
                                             <td class="center">
                                                 <img
@@ -263,6 +267,10 @@ if (!empty($token)):
                 </section>
             </body>
         </html>
+
+        <?php else:
+            Helper::redirect($this->objUrl->href('error'));
+        endif; ?>
 <?php else:
         Helper::redirect($this->objUrl->href('error'));
     endif;

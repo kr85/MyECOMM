@@ -5,6 +5,7 @@ use MyECOMM\Order;
 use MyECOMM\Business;
 use MyECOMM\Helper;
 use MyECOMM\Catalog;
+use MyECOMM\Country;
 
 // Restrict access only for logged in users
 Login::restrictAdmin();
@@ -21,6 +22,9 @@ if (!empty($id)):
         $items = $objOrder->getOrderItems($id);
         $ObjBusiness = new Business();
         $business = $ObjBusiness->getOne(Business::BUSINESS_ID);
+
+        $objCountry = new Country();
+        $countryBusiness = $objCountry->getOne($business['country']);
 
         $objCatalog = new Catalog();
 
@@ -67,6 +71,7 @@ if (!empty($id)):
                     <p>
                         <strong><?php echo $business['name']; ?></strong><br/>
                         <?php echo nl2br($business['address']); ?><br/>
+                        <?php echo $countryBusiness['name']; ?><br/>
                         <?php echo $business['telephone']; ?><br/>
                         <?php echo $business['email']; ?><br/>
                         <?php echo $business['website']; ?>
@@ -265,6 +270,10 @@ if (!empty($id)):
     </body>
 </html>
 <?php
+    else:
+        Helper::redirect($this->objUrl->href('error'));
     endif;
+else:
+    Helper::redirect($this->objUrl->href('error'));
 endif;
 ?>

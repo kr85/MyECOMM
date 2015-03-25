@@ -1865,6 +1865,8 @@ button.btn-update span {
 .admin .order-edit select#status {
   width: 100%;
   background-color: white; }
+.admin .box-account {
+  padding-top: 40px; }
 
 * {
   border: none;
