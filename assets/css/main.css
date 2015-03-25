@@ -515,7 +515,7 @@ button.btn-cart {
     border: 1px solid #cfcfcf;
     border-bottom-right-radius: 25px;
     border-bottom-left-radius: 25px;
-    box-shadow: 0 0 10px #636363; }
+    box-shadow: 4px 13px 32px #636363; }
 
 .toolbar {
   border: solid 1px #DFDFDF;
@@ -1770,27 +1770,27 @@ button.btn-update span {
     padding-left: 5px; }
 .admin .section-add fieldset, .admin .section-edit fieldset, .admin .category-add fieldset, .admin .category-edit fieldset, .admin .product-add fieldset, .admin .product-edit fieldset, .admin .client-edit fieldset, .admin .business-edit fieldset {
   padding: 22px 25px; }
-.admin .shipping-type-add, .admin .shipping-rate-add {
+.admin .shipping-type-add, .admin .shipping-rate-add, .admin .country-add-box {
   width: 100%;
   margin-bottom: 40px; }
-  .admin .shipping-type-add .fld, .admin .shipping-rate-add .fld {
+  .admin .shipping-type-add .fld, .admin .shipping-rate-add .fld, .admin .country-add-box .fld {
     width: 400px; }
-  .admin .shipping-type-add .fld_small, .admin .shipping-rate-add .fld_small {
+  .admin .shipping-type-add .fld_small, .admin .shipping-rate-add .fld_small, .admin .country-add-box .fld_small {
     padding: 5px; }
-  .admin .shipping-type-add em, .admin .shipping-rate-add em {
+  .admin .shipping-type-add em, .admin .shipping-rate-add em, .admin .country-add-box em {
     color: #19BDFA; }
-  .admin .shipping-type-add table, .admin .shipping-rate-add table {
+  .admin .shipping-type-add table, .admin .shipping-rate-add table, .admin .country-add-box table {
     margin-left: auto;
     margin-right: auto; }
-    .admin .shipping-type-add table .local label, .admin .shipping-rate-add table .local label {
+    .admin .shipping-type-add table .local label, .admin .shipping-rate-add table .local label, .admin .country-add-box table .local label {
       font-weight: 700; }
-    .admin .shipping-type-add table label, .admin .shipping-rate-add table label {
+    .admin .shipping-type-add table label, .admin .shipping-rate-add table label, .admin .country-add-box table label {
       font-weight: 700; }
-    .admin .shipping-type-add table td, .admin .shipping-rate-add table td {
+    .admin .shipping-type-add table td, .admin .shipping-rate-add table td, .admin .country-add-box table td {
       padding-left: 3px;
       padding-right: 3px;
       vertical-align: middle; }
-      .admin .shipping-type-add table td .valid_name, .admin .shipping-rate-add table td .valid_name {
+      .admin .shipping-type-add table td .valid_name, .admin .shipping-rate-add table td .valid_name, .admin .country-add-box table td .valid_name {
         font-size: 15px;
         font-weight: 700; }
 .admin .form-shipping-types fieldset {
@@ -1804,8 +1804,17 @@ button.btn-update span {
   border: 1px solid #CFCFCF; }
 .admin #typesLocal option, .admin #typesInternational option {
   padding-left: 5px; }
-.admin #shippingList fieldset {
+.admin #shippingList fieldset, .admin #countryList fieldset {
   padding: 1px; }
+.admin #countryList .fld {
+  width: 300px; }
+.admin #countryList td {
+  position: relative; }
+  .admin #countryList td input {
+    width: 287px;
+    position: absolute;
+    top: 5px;
+    padding: 5px; }
 
 * {
   border: none;

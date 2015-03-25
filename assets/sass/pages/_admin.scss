@@ -200,7 +200,7 @@
     }
   }
 
-  .shipping-type-add, .shipping-rate-add {
+  .shipping-type-add, .shipping-rate-add, .country-add-box {
     width: 100%;
     margin-bottom: 40px;
 
@@ -270,9 +270,26 @@
     }
   }
 
-  #shippingList {
+  #shippingList, #countryList {
     fieldset {
       padding: 1px;
+    }
+  }
+
+  #countryList {
+    .fld {
+      width: 300px;
+    }
+
+    td {
+      position: relative;
+
+      input {
+        width: 287px;
+        position: absolute;
+        top: 5px;
+        padding: 5px;
+      }
     }
   }
 }

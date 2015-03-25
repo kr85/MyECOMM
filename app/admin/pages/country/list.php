@@ -7,36 +7,59 @@ $countries = $objCountry->getAll();
 require_once('_header.php');
 ?>
 
-<h1>Countries</h1>
-
-<form method="post" class="ajax" data-action="<?php
-echo $this->objUrl->getCurrent(['action', 'id'], false, ['action', 'add']);
-?>">
-<table class="tbl_insert">
-    <thead>
-        <tr>
-            <th><label for="name" class="valid_name">Country Name: *</label></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <input type="text" name="name" id="name" class="fld"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="btn_add" class="sbm sbm_blue fl_l">
-                    <input type="submit" class="btn" id="btn_add" value="Add"/>
-                </label>
-            </td>
-        </tr>
-    </tbody>
-</table>
-</form>
-
-<div class="dev br_td">&nbsp;</div>
-
+<div class="listing country-list">
+    <div class="breadcrumbs">
+        <ul>
+            <li class="dashboard">
+                <a href="/panel/dashboard" title="Go to Dashboard">Dashboard</a>
+                <span>&nbsp;</span>
+            </li>
+            <li>
+                <strong>
+                    Countries
+                </strong>
+            </li>
+        </ul>
+    </div>
+    <div class="page-title">
+        <h1>Countries</h1>
+    </div>
+    <div class="country-add-box">
+        <form method="post" class="ajax" data-action="<?php
+            echo $this->objUrl->getCurrent(['action', 'id'], false, ['action', 'add']);
+        ?>">
+            <table>
+                <tr>
+                    <td>
+                        <label for="name" class="">
+                            Country Name: <em>*</em>
+                        </label>
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            class="fld"
+                            placeholder="Add a new country..."
+                        />
+                    </td>
+                    <td>
+                        <button class="button" type="submit">
+                                <span>
+                                    <span>Add</span>
+                                </span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                   <td colspan="3" class="valid_name"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<div class="clearfix"></div>
 <form method="post" data-url="<?php echo $this->objUrl->getCurrent(
         ['action', 'id'],
         false,

@@ -141,5 +141,9 @@ if (!empty($data['rows'])): ?>
     </tbody>
 </table>
 <?php else: ?>
-<p>There are currently no records.</p>
+<div class="center">
+    <p class="empty">
+        There are currently <strong>no records</strong> associated with this shipping rate.
+    </p>
+</div>
 <?php endif; ?>

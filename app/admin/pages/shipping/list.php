@@ -42,15 +42,18 @@ require_once('_header.php'); ?>
             <table>
                 <tr>
                     <td>
-                        <label
-                            for="name"
-                            class="valid_name"
-                        >
-                            Type Name:
+                        <label for="name">
+                            Type Name: <em>*</em>
                         </label>
                     </td>
                     <td>
-                        <input type="text" name="name" id="name" class="fld"/>
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            class="fld"
+                            placeholder="Add a new shipping type..."
+                        />
                     </td>
                     <td class="local">
                         <input
@@ -70,6 +73,9 @@ require_once('_header.php'); ?>
                                 </span>
                         </button>
                     </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="valid_name"></td>
                 </tr>
             </table>
         </form>
