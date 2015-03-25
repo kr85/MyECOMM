@@ -110,7 +110,7 @@ if (!empty($user)) {
         <h1>Checkout</h1>
     </div>
     <?php echo $objValidation->validate('update_info_error'); ?>
-    <form action="" method="post">
+    <form action="<?php echo $this->objUrl->href('summary'); ?>" method="post">
         <ol class="checkout-steps">
             <li class="section active" id="checkout-section-billing">
                 <div class="step-title">

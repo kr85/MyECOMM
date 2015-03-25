@@ -31,7 +31,7 @@ CREATE TABLE `admins` (
 --
 -- Dumping data for table `admins`
 --
-INSERT INTO `admins` VALUES (1, 'Kosta', 'Rashev', 'kosta.rashev@gmail.com', 'bd2b1aaf7ef4f09be9f52ce2d8d599674d81aa9d6a4421696dc4d93dd0619d682ce56b4d64a9ef097761ced99e0f67265b5f76085e5b0ee7ca4696b2ad6fe2b2'); -- Password = 'secret'
+INSERT INTO `admins` VALUES (1, 'John', 'Doe', 'admin@test.com', 'a4056fb362f0d5554f91fa1d72d376a1cf7fe4b3a913392348b0945a50e318448a0da370c6bc5186035f9a1728a6474f0687b50ce0a510e8e976e0c70572c575'); -- Password = 's3kRe1111'
 
 -- --------------------------------------------------------
 
@@ -683,6 +683,9 @@ CREATE TABLE `zones` (
 INSERT INTO `zones` VALUES (1, 'Local');
 INSERT INTO `zones` VALUES (2, 'Zone 1');
 INSERT INTO `zones` VALUES (3, 'Zone 2');
+INSERT INTO `zones` VALUES (4, 'Zone 3');
+INSERT INTO `zones` VALUES (5, 'Zone 4');
+INSERT INTO `zones` VALUES (6, 'Zone 5');
 
 --
 -- Table structure for table `zones_country_codes`
@@ -737,6 +740,239 @@ ADD CONSTRAINT `shipping_ibfk_2` FOREIGN KEY (`country`) REFERENCES `countries` 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Dumping data for table `zones_country_codes`
+--
+
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (1, '900');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (1, '910');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (1, '920');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (1, '930');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (1, '940');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (1, '950');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (1, '960');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (1, '970');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (1, '980');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (1, '990');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (2, '800');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (2, '810');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (2, '820');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (2, '830');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (2, '840');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (2, '850');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (2, '860');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (2, '870');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (2, '880');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (2, '890');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '700');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '710');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '720');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '730');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '740');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '750');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '760');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '770');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '780');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '790');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '600');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '610');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '620');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '630');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '640');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '650');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '660');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '670');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '680');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '690');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '500');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '510');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '520');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '530');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '540');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '550');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '560');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '570');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '580');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (3, '590');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '400');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '410');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '420');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '430');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '440');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '450');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '460');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '470');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '480');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '490');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '300');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '310');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '320');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '330');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '340');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '350');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '360');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '370');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '380');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (4, '390');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '200');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '210');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '220');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '230');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '240');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '250');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '260');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '270');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '280');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '290');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '100');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '110');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '120');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '130');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '140');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '150');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '160');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '170');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '180');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (5, '190');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (6, '000');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (6, '010');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (6, '020');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (6, '030');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (6, '040');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (6, '050');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (6, '060');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (6, '070');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (6, '080');
+INSERT INTO `zones_country_codes` (`zone`, `country_code`) VALUES (6, '090');
+
+--
+-- Dumping data for table `shipping`
+--
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (1, 1, 230, 10.00, 15.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (2, 1, 230, 10.00, 12.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (3, 1, 230, 10.00, 9.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (4, 1, 230, 10.00, 5.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (1, 2, 230, 10.00, 17.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (2, 2, 230, 10.00, 15.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (3, 2, 230, 10.00, 10.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (4, 2, 230, 10.00, 7.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (1, 3, 230, 10.00, 18.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (2, 3, 230, 10.00, 16.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (3, 3, 230, 10.00, 12.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (4, 3, 230, 10.00, 8.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (1, 4, 230, 10.00, 20.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (2, 4, 230, 10.00, 18.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (3, 4, 230, 10.00, 15.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (4, 4, 230, 10.00, 10.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (1, 5, 230, 10.00, 22.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (2, 5, 230, 10.00, 19.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (3, 5, 230, 10.00, 17.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (4, 5, 230, 10.00, 12.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (1, 6, 230, 10.00, 25.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (2, 6, 230, 10.00, 22.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (3, 6, 230, 10.00, 20.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`) VALUES (4, 6, 230, 10.00, 15.50);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 1, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 1, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 2, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 2, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 3, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 3, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 4, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 4, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 5, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 5, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 6, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 6, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 7, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 7, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 8, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 8, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 9, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 9, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 10, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 10, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 11, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 11, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 12, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 12, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 13, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 13, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 14, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 14, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 15, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 15, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 16, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 16, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 17, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 17, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 18, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 18, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 19, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 19, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 20, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 20, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 21, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 21, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 22, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 22, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 23, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 23, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 24, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 24, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 25, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 25, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 26, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 26, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 27, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 27, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 28, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 28, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 29, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 29, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 30, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 30, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 31, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 31, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 32, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 32, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 33, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 33, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 34, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 34, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 35, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 35, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 36, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 36, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 37, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 37, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 38, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 38, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 39, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 39, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 40, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 40, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 41, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 41, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 42, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 42, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 43, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 43, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 44, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 44, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 45, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 45, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 46, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 46, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 47, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 47, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 48, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 48, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 49, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 49, 10.00, 50.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (5, 0, 50, 10.00, 25.00);
+INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)  VALUES (6, 0, 50, 10.00, 50.00);
 
 --
 -- Constraints for table `states`
@@ -795,7 +1031,7 @@ ADD CONSTRAINT `business_ibfk_1` FOREIGN KEY (`country`) REFERENCES `countries` 
 --
 -- Dumping data for table `business`
 --
-INSERT INTO `business` VALUES (1, 'MyECOMM', '123 Way Street\nSan Jose, CA 95192', 230, '408-505-0000', ' support@myecomm.com', 'www.MyECOMM.com', NULL, 10.00);
+INSERT INTO `business` VALUES (1, 'Books - Online Store', '123 Way Street\nSan Jose, CA 95192', 230, '408-505-0000', ' support@books.com', 'books.kostarashev.com', NULL, 10.00);
 
 --
 -- Dumping data for table `products`
@@ -1043,41 +1279,31 @@ VALUES (119, 'Ninja Secrets of Invisibility', 'Like the ninja warrior, you too c
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `weight`, `date`, `section`, `category`, `image`, `identity`, `meta_title`, `meta_description`)
 VALUES (120, 'Racing the Sunset: Lessons on How Athletes Survive, Thrive, or Fail After Sport', 'A seventh-generation Californian, Scott Tinley led the quintessential Golden State dream. As he grew from beach rat to lifeguard to a recreational administration major, it seemed only natural to him that he would try to parlay the athletic skills gleaned from this idyllic lifestyle into a profession as one of the best triathletes in the world. For twenty years, his skill, tenacity, and devil-may-care attitude guided him along the path.\nBut when age took hold of his legs, and no amount of training would help, his athletic gold rush went bust. Cracks in his psyche began to show, as if beneath it all—like much of California itself—his athletic life had been built on a fault. Always introspective and inquiring, Tinley threw himself headlong into athlete retirement and the larger issues of life transition and change. His new journey, driven by his quest for personal growth and healing, was filled with pain, false starts, and heartrending intimacies. It led him to hundreds of other retired professional athletes who would openly discuss their own triumphs and tragedies. With much discipline, Tinley completed one of the most thorough athlete research projects ever attempted, and befriended such superstars as Bill Walton, Eric Heiden, Greg LeMond, Jerry Sherk, Steve Scott, and Rick Sutcliffe. Along the way he uncovered secrets about himself and the process of change, turmoil, and final acceptance, all shared openly and eloquently in Racing the Sunset. This book will do for athletes of every level what Passages did for an entire generation.', '14.81', 0.5, NOW(), 1, 8, 'Racing-Sunset-Lessons-Athletes-Survive.jpg', 'Racing-Sunset-Lessons-Athletes-Survive', 'Racing the Sunset: Lessons on How Athletes Survive, Thrive, or Fail After Sport', 'Racing the Sunset: Lessons on How Athletes Survive, Thrive, or Fail After Sport');
 
---
--- Dumping data for table `zones_country_codes`
---
-INSERT INTO `zones_country_codes` VALUES (1, 1, 'US');
-INSERT INTO `zones_country_codes` VALUES (2, 2, 'CA');
-INSERT INTO `zones_country_codes` VALUES (3, 2, 'MX');
-INSERT INTO `zones_country_codes` VALUES (4, 3, 'BG');
-INSERT INTO `zones_country_codes` VALUES (5, 3, 'PL');
-INSERT INTO `zones_country_codes` VALUES (6, 1, '94086');
-INSERT INTO `zones_country_codes` VALUES (7, 1, '95192');
+CREATE TABLE `wishlist` (
+  `id`      INT(11)   NOT NULL AUTO_INCREMENT,
+  `client`  INT(11)   NOT NULL,
+  `product` INT(11)   NOT NULL,
+  `date`    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `client`( `client`),
+  KEY `product` (`product`)
+)
+  ENGINE = InnoDB;
 
---
--- Dumping data for table `shipping`
---
-INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
-    VALUES (1, 1, 230, 10.00, 15.50);
-INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
-    VALUES (2, 1, 230, 10.00, 12.50);
-INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
-    VALUES (3, 1, 230, 10.00, 9.50);
-INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
-    VALUES (4, 1, 230, 10.00, 5.50);
-INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
-    VALUES (1, 2, 230, 10.00, 17.50);
-INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
-    VALUES (2, 2, 230, 10.00, 15.50);
-INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
-    VALUES (3, 2, 230, 10.00, 10.50);
-INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
-    VALUES (4, 2, 230, 10.00, 7.50);
-INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
-    VALUES (1, 3, 230, 10.00, 18.50);
-INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
-    VALUES (2, 3, 230, 10.00, 16.50);
-INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
-    VALUES (3, 3, 230, 10.00, 12.50);
-INSERT INTO `shipping` (`type`, `zone`, `country`, `weight`, `cost`)
-    VALUES (4, 3, 230, 10.00, 8.50);
+ALTER TABLE `wishlist`
+ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`client`) REFERENCES `clients` (`id`)
+  ON DELETE RESTRICT
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`product`) REFERENCES `products` (`id`)
+  ON DELETE RESTRICT
+  ON UPDATE CASCADE;
+
+CREATE TABLE `reset_password` (
+  `id`    INT(11)      NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(150) NOT NULL,
+  `hash`  VARCHAR(255) NOT NULL,
+  `date`  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `count` INT(11)      NOT NULL,
+  PRIMARY KEY (`id`)
+)
+  ENGINE = InnoDB;
