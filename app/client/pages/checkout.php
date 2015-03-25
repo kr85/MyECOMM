@@ -99,9 +99,7 @@ if (!empty($user)) {
                 if ($objUser->updateUser($objValidation->post, $user['id'])) {
                     Helper::redirect($this->objUrl->href('summary'));
                 } else {
-                    $message = "There are a problem updating your details. ";
-                    $message .= "Please contact the administrator.";
-                    $objValidation->addToErrors('update_info_error', $message);
+                    $objValidation->addToErrors('update_fail');
                 }
             }
         }
@@ -109,8 +107,8 @@ if (!empty($user)) {
     <div class="page-title">
         <h1>Checkout</h1>
     </div>
-    <?php echo $objValidation->validate('update_info_error'); ?>
-    <form action="<?php echo $this->objUrl->href('summary'); ?>" method="post">
+    <?php echo $objValidation->validate('update_fail'); ?>
+    <form action="" method="post">
         <ol class="checkout-steps">
             <li class="section active" id="checkout-section-billing">
                 <div class="step-title">
@@ -472,11 +470,9 @@ if (!empty($user)) {
                             class="left back-btn">
                             <small>« </small>Back
                         </a>
-                        <button type="submit" class="button btn-continue f-right">
-                            <span>
-                                <span>Continue</span>
-                            </span>
-                        </button>
+                        <label for="btn_submit" class="btn-2 right">
+                            <input type="submit" value="Continue" />
+                        </label>
                         <div class="clearfix"></div>
                     </div>
                 </div>
