@@ -143,34 +143,39 @@ else:
                     ?>
                 </td>
                 <td class="center">
+                    <a
+                        href="<?php echo $this->objUrl->getCurrent(
+                            ['action'],
+                            false,
+                            ['action', 'edit', 'id', $order['id']]
+                        ); ?>"
+                        class="btn-view"
+                        title="View Order"
+                    >
+                        View
+                    </a>
+                </td>
+                <td class="center">
                     <?php if ($order['status'] == 1): ?>
                         <a
                             href="<?php echo $this->objUrl->getCurrent(
                                 ['action'],
                                 false,
-                                ['action', 'edit', 'id', $order['id']]
+                                ['action', 'remove', 'id', $order['id']]
                             ); ?>"
-                            class="btn-view"
-                            title="View Order"
+                            class="btn-remove-2"
+                            title="Remove Order"
                         >
-                            View
+                            Remove
                         </a>
                     <?php else: ?>
-                        <span class="inactive">Remove</span>
+                        <span
+                            class="inactive btn-remove-2"
+                            title="Can't Remove This Order"
+                        >
+                            Remove
+                        </span>
                     <?php endif; ?>
-                </td>
-                <td class="center">
-                    <a
-                        href="<?php echo $this->objUrl->getCurrent(
-                            ['action'],
-                            false,
-                            ['action', 'remove', 'id', $order['id']]
-                        ); ?>"
-                        class="btn-remove-2"
-                        title="Remove Order"
-                    >
-                        Remove
-                    </a>
                 </td>
             </tr>
             <?php endforeach; ?>

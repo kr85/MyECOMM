@@ -284,3 +284,33 @@ button.btn-cart {
 .btn-1-new-wrapper {
   text-align: right;
 }
+
+.btn-2 {
+  border: solid 1px #959595;
+  border-radius: 3px;
+  box-shadow: 2px 2px 5px #ddd;
+  background: url(../images/button.gif) repeat-x;
+  background-size: 30px auto;
+  color: #fff;
+  padding: 3.5px 20px;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  &:hover {
+    border: solid 1px #676767;
+    background: url(../images/button.gif) repeat-x 0 -24px;
+  }
+
+  &:active, &:focus {
+    border: solid 1px #959595;
+  }
+
+  input {
+    background-color: transparent;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+    font-size: 13px;
+    font-weight: 400;
+    border: none;
+  }
+}

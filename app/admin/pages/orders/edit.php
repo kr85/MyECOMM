@@ -36,46 +36,69 @@ if (!empty($id)) {
 
             if ($objValidation->isValid()) {
                 if ($objOrder->updateOrder($id, $variables)) {
-                    Helper::redirect(
-                        $this->objUrl->getCurrent(
-                            ['action', 'id'], false, ['action', 'edited']
-                        )
-                    );
+                    $objValidation->addToSuccess('updated_success');
                 } else {
-                    Helper::redirect(
-                        $this->objUrl->getCurrent(
-                            ['action', 'id'], false, ['action', 'edited-failed']
-                        )
-                    );
+                    $objValidation->addToErrors('updated_failed');
                 }
             }
         }
 
         require_once('_header.php');
         ?>
-        <h1>Orders :: View</h1>
 
-        <form action="" method="POST">
-            <table class="tbl_insert">
+<div class="order-edit">
+    <div class="breadcrumbs">
+        <ul>
+            <li class="dashboard">
+                <a href="/panel/dashboard" title="Go to Dashboard">Dashboard</a>
+                <span>&nbsp;</span>
+            </li>
+            <li class="orders">
+                <a href="/panel/orders" title="Go to Orders">Orders</a>
+                <span>&nbsp;</span>
+            </li>
+            <li>
+                <strong>
+                    Edit
+                </strong>
+            </li>
+        </ul>
+    </div>
+    <div class="page-title">
+        <h1>Orders :: Edit</h1>
+    </div>
+    <form action="" method="POST">
+        <?php echo $objValidation->validate('updated_success'); ?>
+        <?php echo $objValidation->validate('updated_failed'); ?>
+        <fieldset>
+            <table class="data-table">
                 <tr>
                     <th>Date</th>
-                    <td colspan="4">
+                    <td colspan="4" class="center bold">
                         <?php echo Helper::setDate(2, $order['date']); ?>
                     </td>
                 </tr>
                 <tr>
                     <th>Order No.</th>
-                    <td colspan="4"><?php echo $order['id']; ?></td>
+                    <td colspan="4" class="center bold"><?php echo $order['id']; ?></td>
                 </tr>
                 <?php if (!empty($items)): ?>
                     <tr>
                         <th rowspan="<?php echo count($items) + 1; ?>">
                             Items:
                         </th>
-                        <td class="col_5">Id</td>
-                        <td>Item</td>
-                        <td class="col_5">Qty</td>
-                        <td class="ta_r col_15">Amount</td>
+                        <td class="center order-items-head" rowspan="1">
+                            <span class="nobr">Id</span>
+                        </td>
+                        <td class="center order-items-head" rowspan="1">
+                            <span class="nobr">Item</span>
+                        </td>
+                        <td class="center order-items-head" rowspan="1">
+                            <span class="nobr">Qty</span>
+                        </td>
+                        <td class="center order-items-head" rowspan="1">
+                            <span class="nobr">Amount</span>
+                        </td>
                     </tr>
                     <?php foreach ($items as $item):
                         $product = $objCatalog->getProduct(
@@ -83,14 +106,14 @@ if (!empty($id)) {
                         );
                         ?>
                         <tr>
-                            <td><?php echo $product['id']; ?></td>
-                            <td>
+                            <td class="center"><?php echo $product['id']; ?></td>
+                            <td class="center">
                                 <?php echo Helper::encodeHTML(
                                     $product['name']
                                 ); ?>
                             </td>
-                            <td class="ta_r"><?php echo $item['qty']; ?></td>
-                            <td class="ta_r">
+                            <td class="center"><?php echo $item['qty']; ?></td>
+                            <td class="center">
                                 <?php
                                     echo $this->objCurrency->display(
                                         number_format($item['price'] * $item['qty'], 2)
@@ -103,10 +126,10 @@ if (!empty($id)) {
                 <tbody>
                     <tr>
                         <th><i>Shipping:</i></th>
-                        <td colspan="3">
+                        <td colspan="3" class="center" style="background-color: #F5F5F5;">
                             <i><?php echo Helper::encodeHTML($order['shipping_type']); ?></i>
                         </td>
-                        <td class="ta_r">
+                        <td class="center" style="background-color: #F5F5F5;">
                             <i>
                                 <?php
                                     echo $this->objCurrency->display(
@@ -118,7 +141,7 @@ if (!empty($id)) {
                     </tr>
                     <tr>
                         <th><i>Subtotal:</i></th>
-                        <td colspan="4" class="ta_r">
+                        <td colspan="4" class="ta_r" style="padding-right: 43px;background-color: #F5F5F5;">
                             <i>
                                 <?php
                                     echo $this->objCurrency->display(
@@ -129,8 +152,8 @@ if (!empty($id)) {
                         </td>
                     </tr>
                     <tr>
-                        <th><i>Tax (<?php echo $order['tax_rate']; ?>%):</i></th>
-                        <td colspan="4" class="ta_r">
+                        <th><i>Tax:</i></th>
+                        <td colspan="4" class="ta_r" style="padding-right: 43px;background-color: #F5F5F5;">
                             <i>
                                 <?php
                                     echo $this->objCurrency->display(
@@ -142,7 +165,7 @@ if (!empty($id)) {
                     </tr>
                     <tr>
                         <th><strong>Total:</strong></th>
-                        <td colspan="4" class="ta_r">
+                        <td colspan="4" class="ta_r" style="padding-right: 43px;color: #19BDFA;background-color: #F5F5F5;">
                             <strong>
                                 <?php
                                     echo $this->objCurrency->display(
@@ -197,11 +220,11 @@ if (!empty($id)) {
                     <th>PayPal Status</th>
                     <td colspan="4">
                         <?php
-                            echo !empty($order['payment_status']) ?
-                                Helper::encodeHTML(
-                                    $order['payment_status']
-                                ) :
-                                "Pending";
+                        echo !empty($order['payment_status']) ?
+                            Helper::encodeHTML(
+                                $order['payment_status']
+                            ) :
+                            "Pending";
                         ?>
                     </td>
                 </tr>
@@ -241,26 +264,37 @@ if (!empty($id)) {
                 <tr>
                     <th>&nbsp;</th>
                     <td colspan="4">
-                        <div class="sbm sbm_blue fl_r">
-                            <a href="<?php echo $this->objUrl->getCurrent(
-                                    ['action'], false, ['action', 'invoice']
-                                ); ?>" class="btn"
-                               target="_blank">Invoice</a>
-                        </div>
-                        <div class="sbm sbm_blue fl_l mr_r4">
-                            <a href="<?php echo $this->objUrl->getCurrent(
-                                ['action', 'id']); ?>" class="btn">
-                                Go Back
+                        <div class="buttons-set">
+                            <a
+                                href="/panel/orders"
+                                class="left back-btn">
+                                <small>« </small>Back
                             </a>
+                            <a
+                                href="<?php echo $this->objUrl->getCurrent(
+                                    ['action'], false, ['action', 'invoice']
+                                ); ?>"
+                                class="btn-2 right"
+                                style="margin-left: 15px;"
+                                target="_blank"
+                            >
+                                <span>Invoice</span>
+                            </a>
+                            <label for="btn_submit" class="login-btn right">
+                                <input
+                                    type="submit"
+                                    id="btn_submit"
+                                    class="login-btn-reset"
+                                    value="Update"/>
+                            </label>
+                            <div class="clearfix"></div>
                         </div>
-                        <label for="btn_update" class="sbm sbm_blue fl_l">
-                            <input type="submit" id="btn_update" class="btn"
-                                   value="Update"/>
-                        </label>
                     </td>
                 </tr>
             </table>
-        </form>
+        </fieldset>
+    </form>
+</div>
         <?php
         require_once('_footer.php');
     }

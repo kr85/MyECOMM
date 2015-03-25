@@ -486,6 +486,29 @@ button.btn-cart {
 .btn-1-new-wrapper {
   text-align: right; }
 
+.btn-2 {
+  border: solid 1px #959595;
+  border-radius: 3px;
+  box-shadow: 2px 2px 5px #ddd;
+  background: url(../images/button.gif) repeat-x;
+  background-size: 30px auto;
+  color: #fff;
+  padding: 3.5px 20px;
+  text-transform: uppercase;
+  text-decoration: none; }
+  .btn-2:hover {
+    border: solid 1px #676767;
+    background: url(../images/button.gif) repeat-x 0 -24px; }
+  .btn-2:active, .btn-2:focus {
+    border: solid 1px #959595; }
+  .btn-2 input {
+    background-color: transparent;
+    text-transform: uppercase;
+    color: white;
+    font-size: 13px;
+    font-weight: 400;
+    border: none; }
+
 /*.form-valid .input:focus:valid, form textarea:focus:valid {
   background: #fff url(../images/valid.png) no-repeat 99% center;
   box-shadow: 0 0 5px #5cd053;
@@ -1826,6 +1849,22 @@ button.btn-update span {
     position: absolute;
     top: 5px;
     padding: 5px; }
+.admin .order-edit fieldset {
+  padding: 1px; }
+.admin .order-edit th {
+  width: 100px; }
+.admin .order-edit .order-items-head {
+  background-color: #ECECEC;
+  border: 1px solid #D2D2D2;
+  color: #2F2F2F;
+  text-transform: uppercase;
+  font-weight: 600; }
+.admin .order-edit textarea#notes {
+  resize: none;
+  height: 120px; }
+.admin .order-edit select#status {
+  width: 100%;
+  background-color: white; }
 
 * {
   border: none;

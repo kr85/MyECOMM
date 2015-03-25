@@ -316,4 +316,32 @@
       }
     }
   }
+
+  .order-edit {
+    fieldset {
+      padding: 1px;
+    }
+
+    th {
+      width: 100px;
+    }
+
+    .order-items-head {
+      background-color: #ECECEC;
+      border: 1px solid #D2D2D2;
+      color: #2F2F2F;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    textarea#notes {
+      resize: none;
+      height: 120px;
+    }
+
+    select#status {
+      width: 100%;
+      background-color: rgb(255, 255, 255);
+    }
+  }
 }
