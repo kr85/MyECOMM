@@ -31,7 +31,7 @@ CREATE TABLE `admins` (
 --
 -- Dumping data for table `admins`
 --
-INSERT INTO `admins` VALUES (1, 'John', 'Doe', 'admin@test.com', 'a4056fb362f0d5554f91fa1d72d376a1cf7fe4b3a913392348b0945a50e318448a0da370c6bc5186035f9a1728a6474f0687b50ce0a510e8e976e0c70572c575'); -- Password = 's3kRe1111'
+INSERT INTO `admins` VALUES (1, 'John', 'Doe', 'admin@test.com', 'a4056fb362f0d5554f91fa1d72d376a1cf7fe4b3a913392348b0945a50e318448a0da370c6bc5186035f9a1728a6474f0687b50ce0a510e8e976e0c70572c575');
 
 -- --------------------------------------------------------
 
