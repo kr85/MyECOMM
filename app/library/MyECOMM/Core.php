@@ -28,7 +28,7 @@ class Core {
     /**
      * @var string Meta title
      */
-    public $metaTitle = 'eCommerce Website';
+    public $metaTitle = 'Books - Online Store';
 
     /**
      * @var string Meta description
