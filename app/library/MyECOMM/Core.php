@@ -33,7 +33,7 @@ class Core {
     /**
      * @var string Meta description
      */
-    public $metaDescription = 'eCommerce Website';
+    public $metaDescription = 'Books - Online Store';
 
     /**
      * Constructor
