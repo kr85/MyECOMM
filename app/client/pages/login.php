@@ -68,7 +68,6 @@ require_once('_header.php');
                                         class="login-input-field input"
                                         value="<?php echo $objForm->stickyText('login_email'); ?>"
                                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                                        placeholder="your@email.com"
                                         />
                                 </li>
                                 <li class="login-passwd">
@@ -78,8 +77,6 @@ require_once('_header.php');
                                         name="login_password"
                                         id="login_password"
                                         class="login-input-field input"
-                                        value=""
-                                        placeholder="Your password"
                                         />
                                 </li>
                             </ul>
