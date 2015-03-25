@@ -1770,27 +1770,27 @@ button.btn-update span {
     padding-left: 5px; }
 .admin .section-add fieldset, .admin .section-edit fieldset, .admin .category-add fieldset, .admin .category-edit fieldset, .admin .product-add fieldset, .admin .product-edit fieldset, .admin .client-edit fieldset, .admin .business-edit fieldset {
   padding: 22px 25px; }
-.admin .shipping-type-add, .admin .shipping-rate-add, .admin .country-add-box {
+.admin .shipping-type-add, .admin .shipping-rate-add, .admin .country-add-box, .admin .local-zone-add, .admin .post-codes-add {
   width: 100%;
   margin-bottom: 40px; }
-  .admin .shipping-type-add .fld, .admin .shipping-rate-add .fld, .admin .country-add-box .fld {
+  .admin .shipping-type-add .fld, .admin .shipping-rate-add .fld, .admin .country-add-box .fld, .admin .local-zone-add .fld, .admin .post-codes-add .fld {
     width: 400px; }
-  .admin .shipping-type-add .fld_small, .admin .shipping-rate-add .fld_small, .admin .country-add-box .fld_small {
+  .admin .shipping-type-add .fld_small, .admin .shipping-rate-add .fld_small, .admin .country-add-box .fld_small, .admin .local-zone-add .fld_small, .admin .post-codes-add .fld_small {
     padding: 5px; }
-  .admin .shipping-type-add em, .admin .shipping-rate-add em, .admin .country-add-box em {
+  .admin .shipping-type-add em, .admin .shipping-rate-add em, .admin .country-add-box em, .admin .local-zone-add em, .admin .post-codes-add em {
     color: #19BDFA; }
-  .admin .shipping-type-add table, .admin .shipping-rate-add table, .admin .country-add-box table {
+  .admin .shipping-type-add table, .admin .shipping-rate-add table, .admin .country-add-box table, .admin .local-zone-add table, .admin .post-codes-add table {
     margin-left: auto;
     margin-right: auto; }
-    .admin .shipping-type-add table .local label, .admin .shipping-rate-add table .local label, .admin .country-add-box table .local label {
+    .admin .shipping-type-add table .local label, .admin .shipping-rate-add table .local label, .admin .country-add-box table .local label, .admin .local-zone-add table .local label, .admin .post-codes-add table .local label {
       font-weight: 700; }
-    .admin .shipping-type-add table label, .admin .shipping-rate-add table label, .admin .country-add-box table label {
+    .admin .shipping-type-add table label, .admin .shipping-rate-add table label, .admin .country-add-box table label, .admin .local-zone-add table label, .admin .post-codes-add table label {
       font-weight: 700; }
-    .admin .shipping-type-add table td, .admin .shipping-rate-add table td, .admin .country-add-box table td {
+    .admin .shipping-type-add table td, .admin .shipping-rate-add table td, .admin .country-add-box table td, .admin .local-zone-add table td, .admin .post-codes-add table td {
       padding-left: 3px;
       padding-right: 3px;
       vertical-align: middle; }
-      .admin .shipping-type-add table td .valid_name, .admin .shipping-rate-add table td .valid_name, .admin .country-add-box table td .valid_name {
+      .admin .shipping-type-add table td .valid_name, .admin .shipping-rate-add table td .valid_name, .admin .country-add-box table td .valid_name, .admin .local-zone-add table td .valid_name, .admin .post-codes-add table td .valid_name {
         font-size: 15px;
         font-weight: 700; }
 .admin .form-shipping-types fieldset {
@@ -1804,14 +1804,25 @@ button.btn-update span {
   border: 1px solid #CFCFCF; }
 .admin #typesLocal option, .admin #typesInternational option {
   padding-left: 5px; }
-.admin #shippingList fieldset, .admin #countryList fieldset {
+.admin #shippingList fieldset, .admin #countryList fieldset, .admin #zoneList fieldset, .admin #postCodeList fieldset {
   padding: 1px; }
+.admin #postCodeList .buttons-set {
+  margin-top: 15px;
+  margin-bottom: 15px; }
 .admin #countryList .fld {
   width: 300px; }
 .admin #countryList td {
   position: relative; }
   .admin #countryList td input {
     width: 287px;
+    position: absolute;
+    top: 5px;
+    padding: 5px; }
+.admin #zoneList .fld {
+  width: 380px; }
+.admin #zoneList td {
+  position: relative; }
+  .admin #zoneList td input {
     position: absolute;
     top: 5px;
     padding: 5px; }

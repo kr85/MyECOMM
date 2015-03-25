@@ -7,13 +7,13 @@ $call = $this->objUrl->get('call');
 
 switch ($call) {
     case 'add':
-        require_once('codes' . DS . 'add.php');
+        require_once('codes'.DS.'add.php');
         break;
     case 'remove':
         if (!empty($cid)) {
             $code = $objShipping->getPostCode($cid, $zone['id']);
             if (!empty($code)) {
-                require_once('codes' . DS . 'remove.php');
+                require_once('codes'.DS.'remove.php');
             } else {
                 throw new Exception('Record not found.');
             }
@@ -22,5 +22,5 @@ switch ($call) {
         }
         break;
     default:
-        require_once('codes' . DS . 'list.php');
+        require_once('codes'.DS.'list.php');
 }

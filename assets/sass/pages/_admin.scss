@@ -200,7 +200,8 @@
     }
   }
 
-  .shipping-type-add, .shipping-rate-add, .country-add-box {
+  .shipping-type-add, .shipping-rate-add, .country-add-box, .local-zone-add,
+  .post-codes-add {
     width: 100%;
     margin-bottom: 40px;
 
@@ -270,9 +271,16 @@
     }
   }
 
-  #shippingList, #countryList {
+  #shippingList, #countryList, #zoneList, #postCodeList {
     fieldset {
       padding: 1px;
+    }
+  }
+
+  #postCodeList {
+    .buttons-set {
+      margin-top: 15px;
+      margin-bottom: 15px;
     }
   }
 
@@ -286,6 +294,22 @@
 
       input {
         width: 287px;
+        position: absolute;
+        top: 5px;
+        padding: 5px;
+      }
+    }
+  }
+
+  #zoneList {
+    .fld {
+      width: 380px;
+    }
+
+    td {
+      position: relative;
+
+      input {
         position: absolute;
         top: 5px;
         padding: 5px;
