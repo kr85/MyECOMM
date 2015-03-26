@@ -21,6 +21,12 @@
             Login: <?php echo $email; ?><br/>
             Password: <?php echo $password; ?>
         </p>
+        <p class="text_small">
+            <i>
+                Note: Sending plaintext passwords to emails is a bad practice.
+                Here this is done only for testing purposes.
+            </i>
+        </p>
 
         <?php else: ?>
 </p>
